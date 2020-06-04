@@ -1,4 +1,4 @@
-package com.example.mes_app;
+package com.mes_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.mes_app.R;
 
 public class MainActivity extends AppCompatActivity {
 
