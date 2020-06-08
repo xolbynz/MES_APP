@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 import com.example.mes_app.R;
 
@@ -14,7 +15,7 @@ public class loginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loginMain);
+        setContentView(R.layout.activity_login);
         //dg
         //jg
 
