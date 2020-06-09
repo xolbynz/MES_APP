@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_work1"
+        android:title="작업지시서 조회" />
+    <item
+        android:id="@+id/menu_work2"
+        android:title="공정/생산입고 확인" />
+    <item
+        android:id="@+id/menu_work3"
+        android:title="제품 입고 현황 확인" />
+    <item
+        android:id="@+id/menu_work4"
+        android:title="공정진행현황 확인" />
+    <item
+        android:id="@+id/menu_work5"
+        android:title="현황판 모니터링" />
+</menu>

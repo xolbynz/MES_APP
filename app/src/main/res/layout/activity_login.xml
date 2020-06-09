@@ -14,12 +14,10 @@
         android:layout_marginLeft="48dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:src="@drawable/sf_logo_" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,9 +27,10 @@
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textView"
@@ -41,9 +40,9 @@
             android:layout_marginLeft="16dp"
             android:text="사업자번호"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_사업자번호"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2"
+            app:layout_constraintTop_toTopOf="@+id/edit_사업자번호"
             app:layout_constraintVertical_bias="0.56" />
 
         <TextView
@@ -54,9 +53,9 @@
             android:layout_marginLeft="16dp"
             android:text="ID"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_ID"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toTopOf="@+id/edit_ID"
             app:layout_constraintVertical_bias="0.375" />
 
         <TextView
@@ -69,10 +68,10 @@
             android:text="PW"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_ID" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/edit_PW"
             android:layout_width="283dp"
             android:layout_height="43dp"
             android:layout_marginEnd="48dp"
@@ -87,7 +86,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/edit_ID"
             android:layout_width="259dp"
             android:layout_height="42dp"
             android:layout_marginTop="12dp"
@@ -99,10 +98,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.771"
             app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_사업자번호" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/edit_사업자번호"
             android:layout_width="263dp"
             android:layout_height="49dp"
             android:layout_marginStart="12dp"
@@ -122,12 +121,20 @@
             android:id="@+id/btn_login"
             android:layout_width="334dp"
             android:layout_height="46dp"
+            android:layout_marginStart="74dp"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/design_default_color_secondary_variant"
             android:gravity="center"
             android:text="로그인"
             android:textSize="40sp"
-            tools:layout_editor_absoluteX="74dp"
-            tools:layout_editor_absoluteY="223dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
