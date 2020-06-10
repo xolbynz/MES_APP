@@ -2,6 +2,7 @@ package com.mes_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ public class    MainActivity extends AppCompatActivity  {
         Button tab1 = (Button) findViewById(R.id.btn_rawmenu);
         Button tab2 = (Button) findViewById(R.id.btn_workmenu);
         Button tab3 = (Button) findViewById(R.id.btn_itemmenu);
+        Button tab4 = (Button) findViewById(R.id.btn_setting);
 
         tab1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +42,8 @@ public class    MainActivity extends AppCompatActivity  {
                             case R.id.menu_raw1:
                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
+                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
+                                startActivity(intent);
 
                                 break;
 
@@ -208,7 +212,46 @@ public class    MainActivity extends AppCompatActivity  {
             }
         });
 
+        tab4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu p = new PopupMenu(
+                        getApplicationContext(), // 현재 화면의 제어권자
+                        v);
+                getMenuInflater().inflate(R.menu.menu_setting, p.getMenu());
+                // 이벤트 처리
+                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu_setting1:
+                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
+
+                                break;
+
+                            case R.id.menu_setting2:
+                                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+
+                                break;
+
+
+
+
+                        }
+                        return true;
+                    }
+
+
+
+                });
+                p.show(); // 메뉴를 띄우기
+
+
+
+
+            }
+        });
 
 
     }
