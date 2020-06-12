@@ -1,6 +1,9 @@
 package com.mes_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +17,9 @@ import com.example.mes_app.R;
 import com.google.android.material.tabs.TabItem;
 
 public class    MainActivity extends AppCompatActivity  {
-
+    FragmentTransaction transaction;
+    raw_viewActivity frag1 = new raw_viewActivity(); //프래그먼트 객채셍성
+    raw_inputActivity frag2 = new raw_inputActivity(); //프래그먼트 객채셍성
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +32,20 @@ public class    MainActivity extends AppCompatActivity  {
         Button tab3 = (Button) findViewById(R.id.btn_itemmenu);
         Button tab4 = (Button) findViewById(R.id.btn_setting);
 
+
+
+        //프래그먼트 추가
+        FragmentManager fragmentManager =  getSupportFragmentManager();
+
+
+
+
+
+
+
+         transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragmentBorC,frag1);
+        transaction.commitAllowingStateLoss();
         tab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,17 +57,25 @@ public class    MainActivity extends AppCompatActivity  {
                 p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+
                         switch (item.getItemId()) {
                             case R.id.menu_raw1:
                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
-                                startActivity(intent);
+//                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
+//                                startActivity(intent);
+                                transaction.replace(R.id.fragmentBorC, frag1);
+                                transaction.commitNow();
 
                                 break;
 
                             case R.id.menu_raw2:
                                 Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+
+
+                                transaction.replace(R.id.fragmentBorC, frag2).commitAllowingStateLoss();
+                                transaction.commitNow();
+
 
                                 break;
 

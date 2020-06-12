@@ -1,16 +1,30 @@
 package com.mes_app;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.mes_app.R;
 
-public class raw_viewActivity extends  Activity
+public class raw_viewActivity extends Fragment
 {
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+
+    public raw_viewActivity() {
     }
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+
+            return inflater.inflate(R.layout.activity_raw_view, container, false);
+        }
+
+
+
+
+
 }
