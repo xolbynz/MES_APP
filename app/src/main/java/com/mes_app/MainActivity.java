@@ -16,10 +16,11 @@ import android.widget.Toast;
 import com.example.mes_app.R;
 import com.google.android.material.tabs.TabItem;
 
-public class    MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
-    raw_viewActivity frag1 = new raw_viewActivity(); //프래그먼트 객채셍성
-    raw_inputActivity frag2 = new raw_inputActivity(); //프래그먼트 객채셍성
+    raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
+    raw_inputActivity frag_raw_input = new raw_inputActivity();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,19 +34,15 @@ public class    MainActivity extends AppCompatActivity  {
         Button tab4 = (Button) findViewById(R.id.btn_setting);
 
 
-
         //프래그먼트 추가
-        FragmentManager fragmentManager =  getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
 
+        transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragmentBorC, frag_raw_view);
+        transaction.commitNow();
+        System.out.println("첫페이지 실행");
 
-
-
-
-
-         transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragmentBorC,frag1);
-        transaction.commitAllowingStateLoss();
         tab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,17 +61,27 @@ public class    MainActivity extends AppCompatActivity  {
 
 //                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
 //                                startActivity(intent);
-                                transaction.replace(R.id.fragmentBorC, frag1);
-                                transaction.commitNow();
+                                try {
+
+
+                                    replaceFragment(frag_raw_view);
+                                } catch (Exception ex) {
+
+                                    System.out.println(ex.toString());
+                                }
 
                                 break;
 
                             case R.id.menu_raw2:
                                 Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
 
+                                try {
 
-                                transaction.replace(R.id.fragmentBorC, frag2).commitAllowingStateLoss();
-                                transaction.commitNow();
+                                    replaceFragment(frag_raw_view);
+                                } catch (Exception ex) {
+
+                                    System.out.println(ex.toString());
+                                }
 
 
                                 break;
@@ -90,11 +97,8 @@ public class    MainActivity extends AppCompatActivity  {
                     }
 
 
-
                 });
                 p.show(); // 메뉴를 띄우기
-
-
 
 
             }
@@ -142,11 +146,8 @@ public class    MainActivity extends AppCompatActivity  {
                     }
 
 
-
                 });
                 p.show(); // 메뉴를 띄우기
-
-
 
 
             }
@@ -173,12 +174,12 @@ public class    MainActivity extends AppCompatActivity  {
                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
 
-                                break; case R.id.menu_item3:
+                                break;
+                            case R.id.menu_item3:
                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
 
                                 break;
-
 
 
                         }
@@ -186,11 +187,8 @@ public class    MainActivity extends AppCompatActivity  {
                     }
 
 
-
                 });
                 p.show(); // 메뉴를 띄우기
-
-
 
 
             }
@@ -216,12 +214,12 @@ public class    MainActivity extends AppCompatActivity  {
                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
 
-                                break; case R.id.menu_item3:
+                                break;
+                            case R.id.menu_item3:
                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
 
 
                                 break;
-
 
 
                         }
@@ -229,11 +227,8 @@ public class    MainActivity extends AppCompatActivity  {
                     }
 
 
-
                 });
                 p.show(); // 메뉴를 띄우기
-
-
 
 
             }
@@ -263,18 +258,13 @@ public class    MainActivity extends AppCompatActivity  {
                                 break;
 
 
-
-
                         }
                         return true;
                     }
 
 
-
                 });
                 p.show(); // 메뉴를 띄우기
-
-
 
 
             }
@@ -283,8 +273,11 @@ public class    MainActivity extends AppCompatActivity  {
 
     }
 
-
-
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentBorC, fragment).commit();
+    }
 
 }
 

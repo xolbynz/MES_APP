@@ -74,8 +74,8 @@ public class loginActivity extends AppCompatActivity {
             if (conn != null && !conn.isClosed())
                 return true;
             // TODO
-            String dbIp = "218.38.14.36:1433";
-            String dbName = "SM_FACTORY_COM";
+            String dbIp = "218.38.14.36:1443";	// 뒤에 :1443 은 입력하지 않는다.
+            String dbName = "SM_FACTORY_COM"; //임시로 00에들어감
             String dbUser = "smartUser";
             String dbUserPass = "smart/?25";
             ConnectionClass connClass = new ConnectionClass();
