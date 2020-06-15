@@ -2,6 +2,7 @@ package com.mes_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +16,16 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.common.CompInfo;
+//import com.common.CompInfo;
 import com.example.mes_app.R;
 
 public class loginActivity extends AppCompatActivity {
 
     static public Connection conn;
     static public Connection LoginConn;
-    CompInfo compInfo;
+
+    private Context mContext;
+   // CompInfo compInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //dg
         //jg
+        mContext = this;
         if (tryConnect(true))
             Toast.makeText(this, "준비완료", Toast.LENGTH_LONG).show();
         else
@@ -41,6 +45,8 @@ public class loginActivity extends AppCompatActivity {
         final EditText edit_ID = (EditText) findViewById(R.id.edit_ID);
         final EditText edit_PW = (EditText) findViewById(R.id.edit_PW);
 
+
+        edit_saipNO.setText( PreferenceManager.getString(mContext, "saupNo"));
         btnLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +67,9 @@ public class loginActivity extends AppCompatActivity {
                 try {
 
                     if (getcompinfo(edit_saipNO.getText().toString(), edit_ID.getText().toString(), edit_PW.getText().toString()) == true) {
+
+
+                        PreferenceManager.setString(mContext, "saupNo", edit_saipNO.getText().toString());
                         Intent intent = new Intent(loginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
