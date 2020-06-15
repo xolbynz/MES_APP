@@ -92,13 +92,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ScrollView
+                <TableLayout
                     android:layout_width="725dp"
                     android:layout_height="318dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="1dp">
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"/>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="원자재명" />
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="구매처" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="96dp"
+                            android:layout_height="wrap_content"
+                            android:text="입고위치" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="77dp"
+                            android:layout_height="wrap_content"
+                            android:text="규격" />
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="입고량" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="79dp"
+                            android:layout_height="wrap_content"
+                            android:text="출고량" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="재고량" />
+
+                    </TableRow>
+
+                </TableLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,6 +164,34 @@
         android:text="원자재 조회"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="729dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginEnd="345dp"
+            android:layout_marginRight="345dp"
+            android:text="Copyright ⓒ GICOMPANY Co., Ltd. ALL RIGHTS RESERVED. "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

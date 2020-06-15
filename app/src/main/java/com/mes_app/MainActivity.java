@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 try {
 
-                                    replaceFragment(frag_raw_view);
+                                    replaceFragment(frag_raw_input);
                                 } catch (Exception ex) {
 
                                     System.out.println(ex.toString());
@@ -86,10 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 break;
 
-                            case R.id.menu_raw3:
-                                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
 
-                                break;
 
 
                         }
