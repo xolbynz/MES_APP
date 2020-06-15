@@ -32,7 +32,8 @@ public class loginActivity extends AppCompatActivity {
         //jg
         if (tryConnect(true))
             Toast.makeText(this, "준비완료", Toast.LENGTH_LONG).show();
-
+        else
+            Toast.makeText(this, "접속오류", Toast.LENGTH_LONG).show();
 
 
         Button btnLoginButton = (Button) findViewById(R.id.btn_login);
@@ -58,9 +59,8 @@ public class loginActivity extends AppCompatActivity {
                     return;
                 }
                 try {
-                    Toast.makeText(getApplicationContext(), "Login0000224093 ", Toast.LENGTH_LONG).show();
 
-                    if(getcompinfo(edit_saipNO.getText().toString(), edit_ID.getText().toString(),edit_PW.getText().toString()) == true) {
+                    if (getcompinfo(edit_saipNO.getText().toString(), edit_ID.getText().toString(), edit_PW.getText().toString()) == true) {
                         Intent intent = new Intent(loginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -78,14 +78,16 @@ public class loginActivity extends AppCompatActivity {
     public boolean tryConnect(boolean showMessage) {
         try {
             if (conn != null && !conn.isClosed())
-                return true;
+                return false;
             // TODO
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
             String dbIp = "218.38.14.36";    // 뒤에 :1443 은 입력하지 않는다.
             String dbName = "SM_FACTORY_COM"; //임시로 COM에들어감
             String dbUser = "smartUser";
             String dbUserPass = "smart/?25";
             ConnectionClass connClass = new ConnectionClass();
             conn = connClass.getConnection(dbUser, dbUserPass, dbName, dbIp);
+
             if (conn == null) {
                 if (showMessage)
                     Toast.makeText(this, connClass.getLastErrMsg(), Toast.LENGTH_LONG).show();
@@ -97,13 +99,12 @@ public class loginActivity extends AppCompatActivity {
                     return false;
                 } else {
                     if (showMessage) {
-                        Toast.makeText(this, "DataBase 연결에 성공", Toast.LENGTH_LONG).show();
-                        conn.close();
+                        Toast.makeText(this, "DataBase 연결 성공", Toast.LENGTH_LONG).show();
                     }
                     return true;
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             if (showMessage)
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -112,67 +113,66 @@ public class loginActivity extends AppCompatActivity {
     }
 
     public boolean getcompinfo(String saupNo, String Id, String Pw) throws SQLException {
-        boolean check = false;
 
-        String query = null;
+        StringBuilder query = new StringBuilder();
         ResultSet rs = null;
 
-        query = "select COM_LOCATION,COMPANY_NM,A.SP_CODE,B.SP_SITE";
-        query += "from T_COMP_LOGIN A ";
-        query += "left outer join T_SUPPLY_CODE B";
-        query += "on A.SP_CODE = B.SP_CODE";
-        query += "where COM_SAUP_NO = ' " + saupNo + "'";
+        query.append("SELECT A.COM_LOCATION,");
+        query.append("COMPANY_NM, ");
+        query.append("A.SP_CODE,");
+        query.append("B.SP_SITE ");
+        query.append("FROM [SM_FACTORY_COM].[dbo].[T_COMP_LOGIN] A ");
+        query.append("left outer join [SM_FACTORY_COM].[dbo].[T_SUPPLY_CODE] B ");
+        query.append("on A.SP_CODE = B.SP_CODE ");
+        query.append("where COM_SAUP_NO = '" + saupNo + "'");
 
         Statement stmt = conn.createStatement();
 
-        rs = stmt.executeQuery(query);
+        rs = stmt.executeQuery(query.toString());
+        try {
+            if (rs.next()) {
+                StringBuilder query2 = new StringBuilder();
+                ResultSet rs2 = null;
 
-        if (rs.next()) {
-            String query2 = null;
-            ResultSet rs2 = null;
+                if (LoginConn != null && !LoginConn.isClosed())
+                    return  false;
 
-            if (LoginConn != null && !LoginConn.isClosed()) {
                 String dbIp = "218.38.14.36";    // 뒤에 :1443 은 입력하지 않는다.
                 String dbName = rs.getString(1); // 사업자 번호에 해당되는 DB 접속
                 String dbUser = "smartUser";
                 String dbUserPass = "smart/?25";
                 ConnectionClass connClass = new ConnectionClass();
                 LoginConn = connClass.getConnection(dbUser, dbUserPass, dbName, dbIp);
-            }
 
-            query2 = "select * from N_STAFF_CODE";
-            query2 += "where * LOGIN_ID = '" + Id + "' and PW = '" + Pw + "'";
+                query2.append("select * from [" + rs.getString(1) + "].[dbo].[N_STAFF_CODE]");
+                query2.append("where LOGIN_ID = '" + Id + "' and PW = '" + Pw + "'");
 
-            Statement stmt2 = LoginConn.createStatement();
 
-            rs2 = stmt2.executeQuery(query2);
+                Statement stmt2 = LoginConn.createStatement();
 
-            ResultSetMetaData rsmd2 = rs2.getMetaData();
+                rs2 = stmt2.executeQuery(query2.toString());
 
-            if (rs2.next()) {
-                compInfo.setSaupNo(saupNo);
-                compInfo.setSaupNm(rs.getString(2));
-                compInfo.setSpCode(rs.getString(3));
-                compInfo.setSpSite(rs.getString(4));
+                if (rs2.next()) {
+//                    compInfo.setSaupNo(saupNo);
+//                    compInfo.setSaupNm(rs.getString(2));
+//                    compInfo.setSpCode(rs.getString(3));
+//                    compInfo.setSpSite(rs.getString(4));
+                    return true;
+                } else {
+                    Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();
+                    return false;
+                }
 
-                conn.close();
-
-                return true;
             } else {
-                Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();
-
-                conn.close();
-
+                Toast.makeText(this, "등록된 사업자가 아닙니다", Toast.LENGTH_LONG).show();
                 return false;
             }
-
-        } else {
-            Toast.makeText(this, "등록된 사업자가 아닙니다", Toast.LENGTH_LONG).show();
-
-            conn.close();
-
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             return false;
         }
     }
 }
+
+
 
