@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity android:name="com.mes_app.loginActivity"
-
-
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="landscape ">
 
 
@@ -22,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.mes_app.MainActivity" />
-<!--        <activity android:name="com.mes_app.raw_viewActivity" />-->
+        <activity android:name="com.mes_app.raw_viewActivity" />
 <!--        <activity android:name="com.mes_app.raw_inputActivity" />-->
 
     </application>

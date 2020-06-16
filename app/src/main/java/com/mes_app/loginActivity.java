@@ -4,11 +4,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.hardware.input.InputManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -57,6 +55,7 @@ public class loginActivity extends AppCompatActivity {
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         btn_Login.setOnClickListener(btn1Listener);
+        Pw.setOnKeyListener(EditTextEnterkey);
 
         if (imm.isActive()) {
             imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
@@ -64,13 +63,19 @@ public class loginActivity extends AppCompatActivity {
 
     }
 
-    protected void onResume() {
-        super.onResume();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-    }
+    View.OnKeyListener EditTextEnterkey = new View.OnKeyListener() { // 비밀번호 부분에서 엔터치면 키보드 내리기
+        @Override
+        public boolean onKey(View view, int i, KeyEvent keyEvent) {
+            switch (i) {
+                case KeyEvent.KEYCODE_ENTER:
+                    if (imm.isActive())
+                        imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
+            }
+            return false;
+        }
+    };
 
     View.OnClickListener btn1Listener = new View.OnClickListener() {
-
         @Override
         public void onClick(View v) {
             if (Saup_No.getText().toString().equals("")) {
@@ -206,6 +211,7 @@ public class loginActivity extends AppCompatActivity {
             return false;
         }
     }
+
 }
 
 

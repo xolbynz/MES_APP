@@ -20,11 +20,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.common.CompInfo;
+import com.common.DBInfo;
 import com.example.mes_app.R;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class raw_viewActivity extends Fragment {
+public class raw_viewActivity extends Fragment  {
 
     MainActivity activity;
     Button btn_search;
@@ -32,6 +35,7 @@ public class raw_viewActivity extends Fragment {
     ViewGroup rootView;
 
     CompInfo compInfo;
+    DBInfo dbInfo;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
     TableLayout tableLayout;
@@ -40,9 +44,6 @@ public class raw_viewActivity extends Fragment {
     public raw_viewActivity() {
 
         list = new ArrayList<String>();
-
-
-
     }
 
 
@@ -82,27 +83,15 @@ public class raw_viewActivity extends Fragment {
         btn_search = rootView.findViewById(R.id.btn_search);
         spinner_search = rootView.findViewById(R.id.spinner_raw_search);
         tableLayout = rootView.findViewById(R.id.tableLayout);
+
+
         return rootView;
-
-
     }
-    class Querythread extends Thread {
-        public void run() {
 
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    public ResultSet Raw_Detail(Connection connection, ResultSet rs){
 
-
-            Log.i("Android", " MSSQL 접속 준비");
-
-            list.clear();
-
-//            Query(); //쿼리함수 호출
-
-        }
+        return rs;
     }
+
 
 }
