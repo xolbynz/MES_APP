@@ -163,7 +163,7 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-//                    compInfo.setSaupNo(saupNo);
+                    compInfo.setSaupNo(saupNo);
 //                    compInfo.setSaupNm(rs.getString(2));
 //                    compInfo.setSpCode(rs.getString(3));
 //                    compInfo.setSpSite(rs.getString(4));

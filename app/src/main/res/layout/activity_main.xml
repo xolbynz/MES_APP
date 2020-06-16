@@ -48,8 +48,8 @@
 
     <FrameLayout
         android:id="@+id/fragmentBorC"
-        android:layout_width="1279dp"
-        android:layout_height="794dp"
+        android:layout_width="1277dp"
+        android:layout_height="698dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
@@ -64,5 +64,50 @@
         app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1278dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentBorC">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#FF0000"/>
+
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:text="이용약관 |  개인정보취급방침 "
+            android:textColor="?android:attr/colorActivatedHighlight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="1dp"
+            android:text="Copyright ⓒ GICOMPANY Co., Ltd. ALL RIGHTS RESERVED"
+            android:textColor="@color/design_default_color_on_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
