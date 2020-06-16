@@ -1,28 +1,36 @@
 package com.mes_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.common.CompInfo;
+//import com.common.CompInfo;
 import com.example.mes_app.R;
 
 public class loginActivity extends AppCompatActivity {
 
     static public Connection conn;
     static public Connection LoginConn;
-    CompInfo compInfo;
+    InputMethodManager imm; //키보드 내리기
+    private Context mContext; //사업자 번호 기억
+   // CompInfo compInfo;
+   EditText edit_saipNO;
+    EditText edit_ID;
+    EditText edit_PW;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,7 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //dg
         //jg
+        mContext = this; //사업자 번호 기억 할때 필요
         if (tryConnect(true))
             Toast.makeText(this, "준비완료", Toast.LENGTH_LONG).show();
         else
@@ -37,9 +46,34 @@ public class loginActivity extends AppCompatActivity {
 
 
         Button btnLoginButton = (Button) findViewById(R.id.btn_login);
-        final EditText edit_saipNO = (EditText) findViewById(R.id.edit_사업자번호);
-        final EditText edit_ID = (EditText) findViewById(R.id.edit_ID);
-        final EditText edit_PW = (EditText) findViewById(R.id.edit_PW);
+          edit_saipNO = (EditText) findViewById(R.id.edit_사업자번호);
+          edit_ID = (EditText) findViewById(R.id.edit_ID);
+          edit_PW = (EditText) findViewById(R.id.edit_PW);
+        final ConstraintLayout layour_main = (ConstraintLayout)  findViewById(R.id.layout_maIn);
+        final ConstraintLayout layour_login = (ConstraintLayout)  findViewById(R.id.layout_login);
+        final ImageView  image_saup = (ImageView) findViewById(R.id.image_saup);
+
+
+
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
+
+
+        edit_saipNO.setText( PreferenceManager.getString(mContext, "saupNo"));  //사업자 번호 기억한거 불러오기
+
+// 클릭 이벤트주기 -> 키보드 숨김
+        layour_main.setOnClickListener(myClickListener);
+        layour_login.setOnClickListener(myClickListener);
+        image_saup.setOnClickListener(myClickListener);
+
+        image_saup.setFocusableInTouchMode(true);
+
+
+        image_saup.requestFocus();//시작시 이미지에 포커스 주기
+
+
+
+
+
 
         btnLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +95,9 @@ public class loginActivity extends AppCompatActivity {
                 try {
 
                     if (getcompinfo(edit_saipNO.getText().toString(), edit_ID.getText().toString(), edit_PW.getText().toString()) == true) {
+
+
+                        PreferenceManager.setString(mContext, "saupNo", edit_saipNO.getText().toString()); //사업자 번호 기억 저장하기
                         Intent intent = new Intent(loginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -74,6 +111,31 @@ public class loginActivity extends AppCompatActivity {
         });
 
     }
+
+    View.OnClickListener myClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            imm.hideSoftInputFromWindow(edit_saipNO.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(edit_ID.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(edit_PW.getWindowToken(), 0);
+
+
+
+            switch (v.getId())
+            {
+                case R.id.layout_maIn :
+                    break;
+
+                case R.id.layout_login :
+                    break;
+                case R.id.image_saup :
+                    break;
+            }
+        }
+    };
+
 
     public boolean tryConnect(boolean showMessage) {
         try {

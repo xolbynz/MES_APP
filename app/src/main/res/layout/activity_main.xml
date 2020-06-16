@@ -48,8 +48,8 @@
 
     <FrameLayout
         android:id="@+id/fragmentBorC"
-        android:layout_width="1022dp"
-        android:layout_height="709dp"
+        android:layout_width="1279dp"
+        android:layout_height="794dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
