@@ -224,10 +224,12 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-  //                  compInfo.setSaupNo(saupNo);
-//                    compInfo.setSaupNm(rs.getString(2));
-//                    compInfo.setSpCode(rs.getString(3));
-//                    compInfo.setSpSite(rs.getString(4));
+
+                    compInfo = new CompInfo();
+                    compInfo.setSaupNo(saupNo);
+                    compInfo.setSaupNm(rs.getString(2));
+                    compInfo.setSpCode(rs.getString(3));
+                    compInfo.setSpSite(rs.getString(4));
                     return true;
                 } else {
                     Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();
