@@ -2,12 +2,12 @@ package com.common;
 
 import java.io.Serializable;
 
-public class CompInfo {
+public  class CompInfo {
 
-    static public String saupNo = "";
-    static public String saupNm = "";
-    static public String spCode = "";
-    static public String spSite = "";
+    private String saupNo = "";
+    private String saupNm = "";
+    private String spCode = "";
+    private String spSite = "";
 
     public String getSaupNo() {
         return saupNo;

@@ -1,10 +1,15 @@
 package com.mes_app;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.hardware.input.InputManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,9 +34,10 @@ public class loginActivity extends AppCompatActivity {
     EditText Saup_No;
     EditText Id;
     EditText Pw;
-
+    InputMethodManager imm;
     View view;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +55,18 @@ public class loginActivity extends AppCompatActivity {
         Id = (EditText) findViewById(R.id.edit_ID);
         Pw = (EditText) findViewById(R.id.edit_PW);
 
+        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         btn_Login.setOnClickListener(btn1Listener);
 
+        if (imm.isActive()) {
+            imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
+        }
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     View.OnClickListener btn1Listener = new View.OnClickListener() {
@@ -74,6 +90,10 @@ public class loginActivity extends AppCompatActivity {
                 if (getcompinfo(Saup_No.getText().toString(), Id.getText().toString(), Pw.getText().toString()) == true) {
                     Intent intent = new Intent(loginActivity.this, MainActivity.class);
                     startActivity(intent);
+
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
+                    }
                     finish();
                 }
 
@@ -106,7 +126,9 @@ public class loginActivity extends AppCompatActivity {
                 if (conn.isClosed()) {
                     if (showMessage)
                         Toast.makeText(this, "DataBase 연결 실패", Toast.LENGTH_LONG).show();
-                    return false;
+                    return false
+
+                            ;
                 } else {
                     if (showMessage) {
                         Toast.makeText(this, "DataBase 연결 성공", Toast.LENGTH_LONG).show();
@@ -163,10 +185,12 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-                    compInfo.setSaupNo(saupNo);
-//                    compInfo.setSaupNm(rs.getString(2));
-//                    compInfo.setSpCode(rs.getString(3));
-//                    compInfo.setSpSite(rs.getString(4));
+
+                    compInfo = new CompInfo();
+                    compInfo.setSaupNo(rs.getString(1));
+                    compInfo.setSaupNm(rs.getString(2));
+                    compInfo.setSpCode(rs.getString(3));
+                    compInfo.setSpSite(rs.getString(4));
                     return true;
                 } else {
                     Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();
