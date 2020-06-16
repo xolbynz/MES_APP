@@ -49,7 +49,7 @@ public class loginActivity extends AppCompatActivity {
         else
             Toast.makeText(this, "접속오류", Toast.LENGTH_LONG).show();
         mContext = this;
-
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
         btn_Login = (Button) findViewById(R.id.btn_login);
         Saup_No = (EditText) findViewById(R.id.edit_사업자번호);
         Id = (EditText) findViewById(R.id.edit_ID);

@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
     raw_inputActivity frag_raw_input = new raw_inputActivity();
 
+    Button tab1;//메뉴바
+    Button tab2;
+    Button tab3;
+    Button tab4;
+
+    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
         //dg
         //jg
 
-        Button tab1 = (Button) findViewById(R.id.btn_rawmenu);
-        Button tab2 = (Button) findViewById(R.id.btn_workmenu);
-        Button tab3 = (Button) findViewById(R.id.btn_itemmenu);
-        Button tab4 = (Button) findViewById(R.id.btn_setting);
+         tab1 = (Button) findViewById(R.id.btn_rawmenu);
+         tab2 = (Button) findViewById(R.id.btn_workmenu);
+         tab3 = (Button) findViewById(R.id.btn_itemmenu);
+         tab4 = (Button) findViewById(R.id.btn_setting);
 
 
         //프래그먼트 추가
-        FragmentManager fragmentManager = getSupportFragmentManager();
+         fragmentManager = getSupportFragmentManager();
 
 
         transaction = fragmentManager.beginTransaction();
