@@ -3,6 +3,7 @@ package com.mes_app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -68,7 +69,7 @@ public class loginActivity extends AppCompatActivity {
         image_saup.setOnClickListener(myClickListener);
 
         image_saup.setFocusableInTouchMode(true);
-
+        Pw.setOnKeyListener(EditTextEnterkey);
 
         image_saup.requestFocus();//시작시 이미지에 포커스 주기
     }
@@ -105,6 +106,19 @@ public class loginActivity extends AppCompatActivity {
             }
         }
     };
+
+    View.OnKeyListener EditTextEnterkey = new View.OnKeyListener() { // 비밀번호 부분에서 엔터치면 키보드 내리기
+        @Override
+        public boolean onKey(View view, int i, KeyEvent keyEvent) {
+            switch (i) {
+                case KeyEvent.KEYCODE_ENTER:
+                    if (imm.isActive())
+                        imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
+            }
+            return false;
+        }
+    };
+
 
 ///모든 뷰 클릭시 이벤트 발동
 // 사업자 번호 , 아이디 , 패스워드를 제외한  뷰 클릭시 키보드 내림
@@ -210,7 +224,7 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-                    compInfo.setSaupNo(saupNo);
+  //                  compInfo.setSaupNo(saupNo);
 //                    compInfo.setSaupNm(rs.getString(2));
 //                    compInfo.setSpCode(rs.getString(3));
 //                    compInfo.setSpSite(rs.getString(4));

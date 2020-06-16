@@ -1,8 +1,10 @@
 package com.mes_app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     Button tab4;
 
     FragmentManager fragmentManager;
+
+    InputMethodManager imm; //키보드 내리기
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
          tab3 = (Button) findViewById(R.id.btn_itemmenu);
          tab4 = (Button) findViewById(R.id.btn_setting);
 
-
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
         //프래그먼트 추가
          fragmentManager = getSupportFragmentManager();
 
