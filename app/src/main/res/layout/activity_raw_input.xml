@@ -6,45 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="원자재 입고"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1270dp"
-        android:layout_height="764dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="3dp"
+        android:layout_width="1285dp"
+        android:layout_height="618dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <TableLayout
             android:id="@+id/tableLayout"
-            android:layout_width="1151dp"
-            android:layout_height="550dp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+            android:layout_width="1142dp"
+            android:layout_height="499dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp" />
+                android:layout_height="1dp"
+                android:background="@color/design_default_color_background" />
 
             <TableRow
                 android:layout_width="match_parent"
@@ -52,45 +37,45 @@
 
                 <TextView
                     android:id="@+id/textView8"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="101dp"
+                    android:layout_height="match_parent"
                     android:text="원자재명" />
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="31dp"
                     android:text="구매처" />
 
                 <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="96dp"
-                    android:layout_height="wrap_content"
-                    android:text="입고위치" />
+                    android:layout_width="122dp"
+                    android:layout_height="match_parent"
+                    android:text="발주일자" />
 
                 <TextView
                     android:id="@+id/textView11"
-                    android:layout_width="77dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="93dp"
+                    android:layout_height="match_parent"
                     android:text="규격" />
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="88dp"
-                    android:layout_height="wrap_content"
-                    android:text="입고량" />
+                    android:layout_width="107dp"
+                    android:layout_height="match_parent"
+                    android:text="입고 위치" />
 
                 <TextView
                     android:id="@+id/textView13"
-                    android:layout_width="79dp"
-                    android:layout_height="wrap_content"
-                    android:text="출고량" />
+                    android:layout_width="117dp"
+                    android:layout_height="match_parent"
+                    android:text="발주량" />
 
                 <TextView
                     android:id="@+id/textView14"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="재고량" />
+                    android:layout_width="232dp"
+                    android:layout_height="match_parent"
+                    android:text="미입고량" />
 
             </TableRow>
 
@@ -98,11 +83,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
-            android:layout_width="124dp"
-            android:layout_height="755dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="2dp"
+            android:layout_width="139dp"
+            android:layout_height="619dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -113,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:text="입고량 입력"
@@ -122,12 +104,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextNumber"
-                android:layout_width="67dp"
-                android:layout_height="24dp"
+                android:id="@+id/edit_input"
+                android:layout_width="114dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginRight="6dp"
                 android:ems="10"
@@ -138,8 +120,8 @@
 
             <TextView
                 android:id="@+id/textView7"
-                android:layout_width="65dp"
-                android:layout_height="23dp"
+                android:layout_width="107dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginLeft="6dp"
                 android:layout_marginTop="17dp"
@@ -150,14 +132,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_input" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
-            android:layout_width="1135dp"
-            android:layout_height="116dp"
+            android:id="@+id/layout_bottom"
+            android:layout_width="1141dp"
+            android:layout_height="53dp"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="12dp"
@@ -165,51 +147,56 @@
             android:layout_marginRight="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-            app:layout_constraintHorizontal_bias="0.012"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout">
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:layout_constraintVertical_bias="0.896">
 
             <Button
-                android:id="@+id/button"
-                android:layout_width="78dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="305dp"
-                android:layout_marginLeft="305dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="287dp"
-                android:layout_marginRight="287dp"
-                android:text="Button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.482"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_unstc"
                 android:layout_width="93dp"
                 android:layout_height="33dp"
-                android:layout_marginStart="304dp"
-                android:layout_marginLeft="304dp"
+                android:layout_marginStart="488dp"
+                android:layout_marginLeft="488dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:text="Button"
+                android:text="미입고 현황"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button"
-                app:layout_constraintVertical_bias="0.895" />
+                app:layout_constraintVertical_bias="0.517" />
 
             <Button
-                android:id="@+id/button3"
-                android:layout_width="102dp"
-                android:layout_height="30dp"
-                android:text="Button"
-                app:layout_constraintBottom_toBottomOf="@+id/button2"
+                android:id="@+id/btn_barcode"
+                android:layout_width="106dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="518dp"
+                android:layout_marginRight="518dp"
+                android:text="바코드 입고"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_unstc"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.492"
-                app:layout_constraintStart_toEndOf="@+id/button2"
-                app:layout_constraintTop_toTopOf="@+id/button2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/btn_unstc"
+                app:layout_constraintTop_toTopOf="@+id/btn_unstc"
                 app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="170dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="527dp"
+            android:layout_marginLeft="527dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="511dp"
+            android:layout_marginRight="511dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/ic_launcher_background"
+            android:text="입고진행"
+            app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

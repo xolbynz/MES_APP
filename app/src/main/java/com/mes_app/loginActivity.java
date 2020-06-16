@@ -1,26 +1,23 @@
 package com.mes_app;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.common.CompInfo;
+import com.common.DBInfo;
+import com.example.mes_app.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import com.common.CompInfo;
-import com.common.DBInfo;
-import com.example.mes_app.R;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -32,10 +29,9 @@ public class loginActivity extends AppCompatActivity {
     EditText Saup_No;
     EditText Id;
     EditText Pw;
-    InputMethodManager imm;
+    private Context mContext; // 사업자번호 저장
     View view;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,36 +42,19 @@ public class loginActivity extends AppCompatActivity {
             Toast.makeText(this, "준비완료", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(this, "접속오류", Toast.LENGTH_LONG).show();
-
+        mContext = this;
 
         btn_Login = (Button) findViewById(R.id.btn_login);
         Saup_No = (EditText) findViewById(R.id.edit_사업자번호);
         Id = (EditText) findViewById(R.id.edit_ID);
         Pw = (EditText) findViewById(R.id.edit_PW);
+        Saup_No.setText( PreferenceManager.getString(mContext, "saupNo")); //사업자번호 불러오기
 
-        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         btn_Login.setOnClickListener(btn1Listener);
-        Pw.setOnKeyListener(EditTextEnterkey);
-
-        if (imm.isActive()) {
-            imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
-        }
-
     }
 
-    View.OnKeyListener EditTextEnterkey = new View.OnKeyListener() { // 비밀번호 부분에서 엔터치면 키보드 내리기
-        @Override
-        public boolean onKey(View view, int i, KeyEvent keyEvent) {
-            switch (i) {
-                case KeyEvent.KEYCODE_ENTER:
-                    if (imm.isActive())
-                        imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
-            }
-            return false;
-        }
-    };
-
     View.OnClickListener btn1Listener = new View.OnClickListener() {
+
         @Override
         public void onClick(View v) {
             if (Saup_No.getText().toString().equals("")) {
@@ -93,12 +72,10 @@ public class loginActivity extends AppCompatActivity {
             try {
 
                 if (getcompinfo(Saup_No.getText().toString(), Id.getText().toString(), Pw.getText().toString()) == true) {
+
+                    PreferenceManager.setString(mContext, "saupNo", Saup_No.getText().toString());// 사업자번호 저장
                     Intent intent = new Intent(loginActivity.this, MainActivity.class);
                     startActivity(intent);
-
-                    if (imm.isActive()) {
-                        imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
-                    }
                     finish();
                 }
 
@@ -131,9 +108,7 @@ public class loginActivity extends AppCompatActivity {
                 if (conn.isClosed()) {
                     if (showMessage)
                         Toast.makeText(this, "DataBase 연결 실패", Toast.LENGTH_LONG).show();
-                    return false
-
-                            ;
+                    return false;
                 } else {
                     if (showMessage) {
                         Toast.makeText(this, "DataBase 연결 성공", Toast.LENGTH_LONG).show();
@@ -190,12 +165,10 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-
-                    compInfo = new CompInfo();
-                    compInfo.setSaupNo(rs.getString(1));
-                    compInfo.setSaupNm(rs.getString(2));
-                    compInfo.setSpCode(rs.getString(3));
-                    compInfo.setSpSite(rs.getString(4));
+                    compInfo.setSaupNo(saupNo);
+//                    compInfo.setSaupNm(rs.getString(2));
+//                    compInfo.setSpCode(rs.getString(3));
+//                    compInfo.setSpSite(rs.getString(4));
                     return true;
                 } else {
                     Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();
@@ -211,7 +184,6 @@ public class loginActivity extends AppCompatActivity {
             return false;
         }
     }
-
 }
 
 

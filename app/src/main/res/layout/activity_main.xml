@@ -48,17 +48,14 @@
 
     <FrameLayout
         android:id="@+id/fragmentBorC"
-        android:layout_width="1277dp"
-        android:layout_height="698dp"
+        android:layout_width="1285dp"
+        android:layout_height="613dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.0">
@@ -66,8 +63,8 @@
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1278dp"
-        android:layout_height="45dp"
+        android:layout_width="1276dp"
+        android:layout_height="123dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
@@ -78,11 +75,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentBorC">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerInParent="true"
-            android:background="#FF0000"/>
+            android:background="#FF0000" />
 
 
         <TextView
@@ -92,8 +90,11 @@
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="1092dp"
+            android:layout_marginRight="1092dp"
             android:text="이용약관 |  개인정보취급방침 "
             android:textColor="?android:attr/colorActivatedHighlight"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
