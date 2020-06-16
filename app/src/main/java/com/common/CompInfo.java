@@ -1,10 +1,13 @@
 package com.common;
 
+import java.io.Serializable;
+
 public class CompInfo {
-    private String saupNo;
-    private String saupNm;
-    private String spCode;
-    private String spSite;
+
+    static public String saupNo = "";
+    static public String saupNm = "";
+    static public String spCode = "";
+    static public String spSite = "";
 
     public String getSaupNo() {
         return saupNo;

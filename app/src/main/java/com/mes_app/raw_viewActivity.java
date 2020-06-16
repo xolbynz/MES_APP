@@ -16,14 +16,20 @@ import com.example.mes_app.R;
 
 public class raw_viewActivity extends Fragment {
 
-                MainActivity activity;
+    MainActivity activity;
+    Button btn_search;
+    Spinner spinner_search;
+    ViewGroup rootView;
+
     public raw_viewActivity() {
+
+
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        
+
         activity = (MainActivity) getActivity();
     }
 
@@ -32,7 +38,7 @@ public class raw_viewActivity extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        activity=null;
+        activity = null;
     }
 
     @Override
@@ -51,23 +57,14 @@ public class raw_viewActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_view , container, false);
+        rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_view, container, false);
+        btn_search = rootView.findViewById(R.id.btn_search);
+        spinner_search = rootView.findViewById(R.id.spinner_raw_search);
 
-         Button btn_search =         rootView. findViewById(R.id.btn_search);
-         final Spinner spinner_search = rootView. findViewById(R.id.spinner_raw_search);
-
-         btn_search.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                                         System.out.println(spinner_search.getSelectedItem().toString());
-             }
-         });
-
-                                  
         return rootView;
-
-
     }
+
+
 
 
 }
