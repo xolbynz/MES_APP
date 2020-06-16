@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.common.CompInfo;
 import com.common.DBInfo;
@@ -24,12 +27,15 @@ public class loginActivity extends AppCompatActivity {
     static public Connection conn;
     CompInfo compInfo;
     DBInfo dbInfo;
-
+    InputMethodManager imm; //키보드 내리기
     Button btn_Login;
     EditText Saup_No;
     EditText Id;
     EditText Pw;
     private Context mContext; // 사업자번호 저장
+    ConstraintLayout layour_main;
+    ConstraintLayout layour_login;
+    ImageView image_saup;
     View view;
 
     @Override
@@ -48,9 +54,23 @@ public class loginActivity extends AppCompatActivity {
         Saup_No = (EditText) findViewById(R.id.edit_사업자번호);
         Id = (EditText) findViewById(R.id.edit_ID);
         Pw = (EditText) findViewById(R.id.edit_PW);
+
+       layour_main = (ConstraintLayout)  findViewById(R.id.layout_maIn);
+          layour_login = (ConstraintLayout)  findViewById(R.id.layout_login);
+          image_saup = (ImageView) findViewById(R.id.image_saup);
         Saup_No.setText( PreferenceManager.getString(mContext, "saupNo")); //사업자번호 불러오기
 
+
+
         btn_Login.setOnClickListener(btn1Listener);
+        layour_main.setOnClickListener(myClickListener);
+        layour_login.setOnClickListener(myClickListener);
+        image_saup.setOnClickListener(myClickListener);
+
+        image_saup.setFocusableInTouchMode(true);
+
+
+        image_saup.requestFocus();//시작시 이미지에 포커스 주기
     }
 
     View.OnClickListener btn1Listener = new View.OnClickListener() {
@@ -86,6 +106,31 @@ public class loginActivity extends AppCompatActivity {
         }
     };
 
+///모든 뷰 클릭시 이벤트 발동
+// 사업자 번호 , 아이디 , 패스워드를 제외한  뷰 클릭시 키보드 내림
+    View.OnClickListener myClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            imm.hideSoftInputFromWindow(Saup_No.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(Id.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
+
+
+
+            switch (v.getId())
+            {
+                case R.id.layout_maIn :
+                    break;
+
+                case R.id.layout_login :
+                    break;
+                case R.id.image_saup :
+                    break;
+            }
+        }
+    };
 
     public boolean tryConnect(boolean showMessage) {
         try {
