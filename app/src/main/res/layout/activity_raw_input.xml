@@ -18,8 +18,8 @@
 
         <TableLayout
             android:id="@+id/tableLayout"
-            android:layout_width="1142dp"
-            android:layout_height="499dp"
+            android:layout_width="1143dp"
+            android:layout_height="481dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
             app:layout_constraintHorizontal_bias="1.0"

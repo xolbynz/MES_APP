@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
     raw_inputActivity frag_raw_input = new raw_inputActivity();
     work_viewActivity frag_work_view = new work_viewActivity();
+    work_processActivity frag_work_process = new work_processActivity();
+    stock_statusActivity frag_stock_status = new stock_statusActivity();
 
     Button tab1;//메뉴바
     Button tab2;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     InputMethodManager imm; //키보드 내리기
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
         //프래그먼트 추가
-        fragmentManager = getSupportFragmentManager();
-
-
-        transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragmentBorC, frag_raw_view);
-        transaction.commitNow();
+//        fragmentManager = getSupportFragmentManager();
+//
+//
+//        transaction = fragmentManager.beginTransaction();
+//        transaction.add(R.id.fragmentBorC, frag_raw_view);
+//        transaction.commitNow();
         System.out.println("첫페이지 실행");
 
         tab1.setOnClickListener(menuClickListenr);
@@ -59,11 +62,15 @@ public class MainActivity extends AppCompatActivity {
         tab4.setOnClickListener(menuClickListenr);
 
     }
+
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentBorC, fragment).commit();
+
+
     }
+
     View.OnClickListener menuClickListenr = new View.OnClickListener() {
 
         @Override
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     getMenuInflater().inflate(R.menu.menu_raw, p.getMenu());
 
                     break;
-                case  R.id.btn_workmenu:
+                case R.id.btn_workmenu:
                     getMenuInflater().inflate(R.menu.menu_work, p.getMenu());
 
                     break;
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
 //                                startActivity(intent);
+
                             try {
 
 
@@ -124,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 System.out.println(ex.toString());
                             }
-
+                            break;
                         case R.id.menu_work1:
                             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
 
@@ -138,8 +146,32 @@ public class MainActivity extends AppCompatActivity {
 
 
                             break;
+                        case R.id.menu_work2:
+                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+
+                            try {
+
+                                replaceFragment(frag_work_process);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
 
 
+                            break;
+                        case R.id.menu_work3:
+                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+
+                            try {
+
+                                replaceFragment(frag_stock_status);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
 
 
                     }
