@@ -45,7 +45,6 @@ public class DBInfo {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         rs = stmt.executeQuery(query);
         return rs;
     }

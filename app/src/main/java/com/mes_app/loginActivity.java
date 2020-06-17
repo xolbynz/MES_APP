@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,32 +52,51 @@ public class loginActivity extends AppCompatActivity {
         else
             Toast.makeText(this, "접속오류", Toast.LENGTH_LONG).show();
         mContext = this;
+        dbInfo = new DBInfo();
+        compInfo = new CompInfo();
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
         btn_Login = (Button) findViewById(R.id.btn_login);
         Saup_No = (EditText) findViewById(R.id.edit_사업자번호);
         Id = (EditText) findViewById(R.id.edit_ID);
         Pw = (EditText) findViewById(R.id.edit_PW);
-
-       layour_main = (ConstraintLayout)  findViewById(R.id.layout_maIn);
-          layour_login = (ConstraintLayout)  findViewById(R.id.layout_login);
-          image_saup = (ImageView) findViewById(R.id.image_saup);
-        Saup_No.setText( PreferenceManager.getString(mContext, "saupNo")); //사업자번호 불러오기
+        layour_main = (ConstraintLayout) findViewById(R.id.layout_maIn);
+        layour_login = (ConstraintLayout) findViewById(R.id.layout_login);
+        image_saup = (ImageView) findViewById(R.id.image_saup);
 
 
-
-        btn_Login.setOnClickListener(btn1Listener);
+        Saup_No.setText(PreferenceManager.getString(mContext, "saupNo")); //사업자번호 불러오기
+        btn_Login.setOnClickListener(Btn_Login_CLickListner);
         layour_main.setOnClickListener(myClickListener);
         layour_login.setOnClickListener(myClickListener);
         image_saup.setOnClickListener(myClickListener);
 
+
         image_saup.setFocusableInTouchMode(true);
-        Pw.setOnKeyListener(EditTextEnterkey);
+        Pw.setOnKeyListener(PasswordEnterKeyListener);
+
 
         image_saup.requestFocus();//시작시 이미지에 포커스 주기
     }
 
-    View.OnClickListener btn1Listener = new View.OnClickListener() {
+    // 이벤트 핸들러
 
+
+    View.OnKeyListener PasswordEnterKeyListener = new View.OnKeyListener() { // 패스워드에서 엔터치면 키보드 내려가게 하기
+        @Override
+        public boolean onKey(View v, int i, KeyEvent event) {
+            switch (i){
+                case KeyEvent.KEYCODE_ENTER:
+                    imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+    };
+
+
+    View.OnClickListener Btn_Login_CLickListner = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (Saup_No.getText().toString().equals("")) {
@@ -90,6 +111,7 @@ public class loginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "패스워드를 입력해주시기 바랍니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             try {
 
                 if (getcompinfo(Saup_No.getText().toString(), Id.getText().toString(), Pw.getText().toString()) == true) {
@@ -98,53 +120,39 @@ public class loginActivity extends AppCompatActivity {
                     Intent intent = new Intent(loginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
+                } else {
+                    return;
                 }
 
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
     };
 
-    View.OnKeyListener EditTextEnterkey = new View.OnKeyListener() { // 비밀번호 부분에서 엔터치면 키보드 내리기
+    ///모든 뷰 클릭시 이벤트 발동
+    /// 사업자 번호 , 아이디 , 패스워드를 제외한  뷰 클릭시 키보드 내림
+    /// 6.17 문세진 리스너 객체 생성해서 불러내기 수정
+    View.OnClickListener myClickListener = new View.OnClickListener() {
         @Override
-        public boolean onKey(View view, int i, KeyEvent keyEvent) {
-            switch (i) {
-                case KeyEvent.KEYCODE_ENTER:
-                    if (imm.isActive())
-                        imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
-            }
-            return false;
-        }
-    };
-
-
-///모든 뷰 클릭시 이벤트 발동
-// 사업자 번호 , 아이디 , 패스워드를 제외한  뷰 클릭시 키보드 내림
-    View.OnClickListener myClickListener = new View.OnClickListener()
-    {
-        @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             imm.hideSoftInputFromWindow(Saup_No.getWindowToken(), 0);
             imm.hideSoftInputFromWindow(Id.getWindowToken(), 0);
             imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
-
-
-
-            switch (v.getId())
-            {
-                case R.id.layout_maIn :
+            switch (v.getId()) {
+                case R.id.layout_maIn:
                     break;
-
-                case R.id.layout_login :
+                case R.id.layout_login:
                     break;
-                case R.id.image_saup :
+                case R.id.image_saup:
                     break;
             }
         }
     };
+
+
+    // DB 연동
+
 
     public boolean tryConnect(boolean showMessage) {
         try {
@@ -224,8 +232,6 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-
-                    compInfo = new CompInfo();
                     compInfo.setSaupNo(saupNo);
                     compInfo.setSaupNm(rs.getString(2));
                     compInfo.setSpCode(rs.getString(3));
@@ -233,11 +239,13 @@ public class loginActivity extends AppCompatActivity {
                     return true;
                 } else {
                     Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();
+                    dbInfo.mainConn = null;
                     return false;
                 }
 
             } else {
                 Toast.makeText(this, "등록된 사업자가 아닙니다", Toast.LENGTH_LONG).show();
+                dbInfo.mainConn = null;
                 return false;
             }
         } catch (SQLException e) {
