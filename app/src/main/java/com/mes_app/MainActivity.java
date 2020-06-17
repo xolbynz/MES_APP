@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button tab3;
     Button tab4;
 
+
     FragmentManager fragmentManager;
 
     InputMethodManager imm; //키보드 내리기
@@ -36,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
         //dg
         //jg
 
-         tab1 = (Button) findViewById(R.id.btn_rawmenu);
-         tab2 = (Button) findViewById(R.id.btn_workmenu);
-         tab3 = (Button) findViewById(R.id.btn_itemmenu);
-         tab4 = (Button) findViewById(R.id.btn_setting);
+        tab1 = (Button) findViewById(R.id.btn_rawmenu);
+        tab2 = (Button) findViewById(R.id.btn_workmenu);
+        tab3 = (Button) findViewById(R.id.btn_itemmenu);
+        tab4 = (Button) findViewById(R.id.btn_setting);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
         //프래그먼트 추가
-         fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
 
         transaction = fragmentManager.beginTransaction();
@@ -51,238 +52,94 @@ public class MainActivity extends AppCompatActivity {
         transaction.commitNow();
         System.out.println("첫페이지 실행");
 
-        tab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu p = new PopupMenu(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        v);
-                getMenuInflater().inflate(R.menu.menu_raw, p.getMenu());
-                // 이벤트 처리
-                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        switch (item.getItemId()) {
-                            case R.id.menu_raw1:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-//                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
-//                                startActivity(intent);
-                                try {
-
-
-                                    replaceFragment(frag_raw_view);
-                                } catch (Exception ex) {
-
-                                    System.out.println(ex.toString());
-                                }
-
-                                break;
-
-                            case R.id.menu_raw2:
-                                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-
-                                try {
-
-                                    replaceFragment(frag_raw_input);
-                                } catch (Exception ex) {
-
-                                    System.out.println(ex.toString());
-                                }
-
-
-                                break;
-
-
-
-
-                        }
-                        return true;
-                    }
-
-
-                });
-                p.show(); // 메뉴를 띄우기
-
-
-            }
-        });
-
-        tab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu p = new PopupMenu(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        v);
-                getMenuInflater().inflate(R.menu.menu_work, p.getMenu());
-                // 이벤트 처리
-                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu_work1:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-
-                            case R.id.menu_work2:
-                                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-
-                                break;
-
-                            case R.id.menu_work3:
-                                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-
-                                break;
-                            case R.id.menu_work4:
-                                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-
-                                break;
-                            case R.id.menu_work5:
-                                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-
-                                break;
-
-
-                        }
-                        return true;
-                    }
-
-
-                });
-                p.show(); // 메뉴를 띄우기
-
-
-            }
-        });
-
-        tab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu p = new PopupMenu(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        v);
-                getMenuInflater().inflate(R.menu.menu_item, p.getMenu());
-                // 이벤트 처리
-                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu_item1:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-                            case R.id.menu_item2:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-                            case R.id.menu_item3:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-
-
-                        }
-                        return true;
-                    }
-
-
-                });
-                p.show(); // 메뉴를 띄우기
-
-
-            }
-        });
-        tab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu p = new PopupMenu(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        v);
-                getMenuInflater().inflate(R.menu.menu_item, p.getMenu());
-                // 이벤트 처리
-                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu_item1:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-                            case R.id.menu_item2:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-                            case R.id.menu_item3:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-
-
-                        }
-                        return true;
-                    }
-
-
-                });
-                p.show(); // 메뉴를 띄우기
-
-
-            }
-        });
-
-        tab4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu p = new PopupMenu(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        v);
-                getMenuInflater().inflate(R.menu.menu_setting, p.getMenu());
-                // 이벤트 처리
-                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu_setting1:
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-
-                                break;
-
-                            case R.id.menu_setting2:
-                                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-
-                                break;
-
-
-                        }
-                        return true;
-                    }
-
-
-                });
-                p.show(); // 메뉴를 띄우기
-
-
-            }
-        });
-
+        tab1.setOnClickListener(menuClickListenr);
+        tab2.setOnClickListener(menuClickListenr);
+        tab3.setOnClickListener(menuClickListenr);
+        tab4.setOnClickListener(menuClickListenr);
 
     }
-
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentBorC, fragment).commit();
     }
+    View.OnClickListener menuClickListenr = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            PopupMenu p = new PopupMenu(
+                    getApplicationContext(), // 현재 화면의 제어권자
+                    v);
+
+            System.out.print(v.getId());
+            switch (v.getId()) {
+                case R.id.btn_rawmenu:
+                    getMenuInflater().inflate(R.menu.menu_raw, p.getMenu());
+
+                    break;
+                case  R.id.btn_workmenu:
+                    getMenuInflater().inflate(R.menu.menu_work, p.getMenu());
+
+                    break;
+                case R.id.btn_itemmenu:
+                    getMenuInflater().inflate(R.menu.menu_item, p.getMenu());
+                    break;
+                case R.id.btn_setting:
+                    getMenuInflater().inflate(R.menu.menu_setting, p.getMenu());
+                    break;
+                default:
+                    break;
+            }
+
+
+            p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+
+                    switch (item.getItemId()) {
+                        case R.id.menu_raw1:
+                            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+
+//                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
+//                                startActivity(intent);
+                            try {
+
+
+                                replaceFragment(frag_raw_view);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+                            break;
+
+                        case R.id.menu_raw2:
+                            Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+
+                            try {
+
+                                replaceFragment(frag_raw_input);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
+
+
+
+
+                    }
+                    return true;
+                }
+
+
+            });
+            p.show(); // 메뉴를 띄우기
+
+        }
+    };
 
 }
 
