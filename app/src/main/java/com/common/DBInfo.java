@@ -35,13 +35,13 @@ public class DBInfo {
 
     }
 
-    static ResultSet SelectDB(Connection conn, String query) throws SQLException {
+    public ResultSet SelectDB(String query) throws SQLException {
 
         ResultSet rs = null;
         Statement stmt = null;
 
         try {
-            stmt = conn.createStatement();
+            stmt = mainConn.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
