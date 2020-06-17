@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
     raw_inputActivity frag_raw_input = new raw_inputActivity();
+    work_viewActivity frag_work_view = new work_viewActivity();
 
     Button tab1;//메뉴바
     Button tab2;
@@ -119,6 +120,17 @@ public class MainActivity extends AppCompatActivity {
                             try {
 
                                 replaceFragment(frag_raw_input);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+                        case R.id.menu_work1:
+                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+
+                            try {
+
+                                replaceFragment(frag_work_view);
                             } catch (Exception ex) {
 
                                 System.out.println(ex.toString());
