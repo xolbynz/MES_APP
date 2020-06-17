@@ -20,7 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.mes_app.MainActivity" />
+        <activity android:name="com.mes_app.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
+
 <!--        <activity android:name="com.mes_app.raw_viewActivity" />-->
 <!--        <activity android:name="com.mes_app.raw_inputActivity" />-->
 

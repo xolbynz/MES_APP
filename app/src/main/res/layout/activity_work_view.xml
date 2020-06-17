@@ -7,8 +7,8 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1280dp"
-        android:layout_height="752dp"
+        android:layout_width="1284dp"
+        android:layout_height="641dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
@@ -22,8 +22,8 @@
 
         <LinearLayout
             android:id="@+id/Layout_main"
-            android:layout_width="1278dp"
-            android:layout_height="750dp"
+            android:layout_width="1281dp"
+            android:layout_height="648dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,17 +39,18 @@
                     android:id="@+id/txt_work"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="56dp"
                     android:text="[작업지시 항목]"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TableLayout
                     android:id="@+id/table_work"
-                    android:layout_width="633dp"
-                    android:layout_height="658dp"
+                    android:layout_width="646dp"
+                    android:layout_height="535dp"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="1dp"
                     android:layout_marginTop="32dp"
@@ -59,49 +60,84 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_work">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#FFFFFF" />
+
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent"
+                        android:background="@color/design_default_color_background">
 
                         <TextView
                             android:id="@+id/textView18"
                             android:layout_width="118dp"
                             android:layout_height="match_parent"
+                            android:background="@color/cardview_dark_background"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="1dp"
+                            android:layout_marginRight="1dp"
+                            android:gravity="left"
                             android:text="Lot_No" />
 
                         <TextView
                             android:id="@+id/textView19"
                             android:layout_width="140dp"
                             android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="1dp"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/cardview_dark_background"
                             android:text="업체명" />
 
                         <TextView
                             android:id="@+id/textView20"
                             android:layout_width="131dp"
                             android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="1dp"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/cardview_dark_background"
                             android:text="제품명" />
 
                         <TextView
                             android:id="@+id/textView21"
                             android:layout_width="178dp"
                             android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="1dp"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/cardview_dark_background"
                             android:text="생산의뢰수량" />
                     </TableRow>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#FFFFFF" />
                 </TableLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_right"
-                android:layout_width="638dp"
-                android:layout_height="match_parent">
+                android:layout_width="647dp"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="636dp"
-                    android:layout_height="735dp"
+                    android:layout_width="651dp"
+                    android:layout_height="643dp"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="1dp"
                     android:layout_marginTop="1dp"
@@ -116,7 +152,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="211dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/textView22"
@@ -436,7 +472,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="281dp">
+                        android:layout_height="204dp">
 
                         <TextView
                             android:id="@+id/textView36"
@@ -450,82 +486,159 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TableLayout
-                            android:layout_width="634dp"
-                            android:layout_height="243dp"
-                            tools:layout_editor_absoluteX="1dp"
-                            tools:layout_editor_absoluteY="37dp">
+                            android:layout_width="638dp"
+                            android:layout_height="137dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginRight="17dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView36"
+                            app:layout_constraintVertical_bias="0.866">
 
                             <TableRow
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" >
+                                android:layout_height="match_parent"
+                                android:background="@color/design_default_color_background">
 
                                 <TextView
                                     android:id="@+id/textView37"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="No." />
 
                                 <TextView
                                     android:id="@+id/textView38"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="업체명" />
 
                                 <TextView
                                     android:id="@+id/textView39"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="원부재료" />
 
                                 <TextView
                                     android:id="@+id/textView40"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="규격" />
 
                                 <TextView
                                     android:id="@+id/textView41"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="구분" />
 
                                 <TextView
                                     android:id="@+id/textView42"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="개별소요량" />
 
                                 <TextView
                                     android:id="@+id/textView43"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="총소요량" />
 
                                 <TextView
                                     android:id="@+id/textView44"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="사용단위" />
 
                                 <TextView
                                     android:id="@+id/textView45"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="현재고" />
 
                                 <TextView
                                     android:id="@+id/textView46"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="공정 후 재고" />
 
                                 <TextView
                                     android:id="@+id/textView47"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="입고단위" />
                             </TableRow>
-
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#FFFFFF" />
                             <TableRow
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
@@ -545,83 +658,147 @@
                         android:layout_height="match_parent">
 
                         <TableLayout
-                            android:layout_width="628dp"
-                            android:layout_height="204dp"
+                            android:layout_width="627dp"
+                            android:layout_height="148dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginLeft="1dp"
                             android:layout_marginEnd="1dp"
                             android:layout_marginRight="1dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.161"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView48"
-                            app:layout_constraintVertical_bias="0.0">
+                            app:layout_constraintTop_toBottomOf="@+id/textView48">
 
                             <TableRow
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:background="@color/design_default_color_background">
 
                                 <TextView
                                     android:id="@+id/textView37"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="No." />
 
                                 <TextView
                                     android:id="@+id/textView38"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="업체명" />
 
                                 <TextView
                                     android:id="@+id/textView39"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="반재품명" />
 
                                 <TextView
                                     android:id="@+id/textView40"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="규격" />
 
                                 <TextView
                                     android:id="@+id/textView42"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="개별소요량" />
 
                                 <TextView
                                     android:id="@+id/textView43"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="총소요량" />
 
                                 <TextView
                                     android:id="@+id/textView44"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="사용단위" />
 
                                 <TextView
                                     android:id="@+id/textView45"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="현재고" />
 
                                 <TextView
                                     android:id="@+id/textView46"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="공정 후 재고" />
 
                                 <TextView
                                     android:id="@+id/textView47"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:background="@color/cardview_dark_background"
+                                    android:layout_marginStart="1dp"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginRight="1dp"
                                     android:text="입고단위" />
                             </TableRow>
-
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#FFFFFF" />
                             <TableRow
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
@@ -639,9 +816,9 @@
                             android:id="@+id/textView48"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="17dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="28dp"
                             android:text="[투입 원재료 현황]"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
