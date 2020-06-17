@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="1285dp"
-        android:layout_height="618dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -16,75 +16,136 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="1143dp"
-            android:layout_height="481dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-            app:layout_constraintHorizontal_bias="1.0"
+        <LinearLayout
+            android:layout_width="1319dp"
+            android:layout_height="592dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/design_default_color_background" />
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="1157dp"
+                android:layout_height="442dp"
+                android:layout_marginTop="4dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/design_default_color_background" />
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="101dp"
-                    android:layout_height="match_parent"
-                    android:text="원자재명" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="200dp"
-                    android:layout_height="31dp"
-                    android:text="구매처" />
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="101dp"
+                        android:layout_height="match_parent"
+                        android:text="원자재명" />
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="122dp"
-                    android:layout_height="match_parent"
-                    android:text="발주일자" />
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="200dp"
+                        android:layout_height="31dp"
+                        android:text="구매처" />
 
-                <TextView
-                    android:id="@+id/textView11"
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="122dp"
+                        android:layout_height="match_parent"
+                        android:text="발주일자" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="93dp"
+                        android:layout_height="match_parent"
+                        android:text="규격" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="107dp"
+                        android:layout_height="match_parent"
+                        android:text="입고 위치" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="117dp"
+                        android:layout_height="match_parent"
+                        android:text="발주량" />
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="232dp"
+                        android:layout_height="match_parent"
+                        android:text="미입고량" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_bottom"
+                android:layout_width="1164dp"
+                android:layout_height="105dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp">
+
+                <Button
+                    android:id="@+id/btn_unstc"
                     android:layout_width="93dp"
-                    android:layout_height="match_parent"
-                    android:text="규격" />
+                    android:layout_height="33dp"
+                    android:layout_marginStart="488dp"
+                    android:layout_marginLeft="488dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="미입고 현황"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button"
+                    app:layout_constraintVertical_bias="1.0" />
 
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="107dp"
-                    android:layout_height="match_parent"
-                    android:text="입고 위치" />
+                <Button
+                    android:id="@+id/btn_barcode"
+                    android:layout_width="106dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="518dp"
+                    android:layout_marginRight="518dp"
+                    android:text="바코드 입고"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_unstc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/btn_unstc"
+                    app:layout_constraintTop_toTopOf="@+id/btn_unstc"
+                    app:layout_constraintVertical_bias="1.0" />
 
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="117dp"
-                    android:layout_height="match_parent"
-                    android:text="발주량" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="170dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="499dp"
+                    android:layout_marginLeft="499dp"
+                    android:layout_marginEnd="477dp"
+                    android:layout_marginRight="477dp"
+                    android:background="@drawable/ic_launcher_background"
+                    android:text="입고진행"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="232dp"
-                    android:layout_height="match_parent"
-                    android:text="미입고량" />
-
-            </TableRow>
-
-        </TableLayout>
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
-            android:layout_width="139dp"
-            android:layout_height="619dp"
+            android:layout_width="93dp"
+            android:layout_height="584dp"
+            android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -136,67 +197,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_bottom"
-            android:layout_width="1141dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-            app:layout_constraintVertical_bias="0.896">
-
-            <Button
-                android:id="@+id/btn_unstc"
-                android:layout_width="93dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="488dp"
-                android:layout_marginLeft="488dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:text="미입고 현황"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button"
-                app:layout_constraintVertical_bias="0.517" />
-
-            <Button
-                android:id="@+id/btn_barcode"
-                android:layout_width="106dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="518dp"
-                android:layout_marginRight="518dp"
-                android:text="바코드 입고"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_unstc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/btn_unstc"
-                app:layout_constraintTop_toTopOf="@+id/btn_unstc"
-                app:layout_constraintVertical_bias="1.0" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="170dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="527dp"
-            android:layout_marginLeft="527dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="511dp"
-            android:layout_marginRight="511dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/ic_launcher_background"
-            android:text="입고진행"
-            app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

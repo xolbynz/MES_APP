@@ -32,24 +32,26 @@
 
             <EditText
                 android:id="@+id/editTextDate2"
-                android:layout_width="204dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="36dp"
+                android:layout_width="205dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="date"
+                android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/editTextDate4"
-                android:layout_width="204dp"
-                android:layout_height="28dp"
+                android:layout_width="212dp"
+                android:layout_height="47dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
                 android:ems="10"
                 android:inputType="date"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="@+id/editTextDate2"
                 app:layout_constraintStart_toEndOf="@+id/editTextDate2"
                 app:layout_constraintTop_toTopOf="@+id/editTextDate2"
