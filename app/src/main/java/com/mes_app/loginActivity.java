@@ -212,18 +212,19 @@ public class loginActivity extends AppCompatActivity {
             if (rs.next()) {
                 StringBuilder query2 = new StringBuilder();
                 ResultSet rs2 = null;
+                dbInfo.Location = rs.getString(1);
 
                 if (dbInfo.mainConn != null && !dbInfo.mainConn.isClosed())
                     return false;
 
                 String dbIp = "218.38.14.36";    // 뒤에 :1443 은 입력하지 않는다.
-                String dbName = rs.getString(1); // 사업자 번호에 해당되는 DB 접속
+                String dbName = dbInfo.Location; // 사업자 번호에 해당되는 DB 접속
                 String dbUser = "smartUser";
                 String dbUserPass = "smart/?25";
                 ConnectionClass connClass = new ConnectionClass();
                 dbInfo.mainConn = connClass.getConnection(dbUser, dbUserPass, dbName, dbIp);
 
-                query2.append("select * from [" + rs.getString(1) + "].[dbo].[N_STAFF_CODE]");
+                query2.append("select * from [" + dbInfo.Location + "].[dbo].[N_STAFF_CODE]");
                 query2.append("where LOGIN_ID = '" + Id + "' and PW = '" + Pw + "'");
 
 
@@ -232,10 +233,13 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
+
                     compInfo.setSaupNo(saupNo);
                     compInfo.setSaupNm(rs.getString(2));
                     compInfo.setSpCode(rs.getString(3));
                     compInfo.setSpSite(rs.getString(4));
+
+//                    dbInfo.mainConn.close();
                     return true;
                 } else {
                     Toast.makeText(this, "아이디 혹은 비밀번호가 틀립니다", Toast.LENGTH_LONG).show();

@@ -30,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 public class DBInfo {
 
     static public Connection mainConn = null;
+    static public String Location = null;
 
     static void InsertDB() {
 
