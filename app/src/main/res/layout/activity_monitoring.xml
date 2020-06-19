@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1278dp"
+        android:layout_height="613dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="1276dp"
+            android:layout_height="611dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="59dp">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="18dp"
+                    android:text="조회일자"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editTextDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:ems="10"
+                    android:inputType="date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editTextDate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="98dp"
+                    android:layout_marginLeft="98dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:ems="10"
+                    android:inputType="date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editTextDate"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="602dp"
+                    android:layout_marginRight="602dp"
+                    android:layout_marginBottom="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editTextDate2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/search2blue" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableLayout
+                    android:layout_width="1274dp"
+                    android:layout_height="550dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/textView33"
+                            android:layout_width="146dp"
+                            android:layout_height="wrap_content"
+                            android:text="업체명" />
+
+                        <TextView
+                            android:id="@+id/textView53"
+                            android:layout_width="152dp"
+                            android:layout_height="wrap_content"
+                            android:text="제품명" />
+
+                        <TextView
+                            android:id="@+id/textView54"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="납기요청일" />
+
+                        <TextView
+                            android:id="@+id/textView55"
+                            android:layout_width="118dp"
+                            android:layout_height="wrap_content"
+                            android:text="지시일자" />
+
+                        <TextView
+                            android:id="@+id/textView56"
+                            android:layout_width="117dp"
+                            android:layout_height="wrap_content"
+                            android:text="지시수량" />
+
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="118dp"
+                            android:layout_height="wrap_content"
+                            android:text="공정단계" />
+
+                        <TextView
+                            android:id="@+id/textView58"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="공정수량" />
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="101dp"
+                            android:layout_height="wrap_content"
+                            android:text="생산일자" />
+
+                        <TextView
+                            android:id="@+id/textView60"
+                            android:layout_width="89dp"
+                            android:layout_height="wrap_content"
+                            android:text="생산수량" />
+
+                        <TextView
+                            android:id="@+id/textView61"
+                            android:layout_width="87dp"
+                            android:layout_height="wrap_content"
+                            android:text="불량수" />
+
+                        <TextView
+                            android:id="@+id/textView62"
+                            android:layout_width="81dp"
+                            android:layout_height="wrap_content"
+                            android:text="불량률" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

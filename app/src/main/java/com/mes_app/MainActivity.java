@@ -1,7 +1,10 @@
 package com.mes_app;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.common.DBInfo;
 import com.example.mes_app.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     work_viewActivity frag_work_view = new work_viewActivity();
     work_processActivity frag_work_process = new work_processActivity();
     stock_statusActivity frag_stock_status = new stock_statusActivity();
+    monitoringActivity frag_monMonitoring = new monitoringActivity();
 
     Button tab1;//메뉴바
     Button tab2;
@@ -30,9 +35,35 @@ public class MainActivity extends AppCompatActivity {
     Button tab4;
 
 
+
     FragmentManager fragmentManager;
 
     InputMethodManager imm; //키보드 내리기
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,loginActivity.class);
+            startActivity(intent);
+            DBInfo.mainConn = null;
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //dg
         //jg
+        getSupportActionBar().setTitle("TEST회사MES");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF339999));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
+
+
+
+
 
         tab1 = (Button) findViewById(R.id.btn_rawmenu);
         tab2 = (Button) findViewById(R.id.btn_workmenu);
@@ -133,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                                 System.out.println(ex.toString());
                             }
                             break;
-                        case R.id.menu_work1:
+                        case R.id.menu_work1: //작업지시서 조회
                             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
 
                             try {
@@ -146,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             break;
-                        case R.id.menu_work2:
+                        case R.id.menu_work2: //공정 진행 현황
                             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
 
                             try {
@@ -159,12 +201,26 @@ public class MainActivity extends AppCompatActivity {
 
 
                             break;
-                        case R.id.menu_work3:
+                        case R.id.menu_work3: //제품 입고 현황
                             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
 
                             try {
 
                                 replaceFragment(frag_stock_status);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
+
+                        case R.id.menu_work4: //현황판 모니터링
+                            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+
+                            try {
+
+                                replaceFragment(frag_monMonitoring);
                             } catch (Exception ex) {
 
                                 System.out.println(ex.toString());
