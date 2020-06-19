@@ -2,6 +2,7 @@ package com.mes_app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,17 @@ import com.common.DBInfo;
 import com.example.mes_app.R;
 import com.example.mes_app.data.Result;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -46,6 +58,8 @@ public class raw_viewActivity extends Fragment  {
     EditText editSearch;
     InputMethodManager imm;
     ResultSet rs;
+    JSONObject jsonObject;
+
     public raw_viewActivity() {
         dbInfo = new DBInfo();
     }
@@ -94,7 +108,36 @@ public class raw_viewActivity extends Fragment  {
         editSearch.setOnFocusChangeListener(OutFocus);
         btn_search.setOnClickListener(Raw_Search);
 
+
         dbInfo = new DBInfo();
+        AssetManager assetManager = getResources().getAssets();
+        try {
+            InputStream inputStream = assetManager.open("jsons/test.json");
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+            StringBuffer buffer = new StringBuffer();
+            int line = inputStreamReader.read();
+            while (line != 0){
+                buffer.append(line+"\n");
+                line=inputStreamReader.read();
+            }
+
+            String jsonData= buffer.toString();
+
+            JSONArray jsonArray= new JSONArray(jsonData);
+
+            String s="";
+
+            for(int i=0; i<jsonArray.length();i++){
+                JSONObject jsonObjecto = jsonArray.getJSONObject(i);
+
+
+            }
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
 
         return rootView;
     }
@@ -134,7 +177,6 @@ public class raw_viewActivity extends Fragment  {
 
         StringBuilder query = new StringBuilder();
 
-
         query.append("SELECT * ");
         query.append("FROM ["+ dbInfo.Location +"].[dbo].[F_RAW_DETAIL]  ");
 
@@ -158,6 +200,7 @@ public class raw_viewActivity extends Fragment  {
             list.add(row);
         }
         return list;
+
     }
 
 
