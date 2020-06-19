@@ -478,16 +478,13 @@
                             android:id="@+id/textView36"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="17dp"
                             android:text="[투입 원재료 현황]"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TableLayout
-                            android:layout_width="638dp"
-                            android:layout_height="137dp"
+                            android:layout_width="630dp"
+                            android:layout_height="162dp"
                             android:layout_marginTop="1dp"
                             android:layout_marginEnd="17dp"
                             android:layout_marginRight="17dp"
@@ -496,7 +493,7 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView36"
-                            app:layout_constraintVertical_bias="0.866">
+                            app:layout_constraintVertical_bias="0.297">
 
                             <TableRow
                                 android:layout_width="match_parent"
@@ -507,12 +504,12 @@
                                     android:id="@+id/textView37"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="No." />
 
                                 <TextView
@@ -555,90 +552,92 @@
                                     android:id="@+id/textView41"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="구분" />
 
                                 <TextView
                                     android:id="@+id/textView42"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="개별소요량" />
 
                                 <TextView
                                     android:id="@+id/textView43"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="총소요량" />
 
                                 <TextView
                                     android:id="@+id/textView44"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="사용단위" />
 
                                 <TextView
                                     android:id="@+id/textView45"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="현재고" />
 
                                 <TextView
                                     android:id="@+id/textView46"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="공정 후 재고" />
 
                                 <TextView
                                     android:id="@+id/textView47"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="입고단위" />
                             </TableRow>
+
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:background="#FFFFFF" />
+
                             <TableRow
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
@@ -666,9 +665,10 @@
                             android:layout_marginRight="1dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.161"
+                            app:layout_constraintHorizontal_bias="0.318"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView48">
+                            app:layout_constraintTop_toBottomOf="@+id/textView48"
+                            app:layout_constraintVertical_bias="0.311">
 
                             <TableRow
                                 android:layout_width="match_parent"
@@ -679,12 +679,12 @@
                                     android:id="@+id/textView37"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="No." />
 
                                 <TextView
@@ -701,104 +701,106 @@
 
                                 <TextView
                                     android:id="@+id/textView39"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="107dp"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="반재품명" />
 
                                 <TextView
                                     android:id="@+id/textView40"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
+                                    android:layout_width="65dp"
+                                    android:layout_height="21dp"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="규격" />
 
                                 <TextView
                                     android:id="@+id/textView42"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="개별소요량" />
 
                                 <TextView
                                     android:id="@+id/textView43"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="총소요량" />
 
                                 <TextView
                                     android:id="@+id/textView44"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="사용단위" />
 
                                 <TextView
                                     android:id="@+id/textView45"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="현재고" />
 
                                 <TextView
                                     android:id="@+id/textView46"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="공정 후 재고" />
 
                                 <TextView
                                     android:id="@+id/textView47"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/cardview_dark_background"
                                     android:layout_marginStart="1dp"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginEnd="1dp"
                                     android:layout_marginRight="1dp"
+                                    android:background="@color/cardview_dark_background"
                                     android:text="입고단위" />
                             </TableRow>
+
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:background="#FFFFFF" />
+
                             <TableRow
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
@@ -816,9 +818,6 @@
                             android:id="@+id/textView48"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="28dp"
                             android:text="[투입 원재료 현황]"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
