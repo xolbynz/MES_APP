@@ -47,7 +47,9 @@ public class DBInfo {
             e.printStackTrace();
         }
         rs = stmt.executeQuery(query);
-        return rs;
+
+
+       return rs;
     }
 }
 
