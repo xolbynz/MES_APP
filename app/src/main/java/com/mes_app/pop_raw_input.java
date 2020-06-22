@@ -1,7 +1,9 @@
 package com.mes_app;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,7 +18,7 @@ import com.example.mes_app.R;
  *      입고진행시 팝업으로 확인 취소
  *  </summry>
  */
-public class pop_raw_input {
+public class pop_raw_input extends Activity {
 
     Context context;
     Button btn_ok ;
@@ -70,6 +72,25 @@ public class pop_raw_input {
             }
         });
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //바깥레이어 클릭시 안닫히게
+        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //안드로이드 백버튼 막기
+        return;
+    }
+
+
+
 
 
 

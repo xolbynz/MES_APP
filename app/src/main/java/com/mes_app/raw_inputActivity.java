@@ -47,6 +47,7 @@ Button btn_input;
 
             CustomDialog oDialog = new CustomDialog(context);
             oDialog.setCancelable(false);
+
             oDialog.show();
 
         }

@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#00000000"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="26dp"
         android:layout_weight="20" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,19 +20,20 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="168dp"
-            android:layout_marginRight="168dp"
+
+
+            android:layout_marginEnd="154dp"
+            android:layout_marginRight="154dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="50"
-
             android:gravity="center"
             android:text="항목의 입고를 진행 합니다"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView65" />
+            app:layout_constraintStart_toStartOf="@+id/textView66" />
 
         <TextView
             android:id="@+id/textView64"
@@ -86,6 +87,7 @@
                 android:text="취소" />
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
