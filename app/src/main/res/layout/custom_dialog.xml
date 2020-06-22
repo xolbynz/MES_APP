@@ -15,7 +15,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="244dp">
+        android:layout_height="244dp"
+        android:background="#4C4040">
 
         <TextView
             android:id="@+id/textView"
@@ -25,7 +26,7 @@
             android:layout_marginRight="168dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="50"
-            android:background="#ffffff"
+
             android:gravity="center"
             android:text="항목의 입고를 진행 합니다"
             android:textSize="18sp"
@@ -61,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="10"
-            android:background="@color/mr_cast_meta_black_scrim"
+
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
