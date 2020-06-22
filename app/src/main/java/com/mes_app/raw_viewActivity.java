@@ -27,10 +27,12 @@ import com.example.mes_app.data.Result;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +45,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class raw_viewActivity extends Fragment  {
+public class raw_viewActivity extends Fragment {
 
     MainActivity activity;
     Button btn_search;
@@ -52,7 +54,7 @@ public class raw_viewActivity extends Fragment  {
 
     CompInfo compInfo;
     DBInfo dbInfo;
-    ArrayList<HashMap<String ,Object>> list;
+    ArrayList<HashMap<String, Object>> list;
     ArrayAdapter<String> adapter;
     TableLayout tableLayout;
     EditText editSearch;
@@ -63,7 +65,6 @@ public class raw_viewActivity extends Fragment  {
     public raw_viewActivity() {
         dbInfo = new DBInfo();
     }
-
 
 
     @Override
@@ -110,97 +111,117 @@ public class raw_viewActivity extends Fragment  {
 
 
         dbInfo = new DBInfo();
-        AssetManager assetManager = getResources().getAssets();
-        try {
-            InputStream inputStream = assetManager.open("jsons/test.json");
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-
-            StringBuffer buffer = new StringBuffer();
-            int line = inputStreamReader.read();
-            while (line != 0){
-                buffer.append(line+"\n");
-                line=inputStreamReader.read();
-            }
-
-            String jsonData= buffer.toString();
-
-            JSONArray jsonArray= new JSONArray(jsonData);
-
-            String s="";
-
-            for(int i=0; i<jsonArray.length();i++){
-                JSONObject jsonObjecto = jsonArray.getJSONObject(i);
-
-
-            }
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
-
+//        AssetManager assetManager = getResources().getAssets();
+//        try {
+//            InputStream inputStream = assetManager.open("jsons/test.json");
+//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//
+//            StringBuffer buffer = new StringBuffer();
+//            int line = inputStreamReader.read();
+//            while (line != 0){
+//                buffer.append(line+"\n");
+//                line=inputStreamReader.read();
+//            }
+//
+//            String jsonData= buffer.toString();
+//
+//            JSONArray jsonArray= new JSONArray(jsonData);
+//
+//            String s="";
+//
+//            for(int i=0; i<jsonArray.length();i++){
+//                JSONObject jsonObjecto = jsonArray.getJSONObject(i);
+//
+//
+//            }
+//
+//        } catch (IOException | JSONException e) {
+//            e.printStackTrace();
+//        }
+//
         return rootView;
-    }
 
+
+    }
 
     View.OnClickListener Raw_Search = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-
             try {
-                rs = Raw_Detail(rs,dbInfo.mainConn);
+                rs = Raw_Detail(rs, editSearch.toString());
 
-                if(rs != null || rs.getRow() != 0){
+                if (rs != null || rs.getRow() != 0) {
                     list = convertResultSetToArrayList(rs);
-
-//                    for(int i=0; i < list.size(); i++)
-//                    Toast.makeText(rootView,list.getClass(),Toast.LENGTH_LONG).show();
+//                    for (int i = 0; i < list.size(); i++)
+                    Toast.makeText(activity, "Text!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
     };
 
     EditText.OnFocusChangeListener OutFocus = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            if (!hasFocus){
-                InputMethodManager inputMethodManager =(InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            if (!hasFocus) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         }
     };
 
-    public ResultSet Raw_Detail(ResultSet resultSet, Connection connection) throws SQLException {
+    public ResultSet Raw_Detail(ResultSet resultSet, String condition) throws SQLException {
 
         StringBuilder query = new StringBuilder();
 
         query.append("SELECT * ");
-        query.append("FROM ["+ dbInfo.Location +"].[dbo].[F_RAW_DETAIL]  ");
-
+        query.append("FROM [" + dbInfo.Location + "].[dbo].[N_RAW_CODE]  ");
+        query.append("WHERE 1=1");
+        if (!condition.equals("")) {
+            if (spinner_search.toString().equals("원자재"))
+                if (condition.toString().equals(""))
+                    query.append("WHERE RAW_MAT_NM LIKE %'" + condition + "'%");
+                else if (spinner_search.toString().equals("거래처"))
+                    query.append("WHERE CUST_NM  = '" + getCustcd(condition) + "'");
+        }
         resultSet = dbInfo.SelectDB(query.toString());
-
-
         return resultSet;
     }
 
-    public ArrayList<HashMap<String,Object>> convertResultSetToArrayList(ResultSet rs) throws SQLException { // ResultSet 해쉬맵 변환
+    public ArrayList<HashMap<String, Object>> convertResultSetToArrayList(ResultSet rs) throws SQLException { // ResultSet 해쉬맵 변환
 
         ResultSetMetaData md = rs.getMetaData();
         int columns = md.getColumnCount();
-        ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+        ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 
-        while(rs.next()) {
-            HashMap<String,Object> row = new HashMap<String, Object>(columns);
-            for(int i=1; i<=columns; ++i) {
+        while (rs.next()) {
+            HashMap<String, Object> row = new HashMap<String, Object>(columns);
+            for (int i = 1; i <= columns; ++i) {
                 row.put(md.getColumnName(i), rs.getObject(i));
             }
             list.add(row);
         }
         return list;
 
+    }
+
+    public String getCustcd(String Condition) throws SQLException {
+
+        ResultSet resultSet;
+        StringBuilder query = new StringBuilder();
+
+        query.append("SELECT CUST_CD ");
+        query.append("FROM [" + dbInfo.Location + "].[dbo].[N_CUST_CODE]  ");
+        query.append("WHERE 1=1");
+        query.append("WHERE CUST_NM LIKE %" + Condition + "% ");
+
+        resultSet = dbInfo.SelectDB(query.toString());
+
+        return resultSet.getString(1);
     }
 
 
