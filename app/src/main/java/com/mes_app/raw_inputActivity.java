@@ -39,7 +39,7 @@ Button btn_input;
 
 
 
-            CustomDialog oDialog = new CustomDialog(this);
+            CustomDialog oDialog = new CustomDialog(activity);
             oDialog.setCancelable(false);
             oDialog.show();
 
