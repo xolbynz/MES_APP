@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="1281dp"
+    android:layout_height="613dp">
 
     <LinearLayout
         android:layout_width="1281dp"
@@ -23,9 +22,9 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="39dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginLeft="36dp"
+                android:layout_marginTop="28dp"
                 android:text="조회 일자"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,12 +33,14 @@
                 android:id="@+id/edit_startDate"
                 android:layout_width="205dp"
                 android:layout_height="39dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginLeft="68dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:inputType="date"
+                android:textColor="#FFFFFF"
                 android:textSize="10sp"
+                android:focusableInTouchMode="false"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,11 +48,13 @@
                 android:id="@+id/edit_endDate"
                 android:layout_width="212dp"
                 android:layout_height="47dp"
-                android:layout_marginStart="252dp"
-                android:layout_marginLeft="252dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginLeft="68dp"
                 android:ems="10"
                 android:inputType="date"
+                android:textColor="#FFFFFF"
                 android:textSize="10sp"
+                android:focusableInTouchMode="false"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_startDate"
                 app:layout_constraintStart_toEndOf="@+id/edit_startDate"
                 app:layout_constraintTop_toTopOf="@+id/edit_startDate"
@@ -63,17 +66,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginLeft="28dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginEnd="18dp"
                 android:layout_marginRight="18dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="22dp"
                 android:text="~"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_startDate"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/edit_endDate"
-                app:layout_constraintHorizontal_bias="0.372"
-                app:layout_constraintStart_toEndOf="@+id/edit_startDate" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/edit_startDate"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_stock_search"
                 android:layout_width="87dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="28dp"
@@ -81,24 +86,6 @@
                 app:layout_constraintStart_toEndOf="@+id/edit_endDate"
                 app:layout_constraintTop_toTopOf="@+id/edit_endDate"
                 app:srcCompat="@drawable/search2blue" />
-
-            <Button
-                android:id="@+id/btn_startDate"
-                android:layout_width="97dp"
-                android:layout_height="37dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="11dp"
-                android:text="Button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView5"
-                app:layout_constraintHorizontal_bias="0.13"
-                app:layout_constraintStart_toEndOf="@+id/edit_startDate"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
