@@ -19,7 +19,7 @@ public class RawVo {
     String check_gubun;
     String prop_stock;
 
-    public RawVo(){
+    public RawVo() {
 
     }
 

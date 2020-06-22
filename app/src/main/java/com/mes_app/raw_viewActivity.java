@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -54,12 +55,12 @@ public class raw_viewActivity extends Fragment {
 
     CompInfo compInfo;
     DBInfo dbInfo;
-    ArrayList<HashMap<String, Object>> list;
+    ArrayList<String> list;
     ArrayAdapter<String> adapter;
     TableLayout tableLayout;
     EditText editSearch;
     InputMethodManager imm;
-    ResultSet rs;
+    JSONArray JArray;
     JSONObject jsonObject;
 
     public raw_viewActivity() {
@@ -111,34 +112,8 @@ public class raw_viewActivity extends Fragment {
 
 
         dbInfo = new DBInfo();
-//        AssetManager assetManager = getResources().getAssets();
-//        try {
-//            InputStream inputStream = assetManager.open("jsons/test.json");
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//
-//            StringBuffer buffer = new StringBuffer();
-//            int line = inputStreamReader.read();
-//            while (line != 0){
-//                buffer.append(line+"\n");
-//                line=inputStreamReader.read();
-//            }
-//
-//            String jsonData= buffer.toString();
-//
-//            JSONArray jsonArray= new JSONArray(jsonData);
-//
-//            String s="";
-//
-//            for(int i=0; i<jsonArray.length();i++){
-//                JSONObject jsonObjecto = jsonArray.getJSONObject(i);
-//
-//
-//            }
-//
-//        } catch (IOException | JSONException e) {
-//            e.printStackTrace();
-//        }
-//
+
+
         return rootView;
 
 
@@ -148,16 +123,14 @@ public class raw_viewActivity extends Fragment {
         @Override
         public void onClick(View v) {
             try {
-                rs = Raw_Detail(rs, editSearch.toString());
+                JArray = Raw_Detail(JArray, editSearch.toString());
 
-                if (rs != null || rs.getRow() != 0) {
-                    list = convertResultSetToArrayList(rs);
-//                    for (int i = 0; i < list.size(); i++)
-                    Toast.makeText(activity, "Text!", Toast.LENGTH_SHORT).show();
+                if (JArray != null) {
+
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 }
-            } catch (SQLException e) {
+            } catch (SQLException | JSONException e) {
                 e.printStackTrace();
             }
 
@@ -174,7 +147,8 @@ public class raw_viewActivity extends Fragment {
         }
     };
 
-    public ResultSet Raw_Detail(ResultSet resultSet, String condition) throws SQLException {
+
+    public JSONArray Raw_Detail( JSONArray JSONArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
 
@@ -188,30 +162,29 @@ public class raw_viewActivity extends Fragment {
                 else if (spinner_search.toString().equals("거래처"))
                     query.append("WHERE CUST_NM  = '" + getCustcd(condition) + "'");
         }
-        resultSet = dbInfo.SelectDB(query.toString());
-        return resultSet;
+        JSONArray = dbInfo.SelectDB(query.toString());
+        return JSONArray;
     }
 
-    public ArrayList<HashMap<String, Object>> convertResultSetToArrayList(ResultSet rs) throws SQLException { // ResultSet 해쉬맵 변환
+    public ArrayList<String> convertResultSetToArrayList(ResultSet rs) throws SQLException { // ResultSet 해쉬맵 변환
 
         ResultSetMetaData md = rs.getMetaData();
         int columns = md.getColumnCount();
-        ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+        ArrayList<String> list = new ArrayList<>(columns);
 
         while (rs.next()) {
-            HashMap<String, Object> row = new HashMap<String, Object>(columns);
-            for (int i = 1; i <= columns; ++i) {
-                row.put(md.getColumnName(i), rs.getObject(i));
+            int i = 1;
+            while(i <= columns) {
+                list.add(rs.getString(i++));
             }
-            list.add(row);
         }
         return list;
 
     }
 
-    public String getCustcd(String Condition) throws SQLException {
+    public String getCustcd(String Condition) throws SQLException, JSONException {
 
-        ResultSet resultSet;
+        JSONArray jsonArray;
         StringBuilder query = new StringBuilder();
 
         query.append("SELECT CUST_CD ");
@@ -219,9 +192,9 @@ public class raw_viewActivity extends Fragment {
         query.append("WHERE 1=1");
         query.append("WHERE CUST_NM LIKE %" + Condition + "% ");
 
-        resultSet = dbInfo.SelectDB(query.toString());
+        jsonArray = dbInfo.SelectDB(query.toString());
 
-        return resultSet.getString(1);
+        return jsonArray.getString(1);
     }
 
 
