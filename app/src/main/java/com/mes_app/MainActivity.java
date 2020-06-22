@@ -23,7 +23,7 @@ import com.example.mes_app.R;
 public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
-    raw_inputActivity frag_raw_input = new raw_inputActivity();
+    raw_inputActivity frag_raw_input = new raw_inputActivity(this);
     work_viewActivity frag_work_view = new work_viewActivity();
     work_processActivity frag_work_process = new work_processActivity();
     stock_statusActivity frag_stock_status = new stock_statusActivity();

@@ -37,9 +37,10 @@ public class CustomDialog extends Dialog
         m_oDialog = this;
 
         TextView oView = (TextView) this.findViewById(R.id.textView);
-        oView.setText("Custom Dialog\n테스트입니다.");
+
 
         Button oBtn = (Button)this.findViewById(R.id.btnOK);
+        Button oBtn2 = (Button)this.findViewById(R.id.btnCancel);
         oBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -48,9 +49,22 @@ public class CustomDialog extends Dialog
                 onClickBtn(v);
             }
         });
+        oBtn2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onClickBtn2(v);
+            }
+        });
     }
 
     public void onClickBtn(View _oView)
+    {
+        this.dismiss();
+    }
+
+    public void onClickBtn2(View _oView)
     {
         this.dismiss();
     }

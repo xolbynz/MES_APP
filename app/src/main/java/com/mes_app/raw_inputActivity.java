@@ -22,6 +22,11 @@ Button btn_input;
     TextView main_label;
     public raw_inputActivity() {
     }
+
+    public raw_inputActivity(Context context) {
+
+        this.context=context;
+    }
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -30,24 +35,21 @@ Button btn_input;
             rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
             btn_input = rootView.findViewById(R.id.btn_input);
 
-            btn_input.setOnClickListener(Rawinput);
+            btn_input.setOnClickListener(showDialog);
+
             return rootView;
         }
-    View.OnClickListener Rawinput = new View.OnClickListener() {
+
+    View.OnClickListener showDialog = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-
-
-            CustomDialog oDialog = new CustomDialog(activity);
+            CustomDialog oDialog = new CustomDialog(context);
             oDialog.setCancelable(false);
             oDialog.show();
 
-
         }
-
-        };
-
+    };
 
 
 
