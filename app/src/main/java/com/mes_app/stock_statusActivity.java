@@ -7,33 +7,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.mes_app.R;
 
-public class stock_statusActivity extends Fragment  {
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class stock_statusActivity extends Fragment {
 
     MainActivity activity;  //매인 소환
     InputMethodManager imm; //키보드 내리기
     ViewGroup rootView;
     EditText startDate;
     EditText endDate;
-    Button btn_startDate;
+    ImageButton btn_stockSearch;
+    Context context;
+
+    int mYear, mMonth, mDay;
 
 
-    public stock_statusActivity() {
-
+    public stock_statusActivity(Context context) {
+        this.context = context;
     }
 
-    public void onAttach(Context context) {
-        super.onAttach(context);
 
-        activity = (MainActivity) getActivity();
-    }
 
 
     @Override
@@ -46,16 +48,29 @@ public class stock_statusActivity extends Fragment  {
         startDate = rootView.findViewById(R.id.edit_startDate);
 
         endDate = rootView.findViewById(R.id.edit_endDate);
-
-        btn_startDate =rootView.findViewById(R.id.btn_startDate);
-        btn_startDate.setOnClickListener(onClickListener);
+        btn_stockSearch= rootView.findViewById(R.id.btn_stock_search);
 
 
 
+        startDate.setOnClickListener(onClickListener);
+        endDate.setOnClickListener(onClickListener);
+        btn_stockSearch.setOnClickListener(stockSearch);
+
+        Calendar cal = new GregorianCalendar();
+
+        mYear = cal.get(Calendar.YEAR);
+
+        mMonth = cal.get(Calendar.MONTH);
+
+        mDay = cal.get(Calendar.DAY_OF_MONTH);
 
 
-        return inflater.inflate(R.layout.activity_stock_status, container, false);
+
+
+
+        return rootView;
     }
+
 
 
 
@@ -64,8 +79,28 @@ public class stock_statusActivity extends Fragment  {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            DatePickerDialog dialog = new DatePickerDialog(getActivity(), listener, 2013, 10, 22);
-            dialog.show();
+
+            System.out.println("달력소환");
+            imm.hideSoftInputFromWindow(startDate.getWindowToken(), 0);
+
+
+
+            switch (v.getId()) {
+                case R.id.edit_startDate:
+
+                    new DatePickerDialog(context, listener, mYear,
+
+                            mMonth, mDay).show();
+                    break;
+                case R.id.edit_endDate:
+
+                    new DatePickerDialog(context, listener2, mYear,
+
+                            mMonth, mDay).show();
+                    break;
+
+            }
+
         }
     };
 
@@ -74,10 +109,51 @@ public class stock_statusActivity extends Fragment  {
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            mYear = year;
+
+            mMonth = month;
+
+            mDay = dayOfMonth;
+
+            startDate.setText(String.format("%d/%d/%d", mYear,
+
+                    mMonth + 1, mDay));
+
 
         }
 
 
+    };
+
+    private DatePickerDialog.OnDateSetListener listener2 = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            mYear = year;
+
+            mMonth = month;
+
+            mDay = dayOfMonth;
+
+            endDate.setText(String.format("%d/%d/%d", mYear,
+
+                    mMonth + 1, mDay));
+
+
+        }
+
+
+    };
+
+
+    View.OnClickListener stockSearch = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            System.out.println(startDate.getText()+"부터"+endDate.getText()+"까지 검색하겠습니다.");
+
+
+        }
     };
 
 

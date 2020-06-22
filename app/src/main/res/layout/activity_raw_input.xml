@@ -97,34 +97,6 @@
                 android:layout_marginRight="1dp">
 
                 <Button
-                    android:id="@+id/btn_unstc"
-                    android:layout_width="93dp"
-                    android:layout_height="33dp"
-                    android:layout_marginStart="488dp"
-                    android:layout_marginLeft="488dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:text="미입고 현황"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_input"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <Button
-                    android:id="@+id/btn_barcode"
-                    android:layout_width="106dp"
-                    android:layout_height="35dp"
-                    android:layout_marginEnd="518dp"
-                    android:layout_marginRight="518dp"
-                    android:text="바코드 입고"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_unstc"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/btn_unstc"
-                    app:layout_constraintTop_toTopOf="@+id/btn_unstc"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <Button
                     android:id="@+id/btn_input"
                     android:layout_width="170dp"
                     android:layout_height="41dp"
@@ -136,8 +108,39 @@
                     android:onClick="showDialog"
                     android:text="입고진행"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="255dp"
+                    android:layout_height="47dp"
+                    android:layout_marginStart="466dp"
+                    android:layout_marginLeft="466dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="443dp"
+                    android:layout_marginRight="443dp"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_input">
+
+                    <Button
+                        android:id="@+id/btn_unstc"
+                        android:layout_width="115dp"
+                        android:layout_height="match_parent"
+                        android:text="미입고 현황" />
+
+                    <Button
+                        android:id="@+id/btn_barcode"
+                        android:layout_width="136dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="518dp"
+                        android:layout_marginRight="518dp"
+                        android:text="바코드 입고" />
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

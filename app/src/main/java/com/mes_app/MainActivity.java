@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     raw_inputActivity frag_raw_input = new raw_inputActivity(this);
     work_viewActivity frag_work_view = new work_viewActivity();
     work_processActivity frag_work_process = new work_processActivity();
-    stock_statusActivity frag_stock_status = new stock_statusActivity();
-    monitoringActivity frag_monMonitoring = new monitoringActivity();
+    stock_statusActivity frag_stock_status = new stock_statusActivity(this);
+    monitoringActivity frag_monMonitoring = new monitoringActivity(this);
 
     Button tab1;//메뉴바
     Button tab2;
