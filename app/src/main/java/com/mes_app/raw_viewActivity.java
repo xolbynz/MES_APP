@@ -2,7 +2,6 @@ package com.mes_app;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -24,28 +22,15 @@ import androidx.fragment.app.Fragment;
 import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-import com.example.mes_app.data.Result;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.res.AssetManager;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class raw_viewActivity extends Fragment {
 
@@ -105,7 +90,7 @@ public class raw_viewActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_view, container, false);
         btn_search = rootView.findViewById(R.id.btn_search);
         spinner_search = rootView.findViewById(R.id.spinner_raw_search);
-        tableLayout = rootView.findViewById(R.id.tableLayout);
+
         editSearch = rootView.findViewById(R.id.edit_search);
 
 

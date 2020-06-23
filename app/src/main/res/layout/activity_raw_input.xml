@@ -22,69 +22,20 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-            <TableLayout
-                android:id="@+id/tableLayout"
-                android:layout_width="1157dp"
-                android:layout_height="442dp"
-                android:layout_marginTop="4dp">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/design_default_color_background" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="101dp"
-                        android:layout_height="match_parent"
-                        android:text="원자재명" />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="200dp"
-                        android:layout_height="31dp"
-                        android:text="구매처" />
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="122dp"
-                        android:layout_height="match_parent"
-                        android:text="발주일자" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="93dp"
-                        android:layout_height="match_parent"
-                        android:text="규격" />
-
-                    <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="107dp"
-                        android:layout_height="match_parent"
-                        android:text="입고 위치" />
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="117dp"
-                        android:layout_height="match_parent"
-                        android:text="발주량" />
-
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="232dp"
-                        android:layout_height="match_parent"
-                        android:text="미입고량" />
-
-                </TableRow>
-
-            </TableLayout>
+            <GridView
+                android:id="@+id/gridView1"
+                android:background="#e5e5e5"
+                android:horizontalSpacing="1dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth"
+                android:layout_width="1214dp"
+                android:verticalSpacing="1dp"
+                android:layout_height="432dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_bottom"

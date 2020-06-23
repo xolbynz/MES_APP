@@ -2,166 +2,95 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="1280dp"
+    android:layout_height="618dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="1243dp"
-        android:layout_height="542dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="16dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="47dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="1255dp"
-            android:layout_height="509dp"
-            android:layout_marginEnd="115dp"
-            android:layout_marginRight="115dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.355">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="73dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="37dp">
+            <TextView
+                android:id="@+id/txt_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="조회기준"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txt_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="조회기준"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <Spinner
+                android:id="@+id/spinner_raw_search"
+                android:layout_width="114dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="17dp"
+                android:entries="@array/raw_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_type"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <Spinner
-                    android:id="@+id/spinner_raw_search"
-                    android:layout_width="108dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:entries="@array/raw_search"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_type"
-                    app:layout_constraintStart_toEndOf="@+id/txt_type"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="23dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/search2blue"
+                android:enabled="true"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_search"
+                app:layout_constraintStart_toEndOf="@+id/edit_search"
+                app:layout_constraintTop_toTopOf="@+id/edit_search"
+                app:layout_constraintVertical_bias="0.333" />
 
-                <Button
-                    android:id="@+id/btn_search"
-                    android:layout_width="23dp"
-                    android:layout_height="27dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/search2blue"
-                    android:enabled="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/edit_search"
-                    app:layout_constraintStart_toEndOf="@+id/edit_search"
-                    app:layout_constraintTop_toTopOf="@+id/edit_search"
-                    app:layout_constraintVertical_bias="0.333" />
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="228dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:ems="10"
+                android:enabled="true"
+                android:inputType="textPersonName"
+                android:textColor="@color/design_default_color_background"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner_raw_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/spinner_raw_search"
+                app:layout_constraintTop_toTopOf="@+id/spinner_raw_search"
+                app:layout_constraintVertical_bias="0.0" />
 
-                <EditText
-                    android:id="@+id/edit_search"
-                    android:layout_width="175dp"
-                    android:layout_height="21dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginLeft="12dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name"
-                    android:textColor="@color/design_default_color_background"
-                    app:layout_constraintBottom_toBottomOf="@+id/spinner_raw_search"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/spinner_raw_search"
-                    app:layout_constraintTop_toTopOf="@+id/spinner_raw_search"
-                    app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TableLayout
-                    android:layout_width="1233dp"
-                    android:layout_height="453dp"
-                    tools:layout_editor_absoluteX="3dp"
-                    tools:layout_editor_absoluteY="4dp">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#FFFFFF" />
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#02ACF8">
-
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:text="원자재명" />
-
-                        <TextView
-                            android:id="@+id/textView9"
-                            android:layout_width="126dp"
-                            android:layout_height="match_parent"
-                            android:text="구매처" />
-
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="145dp"
-                            android:layout_height="match_parent"
-                            android:text="입고위치" />
-
-                        <TextView
-                            android:id="@+id/textView11"
-                            android:layout_width="134dp"
-                            android:layout_height="match_parent"
-                            android:text="규격" />
-
-                        <TextView
-                            android:id="@+id/textView12"
-                            android:layout_width="128dp"
-                            android:layout_height="match_parent"
-                            android:text="입고량" />
-
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="142dp"
-                            android:layout_height="match_parent"
-                            android:text="출고량" />
-
-                        <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="141dp"
-                            android:layout_height="match_parent"
-                            android:text="재고량" />
-
-                    </TableRow>
-
-                </TableLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <GridView
+                android:layout_width="1278dp"
+                android:layout_height="543dp"
+                android:layout_marginTop="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
