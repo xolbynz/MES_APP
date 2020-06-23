@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.VO.RawVo;
 import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
@@ -47,8 +48,8 @@ public class raw_viewActivity extends Fragment {
     EditText editSearch;
     InputMethodManager imm;
     JSONArray JArray;
-    JSONObject jsonObject;
-    GridView gridView;
+    RawVo rawVo;
+    ArrayList<RawVo> rawVoArrayList = new ArrayList<>();
 
     public raw_viewActivity() {
         dbInfo = new DBInfo();
@@ -115,7 +116,32 @@ public class raw_viewActivity extends Fragment {
                 JArray = Raw_Detail(JArray, editSearch.getText().toString());
 
                 if (JArray != null) {
+                    for (int i = 0; i < JArray.length(); i++) {
 
+                        JSONObject jo = JArray.getJSONObject(i);
+                        String raw_mat_cd = jo.getString("raw_mat_cd");
+                        String raw_mat_nm = jo.getString("raw_mat_nm");
+                        String spec = jo.getString("spec");
+                        String raw_mat_gubun = jo.getString("raw_mat_gubun");
+                        String type_cd = jo.getString("type_cd");
+                        String input_unit = jo.getString("input_unit");
+                        String output_unit = jo.getString("output_unit");
+                        String input_price = jo.getString("input_price");
+                        String output_price = jo.getString("output_price");
+                        String st_status_yn = jo.getString("st_status_yn");
+                        String raw_strage = jo.getString("raw_strage");
+                        String used_cd = jo.getString("used_cd");
+                        String basic_stock = jo.getString("basic_stock");
+                        String bal_stock = jo.getString("bal_stock");
+                        String check_gubun = jo.getString("check_gubun");
+                        String prop_stock = jo.getString("prop_stock");
+
+                        rawVoArrayList.add(new RawVo(raw_mat_cd, raw_mat_nm, spec, raw_mat_gubun, type_cd,
+                                input_unit, output_unit, input_price, output_price, st_status_yn,
+                                raw_strage, used_cd, basic_stock, bal_stock, check_gubun, prop_stock));
+
+
+                    }
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 }
