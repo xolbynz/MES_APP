@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -62,6 +63,7 @@ public class raw_viewActivity extends Fragment {
     InputMethodManager imm;
     JSONArray JArray;
     JSONObject jsonObject;
+    GridView gridView;
 
     public raw_viewActivity() {
         dbInfo = new DBInfo();
@@ -122,8 +124,10 @@ public class raw_viewActivity extends Fragment {
     View.OnClickListener Raw_Search = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             try {
-                JArray = Raw_Detail(JArray, editSearch.toString());
+
+                JArray = Raw_Detail(JArray, editSearch.getText().toString());
 
                 if (JArray != null) {
 
@@ -148,7 +152,7 @@ public class raw_viewActivity extends Fragment {
     };
 
 
-    public JSONArray Raw_Detail( JSONArray JSONArray, String condition) throws SQLException, JSONException {
+    public JSONArray Raw_Detail(JSONArray JSONArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
 
@@ -156,11 +160,13 @@ public class raw_viewActivity extends Fragment {
         query.append("FROM [" + dbInfo.Location + "].[dbo].[N_RAW_CODE]  ");
         query.append("WHERE 1=1");
         if (!condition.equals("")) {
-            if (spinner_search.toString().equals("원자재"))
-                if (condition.toString().equals(""))
-                    query.append("WHERE RAW_MAT_NM LIKE %'" + condition + "'%");
-                else if (spinner_search.toString().equals("거래처"))
-                    query.append("WHERE CUST_NM  = '" + getCustcd(condition) + "'");
+            if (spinner_search.getSelectedItem().toString().equals("원자재"))
+                if (!condition.equals(""))
+                    query.append(" AND RAW_MAT_NM LIKE '%" + condition + "%'");
+                else
+                    query.append("");
+            else if (spinner_search.getSelectedItem().toString().equals("거래처"))
+                query.append("AND CUST_NM  = '" + getCustcd(condition) + "'");
         }
         JSONArray = dbInfo.SelectDB(query.toString());
         return JSONArray;
@@ -174,13 +180,14 @@ public class raw_viewActivity extends Fragment {
 
         while (rs.next()) {
             int i = 1;
-            while(i <= columns) {
+            while (i <= columns) {
                 list.add(rs.getString(i++));
             }
         }
         return list;
 
     }
+
 
     public String getCustcd(String Condition) throws SQLException, JSONException {
 
