@@ -25,7 +25,7 @@
             />
         <activity android:name="com.mes_app.pop_raw_input" android:theme="@android:style/Theme.Dialog" />
 
-        출처: https://ghj1001020.tistory.com/9 [혁준 블로그]
+
 <!--        <activity android:name="com.mes_app.raw_viewActivity" />-->
 <!--        <activity android:name="com.mes_app.raw_inputActivity" />-->
 

@@ -1,157 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="1280dp"
+    android:layout_height="618dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1285dp"
-        android:layout_height="600dp"
+    <LinearLayout
+        android:layout_width="1277dp"
+        android:layout_height="609dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
-            android:layout_width="1319dp"
-            android:layout_height="592dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <GridView
-                android:id="@+id/gridView1"
-                android:background="#e5e5e5"
-                android:horizontalSpacing="1dp"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"
-                android:layout_width="1214dp"
-                android:verticalSpacing="1dp"
-                android:layout_height="432dp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_bottom"
-                android:layout_width="1164dp"
-                android:layout_height="105dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginRight="1dp">
-
-                <Button
-                    android:id="@+id/btn_input"
-                    android:layout_width="170dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="499dp"
-                    android:layout_marginLeft="499dp"
-                    android:layout_marginEnd="477dp"
-                    android:layout_marginRight="477dp"
-                    android:background="@drawable/ic_launcher_background"
-                    android:onClick="showDialog"
-                    android:text="입고진행"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:layout_width="255dp"
-                    android:layout_height="47dp"
-                    android:layout_marginStart="466dp"
-                    android:layout_marginLeft="466dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginEnd="443dp"
-                    android:layout_marginRight="443dp"
-                    android:layout_marginBottom="1dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_input">
-
-                    <Button
-                        android:id="@+id/btn_unstc"
-                        android:layout_width="115dp"
-                        android:layout_height="match_parent"
-                        android:text="미입고 현황" />
-
-                    <Button
-                        android:id="@+id/btn_barcode"
-                        android:layout_width="136dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="518dp"
-                        android:layout_marginRight="518dp"
-                        android:text="바코드 입고" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
+        <GridView
+            android:id="@+id/gridView1"
+            android:layout_width="1146dp"
+            android:layout_height="480dp"
+            android:horizontalSpacing="1dp"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="1dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
-            android:layout_width="93dp"
-            android:layout_height="584dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/layout_bottom"
+            android:layout_width="1148dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp">
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:text="입고량 입력"
+            <Button
+                android:id="@+id/btn_input"
+                android:layout_width="181dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="499dp"
+                android:layout_marginLeft="499dp"
+                android:layout_marginEnd="477dp"
+                android:layout_marginRight="477dp"
+                android:background="#050505"
+                android:onClick="showDialog"
+                android:text="입고진행"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/edit_input"
-                android:layout_width="114dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginRight="6dp"
-                android:ems="10"
-                android:inputType="number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="107dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginLeft="6dp"
+            <LinearLayout
+                android:layout_width="251dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="466dp"
+                android:layout_marginLeft="466dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginBottom="250dp"
-                android:text="TextView"
+                android:layout_marginEnd="443dp"
+                android:layout_marginRight="443dp"
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_input" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_input">
 
+                <Button
+                    android:id="@+id/btn_unstc"
+                    android:layout_width="115dp"
+                    android:layout_height="match_parent"
+                    android:text="미입고 현황" />
+
+                <Button
+                    android:id="@+id/btn_barcode"
+                    android:layout_width="136dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="518dp"
+                    android:layout_marginRight="518dp"
+                    android:text="바코드 입고" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="618dp"
+        android:background="#4E4C4C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:text="입고량 입력"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_input"
+            android:layout_width="111dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginRight="6dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="107dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="250dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_input" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

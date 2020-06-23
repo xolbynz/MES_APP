@@ -215,8 +215,8 @@ public class MainActivity extends AppCompatActivity {
 
                             break;
 
-                        case R.id.menu_work4: //현황판 모니터링
-                            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+                        case R.id.menu_work5: //현황판 모니터링
+                            Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
 
                             try {
 

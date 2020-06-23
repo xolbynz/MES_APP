@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,8 +20,8 @@ public class monitoringActivity  extends Fragment {
     Context context;
     ViewGroup rootView;
     Button btn_startDate;
-    Button btn_endDate;
-
+    InputMethodManager imm;
+    int mYear, mMonth, mDay;
     EditText edit_startDate;
     EditText edit_endDate;
 
@@ -39,13 +39,12 @@ this.context=context;
                              Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_monitoring, container, false);
 
-        btn_startDate=rootView.findViewById(R.id.btn_start_moniter);
-        btn_endDate=rootView.findViewById(R.id.btn_end_moniter);
+        imm = (InputMethodManager) getContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
         edit_endDate=rootView.findViewById(R.id.edit_end_moniter);
         edit_startDate=rootView.findViewById(R.id.edit_start_moniter);
 
-        btn_startDate.setOnClickListener(showDate);
-        btn_endDate.setOnClickListener(showDate);
+        edit_endDate.setOnClickListener(showDate);
+        edit_startDate.setOnClickListener(showDate);
         return rootView;
     }
 
@@ -54,10 +53,27 @@ this.context=context;
         @Override
         public void onClick(View v) {
 
-            DatePickerDialog dialog = new DatePickerDialog(context, listener, 2013, 10, 22);
+            System.out.println("달력소환");
+            imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
 
-            dialog.show();
 
+
+            switch (v.getId()) {
+                case R.id.edit_end_moniter:
+
+                    new DatePickerDialog(context, listener, mYear,
+
+                            mMonth, mDay).show();
+                    break;
+                case R.id.edit_start_moniter:
+
+                    new DatePickerDialog(context, listener2, mYear,
+
+                            mMonth, mDay).show();
+                    break;
+
+            }
 
 
 
@@ -71,13 +87,39 @@ this.context=context;
 
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-            Toast.makeText(getContext(), year + "년" + monthOfYear + "월" + dayOfMonth +"일", Toast.LENGTH_SHORT).show();
+            mYear = year;
+
+            mMonth = monthOfYear;
+
+            mDay = dayOfMonth;
+
+            edit_endDate.setText(String.format("%d/%d/%d", mYear,
+
+                    mMonth + 1, mDay));
 
         }
 
     };
 
+    private DatePickerDialog.OnDateSetListener listener2 = new DatePickerDialog.OnDateSetListener() {
 
+        @Override
+
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+            mYear = year;
+
+            mMonth = monthOfYear;
+
+            mDay = dayOfMonth;
+
+            edit_startDate.setText(String.format("%d/%d/%d", mYear,
+
+                    mMonth + 1, mDay));
+
+        }
+
+    };
 
 
 
