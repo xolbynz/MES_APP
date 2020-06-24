@@ -89,7 +89,7 @@ public class raw_viewActivity extends Fragment {
         btn_search = rootView.findViewById(R.id.btn_search);
         spinner_search = rootView.findViewById(R.id.spinner_raw_search);
         editSearch = rootView.findViewById(R.id.edit_search);
-        gridView = rootView.findViewById(R.id.gridView1);
+        gridView = rootView.findViewById(R.id.raw_GridView);
 
         editSearch.setOnFocusChangeListener(OutFocus);
         btn_search.setOnClickListener(Raw_Search);
@@ -112,6 +112,9 @@ public class raw_viewActivity extends Fragment {
                 JArray = Raw_Detail(JArray, editSearch.getText().toString());
 
                 if (JArray != null) {
+
+                    rawVoArrayList.clear();
+
                     for (int i = 0; i < JArray.length(); i++) {
 
                         JSONObject jo = JArray.getJSONObject(i);
