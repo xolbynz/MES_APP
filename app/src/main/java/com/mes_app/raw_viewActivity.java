@@ -138,7 +138,7 @@ public class raw_viewActivity extends Fragment {
                         String check_gubun = "";
                         String prop_stock = "";
 
-                        if (jo.has("RAW_MAT_CD"))
+                        if (jo.has("RAW_MAT_CD")) // Data값이 NULL인 경우 빈값으로 처리
                             raw_mat_cd = jo.getString("RAW_MAT_CD");
                         if (jo.has("RAW_MAT_NM"))
                             raw_mat_nm = jo.getString("RAW_MAT_NM");
@@ -177,7 +177,7 @@ public class raw_viewActivity extends Fragment {
 
                         rawAdapter = new RawAdapter();
                         rawAdapter.addItem(rawVo);
-                        rawVoArrayList.add(rawVo);
+//                        rawVoArrayList.add(rawVo);
 
                     }
                     gridView.setAdapter(rawAdapter);
