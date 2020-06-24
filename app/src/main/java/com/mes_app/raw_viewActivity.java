@@ -23,6 +23,7 @@ import com.VO.RawVo;
 import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,16 +41,12 @@ public class raw_viewActivity extends Fragment {
     Spinner spinner_search;
     ViewGroup rootView;
 
-    CompInfo compInfo;
     DBInfo dbInfo;
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
-    TableLayout tableLayout;
+    GridView gridView;
     EditText editSearch;
-    InputMethodManager imm;
     JSONArray JArray;
     RawVo rawVo;
-    ArrayList<RawVo> rawVoArrayList = new ArrayList<>();
+    ArrayList<RawVo> rawVoArrayList;
 
     public raw_viewActivity() {
         dbInfo = new DBInfo();
@@ -91,16 +88,15 @@ public class raw_viewActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_view, container, false);
         btn_search = rootView.findViewById(R.id.btn_search);
         spinner_search = rootView.findViewById(R.id.spinner_raw_search);
-
         editSearch = rootView.findViewById(R.id.edit_search);
-
+        gridView = rootView.findViewById(R.id.gridView1);
 
         editSearch.setOnFocusChangeListener(OutFocus);
         btn_search.setOnClickListener(Raw_Search);
 
 
         dbInfo = new DBInfo();
-
+        rawVoArrayList = new ArrayList<>();
 
         return rootView;
 
@@ -119,29 +115,69 @@ public class raw_viewActivity extends Fragment {
                     for (int i = 0; i < JArray.length(); i++) {
 
                         JSONObject jo = JArray.getJSONObject(i);
-                        String raw_mat_cd = jo.getString("raw_mat_cd");
-                        String raw_mat_nm = jo.getString("raw_mat_nm");
-                        String spec = jo.getString("spec");
-                        String raw_mat_gubun = jo.getString("raw_mat_gubun");
-                        String type_cd = jo.getString("type_cd");
-                        String input_unit = jo.getString("input_unit");
-                        String output_unit = jo.getString("output_unit");
-                        String input_price = jo.getString("input_price");
-                        String output_price = jo.getString("output_price");
-                        String st_status_yn = jo.getString("st_status_yn");
-                        String raw_strage = jo.getString("raw_strage");
-                        String used_cd = jo.getString("used_cd");
-                        String basic_stock = jo.getString("basic_stock");
-                        String bal_stock = jo.getString("bal_stock");
-                        String check_gubun = jo.getString("check_gubun");
-                        String prop_stock = jo.getString("prop_stock");
 
-                        rawVoArrayList.add(new RawVo(raw_mat_cd, raw_mat_nm, spec, raw_mat_gubun, type_cd,
+                        String raw_mat_cd = "";
+                        String raw_mat_nm = "";
+                        String spec = "";
+                        String raw_mat_gubun = "";
+                        String type_cd = "";
+                        String input_unit = "";
+                        String output_unit = "";
+                        String input_price = "";
+                        String output_price = "";
+                        String st_status_yn = "";
+                        String raw_strage = "";
+                        String used_cd = "";
+                        String basic_stock = "";
+                        String bal_stock = "";
+                        String check_gubun = "";
+                        String prop_stock = "";
+
+                        if (jo.has("RAW_MAT_CD"))
+                            raw_mat_cd = jo.getString("RAW_MAT_CD");
+                        if (jo.has("RAW_MAT_NM"))
+                            raw_mat_nm = jo.getString("RAW_MAT_NM");
+                        if (jo.has("SPEC"))
+                            spec = jo.getString("SPEC");
+                        if (jo.has("RAW_MAT_GUBUN"))
+                            raw_mat_gubun = jo.getString("RAW_MAT_GUBUN");
+                        if (jo.has("TYPE_CD"))
+                            type_cd = jo.getString("TYPE_CD");
+                        if (jo.has("INPUT_UNIT"))
+                            input_unit = jo.getString("INPUT_UNIT");
+                        if (jo.has("OUTPUT_UNIT"))
+                            output_unit = jo.getString("OUTPUT_UNIT");
+                        if (jo.has("INPUT_PRICE"))
+                            input_price = jo.getString("INPUT_PRICE");
+                        if (jo.has("OUTPUT_PRICE"))
+                            output_price = jo.getString("OUTPUT_PRICE");
+                        if (jo.has("ST_STATUS_YN"))
+                            st_status_yn = jo.getString("ST_STATUS_YN");
+                        if (jo.has("RAW_STORAGE"))
+                            raw_strage = jo.getString("RAW_STORAGE");
+                        if (jo.has("USED_CD"))
+                            used_cd = jo.getString("USED_CD");
+                        if (jo.has("BASIC_STOCK"))
+                            basic_stock = jo.getString("BASIC_STOCK");
+                        if (jo.has("BAL_STOCK"))
+                            bal_stock = jo.getString("BAL_STOCK");
+                        if (jo.has("CHECK_GUBUN"))
+                            check_gubun = jo.getString("CHECK_GUBUN");
+                        if (jo.has("PROP_STOCK"))
+                            prop_stock = jo.getString("PROP_STOCK");
+
+                        rawVo = new RawVo(raw_mat_cd, raw_mat_nm, spec, raw_mat_gubun, type_cd,
                                 input_unit, output_unit, input_price, output_price, st_status_yn,
-                                raw_strage, used_cd, basic_stock, bal_stock, check_gubun, prop_stock));
+                                raw_strage, used_cd, basic_stock, bal_stock, check_gubun, prop_stock);
 
+                        rawVoArrayList.add(rawVo);
 
                     }
+
+                    ArrayAdapter<RawVo> adapter = new ArrayAdapter<RawVo>(activity, android.R.layout.simple_list_item_1, rawVoArrayList);
+
+                    gridView.setAdapter(adapter);
+
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 }
