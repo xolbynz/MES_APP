@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -41,8 +43,10 @@ public class stock_statusActivity extends Fragment {
     EditText endDate;
     ImageButton btn_stockSearch;
     Context context;
+GridView gridView;
 
     int mYear, mMonth, mDay;
+
 
     CompInfo compInfo;
     DBInfo dbInfo;
@@ -73,7 +77,7 @@ public class stock_statusActivity extends Fragment {
         endDate = rootView.findViewById(R.id.edit_endDate);
         btn_stockSearch= rootView.findViewById(R.id.btn_stock_search);
 
-
+gridView=rootView.findViewById(R.id.grid_stock_status);
 
         startDate.setOnClickListener(onClickListener);
         endDate.setOnClickListener(onClickListener);
@@ -216,8 +220,25 @@ public class stock_statusActivity extends Fragment {
                         String item_unit = jo.getString("UNIT_NM");
                         String quantity = jo.getString("CURR_AMT");
 
-                        stockInputVoArrayList.add(new StockInputVo(packing_date,lot_no,plan_no,CUST_NM,ITEM_NM,item_std,item_unit,quantity));
+                        stockInputVo=new StockInputVo(packing_date,lot_no,plan_no,CUST_NM,ITEM_NM,item_std,item_unit,quantity);
+
+                        stockInputVoArrayList.add(stockInputVo);
                     }
+
+                    ArrayAdapter<StockInputVo> adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,stockInputVoArrayList);
+
+                    gridView.setAdapter(adapter);
+
+                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Toast.makeText(context, position, Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    });
+
+
                 }
                 else{
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();

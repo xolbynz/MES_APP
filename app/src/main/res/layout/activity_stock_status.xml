@@ -93,109 +93,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableLayout
-                android:id="@+id/table_work"
-                android:layout_width="1273dp"
-                android:layout_height="528dp"
+            <GridView
+                android:id="@+id/grid_stock_status"
+                android:layout_width="1279dp"
+                android:layout_height="547dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#FFFFFF" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/design_default_color_background">
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="118dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginRight="1dp"
-                        android:background="@color/cardview_dark_background"
-                        android:gravity="left"
-                        android:text="포장일자" />
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="140dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginRight="1dp"
-                        android:background="@color/cardview_dark_background"
-                        android:gravity="left"
-                        android:text="LOT_식별표" />
-
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="131dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginRight="1dp"
-                        android:background="@color/cardview_dark_background"
-                        android:gravity="left"
-                        android:text="수주계획" />
-
-                    <TextView
-                        android:id="@+id/textView21"
-                        android:layout_width="258dp"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginRight="1dp"
-                        android:background="@color/cardview_dark_background"
-                        android:gravity="left"
-                        android:text="업체명" />
-
-                    <TextView
-                        android:id="@+id/textView49"
-                        android:layout_width="320dp"
-                        android:layout_height="match_parent"
-                        android:text="제품명" />
-
-                    <TextView
-                        android:id="@+id/textView50"
-                        android:layout_width="114dp"
-                        android:layout_height="match_parent"
-                        android:text="규격" />
-
-                    <TextView
-                        android:id="@+id/textView51"
-                        android:layout_width="69dp"
-                        android:layout_height="match_parent"
-                        android:text="단위" />
-
-                    <TextView
-                        android:id="@+id/textView52"
-                        android:layout_width="112dp"
-                        android:layout_height="match_parent"
-                        android:text="수량" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#FFFFFF" />
-            </TableLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                android:numColumns="3"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
