@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.Adapter.RawAdapter;
 import com.VO.RawVo;
 import com.common.CompInfo;
 import com.common.DBInfo;
@@ -46,6 +47,7 @@ public class raw_viewActivity extends Fragment {
     EditText editSearch;
     JSONArray JArray;
     RawVo rawVo;
+    RawAdapter rawAdapter;
     ArrayList<RawVo> rawVoArrayList;
 
     public raw_viewActivity() {
@@ -173,13 +175,12 @@ public class raw_viewActivity extends Fragment {
                                 input_unit, output_unit, input_price, output_price, st_status_yn,
                                 raw_strage, used_cd, basic_stock, bal_stock, check_gubun, prop_stock);
 
+                        rawAdapter = new RawAdapter();
+                        rawAdapter.addItem(rawVo);
                         rawVoArrayList.add(rawVo);
 
                     }
-
-                    ArrayAdapter<RawVo> adapter = new ArrayAdapter<RawVo>(activity, android.R.layout.simple_list_item_1, rawVoArrayList);
-
-                    gridView.setAdapter(adapter);
+                    gridView.setAdapter(rawAdapter);
 
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.VO.RawVo;
 import com.example.mes_app.R;
@@ -18,41 +19,39 @@ import java.util.ArrayList;
 public class RawAdapter extends BaseAdapter {
 
     Context context;
-    int layout;
-    int img[];
-    LayoutInflater inf;
-    private ArrayList<RawVo> list;
-    private Activity activity;
+    RawVo rawVo;
+    private ArrayList<RawVo> arrayList;
 
-    public RawAdapter(View targetView, int position, long id) {
-
-        this.context = context;
-        this.layout = layout;
-        this.img = img;
-        inf = (LayoutInflater) context.getSystemService
-                (Context.LAYOUT_INFLATER_SERVICE);
-
+    public void addItem(RawVo rawVo){
+        arrayList.add(rawVo);
     }
 
     @Override
     public int getCount() {
-        return img.length;
+        return arrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return img[position];
+        return arrayList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return 0;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView==null)
-            convertView = inf.inflate(layout, null);
 
-        return convertView;
+        context = parent.getContext();
+        rawVo = arrayList.get(position);
+
+        if(convertView == null){
+            LayoutInflater infaInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infaInflater.inflate(R.layout.activity_raw_view, parent, false);
+        }
+        return null;
     }
+
 }
