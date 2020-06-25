@@ -6,9 +6,8 @@
     android:layout_height="618dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="1189dp"
+        android:layout_height="562dp"
         android:layout_marginEnd="23dp"
         android:layout_marginRight="23dp"
         android:layout_marginBottom="47dp"
@@ -37,14 +36,15 @@
                 android:id="@+id/spinner_raw_search"
                 android:layout_width="114dp"
                 android:layout_height="37dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="19dp"
                 android:layout_marginBottom="17dp"
                 android:entries="@array/raw_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txt_type"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <Button
                 android:id="@+id/btn_search"
@@ -80,13 +80,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <GridView
                 android:id="@+id/raw_GridView"
-                android:layout_width="1278dp"
-                android:layout_height="543dp"
-                android:layout_marginTop="1dp"
+                android:layout_width="1145dp"
+                android:layout_height="423dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
