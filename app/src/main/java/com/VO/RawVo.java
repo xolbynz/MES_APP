@@ -12,7 +12,7 @@ public class RawVo {
     String input_price;
     String output_price;
     String st_status_yn;
-    String raw_strage;
+    String raw_storage;
     String used_cd;
     String basic_stock;
     String bal_stock;
@@ -25,7 +25,7 @@ public class RawVo {
 
     public RawVo(String raw_mat_cd, String raw_mat_nm, String spec, String raw_mat_gubun, String type_cd,
                  String input_unit, String output_unit, String input_price, String output_price, String st_status_yn,
-                 String raw_strage, String used_cd, String basic_stock, String bal_stock, String check_gubun, String prop_stock) {
+                 String raw_storage, String used_cd, String basic_stock, String bal_stock, String check_gubun, String prop_stock) {
         this.raw_mat_cd = raw_mat_cd;
         this.raw_mat_nm = raw_mat_nm;
         this.spec = spec;
@@ -36,7 +36,7 @@ public class RawVo {
         this.input_price = input_price;
         this.output_price = output_price;
         this.st_status_yn = st_status_yn;
-        this.raw_strage = raw_strage;
+        this.raw_storage = raw_storage;
         this.used_cd = used_cd;
         this.basic_stock = basic_stock;
         this.bal_stock = bal_stock;
@@ -124,12 +124,12 @@ public class RawVo {
         this.st_status_yn = st_status_yn;
     }
 
-    public String getRaw_strage() {
-        return raw_strage;
+    public String getRaw_storage() {
+        return raw_storage;
     }
 
-    public void setRaw_strage(String raw_strage) {
-        this.raw_strage = raw_strage;
+    public void setRaw_storage(String raw_strage) {
+        this.raw_storage = raw_strage;
     }
 
     public String getUsed_cd() {

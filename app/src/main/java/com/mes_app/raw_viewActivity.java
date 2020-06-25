@@ -177,7 +177,7 @@ public class raw_viewActivity extends Fragment {
 
                         rawAdapter = new RawAdapter();
                         rawAdapter.addItem(rawVo);
-//                        rawVoArrayList.add(rawVo);
+
 
                     }
                     gridView.setAdapter(rawAdapter);
