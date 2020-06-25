@@ -47,7 +47,7 @@ public class raw_viewActivity extends Fragment {
     EditText editSearch;
     JSONArray JArray;
     RawVo rawVo;
-    RawAdapter rawAdapter;
+
     ArrayList<RawVo> rawVoArrayList;
 
     public raw_viewActivity() {
@@ -116,7 +116,7 @@ public class raw_viewActivity extends Fragment {
                 if (JArray != null) {
 
                     rawVoArrayList.clear();
-
+                    RawAdapter rawAdapter = new RawAdapter();
                     for (int i = 0; i < JArray.length(); i++) {
 
                         JSONObject jo = JArray.getJSONObject(i);
@@ -175,7 +175,7 @@ public class raw_viewActivity extends Fragment {
                                 input_unit, output_unit, input_price, output_price, st_status_yn,
                                 raw_strage, used_cd, basic_stock, bal_stock, check_gubun, prop_stock);
 
-                        rawAdapter = new RawAdapter();
+
                         rawAdapter.addItem(rawVo);
 
 

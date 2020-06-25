@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class RawAdapter extends BaseAdapter {
 
     Context context;
-    RawVo rawVo;
-    private ArrayList<RawVo> arrayList;
+    RawVo rawVo = new RawVo();
+    private ArrayList<RawVo> arrayList = new ArrayList<>();
 
     public void addItem(RawVo rawVo) {
         arrayList.add(rawVo);

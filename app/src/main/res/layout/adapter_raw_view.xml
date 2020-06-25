@@ -7,8 +7,8 @@
     android:background="#FFFFFF">
 
     <LinearLayout
-        android:layout_width="335dp"
-        android:layout_height="17dp"
+        android:layout_width="389dp"
+        android:layout_height="106dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="raw_mat_cd"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_raw_mat_nm"
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="raw_mat_nm"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_spec"
@@ -46,7 +46,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="spec"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_raw_mat_gubun"
@@ -55,7 +55,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="raw_mat_gubun"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_type_cd"
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_input_unit"
@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_output_unit"
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_input_price"
@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_output_price"
@@ -100,7 +100,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_st_status_yn"
@@ -109,7 +109,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_raw_strage"
@@ -118,7 +118,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_used_cd"
@@ -127,7 +127,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_basic_stock"
@@ -136,7 +136,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_bal_stock"
@@ -145,7 +145,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_check_gubun"
@@ -154,7 +154,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_prop_stock"
@@ -163,7 +163,7 @@
             android:layout_weight="1"
             android:background="#000000"
             android:text="TextView"
-            android:textSize="8sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
