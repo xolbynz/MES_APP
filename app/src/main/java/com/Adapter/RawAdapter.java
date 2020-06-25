@@ -48,7 +48,7 @@ public class RawAdapter extends BaseAdapter {
             LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infaInflater.inflate(R.layout.adapter_raw_view, parent, false);
 
-            TextView raw_mat_cd = convertView.findViewById(R.id.rawView_tv_rawNm);
+
             TextView raw_mat_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
             TextView spec = convertView.findViewById(R.id.rawView_tv_spec);
             TextView unit_nm = convertView.findViewById(R.id.rawView_tv_unit);
@@ -67,7 +67,6 @@ public class RawAdapter extends BaseAdapter {
             String column7 = "단위";
 
 
-            raw_mat_cd.setText(rawVo.getRaw_mat_cd()); //
             raw_mat_nm.setText(rawVo.getRaw_mat_nm()); //
             spec.setText(rawVo.getSpec()); //
             unit_nm.setText(rawVo.getUnit_nm());
@@ -75,6 +74,7 @@ public class RawAdapter extends BaseAdapter {
             output_amt.setText(rawVo.getOutput_amt());
             curr_amt.setText(rawVo.getCurr_amt());
             loc.setText(rawVo.getLoc());
+
         }
         return convertView; // 뷰 객체 반환
     }

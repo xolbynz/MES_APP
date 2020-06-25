@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mes_app.R;
 
-public class work_viewActivity  extends Fragment {
+public class  work_viewActivity  extends Fragment {
 
     InputMethodManager imm; //키보드 내리기
     public  work_viewActivity() {

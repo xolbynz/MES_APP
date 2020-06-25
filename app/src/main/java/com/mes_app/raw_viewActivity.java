@@ -29,7 +29,9 @@ import org.json.JSONObject;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class raw_viewActivity extends Fragment {
 
@@ -153,7 +155,7 @@ public class raw_viewActivity extends Fragment {
                             bal_stock = jo.getString("BAL_STOCK");
 
                         rawVo = new RawVo(raw_mat_cd, raw_mat_nm, spec, unit_nm, cust_nm,
-                                input_amt, output_amt, curr_amt , loc, basic_stock, bal_stock);
+                                input_amt, output_amt, curr_amt, loc, basic_stock, bal_stock);
 
                         rawAdapter.addItem(rawVo);
 
@@ -190,6 +192,11 @@ public class raw_viewActivity extends Fragment {
 
         StringBuilder query = new StringBuilder();
 
+        SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.KOREAN);
+        SimpleDateFormat month = new SimpleDateFormat("mm", Locale.KOREAN);
+        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.KOREAN);
+        String today = year + "-" + month + "-" + day;
+
         query.append("  SELECT \n");
         query.append("  A.RAW_MAT_CD \n");
         query.append(", A.RAW_MAT_NM \n");
@@ -210,19 +217,19 @@ public class raw_viewActivity extends Fragment {
         query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] A \n");
         query.append("          LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE] B \n");
         query.append("          ON A.STORAGE_CD = B.STORAGE_CD \n");
-        query.append("         where INPUT_DATE = '2020-06-22' \n");
+        query.append("         where INPUT_DATE = '" + today + "' \n");
         query.append("          group by RAW_MAT_CD,B.STORAGE_NM,A.LOC_NM) B \n");
         query.append("  ON A.RAW_MAT_CD = B.RAW_MAT_CD \n");
         query.append("  LEFT OUTER JOIN( \n");
         query.append("          select RAW_MAT_CD \n");
         query.append("          , SUM(ISNULL(TOTAL_AMT,0)) as OUTPUT_AMT \n");
         query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_OUTPUT] \n");
-        query.append("         where OUTPUT_DATE = '2020-06-22' \n");
-        query.append("          group by RAW_MAT_CD)  C \n");
+        query.append("         where OUTPUT_DATE = '" + today + "' \n");
+        query.append("          group by RAW_MAT_CD) C \n");
         query.append("  ON A.RAW_MAT_CD = C.RAW_MAT_CD \n");
-        query.append("  left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD=A.CUST_CD \n");
+        query.append("  left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD = A.CUST_CD \n");
         query.append("  left join [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on A.INPUT_UNIT = E.UNIT_CD \n");
-        query.append("  where 1=1  \n");
+        query.append("  where 1=1 \n");
         if (!condition.equals("")) {
             if (spinner_search.getSelectedItem().toString().equals("원자재"))
                 if (!condition.equals(""))
