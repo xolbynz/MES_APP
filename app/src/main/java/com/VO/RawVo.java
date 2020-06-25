@@ -5,171 +5,120 @@ public class RawVo {
     String raw_mat_cd;
     String raw_mat_nm;
     String spec;
-    String raw_mat_gubun;
-    String type_cd;
-    String input_unit;
-    String output_unit;
-    String input_price;
-    String output_price;
-    String st_status_yn;
-    String raw_storage;
-    String used_cd;
+    String unit_nm;
+    String cust_nm;
+    String input_amt;
+    String output_amt;
+    String curr_amt;
+    String loc;
     String basic_stock;
     String bal_stock;
-    String check_gubun;
-    String prop_stock;
 
     public RawVo() {
 
     }
 
-    public RawVo(String raw_mat_cd, String raw_mat_nm, String spec, String raw_mat_gubun, String type_cd,
-                 String input_unit, String output_unit, String input_price, String output_price, String st_status_yn,
-                 String raw_storage, String used_cd, String basic_stock, String bal_stock, String check_gubun, String prop_stock) {
+    public RawVo(String raw_mat_cd, String raw_mat_nm, String spec, String unit_nm,
+                 String cust_nm, String input_amt, String output_amt, String curr_amt,
+                 String loc, String basic_stock, String bal_stock) {
         this.raw_mat_cd = raw_mat_cd;
         this.raw_mat_nm = raw_mat_nm;
         this.spec = spec;
-        this.raw_mat_gubun = raw_mat_gubun;
-        this.type_cd = type_cd;
-        this.input_unit = input_unit;
-        this.output_unit = output_unit;
-        this.input_price = input_price;
-        this.output_price = output_price;
-        this.st_status_yn = st_status_yn;
-        this.raw_storage = raw_storage;
-        this.used_cd = used_cd;
+        this.unit_nm = unit_nm;
+        this.cust_nm = cust_nm;
+        this.input_amt = input_amt;
+        this.output_amt = output_amt;
+        this.curr_amt = curr_amt;
+        this.loc = loc;
         this.basic_stock = basic_stock;
         this.bal_stock = bal_stock;
-        this.check_gubun = check_gubun;
-        this.prop_stock = prop_stock;
     }
 
     public String getRaw_mat_cd() {
         return raw_mat_cd;
     }
 
-    public void setRaw_mat_cd(String raw_mat_cd) {
-        this.raw_mat_cd = raw_mat_cd;
-    }
-
     public String getRaw_mat_nm() {
         return raw_mat_nm;
-    }
-
-    public void setRaw_mat_nm(String raw_mat_nm) {
-        this.raw_mat_nm = raw_mat_nm;
     }
 
     public String getSpec() {
         return spec;
     }
 
-    public void setSpec(String spec) {
-        this.spec = spec;
+    public String getUnit_nm() {
+        return unit_nm;
     }
 
-    public String getRaw_mat_gubun() {
-        return raw_mat_gubun;
+    public String getCust_nm() {
+        return cust_nm;
     }
 
-    public void setRaw_mat_gubun(String raw_mat_gubun) {
-        this.raw_mat_gubun = raw_mat_gubun;
+    public String getInput_amt() {
+        return input_amt;
     }
 
-    public String getType_cd() {
-        return type_cd;
+    public String getOutput_amt() {
+        return output_amt;
     }
 
-    public void setType_cd(String type_cd) {
-        this.type_cd = type_cd;
+    public String getCurr_amt() {
+        return curr_amt;
     }
 
-    public String getInput_unit() {
-        return input_unit;
-    }
-
-    public void setInput_unit(String input_unit) {
-        this.input_unit = input_unit;
-    }
-
-    public String getOutput_unit() {
-        return output_unit;
-    }
-
-    public void setOutput_unit(String output_unit) {
-        this.output_unit = output_unit;
-    }
-
-    public String getInput_price() {
-        return input_price;
-    }
-
-    public void setInput_price(String input_price) {
-        this.input_price = input_price;
-    }
-
-    public String getOutput_price() {
-        return output_price;
-    }
-
-    public void setOutput_price(String output_price) {
-        this.output_price = output_price;
-    }
-
-    public String getSt_status_yn() {
-        return st_status_yn;
-    }
-
-    public void setSt_status_yn(String st_status_yn) {
-        this.st_status_yn = st_status_yn;
-    }
-
-    public String getRaw_storage() {
-        return raw_storage;
-    }
-
-    public void setRaw_storage(String raw_strage) {
-        this.raw_storage = raw_strage;
-    }
-
-    public String getUsed_cd() {
-        return used_cd;
-    }
-
-    public void setUsed_cd(String used_cd) {
-        this.used_cd = used_cd;
+    public String getLoc() {
+        return loc;
     }
 
     public String getBasic_stock() {
         return basic_stock;
     }
 
-    public void setBasic_stock(String basic_stock) {
-        this.basic_stock = basic_stock;
-    }
-
     public String getBal_stock() {
         return bal_stock;
+    }
+
+    public void setRaw_mat_cd(String raw_mat_cd) {
+        this.raw_mat_cd = raw_mat_cd;
+    }
+
+    public void setRaw_mat_nm(String raw_mat_nm) {
+        this.raw_mat_nm = raw_mat_nm;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    public void setUnit_nm(String unit_nm) {
+        this.unit_nm = unit_nm;
+    }
+
+    public void setCust_nm(String cust_nm) {
+        this.cust_nm = cust_nm;
+    }
+
+    public void setInput_amt(String input_amt) {
+        this.input_amt = input_amt;
+    }
+
+    public void setOutput_amt(String output_amt) {
+        this.output_amt = output_amt;
+    }
+
+    public void setCurr_amt(String curr_amt) {
+        this.curr_amt = curr_amt;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
+
+    public void setBasic_stock(String basic_stock) {
+        this.basic_stock = basic_stock;
     }
 
     public void setBal_stock(String bal_stock) {
         this.bal_stock = bal_stock;
     }
-
-    public String getCheck_gubun() {
-        return check_gubun;
-    }
-
-    public void setCheck_gubun(String check_gubun) {
-        this.check_gubun = check_gubun;
-    }
-
-    public String getProp_stock() {
-        return prop_stock;
-    }
-
-    public void setProp_stock(String prop_stock) {
-        this.prop_stock = prop_stock;
-    }
-
 }

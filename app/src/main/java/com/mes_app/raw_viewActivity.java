@@ -124,19 +124,14 @@ public class raw_viewActivity extends Fragment {
                         String raw_mat_cd = "";
                         String raw_mat_nm = "";
                         String spec = "";
-                        String raw_mat_gubun = "";
-                        String type_cd = "";
-                        String input_unit = "";
-                        String output_unit = "";
-                        String input_price = "";
-                        String output_price = "";
-                        String st_status_yn = "";
-                        String raw_strage = "";
-                        String used_cd = "";
+                        String unit_nm = "";
+                        String cust_nm = "";
+                        String input_amt = "";
+                        String output_amt = "";
+                        String curr_amt = "";
+                        String loc = "";
                         String basic_stock = "";
                         String bal_stock = "";
-                        String check_gubun = "";
-                        String prop_stock = "";
 
                         if (jo.has("RAW_MAT_CD")) // Data값이 NULL인 경우 빈값으로 처리
                             raw_mat_cd = jo.getString("RAW_MAT_CD");
@@ -144,37 +139,25 @@ public class raw_viewActivity extends Fragment {
                             raw_mat_nm = jo.getString("RAW_MAT_NM");
                         if (jo.has("SPEC"))
                             spec = jo.getString("SPEC");
-                        if (jo.has("RAW_MAT_GUBUN"))
-                            raw_mat_gubun = jo.getString("RAW_MAT_GUBUN");
-                        if (jo.has("TYPE_CD"))
-                            type_cd = jo.getString("TYPE_CD");
-                        if (jo.has("INPUT_UNIT"))
-                            input_unit = jo.getString("INPUT_UNIT");
-                        if (jo.has("OUTPUT_UNIT"))
-                            output_unit = jo.getString("OUTPUT_UNIT");
-                        if (jo.has("INPUT_PRICE"))
-                            input_price = jo.getString("INPUT_PRICE");
-                        if (jo.has("OUTPUT_PRICE"))
-                            output_price = jo.getString("OUTPUT_PRICE");
-                        if (jo.has("ST_STATUS_YN"))
-                            st_status_yn = jo.getString("ST_STATUS_YN");
-                        if (jo.has("RAW_STORAGE"))
-                            raw_strage = jo.getString("RAW_STORAGE");
-                        if (jo.has("USED_CD"))
-                            used_cd = jo.getString("USED_CD");
+                        if (jo.has("UNIT_NM"))
+                            unit_nm = jo.getString("UNIT_NM");
+                        if (jo.has("CUST_NM"))
+                            cust_nm = jo.getString("CUST_NM");
+                        if (jo.has("INPUT_AMT"))
+                            input_amt = jo.getString("INPUT_AMT");
+                        if (jo.has("OUTPUT_AMT"))
+                            output_amt = jo.getString("OUTPUT_AMT");
+                        if (jo.has("CURR_AMT"))
+                            curr_amt = jo.getString("CURR_AMT");
+                        if (jo.has("LOC"))
+                            loc = jo.getString("LOC");
                         if (jo.has("BASIC_STOCK"))
                             basic_stock = jo.getString("BASIC_STOCK");
                         if (jo.has("BAL_STOCK"))
                             bal_stock = jo.getString("BAL_STOCK");
-                        if (jo.has("CHECK_GUBUN"))
-                            check_gubun = jo.getString("CHECK_GUBUN");
-                        if (jo.has("PROP_STOCK"))
-                            prop_stock = jo.getString("PROP_STOCK");
 
-                        rawVo = new RawVo(raw_mat_cd, raw_mat_nm, spec, raw_mat_gubun, type_cd,
-                                input_unit, output_unit, input_price, output_price, st_status_yn,
-                                raw_strage, used_cd, basic_stock, bal_stock, check_gubun, prop_stock);
-
+                        rawVo = new RawVo(raw_mat_cd, raw_mat_nm, spec, unit_nm, cust_nm,
+                                input_amt, output_amt, curr_amt , loc, basic_stock, bal_stock);
 
                         rawAdapter.addItem(rawVo);
 
@@ -207,13 +190,43 @@ public class raw_viewActivity extends Fragment {
 
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT * ");
-        query.append("FROM [" + dbInfo.Location + "].[dbo].[N_RAW_CODE]  ");
-        query.append("WHERE 1=1");
+        query.append("  SELECT \n");
+        query.append("  A.RAW_MAT_CD \n");
+        query.append(", A.RAW_MAT_NM \n");
+        query.append(", A.SPEC \n");
+        query.append(", E.UNIT_NM \n");
+        query.append(", ISNULL(D.CUST_NM, '') AS CUST_NM \n");
+        query.append(", ISNULL(B.LOC, '-') AS LOC \n");
+        query.append(", ISNULL(B.INPUT_AMT,0) AS INPUT_AMT \n");
+        query.append(", ISNULL(C.OUTPUT_AMT,0) AS OUTPUT_AMT \n");
+        query.append(", ISNULL(B.INPUT_AMT,0) - ISNULL(C.OUTPUT_AMT,0) AS CURR_AMT \n");
+        query.append(", ISNULL(A.BAL_STOCK,0) AS BAL_STOCK \n");
+        query.append(", ISNULL(A.BASIC_STOCK,0) AS BASIC_STOCK \n");
+        query.append("  from [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] A \n");
+        query.append("  LEFT OUTER JOIN( \n ");
+        query.append("          select RAW_MAT_CD \n");
+        query.append("          , SUM(ISNULL(TOTAL_AMT,0)) as INPUT_AMT \n");
+        query.append("          ,B.STORAGE_NM + ' / ' + A.LOC_NM AS LOC \n");
+        query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] A \n");
+        query.append("          LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE] B \n");
+        query.append("          ON A.STORAGE_CD = B.STORAGE_CD \n");
+        query.append("         where INPUT_DATE = '2020-06-22' \n");
+        query.append("          group by RAW_MAT_CD,B.STORAGE_NM,A.LOC_NM) B \n");
+        query.append("  ON A.RAW_MAT_CD = B.RAW_MAT_CD \n");
+        query.append("  LEFT OUTER JOIN( \n");
+        query.append("          select RAW_MAT_CD \n");
+        query.append("          , SUM(ISNULL(TOTAL_AMT,0)) as OUTPUT_AMT \n");
+        query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_OUTPUT] \n");
+        query.append("         where OUTPUT_DATE = '2020-06-22' \n");
+        query.append("          group by RAW_MAT_CD)  C \n");
+        query.append("  ON A.RAW_MAT_CD = C.RAW_MAT_CD \n");
+        query.append("  left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD=A.CUST_CD \n");
+        query.append("  left join [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on A.INPUT_UNIT = E.UNIT_CD \n");
+        query.append("  where 1=1  \n");
         if (!condition.equals("")) {
             if (spinner_search.getSelectedItem().toString().equals("원자재"))
                 if (!condition.equals(""))
-                    query.append(" AND RAW_MAT_NM LIKE '%" + condition + "%'");
+                    query.append(" AND A.RAW_MAT_NM LIKE '%" + condition + "%'");
                 else
                     query.append("");
             else if (spinner_search.getSelectedItem().toString().equals("거래처"))
