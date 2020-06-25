@@ -159,8 +159,7 @@ public class loginActivity extends AppCompatActivity {
 
     public boolean tryConnect(boolean showMessage) {
         try {
-            if (conn != null && !conn.isClosed())
-                return false;
+            conn = null;
             // TODO
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
             String dbIp = "218.38.14.36";    // 뒤에 :1443 은 입력하지 않는다.

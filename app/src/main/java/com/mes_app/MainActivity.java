@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_logout) {
             Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,loginActivity.class);
-            startActivity(intent);
             DBInfo.mainConn = null;
+            startActivity(intent);
             finish();
             return true;
         }
