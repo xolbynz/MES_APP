@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.Adapter.stock_statusAdapter;
 import com.VO.StockInputVo;
 import com.common.CompInfo;
 import com.common.DBInfo;
@@ -209,6 +209,9 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
                 JArray = Stock_status_Detail(JArray, "");
 
                 if (JArray!=null){
+
+                    stockInputVoArrayList.clear();
+                    stock_statusAdapter stock_statusAdapter = new stock_statusAdapter();
                     for (int i =0; i <JArray.length();i++){
                         JSONObject jo = JArray.getJSONObject(i);
                         String packing_date = jo.getString("INPUT_DATE");
@@ -222,21 +225,15 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
 
                         stockInputVo=new StockInputVo(packing_date,lot_no,plan_no,CUST_NM,ITEM_NM,item_std,item_unit,quantity);
 
-                        stockInputVoArrayList.add(stockInputVo);
+                        stock_statusAdapter.addItem(stockInputVo);
                     }
 
-                    ArrayAdapter<StockInputVo> adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,stockInputVoArrayList);
-
-                    gridView.setAdapter(adapter);
-
-                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Toast.makeText(context, position, Toast.LENGTH_SHORT).show();
+                    if(stock_statusAdapter.getCount() == 0) {
+                        Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                    }
+                  gridView.setAdapter(stock_statusAdapter);
 
 
-                        }
-                    });
 
 
                 }

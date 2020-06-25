@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/stockStatus_tv_custNm2"
+        android:id="@+id/stockStatus_tv_itemNm"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -80,9 +80,9 @@
         android:layout_marginLeft="2dp"
         android:text="규격"
         android:textColor="@color/mr_cast_meta_black_scrim"
-        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_custNm2"
-        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_custNm2"
-        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_custNm2"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_itemNm"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_itemNm"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_itemNm"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView

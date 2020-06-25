@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,10 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import com.Adapter.RawAdapter;
 import com.VO.RawVo;
-import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -162,6 +158,10 @@ public class raw_viewActivity extends Fragment {
                         rawAdapter.addItem(rawVo);
 
 
+                    }
+
+                    if(rawAdapter.getCount() == 0) {
+                        Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                     }
                     gridView.setAdapter(rawAdapter);
 
