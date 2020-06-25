@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="1279dp"
+    android:layout_height="20dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/stockStatus_tv_pacDate"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="포장일자"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_lotNo"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="Lot_식별표"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_plan"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="수주계획"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_lotNo"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_custNm"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="업체명"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_plan"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_custNm2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="제품명"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_custNm"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_pacDate"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_spec"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="규격"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_custNm2"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_custNm2"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_custNm2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="단위"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_spec"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_spec"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/stockStatus_tv_amt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="수량"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        app:layout_constraintBottom_toBottomOf="@+id/stockStatus_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/stockStatus_tv_unit"
+        app:layout_constraintTop_toTopOf="@+id/stockStatus_tv_spec"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
