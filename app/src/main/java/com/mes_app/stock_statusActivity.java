@@ -288,6 +288,7 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         if (!endDate.getText().equals("")) {
             query.append(" and A.INPUT_DATE<='"+endDate.getText()+"' \n");
         }
+        System.out.println(query);
         JSONArray = dbInfo.SelectDB(query.toString());
         return JSONArray;
     }
