@@ -45,7 +45,7 @@ public class stock_statusAdapter extends BaseAdapter {
 
         if(convertView == null){
             LayoutInflater infaInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infaInflater.inflate(R.layout.activity_stock_status, parent, false);
+            convertView = infaInflater.inflate(R.layout.adapter_stock_status, parent, false);
 
             TextView pack_date= convertView.findViewById(R.id.stockStatus_tv_pacDate);
             TextView lot_no= convertView.findViewById(R.id.stockStatus_tv_lotNo);

@@ -265,12 +265,12 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         query.append("select \n");
         query.append("A.INPUT_DATE \n");
         query.append(",A.LOT_NO + RIGHT('00'+ convert(varchar, A.LOT_SUB), 3) as LOT_BAR \n");
-        query.append(",C.PLAN_NUM \n");
-        query.append(",D.CUST_NM \n");
-        query.append(",B.ITEM_NM \n");
-        query.append(",B.SPEC \n");
-        query.append(",E.UNIT_NM \n");
-        query.append(",A.CURR_AMT \n");
+        query.append(",isnull(C.PLAN_NUM,'') as PLAN_NUM \n");
+        query.append(",isnull(D.CUST_NM,'') as CUST_NM \n");
+        query.append(",isnull(B.ITEM_NM,'') as ITEM_NM \n");
+        query.append(",isnull(B.SPEC,'') as SPEC \n");
+        query.append(",isnull(E.UNIT_NM,'') as UNIT_NM \n");
+        query.append(",convert(int,isnull(A.CURR_AMT,0)) as CURR_AMT \n");
 
 
         query.append("FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] as A  \n");
