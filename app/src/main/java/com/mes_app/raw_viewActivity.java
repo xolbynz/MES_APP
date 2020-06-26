@@ -47,8 +47,6 @@ public class raw_viewActivity extends Fragment {
     JSONArray JArray;
     RawVo rawVo;
 
-    ArrayList<RawVo> rawVoArrayList;
-
     public raw_viewActivity() {
         dbInfo = new DBInfo();
     }
@@ -97,7 +95,6 @@ public class raw_viewActivity extends Fragment {
 
 
         dbInfo = new DBInfo();
-        rawVoArrayList = new ArrayList<>();
 
         return rootView;
     }
@@ -114,7 +111,6 @@ public class raw_viewActivity extends Fragment {
 
                 if (JArray.length() != 0) {
 
-                    rawVoArrayList.clear();
                     RawAdapter rawAdapter = new RawAdapter();
                     for (int i = 0; i < JArray.length(); i++) {
 
@@ -162,8 +158,9 @@ public class raw_viewActivity extends Fragment {
                     }
 
                     if(rawAdapter.getCount() == 0) {
-                        Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "오류 발생", Toast.LENGTH_SHORT).show();
                     }
+
                     gridView.setAdapter(rawAdapter);
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
