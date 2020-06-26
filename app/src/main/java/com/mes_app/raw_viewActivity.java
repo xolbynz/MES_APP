@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.jar.JarEntry;
 
 public class raw_viewActivity extends Fragment {
 
@@ -99,8 +100,6 @@ public class raw_viewActivity extends Fragment {
         rawVoArrayList = new ArrayList<>();
 
         return rootView;
-
-
     }
 
     View.OnClickListener Raw_Search = new View.OnClickListener() {
@@ -109,9 +108,11 @@ public class raw_viewActivity extends Fragment {
 
             try {
 
+                JArray = null;
                 JArray = Raw_Detail(JArray, editSearch.getText().toString());
 
-                if (JArray != null) {
+
+                if (JArray.length() != 0) {
 
                     rawVoArrayList.clear();
                     RawAdapter rawAdapter = new RawAdapter();
@@ -158,15 +159,12 @@ public class raw_viewActivity extends Fragment {
                                 input_amt, output_amt, curr_amt, loc, basic_stock, bal_stock);
 
                         rawAdapter.addItem(rawVo);
-
-
                     }
 
                     if(rawAdapter.getCount() == 0) {
                         Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                     }
                     gridView.setAdapter(rawAdapter);
-
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 }
@@ -256,7 +254,6 @@ public class raw_viewActivity extends Fragment {
             }
         }
         return list;
-
     }
 
 
