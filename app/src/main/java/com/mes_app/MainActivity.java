@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         //jg
         getSupportActionBar().setTitle("TEST회사MES");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF339999));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로가기 버튼
 
 
 

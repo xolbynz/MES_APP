@@ -204,11 +204,11 @@ public class raw_viewActivity extends Fragment {
         query.append(", E.UNIT_NM \n");
         query.append(", ISNULL(D.CUST_NM, '') AS CUST_NM \n");
         query.append(", ISNULL(B.LOC, '-') AS LOC \n");
-        query.append(", ISNULL(B.INPUT_AMT,0) AS INPUT_AMT \n");
-        query.append(", ISNULL(C.OUTPUT_AMT,0) AS OUTPUT_AMT \n");
-        query.append(", ISNULL(B.INPUT_AMT,0) - ISNULL(C.OUTPUT_AMT,0) AS CURR_AMT \n");
-        query.append(", ISNULL(A.BAL_STOCK,0) AS BAL_STOCK \n");
-        query.append(", ISNULL(A.BASIC_STOCK,0) AS BASIC_STOCK \n");
+        query.append(", convert(int,ISNULL(B.INPUT_AMT,0)) AS INPUT_AMT \n");
+        query.append(", convert(int,ISNULL(C.OUTPUT_AMT,0)) AS OUTPUT_AMT \n");
+        query.append(", convert(int,(ISNULL(B.INPUT_AMT,0) - ISNULL(C.OUTPUT_AMT,0))) AS CURR_AMT \n");
+        query.append(", convert(int,ISNULL(A.BAL_STOCK,0)) AS BAL_STOCK \n");
+        query.append(", convert(int,ISNULL(A.BASIC_STOCK,0)) AS BASIC_STOCK \n");
         query.append("  from [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] A \n");
         query.append("  LEFT OUTER JOIN( \n ");
         query.append("          select RAW_MAT_CD \n");
