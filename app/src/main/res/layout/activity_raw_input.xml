@@ -5,84 +5,209 @@
     android:layout_width="1280dp"
     android:layout_height="618dp">
 
-    <LinearLayout
-        android:layout_width="1277dp"
-        android:layout_height="609dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="1129dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/rawinput_gv"
+        app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
+        app:layout_constraintStart_toStartOf="@+id/rawinput_gv"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/rawView_tv_rawNm"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="원자재명"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.666" />
+
+        <TextView
+            android:id="@+id/rawView_tv_custNm"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="구매처"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="0.333" />
+
+        <TextView
+            android:id="@+id/rawView_tv_orderDate"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="발주일자"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/rawView_tv_spec"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="규격"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderDate"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/rawView_tv_position"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="입고위치"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/rawView_tv_orderAmt"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="발주량"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_position"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/rawView_tv_nonInpAmt"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="미입고량"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderAmt"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridView
+        android:id="@+id/rawinput_gv"
+        android:layout_width="1148dp"
+        android:layout_height="333dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:horizontalSpacing="1dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp">
+
+    </GridView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="1148dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/rawinput_gv">
 
-        <GridView
-            android:id="@+id/gridView1"
-            android:layout_width="1146dp"
-            android:layout_height="480dp"
-            android:horizontalSpacing="1dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="1dp" />
+        <Button
+            android:id="@+id/btn_input"
+            android:layout_width="181dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="499dp"
+            android:layout_marginLeft="499dp"
+            android:layout_marginEnd="477dp"
+            android:layout_marginRight="477dp"
+            android:background="#050505"
+            android:onClick="showDialog"
+            android:text="입고진행"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_bottom"
-            android:layout_width="1148dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp">
+        <LinearLayout
+            android:layout_width="251dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="466dp"
+            android:layout_marginLeft="466dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="443dp"
+            android:layout_marginRight="443dp"
+            android:layout_marginBottom="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_input">
 
             <Button
-                android:id="@+id/btn_input"
-                android:layout_width="181dp"
-                android:layout_height="65dp"
-                android:layout_marginStart="499dp"
-                android:layout_marginLeft="499dp"
-                android:layout_marginEnd="477dp"
-                android:layout_marginRight="477dp"
-                android:background="#050505"
-                android:onClick="showDialog"
-                android:text="입고진행"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/btn_unstc"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="미입고 현황" />
 
-            <LinearLayout
-                android:layout_width="251dp"
-                android:layout_height="43dp"
-                android:layout_marginStart="466dp"
-                android:layout_marginLeft="466dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="443dp"
-                android:layout_marginRight="443dp"
-                android:layout_marginBottom="1dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_input">
-
-                <Button
-                    android:id="@+id/btn_unstc"
-                    android:layout_width="115dp"
-                    android:layout_height="match_parent"
-                    android:text="미입고 현황" />
-
-                <Button
-                    android:id="@+id/btn_barcode"
-                    android:layout_width="136dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="518dp"
-                    android:layout_marginRight="518dp"
-                    android:text="바코드 입고" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_barcode"
+                android:layout_width="136dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="518dp"
+                android:layout_marginRight="518dp"
+                android:text="바코드 입고" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"

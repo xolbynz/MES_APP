@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="1129dp"
+    android:layout_height="55dp">
+
+    <TextView
+        android:id="@+id/rawView_tv_rawNm"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="원자재명"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <TextView
+        android:id="@+id/rawView_tv_custNm"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="구매처"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/rawView_tv_orderDate"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="발주일자"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
+        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/rawView_tv_spec"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="규격"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderDate"
+        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/rawView_tv_position"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="입고위치"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
+        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/rawView_tv_orderAmt"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="발주량"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_position"
+        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/rawView_tv_nonInpAmt"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="미입고량"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderAmt"
+        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
