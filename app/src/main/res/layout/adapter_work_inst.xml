@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="600dp"
+    android:layout_height="40dp">
+
+    <TextView
+        android:id="@+id/workInst_tv_lotNo"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="LotNO"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <TextView
+        android:id="@+id/workInst_tv_custNm"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="업체명"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/workInst_tv_itemNm"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="제품명"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
+        app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/workInst_tv_instAmt"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="생산의뢰수량"
+        android:textColor="@color/mr_cast_meta_black_scrim"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_itemNm"
+        app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/workInst_btn_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_instAmt"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_instAmt"
+        app:layout_constraintTop_toTopOf="@+id/workInst_tv_instAmt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

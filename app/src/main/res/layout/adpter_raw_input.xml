@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.666" />
 
     <TextView
-        android:id="@+id/rawView_tv_custNm"
+        android:id="@+id/workInst_tv_custNm"
         android:layout_width="180dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -51,7 +51,7 @@
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
         app:layout_constraintVertical_bias="0.0" />
 
