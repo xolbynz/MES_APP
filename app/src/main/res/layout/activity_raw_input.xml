@@ -6,19 +6,15 @@
     android:layout_height="618dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="1129dp"
         android:layout_height="55dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/rawinput_gv"
         app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
         app:layout_constraintStart_toStartOf="@+id/rawinput_gv"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="61dp">
 
         <TextView
             android:id="@+id/rawView_tv_rawNm"
-            android:layout_width="180dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
@@ -70,8 +66,8 @@
             android:id="@+id/rawView_tv_spec"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
             android:background="#FFFFFF"
             android:gravity="center"
             android:text="규격"
@@ -80,11 +76,11 @@
             app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
             app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderDate"
             app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/rawView_tv_position"
-            android:layout_width="160dp"
+            android:layout_width="130dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
@@ -100,7 +96,7 @@
 
         <TextView
             android:id="@+id/rawView_tv_orderAmt"
-            android:layout_width="160dp"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
@@ -116,7 +112,7 @@
 
         <TextView
             android:id="@+id/rawView_tv_nonInpAmt"
-            android:layout_width="160dp"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
@@ -129,25 +125,36 @@
             app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderAmt"
             app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/rawView_tv_nonInpAmt2"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="입력수량"
+            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_nonInpAmt"
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintVertical_bias="1.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <GridView
         android:id="@+id/rawinput_gv"
-        android:layout_width="1148dp"
+        android:layout_width="1129dp"
         android:layout_height="333dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:horizontalSpacing="1dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="1dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        tools:layout_editor_absoluteY="61dp">
 
     </GridView>
 
@@ -155,12 +162,9 @@
         android:id="@+id/layout_bottom"
         android:layout_width="1148dp"
         android:layout_height="143dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
+        app:layout_constraintStart_toStartOf="@+id/rawinput_gv"
         app:layout_constraintTop_toBottomOf="@+id/rawinput_gv">
 
         <Button
@@ -210,57 +214,4 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="618dp"
-        android:background="#4E4C4C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:text="입고량 입력"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_input"
-            android:layout_width="111dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginRight="6dp"
-            android:ems="10"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="107dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginBottom="250dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_input" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

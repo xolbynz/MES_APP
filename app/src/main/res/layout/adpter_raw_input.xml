@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="1329dp"
+    android:layout_width="1129dp"
     android:layout_height="55dp">
 
     <TextView
         android:id="@+id/rawView_tv_rawNm"
-        android:layout_width="180dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
@@ -73,7 +73,7 @@
 
     <TextView
         android:id="@+id/rawView_tv_position"
-        android:layout_width="160dp"
+        android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
@@ -89,7 +89,7 @@
 
     <TextView
         android:id="@+id/rawView_tv_orderAmt"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
@@ -105,7 +105,7 @@
 
     <TextView
         android:id="@+id/rawView_tv_nonInpAmt"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
@@ -121,7 +121,7 @@
 
     <EditText
         android:id="@+id/rawView_et_inpAmt"
-        android:layout_width="200dp"
+        android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
