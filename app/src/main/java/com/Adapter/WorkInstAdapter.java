@@ -68,25 +68,47 @@ public class WorkInstAdapter  extends BaseAdapter {
             btn_view.setText("보기");
 
 
-            lotNo.setOnClickListener(lotNoclick);
-            custNM.setOnClickListener(custNMclick);
+            arrayList.add(workInstVo);
+
 
 
         }
         return convertView;
     }
 
-View.OnClickListener lotNoclick = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
- System.out.println(lotNo.getText());
+    public Context getContext() {
+        return context;
     }
-};
-    View.OnClickListener custNMclick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            System.out.println(custNM.getText());
-        }
-    };
 
+    public WorkInstVo getWorkInstVo() {
+        return workInstVo;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public TextView getLotNo() {
+        return lotNo;
+    }
+
+    public TextView getCustNM() {
+        return custNM;
+    }
+
+    public TextView getItemNm() {
+        return itemNm;
+    }
+
+    public TextView getInstAmt() {
+        return instAmt;
+    }
+
+    public Button getBtn_view() {
+        return btn_view;
+    }
+
+    public ArrayList<WorkInstVo> getArrayList() {
+        return arrayList;
+    }
 }

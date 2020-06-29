@@ -84,7 +84,7 @@
 
             <GridView
                 android:id="@+id/raw_GridView"
-                android:layout_width="1145dp"
+                android:layout_width="1144dp"
                 android:layout_height="423dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"

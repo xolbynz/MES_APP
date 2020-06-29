@@ -64,7 +64,7 @@ dbInfo= new DBInfo();
             JArray =work_inst(JArray,"");
 
             if (JArray.length()!=0){
-                WorkInstAdapter workInstAdapter = new WorkInstAdapter();
+                final WorkInstAdapter workInstAdapter = new WorkInstAdapter();
 
                 for (int i=0; i<JArray.length();i++){
                     JSONObject jo = JArray.getJSONObject(i);
@@ -87,10 +87,12 @@ dbInfo= new DBInfo();
 
                 gv_inst.setAdapter(workInstAdapter);
 
+
                gv_inst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                    @Override
                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       Toast.makeText(getContext(),""+position, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getContext(),""+ workInstAdapter.getItem(position).toString(), Toast.LENGTH_SHORT).show();
+
 
 
                    }
@@ -155,6 +157,7 @@ System.out.println(ex.toString());
         }
         return list;
     }
+
 
 
 }
