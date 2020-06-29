@@ -87,7 +87,14 @@ dbInfo= new DBInfo();
 
                 gv_inst.setAdapter(workInstAdapter);
 
-               gv_inst.setOnItemClickListener(gv_instItemClick);
+               gv_inst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                   @Override
+                   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                       Toast.makeText(getContext(),""+position, Toast.LENGTH_SHORT).show();
+
+
+                   }
+               });
             }
 
         }catch (Exception ex){
@@ -149,16 +156,5 @@ System.out.println(ex.toString());
         return list;
     }
 
-    AdapterView.OnItemClickListener gv_instItemClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String tv = (String)parent.getAdapter().getItem(position);
 
-
-            System.out.println( tv);
-            Toast.makeText(getContext(), tv, Toast.LENGTH_SHORT).show();
-
-
-        }
-    };
 }
