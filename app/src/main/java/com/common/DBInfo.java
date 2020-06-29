@@ -97,6 +97,12 @@ public class DBInfo {
         return jsonArray;
 
     }
+
+    public void Insert(String query) throws SQLException {
+        Statement statement = null;
+        statement = mainConn.createStatement();
+        statement.executeQuery(query);
+    }
 }
 
 

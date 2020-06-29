@@ -70,8 +70,6 @@ public class raw_viewActivity extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
 
 
@@ -105,9 +103,10 @@ public class raw_viewActivity extends Fragment {
 
             try {
 
+
+
                 JArray = null;
                 JArray = Raw_Detail(JArray, editSearch.getText().toString());
-
 
                 if (JArray.length() != 0) {
 
@@ -156,11 +155,6 @@ public class raw_viewActivity extends Fragment {
 
                         rawAdapter.addItem(rawVo);
                     }
-
-                    if(rawAdapter.getCount() == 0) {
-                        Toast.makeText(activity, "오류 발생", Toast.LENGTH_SHORT).show();
-                    }
-
                     gridView.setAdapter(rawAdapter);
                 } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
