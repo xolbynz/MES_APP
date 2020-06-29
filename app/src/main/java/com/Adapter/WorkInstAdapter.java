@@ -18,6 +18,11 @@ public class WorkInstAdapter  extends BaseAdapter {
     Context context;
     WorkInstVo workInstVo= new WorkInstVo();
     int position;
+    TextView lotNo;
+    TextView custNM;
+    TextView itemNm;
+    TextView instAmt;
+    Button btn_view;
 
     private ArrayList<WorkInstVo> arrayList = new ArrayList<>();
 
@@ -49,11 +54,11 @@ public class WorkInstAdapter  extends BaseAdapter {
         if (convertView==null){
             LayoutInflater infaInflater =(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView=infaInflater.inflate(R.layout.adapter_work_inst,parent,false);
-          TextView lotNo= convertView.findViewById(R.id.workInst_tv_lotNo);
-            TextView custNM= convertView.findViewById(R.id.workInst_tv_custNm);
-            TextView itemNm= convertView.findViewById(R.id.workInst_tv_itemNm);
-            TextView instAmt= convertView.findViewById(R.id.workInst_tv_instAmt);
-            Button btn_view= convertView.findViewById(R.id.workInst_btn_view);
+           lotNo= convertView.findViewById(R.id.workInst_tv_lotNo);
+             custNM= convertView.findViewById(R.id.workInst_tv_custNm);
+             itemNm= convertView.findViewById(R.id.workInst_tv_itemNm);
+             instAmt= convertView.findViewById(R.id.workInst_tv_instAmt);
+             btn_view= convertView.findViewById(R.id.workInst_btn_view);
 
 
             lotNo.setText(workInstVo.getLotNO());
@@ -63,14 +68,25 @@ public class WorkInstAdapter  extends BaseAdapter {
             btn_view.setText("보기");
 
 
-
+            lotNo.setOnClickListener(lotNoclick);
+            custNM.setOnClickListener(custNMclick);
 
 
         }
         return convertView;
     }
 
-
-
+View.OnClickListener lotNoclick = new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+ System.out.println(lotNo.getText());
+    }
+};
+    View.OnClickListener custNMclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            System.out.println(custNM.getText());
+        }
+    };
 
 }

@@ -6,8 +6,9 @@
     android:layout_height="618dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1129dp"
-        android:layout_height="55dp"
+        android:id="@+id/constraintLayout2"
+        android:layout_width="1227dp"
+        android:layout_height="51dp"
         app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
         app:layout_constraintStart_toStartOf="@+id/rawinput_gv"
         tools:layout_editor_absoluteY="61dp">
@@ -146,15 +147,21 @@
 
     <GridView
         android:id="@+id/rawinput_gv"
-        android:layout_width="1129dp"
-        android:layout_height="333dp"
+        android:layout_width="1243dp"
+        android:layout_height="327dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:horizontalSpacing="1dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="1dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="61dp">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
     </GridView>
 
