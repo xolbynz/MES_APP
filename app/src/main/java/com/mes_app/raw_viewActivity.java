@@ -3,14 +3,17 @@ package com.mes_app;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -91,78 +94,31 @@ public class raw_viewActivity extends Fragment {
         editSearch.setOnFocusChangeListener(OutFocus);
         btn_search.setOnClickListener(Raw_Search);
 
+        editSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    getLogic();
+                    InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
+                } else
+                    return false;
+            }
+        });
+
 
         dbInfo = new DBInfo();
-
         return rootView;
     }
 
     View.OnClickListener Raw_Search = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            try {
-
-
-
-                JArray = null;
-                JArray = Raw_Detail(JArray, editSearch.getText().toString());
-
-                if (JArray.length() != 0) {
-
-                    RawAdapter rawAdapter = new RawAdapter();
-                    for (int i = 0; i < JArray.length(); i++) {
-
-                        JSONObject jo = JArray.getJSONObject(i);
-
-                        String raw_mat_cd = "";
-                        String raw_mat_nm = "";
-                        String spec = "";
-                        String unit_nm = "";
-                        String cust_nm = "";
-                        String input_amt = "";
-                        String output_amt = "";
-                        String curr_amt = "";
-                        String loc = "";
-                        String basic_stock = "";
-                        String bal_stock = "";
-
-                        if (jo.has("RAW_MAT_CD")) // Data값이 NULL인 경우 빈값으로 처리
-                            raw_mat_cd = jo.getString("RAW_MAT_CD");
-                        if (jo.has("RAW_MAT_NM"))
-                            raw_mat_nm = jo.getString("RAW_MAT_NM");
-                        if (jo.has("SPEC"))
-                            spec = jo.getString("SPEC");
-                        if (jo.has("UNIT_NM"))
-                            unit_nm = jo.getString("UNIT_NM");
-                        if (jo.has("CUST_NM"))
-                            cust_nm = jo.getString("CUST_NM");
-                        if (jo.has("INPUT_AMT"))
-                            input_amt = jo.getString("INPUT_AMT");
-                        if (jo.has("OUTPUT_AMT"))
-                            output_amt = jo.getString("OUTPUT_AMT");
-                        if (jo.has("CURR_AMT"))
-                            curr_amt = jo.getString("CURR_AMT");
-                        if (jo.has("LOC"))
-                            loc = jo.getString("LOC");
-                        if (jo.has("BASIC_STOCK"))
-                            basic_stock = jo.getString("BASIC_STOCK");
-                        if (jo.has("BAL_STOCK"))
-                            bal_stock = jo.getString("BAL_STOCK");
-
-                        rawVo = new RawVo(raw_mat_cd, raw_mat_nm, spec, unit_nm, cust_nm,
-                                input_amt, output_amt, curr_amt, loc, basic_stock, bal_stock);
-
-                        rawAdapter.addItem(rawVo);
-                    }
-                    gridView.setAdapter(rawAdapter);
-                } else {
-                    Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
-                }
-            } catch (SQLException | JSONException e) {
-                e.printStackTrace();
-            }
-
+            getLogic();
+            ;
+            InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
     };
 
@@ -176,8 +132,71 @@ public class raw_viewActivity extends Fragment {
         }
     };
 
+    public void getLogic() {
+        try {
+            JArray = null;
+            JArray = fn_Raw_Detail(JArray, editSearch.getText().toString());
 
-    public JSONArray Raw_Detail(JSONArray JSONArray, String condition) throws SQLException, JSONException {
+            if (JArray.length() != 0) {
+
+                RawAdapter rawAdapter = new RawAdapter();
+                for (int i = 0; i < JArray.length(); i++) {
+
+                    JSONObject jo = JArray.getJSONObject(i);
+
+                    String raw_mat_cd = "";
+                    String raw_mat_nm = "";
+                    String spec = "";
+                    String unit_nm = "";
+                    String cust_nm = "";
+                    String input_amt = "";
+                    String output_amt = "";
+                    String curr_amt = "";
+                    String loc = "";
+                    String basic_stock = "";
+                    String bal_stock = "";
+
+                    if (jo.has("RAW_MAT_CD")) // Data값이 NULL인 경우 빈값으로 처리
+                        raw_mat_cd = jo.getString("RAW_MAT_CD");
+                    if (jo.has("RAW_MAT_NM"))
+                        raw_mat_nm = jo.getString("RAW_MAT_NM");
+                    if (jo.has("SPEC"))
+                        spec = jo.getString("SPEC");
+                    if (jo.has("UNIT_NM"))
+                        unit_nm = jo.getString("UNIT_NM");
+                    if (jo.has("CUST_NM"))
+                        cust_nm = jo.getString("CUST_NM");
+                    if (jo.has("INPUT_AMT"))
+                        input_amt = jo.getString("INPUT_AMT");
+                    if (jo.has("OUTPUT_AMT"))
+                        output_amt = jo.getString("OUTPUT_AMT");
+                    if (jo.has("CURR_AMT"))
+                        curr_amt = jo.getString("CURR_AMT");
+                    if (jo.has("LOC"))
+                        loc = jo.getString("LOC");
+                    if (jo.has("BASIC_STOCK"))
+                        basic_stock = jo.getString("BASIC_STOCK");
+                    if (jo.has("BAL_STOCK"))
+                        bal_stock = jo.getString("BAL_STOCK");
+
+                    rawVo = new RawVo(raw_mat_cd, raw_mat_nm, spec, unit_nm, cust_nm,
+                            input_amt, output_amt, curr_amt, loc, basic_stock, bal_stock);
+
+                    rawAdapter.addItem(rawVo);
+                }
+                gridView.setAdapter(rawAdapter);
+
+            } else {
+                Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                gridView.setAdapter(null);
+            }
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public JSONArray fn_Raw_Detail(JSONArray JSONArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
 
@@ -219,14 +238,17 @@ public class raw_viewActivity extends Fragment {
         query.append("  left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD = A.CUST_CD \n");
         query.append("  left join [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on A.INPUT_UNIT = E.UNIT_CD \n");
         query.append("  where 1=1 \n");
-        if (!condition.equals("")) {
-            if (spinner_search.getSelectedItem().toString().equals("원자재"))
-                if (!condition.equals(""))
-                    query.append(" AND A.RAW_MAT_NM LIKE '%" + condition + "%'");
-                else
-                    query.append("");
-            else if (spinner_search.getSelectedItem().toString().equals("거래처"))
-                query.append("AND CUST_NM  = '" + getCustcd(condition) + "'");
+        if (spinner_search.getSelectedItem().toString().equals("원자재")) {
+            if (!condition.equals(""))
+                query.append(" AND A.RAW_MAT_NM LIKE '%" + condition + "%'");
+            else
+                query.append("");
+        } else if (spinner_search.getSelectedItem().toString().equals("거래처")) {
+            if (!condition.equals(""))
+                query.append("AND CUST_NM  = '%" + getCustcd(condition) + "%'");
+            else
+                query.append("");
+
         }
         JSONArray = dbInfo.SelectDB(query.toString());
         return JSONArray;

@@ -13,22 +13,18 @@ import com.example.mes_app.R;
 
 import java.util.ArrayList;
 
-public class WorkInstAdapter  extends BaseAdapter {
+public class WorkInstAdapter extends BaseAdapter {
 
     Context context;
-    WorkInstVo workInstVo= new WorkInstVo();
+    WorkInstVo workInstVo = new WorkInstVo();
     int position;
-    TextView lotNo;
-    TextView custNM;
-    TextView itemNm;
-    TextView instAmt;
-    Button btn_view;
 
     private ArrayList<WorkInstVo> arrayList = new ArrayList<>();
 
-    public  void addItem(WorkInstVo workInstVo){
+    public void addItem(WorkInstVo workInstVo) {
         arrayList.add(workInstVo);
     }
+
     @Override
     public int getCount() {
         return arrayList.size();
@@ -47,18 +43,18 @@ public class WorkInstAdapter  extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        context =parent.getContext();
-        workInstVo =arrayList.get(position);
-        this.position=position;
+        context = parent.getContext();
+        workInstVo = arrayList.get(position);
+        this.position = position;
 
-        if (convertView==null){
-            LayoutInflater infaInflater =(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView=infaInflater.inflate(R.layout.adapter_work_inst,parent,false);
-           lotNo= convertView.findViewById(R.id.workInst_tv_lotNo);
-             custNM= convertView.findViewById(R.id.workInst_tv_custNm);
-             itemNm= convertView.findViewById(R.id.workInst_tv_itemNm);
-             instAmt= convertView.findViewById(R.id.workInst_tv_instAmt);
-             btn_view= convertView.findViewById(R.id.workInst_btn_view);
+        if (convertView == null) {
+            LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            convertView = infaInflater.inflate(R.layout.adapter_work_inst, parent, false);
+            TextView lotNo = convertView.findViewById(R.id.workInst_tv_lotNo);
+            TextView custNM = convertView.findViewById(R.id.workInst_tv_custNm);
+            TextView itemNm = convertView.findViewById(R.id.workInst_tv_itemNm);
+            TextView instAmt = convertView.findViewById(R.id.workInst_tv_instAmt);
+            Button btn_view = convertView.findViewById(R.id.workInst_btn_view);
 
 
             lotNo.setText(workInstVo.getLotNO());
@@ -66,10 +62,6 @@ public class WorkInstAdapter  extends BaseAdapter {
             itemNm.setText(workInstVo.getItemNm());
             instAmt.setText(workInstVo.getInstAmt());
             btn_view.setText("보기");
-
-
-            arrayList.add(workInstVo);
-
 
 
         }

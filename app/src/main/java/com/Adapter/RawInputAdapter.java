@@ -8,8 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.VO.OrderVo;
-import com.VO.RawVo;
-import com.VO.WorkInstVo;
 import com.example.mes_app.R;
 
 import java.util.ArrayList;
@@ -50,12 +48,12 @@ public class RawInputAdapter extends BaseAdapter {
             convertView = infaInflater.inflate(R.layout.adpter_raw_input, parent, false);
 
             TextView raw_mat_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
-            TextView cust_nm = convertView.findViewById(R.id.workInst_tv_custNm);
+            TextView cust_nm = convertView.findViewById(R.id.rawView_tv_custNm);
             TextView order_date = convertView.findViewById(R.id.rawView_tv_orderDate);
             TextView order_amt = convertView.findViewById(R.id.rawView_tv_orderAmt);
             TextView orderNon_amt = convertView.findViewById(R.id.rawView_tv_nonInpAmt);
-            TextView loc = convertView.findViewById(R.id.rawView_tv_position);
             TextView spec = convertView.findViewById(R.id.rawView_tv_spec);
+            TextView input_amt = convertView.findViewById(R.id.rawView_et_inpAmt);
 
             raw_mat_nm.setText(orderVo.getRawmat_Nm());
             cust_nm.setText(orderVo.getCust_Nm());
@@ -64,6 +62,7 @@ public class RawInputAdapter extends BaseAdapter {
             spec.setText(orderVo.getSpec());
             orderNon_amt.setText(orderVo.getInput_NeedAmt());
         }
+
 
         return convertView;
     }
