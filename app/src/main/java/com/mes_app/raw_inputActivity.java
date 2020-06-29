@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class raw_inputActivity extends Fragment {
     OrderVo orderVo;
     RawInputAdapter rawInputAdapter;
     ArrayList<OrderVo> OrderVoArrayList;
+
 
     public raw_inputActivity() {
         dbInfo = new DBInfo();
@@ -97,6 +99,14 @@ public class raw_inputActivity extends Fragment {
 
         Input_Order_Detail();
 
+//        gridView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                for(int i =0; i <= rawInputAdapter.getCount(); i++){
+//                    rawInputAdapter.getItemId(5);
+//                }
+//            }
+//        });
 
         return rootView;
     }
@@ -110,6 +120,7 @@ public class raw_inputActivity extends Fragment {
             if (JSONArray.length() != 0) {
 
                 for (int i = 0; i < JSONArray.length(); i++) {
+
                     JSONObject jo = JSONArray.getJSONObject(i);
 
                     String Order_Date = "";

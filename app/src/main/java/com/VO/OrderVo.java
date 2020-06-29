@@ -25,7 +25,7 @@ public class OrderVo {
     String Input_NeedAmt;
     String Storage;
 
-    public OrderVo(){
+    public OrderVo() {
 
     }
 

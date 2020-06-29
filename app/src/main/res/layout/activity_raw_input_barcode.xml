@@ -62,7 +62,7 @@
             android:textColor="@color/mr_cast_meta_black_scrim"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
             app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
             app:layout_constraintVertical_bias="0.0" />
 
