@@ -76,39 +76,5 @@ public class WorkInstAdapter  extends BaseAdapter {
         return convertView;
     }
 
-    public Context getContext() {
-        return context;
-    }
 
-    public WorkInstVo getWorkInstVo() {
-        return workInstVo;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public TextView getLotNo() {
-        return lotNo;
-    }
-
-    public TextView getCustNM() {
-        return custNM;
-    }
-
-    public TextView getItemNm() {
-        return itemNm;
-    }
-
-    public TextView getInstAmt() {
-        return instAmt;
-    }
-
-    public Button getBtn_view() {
-        return btn_view;
-    }
-
-    public ArrayList<WorkInstVo> getArrayList() {
-        return arrayList;
-    }
 }

@@ -84,7 +84,7 @@
 
             <GridView
                 android:id="@+id/raw_GridView"
-                android:layout_width="1144dp"
+                android:layout_width="1145dp"
                 android:layout_height="423dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
@@ -94,6 +94,7 @@
                 android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.48"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
