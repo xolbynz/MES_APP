@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.VO.RawVo;
 import com.example.mes_app.R;
 
@@ -56,16 +58,6 @@ public class RawAdapter extends BaseAdapter {
             TextView input_amt = convertView.findViewById(R.id.rawView_tv_inpAmt);
             TextView output_amt = convertView.findViewById(R.id.rawView_tv_outpAmt);
             TextView curr_amt = convertView.findViewById(R.id.rawView_tv_amt);
-
-
-            String column1 = "원자재명";
-            String column2 = "구매처명";
-            String column3 = "위치";
-            String column4 = "입고량";
-            String column5 = "출고량";
-            String column6 = "재고량";
-            String column7 = "단위";
-
 
             raw_mat_nm.setText(rawVo.getRaw_mat_nm()); //
             spec.setText(rawVo.getSpec()); //

@@ -183,7 +183,7 @@ public class raw_inputActivity extends Fragment {
                     if (jo.has("INPUT_AMT"))
                         Input_Amt = jo.getString("INPUT_AMT");
                     if (jo.has("INPUT_NEEDAMT"))
-                        Input_NeedAmt = jo.getString("NO_INPUT_AMT");
+                        Input_NeedAmt = jo.getString("INPUT_NEEDAMT");
                     if (jo.has("STORAGE"))
                         Storage = jo.getString("STORAGE");
 
@@ -237,7 +237,7 @@ public class raw_inputActivity extends Fragment {
         query.append("        , convert(int,ISNULL(B.TOTAL_MONEY, 0)) as TOTAL_MONEY \n");
         query.append("        , (select S_CODE_NM from[SM_FACTORY_COM].[dbo].[T_S_CODE]where L_CODE = '300' and S_CODE = D.RAW_MAT_GUBUN)AS RAW_MAT_GUBUN_NM \n");
         query.append("        , convert(int,ISNULL(C.INPUT_AMT, 0)) AS INPUT_AMT \n");
-        query.append("        , convert(int,ISNULL(C.NO_INPUT_AMT, 0)) AS NO_INPUT_AMT \n");
+        query.append("        , convert(int,ISNULL(C.NO_INPUT_AMT, 0)) AS INPUT_NEEDAMT \n");
         query.append("        , D.RAW_STORAGE AS STORAGE \n");
         query.append("FROM [" + dbInfo.Location + "].[dbo].[F_ORDER] A \n");
         query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] X ON A.CUST_CD = X.CUST_CD \n");

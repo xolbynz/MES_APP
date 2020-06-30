@@ -116,7 +116,6 @@ public class raw_viewActivity extends Fragment {
         @Override
         public void onClick(View v) {
             getLogic();
-            ;
             InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
