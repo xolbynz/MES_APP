@@ -275,9 +275,15 @@ public class raw_inputActivity extends Fragment {
 
             CustomDialog oDialog = new CustomDialog(context);
             oDialog.setCancelable(false);
-
             oDialog.show();
 
+        }
+    };
+
+    View.OnClickListener btnInputClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            
         }
     };
 
