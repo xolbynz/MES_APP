@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="1129dp"
+    android:layout_width="1016dp"
     android:layout_height="55dp">
 
     <TextView
@@ -56,7 +56,7 @@
 
     <TextView
         android:id="@+id/rawView_tv_spec"
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
@@ -71,22 +71,6 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/rawView_tv_position"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        android:text="입고위치"
-        android:textColor="@color/mr_cast_meta_black_scrim"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/rawView_tv_orderAmt"
         android:layout_width="120dp"
         android:layout_height="50dp"
@@ -98,7 +82,7 @@
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_position"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -120,7 +104,7 @@
 
     <EditText
         android:id="@+id/rawView_et_inpAmt"
-        android:layout_width="140dp"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"

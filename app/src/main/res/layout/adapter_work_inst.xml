@@ -53,9 +53,9 @@
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
         app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/workInst_tv_instAmt"
@@ -69,9 +69,9 @@
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
-        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_itemNm"
         app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/workInst_btn_view"

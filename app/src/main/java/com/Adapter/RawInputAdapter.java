@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.VO.OrderVo;
@@ -50,10 +51,10 @@ public class RawInputAdapter extends BaseAdapter {
             TextView raw_mat_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
             TextView cust_nm = convertView.findViewById(R.id.rawView_tv_custNm);
             TextView order_date = convertView.findViewById(R.id.rawView_tv_orderDate);
+            TextView spec = convertView.findViewById(R.id.rawView_tv_spec);
             TextView order_amt = convertView.findViewById(R.id.rawView_tv_orderAmt);
             TextView orderNon_amt = convertView.findViewById(R.id.rawView_tv_nonInpAmt);
-            TextView spec = convertView.findViewById(R.id.rawView_tv_spec);
-            TextView input_amt = convertView.findViewById(R.id.rawView_et_inpAmt);
+            EditText input_amt = convertView.findViewById(R.id.rawView_et_inpAmt);
 
             raw_mat_nm.setText(orderVo.getRawmat_Nm());
             cust_nm.setText(orderVo.getCust_Nm());
@@ -61,6 +62,7 @@ public class RawInputAdapter extends BaseAdapter {
             order_amt.setText(orderVo.getOrder_Amt());
             spec.setText(orderVo.getSpec());
             orderNon_amt.setText(orderVo.getInput_NeedAmt());
+            input_amt.setText("");
         }
 
 

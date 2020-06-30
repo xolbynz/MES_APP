@@ -10,17 +10,15 @@
         android:id="@+id/rawView_tv_rawNm"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
         android:background="#FFFFFF"
         android:gravity="center"
         android:text="원자재명"
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_position"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/workInst_tv_custNm"
@@ -49,8 +47,8 @@
         android:text="입고위치"
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_custNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
+        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_custNm"
+        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_custNm"
         app:layout_constraintVertical_bias="0.333" />
 
@@ -65,10 +63,10 @@
         android:text="규격"
         android:textColor="@color/mr_cast_meta_black_scrim"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_custNm"
-        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
+        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_position"
+        app:layout_constraintStart_toEndOf="@+id/rawView_tv_position"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_position"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/rawView_tv_inpAmt"
@@ -116,7 +114,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_outpAmt"
         app:layout_constraintStart_toEndOf="@+id/rawView_tv_outpAmt"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_outpAmt"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/rawView_tv_unit"

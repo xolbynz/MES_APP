@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -15,13 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.Adapter.RawAdapter;
 import com.Adapter.RawInputAdapter;
 import com.VO.OrderVo;
-import com.VO.RawVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -269,6 +265,7 @@ public class raw_inputActivity extends Fragment {
         query.append("ORDER BY X.CUST_CD, A.ORDER_DATE desc, A.ORDER_CD desc, B.SEQ desc \n");
 
         JSONArray = dbInfo.SelectDB(query.toString());
+        System.out.println("쿼리: \n"+query.toString());
         return JSONArray;
     }
 

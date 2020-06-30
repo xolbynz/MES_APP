@@ -7,11 +7,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="1227dp"
-        android:layout_height="51dp"
+        android:layout_width="1016dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
         app:layout_constraintStart_toStartOf="@+id/rawinput_gv"
-        tools:layout_editor_absoluteY="61dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/rawView_tv_rawNm"
@@ -27,13 +28,13 @@
             android:textColor="@color/mr_cast_meta_black_scrim"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderDate"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.666" />
 
         <TextView
-            android:id="@+id/workInst_tv_custNm"
-            android:layout_width="180dp"
+            android:id="@+id/rawView_tv_custNm"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
@@ -44,8 +45,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
             app:layout_constraintStart_toEndOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm" />
 
         <TextView
             android:id="@+id/rawView_tv_orderDate"
@@ -65,7 +65,7 @@
 
         <TextView
             android:id="@+id/rawView_tv_spec"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
@@ -75,25 +75,9 @@
             android:textColor="@color/mr_cast_meta_black_scrim"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderDate"
             app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/rawView_tv_position"
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="입고위치"
-            android:textColor="@color/mr_cast_meta_black_scrim"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
-            app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/rawView_tv_orderAmt"
@@ -107,7 +91,7 @@
             android:textColor="@color/mr_cast_meta_black_scrim"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintStart_toEndOf="@+id/rawView_tv_position"
+            app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
             app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -128,38 +112,36 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/rawView_tv_nonInpAmt2"
-            android:layout_width="140dp"
+            android:id="@+id/rawView_tv_inpAmt"
+            android:layout_width="178dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
-            android:background="#FFFFFF"
             android:gravity="center"
-            android:text="입력수량"
-            android:textColor="@color/mr_cast_meta_black_scrim"
+            android:text="입고량 입력"
+            android:textColor="@color/mr_cast_meta_default_text_color"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
+            app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_nonInpAmt"
             app:layout_constraintStart_toEndOf="@+id/rawView_tv_nonInpAmt"
             app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <GridView
         android:id="@+id/rawinput_gv"
-        android:layout_width="1243dp"
-        android:layout_height="327dp"
+        android:layout_width="1016dp"
+        android:layout_height="293dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
-        android:horizontalSpacing="1dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="1dp"
+
+
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.163"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
@@ -171,6 +153,7 @@
         android:layout_height="143dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/rawinput_gv"
         app:layout_constraintTop_toBottomOf="@+id/rawinput_gv">
 
