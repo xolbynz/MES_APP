@@ -19,7 +19,7 @@ public class WorkInstAdapter extends BaseAdapter {
     WorkInstVo workInstVo = new WorkInstVo();
     int position;
 
-    private ArrayList<WorkInstVo> arrayList = new ArrayList<>();
+    public ArrayList<WorkInstVo> arrayList = new ArrayList<>();
 
     public void addItem(WorkInstVo workInstVo) {
         arrayList.add(workInstVo);

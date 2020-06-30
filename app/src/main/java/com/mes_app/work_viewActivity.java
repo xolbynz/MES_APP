@@ -91,7 +91,8 @@ dbInfo= new DBInfo();
                gv_inst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                    @Override
                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       Toast.makeText(getContext(),""+ workInstAdapter.getItem(position).toString(), Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getContext(),"1"+  workInstAdapter.arrayList.get(position).toString(), Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getContext(),"1"+  workInstAdapter.arrayList.get(position).toString(), Toast.LENGTH_SHORT).show();
 
 
 
