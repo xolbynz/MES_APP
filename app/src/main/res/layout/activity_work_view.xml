@@ -35,6 +35,80 @@
                 android:layout_width="641dp"
                 android:layout_height="match_parent">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="600dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="9dp"
+                    android:descendantFocusability="blocksDescendants"
+                    app:layout_constraintEnd_toEndOf="@+id/work_view_gv_workInst"
+                    app:layout_constraintStart_toStartOf="@+id/work_view_gv_workInst"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_work">
+
+                    <TextView
+                        android:id="@+id/workInst_tv_lotNo"
+                        android:layout_width="100dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="center"
+                        android:text="LotNO"
+                        android:textColor="@color/mr_cast_meta_default_text_color"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.666" />
+
+                    <TextView
+                        android:id="@+id/workInst_tv_custNm"
+                        android:layout_width="100dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="center"
+                        android:text="업체명"
+                        android:textColor="@color/mr_cast_meta_default_text_color"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintStart_toEndOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <TextView
+                        android:id="@+id/workInst_tv_itemNm"
+                        android:layout_width="100dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="center"
+                        android:text="제품명"
+                        android:textColor="@color/mr_cast_meta_default_text_color"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintStart_toEndOf="@+id/workInst_tv_custNm"
+                        app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <TextView
+                        android:id="@+id/workInst_tv_instAmt"
+                        android:layout_width="100dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="center"
+                        android:text="생산의뢰수량"
+                        android:textColor="@color/mr_cast_meta_default_text_color"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintStart_toEndOf="@+id/workInst_tv_itemNm"
+                        app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:id="@+id/txt_work"
                     android:layout_width="198dp"
@@ -54,16 +128,13 @@
                     android:layout_height="500dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="6dp"
                     android:layout_marginRight="6dp"
-                    android:layout_marginBottom="45dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.516"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_work"
-                    app:layout_constraintVertical_bias="0.527" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,129 +188,71 @@
                             android:id="@+id/textView28"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginLeft="24dp"
                             android:text="지시번호"
                             app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
-                            app:layout_constraintTop_toTopOf="@+id/textView23" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName6"
-                            android:layout_width="134dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView28"
-                            app:layout_constraintStart_toEndOf="@+id/textView28"
-                            app:layout_constraintTop_toTopOf="@+id/textView28"
+                            app:layout_constraintEnd_toEndOf="@+id/textView29"
+                            app:layout_constraintStart_toStartOf="@+id/textView29"
+                            app:layout_constraintTop_toTopOf="@+id/textView23"
                             app:layout_constraintVertical_bias="0.0" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName7"
-                            android:layout_width="134dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView29"
-                            app:layout_constraintStart_toEndOf="@+id/textView29"
-                            app:layout_constraintTop_toTopOf="@+id/textView29" />
-
-                        <TextView
-                            android:id="@+id/textView30"
-                            android:layout_width="51dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginLeft="24dp"
-                            android:layout_marginTop="8dp"
-                            android:text="납품처"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
-                            app:layout_constraintTop_toBottomOf="@+id/textView29" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName8"
-                            android:layout_width="134dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="276dp"
-                            android:layout_marginLeft="276dp"
-                            android:layout_marginBottom="2dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView26"
-                            app:layout_constraintStart_toEndOf="@+id/textView26"
-                            app:layout_constraintTop_toTopOf="@+id/textView26"
-                            app:layout_constraintVertical_bias="1.0" />
-
-                        <TextView
-                            android:id="@+id/textView31"
-                            android:layout_width="53dp"
-                            android:layout_height="19dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginLeft="24dp"
-                            android:layout_marginTop="8dp"
-                            android:text="작업자"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName4"
-                            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
                         <TextView
                             android:id="@+id/textView32"
                             android:layout_width="56dp"
                             android:layout_height="18dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginLeft="24dp"
+                            android:layout_marginStart="180dp"
+                            android:layout_marginLeft="180dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="15dp"
                             android:text="금형"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName5"
-                            app:layout_constraintTop_toBottomOf="@+id/textView31"
-                            app:layout_constraintVertical_bias="0.142" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName9"
-                            android:layout_width="134dp"
-                            android:layout_height="15dp"
-                            android:layout_marginStart="276dp"
-                            android:layout_marginLeft="276dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView27"
                             app:layout_constraintStart_toEndOf="@+id/textView27"
-                            app:layout_constraintTop_toTopOf="@+id/textView27"
-                            app:layout_constraintVertical_bias="0.333" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView31"
+                            app:layout_constraintVertical_bias="0.25" />
 
-                        <EditText
-                            android:id="@+id/editTextTextPersonName10"
-                            android:layout_width="134dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginBottom="11dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName8"
-                            app:layout_constraintStart_toEndOf="@+id/textView30"
-                            app:layout_constraintTop_toTopOf="@+id/textView25" />
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="53dp"
+                            android:layout_height="19dp"
+                            android:layout_marginTop="8dp"
+                            android:text="작업자"
+                            app:layout_constraintEnd_toEndOf="@+id/textView32"
+                            app:layout_constraintStart_toStartOf="@+id/textView32"
+                            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
                         <TextView
                             android:id="@+id/textView29"
                             android:layout_width="51dp"
                             android:layout_height="18dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginLeft="24dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="12dp"
                             android:text="규격"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+                            app:layout_constraintEnd_toEndOf="@+id/textView30"
+                            app:layout_constraintStart_toStartOf="@+id/textView30"
                             app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="51dp"
+                            android:layout_height="17dp"
+                            android:layout_marginTop="8dp"
+                            android:text="납품처"
+                            app:layout_constraintEnd_toEndOf="@+id/textView31"
+                            app:layout_constraintStart_toStartOf="@+id/textView31"
+                            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName9"
+                            android:layout_width="134dp"
+                            android:layout_height="15dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Name"
+                            android:textSize="8sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView27"
+                            app:layout_constraintStart_toEndOf="@+id/textView32"
+                            app:layout_constraintTop_toTopOf="@+id/textView27"
+                            app:layout_constraintVertical_bias="1.0" />
 
                         <TextView
                             android:id="@+id/textView24"
@@ -251,33 +264,6 @@
                             android:text="제품"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName2"
-                            android:layout_width="160dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                            app:layout_constraintStart_toEndOf="@+id/textView23"
-                            app:layout_constraintTop_toTopOf="@+id/textView23"
-                            app:layout_constraintVertical_bias="1.0" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName"
-                            android:layout_width="160dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView24"
-                            app:layout_constraintStart_toEndOf="@+id/textView24"
-                            app:layout_constraintTop_toTopOf="@+id/textView24" />
 
                         <TextView
                             android:id="@+id/textView25"
@@ -301,20 +287,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
-                        <EditText
-                            android:id="@+id/editTextTextPersonName4"
-                            android:layout_width="160dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginBottom="2dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView26"
-                            app:layout_constraintStart_toEndOf="@+id/textView26"
-                            app:layout_constraintTop_toTopOf="@+id/textView26" />
-
                         <TextView
                             android:id="@+id/textView27"
                             android:layout_width="wrap_content"
@@ -328,88 +300,270 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
-                        <EditText
-                            android:id="@+id/editTextTextPersonName5"
-                            android:layout_width="160dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView27"
-                            app:layout_constraintStart_toEndOf="@+id/textView27"
-                            app:layout_constraintTop_toTopOf="@+id/textView27" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName3"
-                            android:layout_width="160dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView25"
-                            app:layout_constraintStart_toEndOf="@+id/textView25"
-                            app:layout_constraintTop_toTopOf="@+id/textView25" />
-
-                        <EditText
-                            android:id="@+id/editTextTextPersonName11"
-                            android:layout_width="75dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginLeft="12dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView34"
-                            app:layout_constraintStart_toEndOf="@+id/textView34"
-                            app:layout_constraintTop_toTopOf="@+id/textView34"
-                            app:layout_constraintVertical_bias="0.0" />
-
                         <TextView
                             android:id="@+id/textView34"
                             android:layout_width="50dp"
                             android:layout_height="17dp"
-                            android:layout_marginStart="240dp"
-                            android:layout_marginLeft="240dp"
                             android:text="Lot.No"
                             app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
+                            app:layout_constraintStart_toStartOf="@+id/textView35"
                             app:layout_constraintTop_toTopOf="@+id/textView23"
-                            app:layout_constraintVertical_bias="1.0" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/textView35"
                             android:layout_width="53dp"
                             android:layout_height="17dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginBottom="97dp"
+                            android:layout_marginStart="400dp"
+                            android:layout_marginLeft="400dp"
+                            android:layout_marginBottom="96dp"
                             android:text="납품일"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName7" />
+                            app:layout_constraintStart_toEndOf="@+id/textView24" />
 
-                        <EditText
-                            android:id="@+id/editTextTextPersonName13"
-                            android:layout_width="75dp"
-                            android:layout_height="17dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Name"
+                        <TextView
+                            android:id="@+id/workView_et_instDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:layout_marginLeft="19dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                            app:layout_constraintStart_toEndOf="@+id/textView23"
+                            app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/workView_et_itemNm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toTopOf="@+id/textView25"
+                            app:layout_constraintStart_toEndOf="@+id/textView24"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23"
+                            app:layout_constraintVertical_bias="0.526" />
+
+                        <TextView
+                            android:id="@+id/workView_et_instAmt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                            app:layout_constraintStart_toEndOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                        <TextView
+                            android:id="@+id/workView_et_lineNm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView26"
+                            app:layout_constraintStart_toEndOf="@+id/textView26"
+                            app:layout_constraintTop_toTopOf="@+id/textView26"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/workView_et_memo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView27"
+                            app:layout_constraintTop_toTopOf="@+id/textView27"
+                            tools:layout_editor_absoluteX="89dp" />
+
+                        <TextView
+                            android:id="@+id/workView_et_instCd"
+                            android:layout_width="134dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView28"
+                            app:layout_constraintStart_toEndOf="@+id/textView28"
+                            app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+                        <TextView
+                            android:id="@+id/workView_et_spec"
+                            android:layout_width="132dp"
+                            android:layout_height="19dp"
+                            android:layout_marginStart="19dp"
+                            android:layout_marginLeft="19dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView29"
+                            app:layout_constraintStart_toEndOf="@+id/textView29"
+                            app:layout_constraintTop_toTopOf="@+id/textView29"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <TextView
+                            android:id="@+id/workView_et_custNm"
+                            android:layout_width="136dp"
+                            android:layout_height="19dp"
+                            android:layout_marginStart="17dp"
+                            android:layout_marginLeft="17dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView30"
+                            app:layout_constraintStart_toEndOf="@+id/textView30"
+                            app:layout_constraintTop_toTopOf="@+id/textView30"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/workView_et_workNm"
+                            android:layout_width="137dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView31"
+                            app:layout_constraintStart_toEndOf="@+id/textView31" />
+
+                        <TextView
+                            android:id="@+id/workView_et_delDate"
+                            android:layout_width="87dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView35"
                             app:layout_constraintStart_toEndOf="@+id/textView35"
                             app:layout_constraintTop_toTopOf="@+id/textView35"
                             app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/workView_et_lotNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginLeft="9dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView34"
+                            app:layout_constraintStart_toEndOf="@+id/textView34"
+                            app:layout_constraintTop_toTopOf="@+id/textView34" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="204dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraintLayout7"
+                            android:layout_width="623dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="18dp"
+                            app:layout_constraintStart_toStartOf="@+id/_dynamic"
+                            app:layout_constraintTop_toBottomOf="@+id/textView36">
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_custNm"
+                                android:layout_width="78dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="2dp"
+                                android:text="업체명"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_rawNm"
+                                android:layout_width="80dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="원부재료"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_custNm"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_custNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_spec"
+                                android:layout_width="60dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="규격"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_inpAmt"
+                                android:layout_width="75dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="개별소요량"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_spec"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_totAmt"
+                                android:layout_width="70dp"
+                                android:layout_height="26dp"
+                                android:text="총소요량"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_inpAmt"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_stock"
+                                android:layout_width="60dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="현재고"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_inptUnit"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_afterStock"
+                                android:layout_width="70dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="공정후재고"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_stock"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_unit"
+                                android:layout_width="60dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="입고단위"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_afterStock"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:id="@+id/workInstRaw_tv_inptUnit"
+                                android:layout_width="60dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:text="사용단위"
+                                app:layout_constraintBottom_toBottomOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintStart_toEndOf="@+id/workInstRaw_tv_totAmt"
+                                app:layout_constraintTop_toTopOf="@+id/workInstRaw_tv_rawNm"
+                                app:layout_constraintVertical_bias="0.0" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
                             android:id="@+id/textView36"
@@ -420,8 +574,8 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <GridView
-                            android:layout_width="649dp"
-                            android:layout_height="183dp"
+                            android:layout_width="623dp"
+                            android:layout_height="136dp"
                             android:layout_marginStart="1dp"
                             android:layout_marginLeft="1dp"
                             android:layout_marginTop="1dp"
@@ -430,8 +584,9 @@
                             android:layout_marginBottom="1dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView36" />
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -443,7 +598,7 @@
                             android:id="@+id/textView48"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="[투입 원재료 현황]"
+                            android:text="[투입 부재료 현황]"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
