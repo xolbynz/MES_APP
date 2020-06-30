@@ -1,5 +1,6 @@
 package com.mes_app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -88,7 +89,7 @@ public class raw_inputActivity extends Fragment {
 
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
         btn_input = rootView.findViewById(R.id.btn_input);
-        btn_input.setOnClickListener(showDialog);
+        btn_input.setOnClickListener(btnInputClick);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
@@ -219,7 +220,7 @@ public class raw_inputActivity extends Fragment {
 
         query.append("select  A.ORDER_DATE  \n");
         query.append("        , A.ORDER_CD \n");
-        query.append("        , B.SEQ \n");
+        query.append("        , B.SEQ  AS ORDER_SEQ \n");
         query.append("        , A.INPUT_REQ_DATE \n");
         query.append("        , A.COMPLETE_YN \n");
         query.append("        , B.RAW_MAT_CD \n");
@@ -231,11 +232,11 @@ public class raw_inputActivity extends Fragment {
         query.append("        , X.CUST_CD \n");
         query.append("        , X.CUST_NM \n");
         query.append("        , D.CHECK_GUBUN \n");
-        query.append("        , (select S_CODE_NM from[SM_FACTORY_COM].[dbo].[T_S_CODE]where L_CODE = '601'  and S_CODE = D.CHECK_GUBUN)AS CHECK_YN \n");
+        query.append("        , (select S_CODE_NM from[SM_FACTORY_COM].[dbo].[T_S_CODE]where L_CODE = '601'  and S_CODE = D.CHECK_GUBUN) AS CHECK_YN \n");
         query.append("        , convert(int,ISNULL(TOTAL_AMT, 0)) AS ORDER_AMT \n");
         query.append("        , convert(int,ISNULL(B.PRICE, 0))  AS PRICE \n");
         query.append("        , convert(int,ISNULL(B.TOTAL_MONEY, 0)) as TOTAL_MONEY \n");
-        query.append("        , (select S_CODE_NM from[SM_FACTORY_COM].[dbo].[T_S_CODE]where L_CODE = '300' and S_CODE = D.RAW_MAT_GUBUN)AS RAW_MAT_GUBUN_NM \n");
+        query.append("        , (select S_CODE_NM from[SM_FACTORY_COM].[dbo].[T_S_CODE]where L_CODE = '300' and S_CODE = D.RAW_MAT_GUBUN) AS RAW_MAT_GUBUN_NM \n");
         query.append("        , convert(int,ISNULL(C.INPUT_AMT, 0)) AS INPUT_AMT \n");
         query.append("        , convert(int,ISNULL(C.NO_INPUT_AMT, 0)) AS INPUT_NEEDAMT \n");
         query.append("        , D.RAW_STORAGE AS STORAGE \n");
@@ -280,12 +281,42 @@ public class raw_inputActivity extends Fragment {
         }
     };
 
-    View.OnClickListener btnInputClick = new View.OnClickListener() {
+    Button.OnClickListener btnInputClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            
+
+            int position = rawInputAdapter.getCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
+            for(int i = 0; i <= position-1; i++) {
+
+                orderVo = null; // 초기화
+                orderVo = (OrderVo) rawInputAdapter.getItem(i);
+
+                String Raw_mat_cd = orderVo.getRawmat_Cd();
+                String Spec = orderVo.getSpec();
+                String Unit_cd = orderVo.getUnit_cd();
+                String Temp_amt = rawInputAdapter.input_amt.getText().toString();
+
+                String Total_amt = "";
+                String Curr_amt = "";
+                String Price = "0";
+                String Total_money = "0";
+                String Heat_no = "";
+                String Heat_time = "";
+                String OrderDate = orderVo.getOrder_Date();
+                String Ordercd = orderVo.getOrder_Cd();
+                String OrderSeq = orderVo.getOrder_Seq();
+                String Complete_yn = orderVo.getComplete_Yn();
+                String Instaff = "";
+                String Intime = "";
+                String Comment = "모바일 입고";
+                String Storage_cd = "";
+                String Loc_cd = "";
+                String Loc_nm = "";
+            }
         }
+
     };
+
 
 
 }

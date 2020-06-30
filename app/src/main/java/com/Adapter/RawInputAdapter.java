@@ -22,6 +22,14 @@ public class RawInputAdapter extends BaseAdapter {
     OrderVo orderVo = new OrderVo();
     private ArrayList<OrderVo> arrayList = new ArrayList<>();
 
+    TextView raw_mat_nm;
+    TextView cust_nm;
+    TextView order_date;
+    TextView spec;
+    TextView order_amt;
+    TextView orderNon_amt;
+    public EditText input_amt;
+
     public void addItem(OrderVo orderVo) {
         arrayList.add(orderVo);
     }
@@ -51,13 +59,13 @@ public class RawInputAdapter extends BaseAdapter {
             LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infaInflater.inflate(R.layout.adpter_raw_input, parent, false);
 
-            TextView raw_mat_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
-            TextView cust_nm = convertView.findViewById(R.id.rawView_tv_custNm);
-            TextView order_date = convertView.findViewById(R.id.rawView_tv_orderDate);
-            TextView spec = convertView.findViewById(R.id.rawView_tv_spec);
-            TextView order_amt = convertView.findViewById(R.id.rawView_tv_orderAmt);
-            TextView orderNon_amt = convertView.findViewById(R.id.rawView_tv_nonInpAmt);
-            EditText input_amt = convertView.findViewById(R.id.rawView_et_inpAmt);
+            raw_mat_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
+            cust_nm = convertView.findViewById(R.id.rawView_tv_custNm);
+            order_date = convertView.findViewById(R.id.rawView_tv_orderDate);
+            spec = convertView.findViewById(R.id.rawView_tv_spec);
+            order_amt = convertView.findViewById(R.id.rawView_tv_orderAmt);
+            orderNon_amt = convertView.findViewById(R.id.rawView_tv_nonInpAmt);
+            input_amt = convertView.findViewById(R.id.rawView_et_inpAmt);
 
             raw_mat_nm.setText(orderVo.getRawmat_Nm());
             cust_nm.setText(orderVo.getCust_Nm());
@@ -67,10 +75,19 @@ public class RawInputAdapter extends BaseAdapter {
             orderNon_amt.setText(orderVo.getInput_NeedAmt());
             input_amt.setText("");
         }
-
-
         return convertView;
     }
+
+
+    EditText.OnKeyListener onKeyListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
+
+            }
+            return false;
+        }
+    };
 
 
 }
