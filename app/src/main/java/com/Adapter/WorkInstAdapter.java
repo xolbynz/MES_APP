@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.VO.WorkInstVo;
@@ -54,14 +53,14 @@ public class WorkInstAdapter extends BaseAdapter {
             TextView custNM = convertView.findViewById(R.id.workInst_tv_custNm);
             TextView itemNm = convertView.findViewById(R.id.workInst_tv_itemNm);
             TextView instAmt = convertView.findViewById(R.id.workInst_tv_instAmt);
-            Button btn_view = convertView.findViewById(R.id.workInst_btn_view);
+         //   Button btn_view = convertView.findViewById(R.id.workInst_btn_view);
 
 
             lotNo.setText(workInstVo.getLotNO());
             custNM.setText(workInstVo.getCustNm());
             itemNm.setText(workInstVo.getItemNm());
             instAmt.setText(workInstVo.getInstAmt());
-            btn_view.setText("보기");
+       //     btn_view.setText("보기");
 
 
         }

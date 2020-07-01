@@ -15,6 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.Adapter.WorkInstAdapter;
+import com.Adapter.WorkInstHalfAdapter;
+import com.Adapter.WorkInstRawAdapter;
+import com.VO.WorkInstHalfVo;
+import com.VO.WorkInstRawVo;
 import com.VO.WorkInstVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
@@ -48,6 +52,10 @@ public class work_viewActivity extends Fragment {
     TextView et_itemNm;
     TextView et_workNm;
     TextView et_lineNm;
+    GridView gv_instDetail;
+
+    WorkInstRawVo workInstRawVo;
+    WorkInstHalfVo workInstHalfVo;
 
 
     public work_viewActivity() {
@@ -80,6 +88,7 @@ public class work_viewActivity extends Fragment {
         et_instDate = rootView.findViewById(R.id.workView_et_instDate);
 
 
+        gv_instDetail = rootView.findViewById(R.id.workInstRaw_gv_detail);
         dbInfo = new DBInfo();
         datebinding();
         return rootView;
@@ -122,6 +131,7 @@ public class work_viewActivity extends Fragment {
                         try {
                             Toast.makeText(getContext(), "LOT_No:" + workInstAdapter.arrayList.get(position).getLotNO().toString(), Toast.LENGTH_SHORT).show();
                             datebind2(workInstAdapter.arrayList.get(position).getLotNO().toString());
+                            datebind3(workInstAdapter.arrayList.get(position).getLotNO().toString());
 
                         } catch (Exception ex) {
                             System.out.println(ex.toString());
@@ -206,7 +216,7 @@ public class work_viewActivity extends Fragment {
         query.append(",isnull(A.INST_AMT,0) as INST_AMT \n");
         query.append(",A.WORKER_CD \n");
         query.append(",isnull(D.STAFF_NM,'') as WORKDER_NM \n");
-        query.append(",F.LINE_NM \n");
+        query.append(",isnull(F.LINE_NM,'') as LINE_NM \n");
         query.append(",A.DELIVERY_DATE \n");
         query.append("from [" + dbInfo.Location + "].[dbo].[F_WORK_INST] as A  \n");
         query.append("left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as c on C.CUST_CD=A.CUST_CD \n");
@@ -264,59 +274,208 @@ public class work_viewActivity extends Fragment {
             System.out.println(ex.toString());
         }
     }
-
-    public void datebind3(int instAmt, String item_cd) {
+//원부재료 바인딩
+    public void datebind3(String lotNo) {
         try {
 
             JArray = null;
-            JArray = work_inst_detail(JArray, "and A.ITEM_CD ='" + item_cd + "'", instAmt);
+            JArray = work_inst_detail(JArray, "and A.LOT_NO ='" + lotNo + "'");
 
             if (JArray.length() != 0) {
 
-
+                WorkInstRawAdapter workInstRawAdapter = new WorkInstRawAdapter();
                 for (int i = 0; i < JArray.length(); i++) {
                     JSONObject jo = JArray.getJSONObject(i);
+
+                    String RAW_MAT_NM = "";
+                    String CUST_NM = "";
+                    String spec = "";
+                    double SOYO_AMT = 0;
+                    String OUTPUT_UNIT_NM = "";
+                    double BAL_STOCK = 0;
+                    String INPUT_UNIT_NM = "";
+
+                    double bal_stock = 0;
+
+
+                    double TOTAL_SOYO_AMT=0;
+                    String CVR_RATIO="0";
+
+                    if (jo.has("RAW_MAT_NM")) // Data값이 NULL인 경우 빈값으로 처리
+                        RAW_MAT_NM = jo.getString("RAW_MAT_NM");
+                    if (jo.has("CUST_NM"))
+                        CUST_NM = jo.getString("CUST_NM");
+                    if (jo.has("SPEC"))
+                        spec = jo.getString("SPEC");
+                    if (jo.has("SOYO_AMT"))
+                        SOYO_AMT = Double.valueOf(jo.getString("SOYO_AMT"));
+                    if (jo.has("OUTPUT_UNIT_NM"))
+                        OUTPUT_UNIT_NM = jo.getString("OUTPUT_UNIT_NM");
+                    if (jo.has("BAL_STOCK"))
+                        BAL_STOCK = Double.valueOf(jo.getString("BAL_STOCK"));
+                    if (jo.has("INPUT_UNIT_NM"))
+                        INPUT_UNIT_NM = jo.getString("INPUT_UNIT_NM");
+                    if (jo.has("TOTAL_SOYO_AMT"))
+                        TOTAL_SOYO_AMT = Double.valueOf(jo.getString("TOTAL_SOYO_AMT"));
+
+                    if (jo.has("CVR_RATIO"))
+                        CVR_RATIO = jo.getString("CVR_RATIO");
+
+                    Double rs_ex_stock=Double.valueOf(bal_stock)-(Double.valueOf(TOTAL_SOYO_AMT)*Double.valueOf(CVR_RATIO));
+
+
+                    workInstRawVo = new WorkInstRawVo(CUST_NM,RAW_MAT_NM,spec,Double.toString(SOYO_AMT),Double.toString(TOTAL_SOYO_AMT),OUTPUT_UNIT_NM,Double.toString(BAL_STOCK),rs_ex_stock.toString(),INPUT_UNIT_NM);
+                    workInstRawAdapter.addItem(workInstRawVo);
                 }
+                gv_instDetail.setAdapter(workInstRawAdapter);
             }
 
         } catch (Exception ex) {
-            System.out.println(ex.toString());
+            System.out.println("어댑터"+ex.toString());
         }
     }
 
 
-    public JSONArray work_inst_detail(JSONArray JSONArray, String condition, double inst_amt) throws SQLException, JSONException {
+    public JSONArray work_inst_detail(JSONArray JSONArray, String condition ) throws SQLException, JSONException {
         StringBuilder sb = new StringBuilder();
-        sb.append("select A.ITEM_CD \n");
-        sb.append("     ,A.ITEM_NM  \n");
-        sb.append("     ,C.RAW_MAT_CD  \n");
-        sb.append("     ,C.RAW_MAT_NM  \n");
-        sb.append("     ,C.SPEC   \n");
-        sb.append("     ,C.CUST_CD     \n");
-        sb.append("     ,D.CUST_NM  \n");
-        sb.append("     ,C.INPUT_UNIT  \n");
-        sb.append("     ,(select UNIT_NM from N_UNIT_CODE where UNIT_CD = C.INPUT_UNIT) as INPUT_UNIT_NM  \n ");
-        sb.append("     ,C.OUTPUT_UNIT  \n");
-        sb.append("     ,(select UNIT_NM from N_UNIT_CODE where UNIT_CD = C.OUTPUT_UNIT) as OUTPUT_UNIT_NM   \n ");
-        sb.append("     ,ISNULL(B.TOTAL_AMT,0) AS SOYO_AMT  \n");
-        sb.append("     ,ISNULL(" + inst_amt + "*B.TOTAL_AMT,0) AS TOTAL_SOYO_AMT \n ");
-        sb.append("     ,ISNULL(C.BAL_STOCK,0) AS BAL_STOCK  \n ");
-        sb.append("     ,ISNULL(C.CVR_RATIO,0) AS CVR_RATIO   \n");
-        sb.append("     ,Z.S_CODE_NM  \n "); //원자재 부자재 명
-        sb.append("     ,Z.S_CODE \n "); //원자재, 부자재  코드
-        sb.append(" FROM N_ITEM_CODE A  \n");
-        sb.append(" inner join N_ITEM_COMP B  \n");
-        sb.append(" on A.ITEM_CD = B.ITEM_CD  \n");
-        sb.append(" left outer join N_RAW_CODE C   \n ");
-        sb.append(" on B.RAW_MAT_CD = C.RAW_MAT_CD	  \n");
-        sb.append(" left outer join N_CUST_CODE D	  \n");
-        sb.append(" on C.CUST_CD = D.CUST_CD	  \n");
-        sb.append("inner join T_S_CODE AS Z on c.RAW_MAT_GUBUN=z.S_CODE and z.L_CODE='300' 	 \n ");  //300번 :원자재 부자재 구분
-        sb.append("where 1=1");
+        sb.append(" select A.W_INST_DATE\n");
+        sb.append(",A.W_INST_CD \n" +
+                "                 ,A.SEQ \n" +
+                "                 ,A.LOT_NO \n" +
+                "                 ,A.RAW_MAT_CD  \n" +
+                "                 ,B.RAW_MAT_NM   \n" +
+                "                 ,B.SPEC   \n" +
+                "                 ,B.CUST_CD \n" +
+                "                 ,C.CUST_NM \n" +
+                "                 ,B.INPUT_UNIT \n" +
+                "                 ,(select UNIT_NM from [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] where UNIT_CD = B.INPUT_UNIT) as INPUT_UNIT_NM  \n" +
+                "                 ,B.OUTPUT_UNIT\n" +
+                "                 ,(select UNIT_NM from [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] where UNIT_CD = B.OUTPUT_UNIT) as OUTPUT_UNIT_NM   \n" +
+                "                 ,A.SOYO_AMT  \n" +
+                "                 ,A.TOTAL_AMT as TOTAL_SOYO_AMT \n" +
+                "                 ,ISNULL(B.BAL_STOCK,0) AS BAL_STOCK  \n" +
+                "                 ,B.CVR_RATIO  \n" +
+                "                  \n");
+        sb.append("from [" + dbInfo.Location + "].[dbo].[F_WORK_INST_DETAIL] A \n" +
+                "             left outer join  [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] B\n" +
+                "             on A.RAW_MAT_CD = B.RAW_MAT_CD\n" +
+                "             left outer join  [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] C  \n" +
+                "             on B.CUST_CD = C.CUST_CD\t \n" +
+                "             inner join  [" + dbInfo.Location + "].[dbo].[F_WORK_INST] F \n" +
+                "             on A.W_INST_DATE = F.W_INST_DATE \n" +
+                "                 and A.W_INST_CD = F.W_INST_CD \n" +
+                "      where 1=1     \n" + condition +
+                "             order by A.SEQ \n");
+        sb.append("\n");
+        sb.append("\n");
+        sb.append("\n");
+        sb.append("\n");
+        sb.append("\n");
 
+
+
+
+
+        JSONArray = dbInfo.SelectDB(sb.toString());
+        System.out.println(sb.toString());
+        return JSONArray;
+    }
+
+
+    //반재품 바인딩
+    public void datebind4(String lotNo) {
+        try {
+
+            JArray = null;
+            JArray = work_inst_half(JArray, "and A.LOT_NO ='" + lotNo + "'");
+
+            if (JArray.length() != 0) {
+
+                WorkInstHalfAdapter workInstHalfAdapte = new WorkInstHalfAdapter();
+                for (int i = 0; i < JArray.length(); i++) {
+                    JSONObject jo = JArray.getJSONObject(i);
+
+                    String ITEM_NM = "";
+                    String CUST_NM = "";
+                    String spec = "";
+                    String SOYO_AMT = "";
+                    String OUTPUT_UNIT_NM = "";
+                    String BAL_STOCK = "0" +
+                            "";
+                    String INPUT_UNIT_NM = "";
+
+                    String bal_stock = "0";
+
+
+                    String TOTAL_SOYO_AMT="0";
+                    String CVR_RATIO="0";
+
+                    if (jo.has("ITEM_NM")) // Data값이 NULL인 경우 빈값으로 처리
+                        ITEM_NM = jo.getString("ITEM_NM");
+                    if (jo.has("CUST_NM"))
+                        CUST_NM = jo.getString("CUST_NM");
+                    if (jo.has("SPEC"))
+                        spec = jo.getString("SPEC");
+                    if (jo.has("SOYO_AMT"))
+                        SOYO_AMT = jo.getString("SOYO_AMT");
+                    if (jo.has("OUTPUT_UNIT_NM"))
+                        OUTPUT_UNIT_NM = jo.getString("UNIT_NM");
+                    if (jo.has("BAL_STOCK"))
+                        BAL_STOCK = jo.getString("BAL_STOCK");
+                    if (jo.has("INPUT_UNIT_NM"))
+                        INPUT_UNIT_NM = jo.getString("UNIT_NM");
+                    if (jo.has("TOTAL_SOYO_AMT"))
+                        TOTAL_SOYO_AMT = jo.getString("TOTAL_SOYO_AMT");
+
+
+
+
+
+                    Double rs_ex_stock=Double.valueOf(bal_stock)-(Double.valueOf(TOTAL_SOYO_AMT));
+                    workInstHalfVo = new WorkInstHalfVo(CUST_NM,ITEM_NM,spec,SOYO_AMT,TOTAL_SOYO_AMT,OUTPUT_UNIT_NM,BAL_STOCK,rs_ex_stock.toString(),INPUT_UNIT_NM);
+                    workInstHalfAdapte.addItem(workInstHalfVo);
+                }
+                gv_instDetail.setAdapter(workInstHalfAdapte);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("어댑터"+ex.toString());
+        }
+    }
+
+
+    public JSONArray work_inst_half(JSONArray JSONArray, String condition ) throws SQLException, JSONException {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(" select A.W_INST_DATE\n" +
+                "                 ,A.W_INST_CD\n" +
+                "                 ,A.SEQ\n" +
+                "                 ,A.LOT_NO\n" +
+                "                 ,A.HALF_ITEM_CD \n" +
+                "                 ,B.ITEM_NM  \n" +
+                "                 ,B.SPEC  \n" +
+                "                 ,B.CUST_CD\n" +
+                "                 ,C.CUST_NM\n" +
+                "                 ,B.UNIT_CD\n" +
+                "                 ,(select UNIT_NM from N_UNIT_CODE where UNIT_CD = B.UNIT_CD) as UNIT_NM  \n" +
+                "                 ,A.SOYO_AMT \n" +
+                "                 ,A.TOTAL_AMT as TOTAL_SOYO_AMT\n" +
+                "                 ,ISNULL(B.BAL_STOCK,0) AS BAL_STOCK  \n" +
+                "             from F_WORK_INST_HALF_DETAIL A \n" +
+                "             left outer join N_ITEM_CODE B\n" +
+                "             on A.HALF_ITEM_CD = B.ITEM_CD\n" +
+                "                 and B.ITEM_GUBUN = '2'\n" +
+                "             left outer join N_CUST_CODE C \n" +
+                "             on B.CUST_CD = C.CUST_CD\t\n");
+
+        sb.append("where 1=1");
         sb.append(condition);
 
-        sb.append(" order by S_CODE	 ");
+
+
+
+
+
         JSONArray = dbInfo.SelectDB(sb.toString());
         System.out.println(sb.toString());
         return JSONArray;

@@ -327,7 +327,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="19dp"
                             android:layout_marginLeft="19dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView23"
                             app:layout_constraintStart_toEndOf="@+id/textView23"
                             app:layout_constraintTop_toTopOf="@+id/textView23" />
@@ -338,7 +337,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginLeft="20dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toTopOf="@+id/textView25"
                             app:layout_constraintStart_toEndOf="@+id/textView24"
                             app:layout_constraintTop_toBottomOf="@+id/textView23"
@@ -350,7 +348,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginLeft="20dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView25"
                             app:layout_constraintStart_toEndOf="@+id/textView25"
                             app:layout_constraintTop_toBottomOf="@+id/textView24" />
@@ -361,7 +358,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginLeft="20dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView26"
                             app:layout_constraintStart_toEndOf="@+id/textView26"
                             app:layout_constraintTop_toTopOf="@+id/textView26"
@@ -371,10 +367,11 @@
                             android:id="@+id/workView_et_memo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
                             app:layout_constraintBottom_toBottomOf="@+id/textView27"
-                            app:layout_constraintTop_toTopOf="@+id/textView27"
-                            tools:layout_editor_absoluteX="89dp" />
+                            app:layout_constraintStart_toEndOf="@+id/textView27"
+                            app:layout_constraintTop_toTopOf="@+id/textView27" />
 
                         <TextView
                             android:id="@+id/workView_et_instCd"
@@ -382,7 +379,6 @@
                             android:layout_height="18dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView28"
                             app:layout_constraintStart_toEndOf="@+id/textView28"
                             app:layout_constraintTop_toTopOf="@+id/textView28" />
@@ -393,7 +389,6 @@
                             android:layout_height="19dp"
                             android:layout_marginStart="19dp"
                             android:layout_marginLeft="19dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView29"
                             app:layout_constraintStart_toEndOf="@+id/textView29"
                             app:layout_constraintTop_toTopOf="@+id/textView29"
@@ -405,7 +400,6 @@
                             android:layout_height="19dp"
                             android:layout_marginStart="17dp"
                             android:layout_marginLeft="17dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView30"
                             app:layout_constraintStart_toEndOf="@+id/textView30"
                             app:layout_constraintTop_toTopOf="@+id/textView30"
@@ -417,7 +411,6 @@
                             android:layout_height="0dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView31"
                             app:layout_constraintStart_toEndOf="@+id/textView31" />
 
@@ -427,7 +420,6 @@
                             android:layout_height="18dp"
                             android:layout_marginStart="4dp"
                             android:layout_marginLeft="4dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView35"
                             app:layout_constraintStart_toEndOf="@+id/textView35"
                             app:layout_constraintTop_toTopOf="@+id/textView35"
@@ -439,7 +431,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="9dp"
                             android:layout_marginLeft="9dp"
-                            android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="@+id/textView34"
                             app:layout_constraintStart_toEndOf="@+id/textView34"
                             app:layout_constraintTop_toTopOf="@+id/textView34" />
@@ -455,6 +446,7 @@
                             android:layout_width="623dp"
                             android:layout_height="30dp"
                             android:layout_marginTop="18dp"
+                            app:layout_constraintEnd_toEndOf="@+id/workInstRaw_gv_detail"
                             app:layout_constraintStart_toStartOf="@+id/_dynamic"
                             app:layout_constraintTop_toBottomOf="@+id/textView36">
 
@@ -574,6 +566,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <GridView
+                            android:id="@+id/workInstRaw_gv_detail"
                             android:layout_width="623dp"
                             android:layout_height="136dp"
                             android:layout_marginStart="1dp"
