@@ -82,6 +82,19 @@
                 app:layout_constraintStart_toEndOf="@+id/edit_start_moniter"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/moniter_btn_search"
+                android:layout_width="136dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edit_end_moniter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/search2blue" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
