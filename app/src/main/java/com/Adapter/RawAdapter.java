@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class RawAdapter extends BaseAdapter {
 
     Context context;
-    RawVo rawVo = new RawVo();
+    RawVo rawVo;
     private ArrayList<RawVo> arrayList = new ArrayList<>();
 
     public void addItem(RawVo rawVo) {
@@ -46,6 +46,7 @@ public class RawAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
+        rawVo= new RawVo();
         rawVo = arrayList.get(position);
 
         if (convertView == null) {

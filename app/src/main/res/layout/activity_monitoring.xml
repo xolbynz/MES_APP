@@ -89,6 +89,7 @@
             android:layout_height="match_parent">
 
             <GridView
+                android:id="@+id/moniter_view_gv_monitering"
                 android:layout_width="1274dp"
                 android:layout_height="532dp"
                 android:layout_marginStart="1dp"
