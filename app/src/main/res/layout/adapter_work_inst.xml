@@ -3,18 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="600dp"
-    android:layout_height="25dp"
-    android:descendantFocusability="blocksDescendants"
-    >
+    android:layout_height="35dp"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/workInst_tv_lotNo"
         android:layout_width="100dp"
-        android:layout_height="38dp"
+        android:layout_height="30dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="7dp"
         android:background="#FFFFFF"
         android:gravity="center"
         android:text="LotNO"
@@ -72,18 +71,5 @@
         app:layout_constraintStart_toEndOf="@+id/workInst_tv_itemNm"
         app:layout_constraintTop_toTopOf="@+id/workInst_tv_lotNo"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/workInst_btn_view"
-        android:layout_width="85dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:text="Button"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="@+id/workInst_tv_instAmt"
-        app:layout_constraintStart_toEndOf="@+id/workInst_tv_instAmt"
-        app:layout_constraintTop_toTopOf="@+id/workInst_tv_instAmt"
-        app:layout_constraintVertical_bias="0.625" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

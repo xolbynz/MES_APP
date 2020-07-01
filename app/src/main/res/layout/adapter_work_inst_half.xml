@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="623dp"
+    android:layout_height="30dp">
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_custNm"
+        android:layout_width="78dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:text="업체명"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_halfNm"
+        android:layout_width="78dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="반재품명"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_custNm"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_spec"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="규격"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_halfNm"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_inpAmt"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="개별소요량"
+        app:layout_constraintBottom_toBottomOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintTop_toTopOf="@+id/workInstHalf_tv_spec" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_totAmt"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="총소요량"
+        app:layout_constraintBottom_toBottomOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_inpAmt"
+        app:layout_constraintTop_toTopOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_inpUnit"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="사용단위"
+        app:layout_constraintBottom_toBottomOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_totAmt"
+        app:layout_constraintTop_toTopOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_stock"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="현재고"
+        app:layout_constraintBottom_toBottomOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_inpUnit"
+        app:layout_constraintTop_toTopOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_afterStock"
+        android:layout_width="70dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="공정후재고"
+        app:layout_constraintBottom_toBottomOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_stock"
+        app:layout_constraintTop_toTopOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/workInstHalf_tv_unit"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="공정후재고"
+        app:layout_constraintBottom_toBottomOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintStart_toEndOf="@+id/workInstHalf_tv_afterStock"
+        app:layout_constraintTop_toTopOf="@+id/workInstHalf_tv_spec"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
