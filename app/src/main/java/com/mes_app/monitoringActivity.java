@@ -162,43 +162,56 @@ public class monitoringActivity extends Fragment {
 
                     JSONObject jo = JArray.getJSONObject(i);
 
+                    String Cust_cd = "";
+                    String Cust_nm = "";
                     String Inst_date = "";
                     String Deli_date = "";
                     String Item_cd = "";
                     String Item_nm = "";
                     String Lot_no = "";
                     String Flow_count = "";
+                    String Processing = "";
                     String Inst_amt = "";
                     String Input_amt = "";
+                    String Input_date = "";
                     String Poor_amt = "";
                     String Input_per = "";
                     String Poor_per = "";
 
-                    if (jo.has("LOT_NO")) // Data값이 NULL인 경우 빈값으로 처리
-                        Inst_date = jo.getString("LOT_NO");
-                    if (jo.has("LOT_SUB"))
-                        Deli_date = jo.getString("LOT_SUB");
-                    if (jo.has("LOT_BAR"))
-                        Item_cd = jo.getString("LOT_BAR");
-                    if (jo.has("ITEM_CD"))
-                        Item_nm = jo.getString("ITEM_CD");
-                    if (jo.has("ITEM_NM"))
-                        Lot_no = jo.getString("ITEM_NM");
-                    if (jo.has("SPEC"))
-                        Flow_count = jo.getString("SPEC");
-                    if (jo.has("UNIT_CD"))
-                        Inst_amt = jo.getString("UNIT_CD");
-                    if (jo.has("UNIT_NM"))
-                        Input_amt = jo.getString("UNIT_NM");
-                    if (jo.has("F_SUB_AMT"))
-                        Poor_amt = jo.getString("F_SUB_AMT");
-                    if (jo.has("CUST_CD"))
-                        Input_per = jo.getString("CUST_CD");
+                    if (jo.has("CUST_CD")) // Data값이 NULL인 경우 빈값으로 처리
+                        Cust_cd = jo.getString("CUST_CD");
                     if (jo.has("CUST_NM"))
-                        Poor_per = jo.getString("CUST_NM");
+                        Cust_nm = jo.getString("CUST_NM");
+                    if (jo.has("INST_DATE"))
+                        Inst_date = jo.getString("INST_DATE");
+                    if (jo.has("DELI_DATE"))
+                        Deli_date = jo.getString("DELI_DATE");
+                    if (jo.has("ITEM_CD"))
+                        Item_cd = jo.getString("ITEM_CD");
+                    if (jo.has("ITEM_NM"))
+                        Item_nm = jo.getString("ITEM_NM");
+                    if (jo.has("LOT_NO"))
+                        Lot_no = jo.getString("LOT_NO");
+                    if (jo.has("FLOW_COUNT"))
+                        Flow_count = jo.getString("FLOW_COUNT");
+                    if (jo.has("INST_AMT"))
+                        Inst_amt = jo.getString("INST_AMT");
+                    if (jo.has("PROCESSING"))
+                        Processing = jo.getString("PROCESSING");
+                    if (jo.has("INPUT_AMT"))
+                        Input_amt = jo.getString("INPUT_AMT");
+                    if (jo.has("INPUT_DATE"))
+                        Input_date = jo.getString("INPUT_DATE");
+                    if (jo.has("POOR_AMT"))
+                        Poor_amt = jo.getString("POOR_AMT");
+                    if (jo.has("INPUT_PER"))
+                        Input_per = jo.getString("INPUT_PER");
+                    if (jo.has("POOR_PER"))
+                        Poor_per = jo.getString("POOR_PER");
 
-                    moniteringVo = new MoniteringVo(Inst_date, Deli_date, Item_cd, Item_nm, Lot_no,
-                            Flow_count, Inst_amt, Input_amt, Poor_amt, Input_per, Poor_per);
+                    moniteringVo = new MoniteringVo(Cust_cd, Cust_nm, Inst_date, Deli_date, Item_cd,
+                            Item_nm, Lot_no, Flow_count, Processing, Inst_amt, Input_amt, Input_date,
+                            Poor_amt, Input_per, Poor_per);
 
                     itemAdapter.addItem(moniteringVo);
                 }
@@ -218,39 +231,45 @@ public class monitoringActivity extends Fragment {
         StringBuilder query = new StringBuilder();
 
 
-        query.append(" SELECT   W.CUST_CD");
-        query.append("         ,W.W_INST_DATE AS INST_DATE");
-        query.append("         ,W.DELIVERY_DATE AS DELI_DATE");
-        query.append("         ,W.ITEM_CD");
-        query.append("         ,(SELECT ITEM_NM FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] WHERE W.ITEM_CD = ITEM_CD) AS ITEM_NM");
-        query.append("         ,W.LOT_NO");
-        query.append("         ,(SELECT COUNT(*) FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] WHERE ITEM_CD = W.ITEM_CD) AS FLOW_COUNT");
-        query.append("         ,CONVERT(INT,W.INST_AMT) AS INST_AMT");
-        query.append("         ,CONVERT(INT,ISNULL(I.INPUT_AMT,0)) AS INPUT_AMT");
-        query.append("         ,CONVERT(INT,ISNULL(INPUT_AMT,0)/W.INST_AMT * 100) AS INPUT_PER");
-        query.append("         ,CONVERT(INT,F.POOR_AMT) AS POOR_AMT");
-        query.append("         ,CONVERT(INT,ISNULL(F.POOR_AMT,0)/W.INST_AMT * 100) AS POOR_PER");
-        query.append(" FROM [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] A");
-        query.append(" INNER JOIN [" + dbInfo.Location + "].[dbo].[F_WORK_INST] W");
-        query.append(" ON A.LOT_NO = W.LOT_NO");
+        query.append(" SELECT DISTINCT");
+        query.append("         ISNULL(A.CUST_CD, '-') AS CUST_CD");
+        query.append("         ,ISNULL((SELECT CUST_NM FROM [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] WHERE A.CUST_CD = CUST_CD), '-') AS CUST_NM");
+        query.append("         ,A.W_INST_DATE AS INST_DATE");
+        query.append("         ,A.DELIVERY_DATE AS DELI_DATE");
+        query.append("         ,A.ITEM_CD");
+        query.append("         ,(SELECT ITEM_NM FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] WHERE A.ITEM_CD = ITEM_CD) AS ITEM_NM");
+        query.append("         ,A.LOT_NO");
+        query.append("         ,(SELECT COUNT(*) FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW_CODE] WHERE ITEM_CD = A.ITEM_CD) AS FLOW_COUNT");
+        query.append("         ,A.INST_AMT AS INST_AMT");
+        query.append("         ,(CASE WHEN B.LOT_NO IS NULL THEN '공정 미진행' WHEN A.LOT_NO = A.LOT_NO AND A.COMPLETE_YN = 'N' ");
+        query.append("         THEN '공정 진행중' ELSE '공정 완료' END) AS PROCESSING");
+        query.append("         ,ISNULL(I.INPUT_AMT, 0) AS INPUT_AMT");
+        query.append("         ,ISNULL(G.INPUT_DATE, '-') AS INPUT_DATE");
+        query.append("         ,ISNULL(F.POOR_AMT, 0) AS POOR_MAT");
+        query.append("         ,CONVERT(INT,ISNULL(I.INPUT_AMT,0)/A.INST_AMT * 100) AS INPUT_PER");
+        query.append("         ,ISNULL(F.POOR_AMT,0)/A.INST_AMT * 100  AS POOR_PER");
+        query.append(" FROM [" + dbInfo.Location + "].[dbo].[F_WORK_INST] A");
+        query.append(" LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] B");
+        query.append(" ON B.LOT_NO = A.LOT_NO");
         query.append(" LEFT OUTER JOIN (  SELECT LOT_NO,");
-        query.append("                           ISNULL(SUM(INPUT_AMT),0) AS INPUT_AMT");
-        query.append("                     FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT]");
-        query.append("                     GROUP BY LOT_NO ) I");
+        query.append("                    ISNULL(SUM(INPUT_AMT),0) AS INPUT_AMT");
+        query.append("                    FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT]");
+        query.append("                    GROUP BY LOT_NO ) I ");
         query.append(" ON I.LOT_NO = A.LOT_NO");
-        query.append(" LEFT OUTER JOIN (SELECT LOT_NO, ");
-        query.append("                         SUM(ISNULL(POOR_AMT,0)) AS POOR_AMT");
-        query.append("                  FROM [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] ");
-        query.append("                  GROUP BY LOT_NO ) F");
+        query.append(" LEFT OUTER JOIN (SELECT LOT_NO, SUM(ISNULL(POOR_AMT,0)) AS POOR_AMT FROM [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] GROUP BY LOT_NO ) F");
         query.append(" ON F.LOT_NO = A.LOT_NO");
-        query.append(" WHERE W.INST_AMT IS NOT NULL AND W.INST_AMT > 0");
-        if ((condition1 != "" || condition1 != null) && (condition2 != "" || condition2 != null))
-            query.append(" AND A.FLOW_DATE > '" + condition1 + "' AND A.FLOW_DATE < '" + condition2 + "'");
-        else if ((condition1 == "" || condition1 == null) && (condition2 != "" || condition2 != null))
-            query.append(" AND A.FLOW_DATE < '" + condition2 + "'");
-        else if ((condition1 != "" || condition1 != null) && (condition2 == "" || condition2 == null))
-            query.append(" AND A.FLOW_DATE >  '" + condition2 + "'");
+        query.append(" LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] G");
+        query.append(" ON G.LOT_NO = A.LOT_NO");
+        query.append(" WHERE A.INST_AMT IS NOT NULL and A.INST_AMT > 0");
 
+        if ((condition1 != "" || condition1 != null) && (condition2 != "" || condition2 != null))
+            query.append(" AND B.FLOW_DATE > '" + condition1 + "' AND B.FLOW_DATE < '" + condition2 + "'");
+        else if ((condition1 == "" || condition1 == null) && (condition2 != "" || condition2 != null))
+            query.append(" AND B.FLOW_DATE < '" + condition2 + "'");
+        else if ((condition1 != "" || condition1 != null) && (condition2 == "" || condition2 == null))
+            query.append(" AND B.FLOW_DATE >  '" + condition2 + "'");
+
+        query.append(" ORDER BY A.LOT_NO ");
         jsonArray = dbInfo.SelectDB(query.toString());
         return jsonArray;
     }

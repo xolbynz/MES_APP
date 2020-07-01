@@ -2,14 +2,18 @@ package com.VO;
 
 public class MoniteringVo {
 
+    String Cust_cd;
+    String Cust_nm;
     String Inst_date;
     String Deli_date;
     String Item_cd;
     String Item_nm;
     String Lot_no;
-    String Flow_count;
-    String Inst_amt; // 투입
-    String Input_amt; // 생산
+    String Flow_count; // 공정 갯수
+    String Inst_amt; // 지시 수량
+    String Processing; // 진행 현황
+    String Input_amt; // 생산 수량
+    String Input_date; // 생산 일자
     String Poor_amt; // 불량
     String Input_per;
     String Poor_per;
@@ -18,9 +22,12 @@ public class MoniteringVo {
 
   }
 
-    public MoniteringVo(String inst_date, String deli_date, String item_cd, String item_nm,
-                        String lot_no, String flow_count, String inst_amt, String input_amt,
+    public MoniteringVo(String cust_cd, String cust_nm, String inst_date, String deli_date,
+                        String item_cd, String item_nm, String lot_no, String flow_count,
+                        String inst_amt, String processing, String input_amt, String input_date,
                         String poor_amt, String input_per, String poor_per) {
+        Cust_cd = cust_cd;
+        Cust_nm = cust_nm;
         Inst_date = inst_date;
         Deli_date = deli_date;
         Item_cd = item_cd;
@@ -28,10 +35,28 @@ public class MoniteringVo {
         Lot_no = lot_no;
         Flow_count = flow_count;
         Inst_amt = inst_amt;
+        Processing = processing;
         Input_amt = input_amt;
+        Input_date = input_date;
         Poor_amt = poor_amt;
         Input_per = input_per;
         Poor_per = poor_per;
+    }
+
+    public String getCust_cd() {
+        return Cust_cd;
+    }
+
+    public void setCust_cd(String cust_cd) {
+        Cust_cd = cust_cd;
+    }
+
+    public String getCust_nm() {
+        return Cust_nm;
+    }
+
+    public void setCust_nm(String cust_nm) {
+        Cust_nm = cust_nm;
     }
 
     public String getInst_date() {
@@ -90,12 +115,28 @@ public class MoniteringVo {
         Inst_amt = inst_amt;
     }
 
+    public String getProcessing() {
+        return Processing;
+    }
+
+    public void setProcessing(String processing) {
+        Processing = processing;
+    }
+
     public String getInput_amt() {
         return Input_amt;
     }
 
     public void setInput_amt(String input_amt) {
         Input_amt = input_amt;
+    }
+
+    public String getInput_date() {
+        return Input_date;
+    }
+
+    public void setInput_date(String input_date) {
+        Input_date = input_date;
     }
 
     public String getPoor_amt() {
