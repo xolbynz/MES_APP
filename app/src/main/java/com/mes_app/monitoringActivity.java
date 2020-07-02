@@ -1,6 +1,5 @@
 package com.mes_app;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,21 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.Adapter.MoniteringAdapter;
 import com.VO.MoniteringVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +27,8 @@ import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class monitoringActivity extends Fragment {
 
@@ -48,13 +47,18 @@ public class monitoringActivity extends Fragment {
     ArrayList<MoniteringVo> moniteringVoArrayList;
 
 
+    public  monitoringActivity(){}
     public monitoringActivity(Context context) {
 
         this.context = context;
         dbInfo = new DBInfo();
     }
 
-    @Nullable
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        activity = (MainActivity) getActivity();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,7 +66,7 @@ public class monitoringActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_monitoring, container, false);
 
 
-        imm = (InputMethodManager) context.getSystemService(activity.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) getContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
 
         gridView = rootView.findViewById(R.id.moniter_view_gv_monitering);
         btnSearch = rootView.findViewById(R.id.moniter_btn_search);
@@ -73,32 +77,41 @@ public class monitoringActivity extends Fragment {
         edit_startDate.setOnClickListener(showDate);
         edit_endDate.setOnClickListener(showDate);
 
-        edit_startDate.setOnFocusChangeListener(hideKeyboard);
-        edit_endDate.setOnFocusChangeListener(hideKeyboard);
+//        edit_startDate.setOnFocusChangeListener(hideKeyboard);
+//        edit_endDate.setOnFocusChangeListener(hideKeyboard);
 
-
+        imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
         btnSearch.setOnClickListener(Monitering_Search);
+
+        Calendar cal = new GregorianCalendar();
+
+        mYear = cal.get(Calendar.YEAR);
+
+        mMonth = cal.get(Calendar.MONTH);
+
+        mDay = cal.get(Calendar.DAY_OF_MONTH);
+
 
         return rootView;
     }
 
-    View.OnFocusChangeListener hideKeyboard = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-
-            if (hasFocus){
-                imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
-            }
-        }
-    };
+//    View.OnFocusChangeListener hideKeyboard = new View.OnFocusChangeListener() {
+//        @Override
+//        public void onFocusChange(View v, boolean hasFocus) {
+//
+//            if (hasFocus){
+//                imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
+//                imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
+//            }
+//        }
+//    };
 
 
     View.OnClickListener showDate = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
+         //   imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
             switch (v.getId()) {
                 case R.id.edit_start_moniter:
 
@@ -260,7 +273,12 @@ public class monitoringActivity extends Fragment {
                 gridView.setAdapter(null);
             }
         } catch (SQLException | JSONException e) {
+            System.out.println(e.toString());
             e.printStackTrace();
+
+        }
+        catch (Exception ex){
+            System.out.println(ex.toString());
         }
     }
 

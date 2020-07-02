@@ -52,8 +52,8 @@
 
             <EditText
                 android:id="@+id/edit_end_moniter"
-                android:layout_width="317dp"
-                android:layout_height="50dp"
+                android:layout_width="307dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="22dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginEnd="493dp"
@@ -80,7 +80,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/edit_end_moniter"
                 app:layout_constraintStart_toEndOf="@+id/edit_start_moniter"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageButton
                 android:id="@+id/moniter_btn_search"
