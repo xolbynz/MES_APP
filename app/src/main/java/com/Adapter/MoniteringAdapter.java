@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.VO.MoniteringVo;
-import com.VO.RawVo;
 import com.example.mes_app.R;
 
 import java.util.ArrayList;
@@ -16,12 +15,12 @@ import java.util.ArrayList;
 public class MoniteringAdapter extends BaseAdapter {
 
     Context context;
-    MoniteringVo moniteringVo;
+    MoniteringVo   moniteringVo = new MoniteringVo();
     ArrayList<MoniteringVo> arrayList = new ArrayList<>();
 
     @Override
     public int getCount() {
-        return 0;
+        return arrayList.size();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class MoniteringAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     public void addItem(MoniteringVo moniteringVo) {
@@ -42,11 +41,12 @@ public class MoniteringAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
-        moniteringVo = new MoniteringVo();
+
         moniteringVo = arrayList.get(position);
 
+
         if (convertView == null) {
-            LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView = infaInflater.inflate(R.layout.adapter_moniter, parent, false);
 
 

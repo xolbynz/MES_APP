@@ -1,14 +1,21 @@
 package com.common;
 
-import java.io.Serializable;
-
 public  class CompInfo {
 
-    private String COM_SAPU_NO = "";
+    private static String COM_SAPU_NO = "";
     private String COM_LOCATION = "";
     private String COMPANY_NM = "";
     private String SP_CODE = "";
     private String PACK_GUBUN = "";
+    private static String COM_LOOG="";
+
+    public String getCOM_LOOG() {
+        return COM_LOOG;
+    }
+
+    public void setCOM_LOOG(String COM_LOOG) {
+        this.COM_LOOG = COM_LOOG;
+    }
 
     public CompInfo(){
 

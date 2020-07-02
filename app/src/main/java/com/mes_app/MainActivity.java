@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Button tab3;
     Button tab4;
 
-
+    CompInfo compInfo;
 
     FragmentManager fragmentManager;
 
@@ -75,12 +76,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF339999));
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로가기 버튼
 
-
-
-
-
-
-
+//byte[] bytes = compInfo.getCOM_LOOG().getBytes();
+//
+//        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//
+//
+//        ImageView image = (ImageView) findViewById(R.id.image_saup);
+//
+//        image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(),
+//                image.getHeight(), false));
 
 
         tab1 = (Button) findViewById(R.id.btn_rawmenu);

@@ -110,7 +110,7 @@ public class monitoringActivity extends Fragment {
     View.OnClickListener showDate = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
+         //   imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
          //   imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
             switch (v.getId()) {
                 case R.id.edit_start_moniter:
@@ -207,7 +207,7 @@ public class monitoringActivity extends Fragment {
 
             if (jsonArray.length() != 0) {
 
-                MoniteringAdapter moniteringAdapter = new MoniteringAdapter();
+                final MoniteringAdapter moniteringAdapter = new MoniteringAdapter();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 

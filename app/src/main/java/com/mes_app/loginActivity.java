@@ -201,12 +201,15 @@ public class loginActivity extends AppCompatActivity {
         query.append("SELECT A.COM_LOCATION,");
         query.append("COMPANY_NM, ");
         query.append("A.SP_CODE,");
-        query.append("B.SP_SITE ");
+        query.append("B.SP_SITE, ");
+        query.append("C.SAUP_LOGO, ");
+        query.append("C.LOGO_SIZE ");
         query.append("FROM [SM_FACTORY_COM].[dbo].[T_COMP_LOGIN] A ");
         query.append("left outer join [SM_FACTORY_COM].[dbo].[T_SUPPLY_CODE] B ");
         query.append("on A.SP_CODE = B.SP_CODE ");
-        query.append("where COM_SAUP_NO = '" + saupNo + "'");
-
+        query.append("left outer join [SM_FACTORY_COM].[dbo].[T_SAUP_CODE] as C on C.SAUP_NO=A.COM_SAUP_NO\n");
+        query.append("where A.COM_SAUP_NO = '" + saupNo + "'");
+System.out.println(query);
         Statement stmt = conn.createStatement();
 
         rs = stmt.executeQuery(query.toString());
@@ -226,7 +229,7 @@ public class loginActivity extends AppCompatActivity {
                 ConnectionClass connClass = new ConnectionClass();
                 dbInfo.mainConn = connClass.getConnection(dbUser, dbUserPass, dbName, dbIp);
 
-                query2.append("select * from [" + dbInfo.Location + "].[dbo].[N_STAFF_CODE]");
+                query2.append("select * from [" + dbInfo.Location + "].[dbo].[N_STAFF_CODE] \n");
                 query2.append("where LOGIN_ID = '" + Id + "' and PW = '" + Pw + "'");
 
 
@@ -241,6 +244,8 @@ public class loginActivity extends AppCompatActivity {
                     compInfo.setSP_CODE(rs.getString(3));
                     compInfo.setPACK_GUBUN(rs.getString(4));
 
+
+                    compInfo.setCOM_LOOG(rs.getString("SAUP_LOGO"));
 //                    dbInfo.mainConn.close();
                     return true;
                 } else {
