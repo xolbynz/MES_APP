@@ -43,7 +43,7 @@ public class stock_statusActivity extends Fragment {
     EditText endDate;
     ImageButton btn_stockSearch;
     Context context;
-GridView gridView;
+    GridView gridView;
 
     int mYear, mMonth, mDay;
 
@@ -63,8 +63,6 @@ GridView gridView;
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,9 +73,9 @@ GridView gridView;
         startDate = rootView.findViewById(R.id.edit_startDate);
 
         endDate = rootView.findViewById(R.id.edit_endDate);
-        btn_stockSearch= rootView.findViewById(R.id.btn_stock_search);
+        btn_stockSearch = rootView.findViewById(R.id.btn_stock_search);
 
-gridView=rootView.findViewById(R.id.grid_stock_status);
+        gridView = rootView.findViewById(R.id.grid_stock_status);
 
         startDate.setOnClickListener(onClickListener);
         endDate.setOnClickListener(onClickListener);
@@ -92,16 +90,11 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         mDay = cal.get(Calendar.DAY_OF_MONTH);
 
 
-
         dbInfo = new DBInfo();
 
 
         return rootView;
     }
-
-
-
-
 
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -110,7 +103,6 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
 
             System.out.println("달력소환");
             imm.hideSoftInputFromWindow(startDate.getWindowToken(), 0);
-
 
 
             switch (v.getId()) {
@@ -139,25 +131,20 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             mYear = year;
 
-            mMonth = month+1;
+            mMonth = month + 1;
 
             mDay = dayOfMonth;
-
-
-
-
-
-            String m_Month=String.valueOf( mMonth);
-            if (mMonth<10) {
-                m_Month="0"+mMonth;
+            String m_Month = String.valueOf(mMonth);
+            if (mMonth < 10) {
+                m_Month = "0" + mMonth;
             }
-            String m_Day=String.valueOf( mDay);
+            String m_Day = String.valueOf(mDay);
 
-            if(mDay<10){
-                m_Day="0"+mDay;
+            if (mDay < 10) {
+                m_Day = "0" + mDay;
             }
 
-            String selectedDate=year+"-"+m_Month+"-"+m_Day;
+            String selectedDate = year + "-" + m_Month + "-" + m_Day;
             startDate.setText(selectedDate);
 
 
@@ -172,25 +159,23 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             mYear = year;
 
-            mMonth = month+1;
+            mMonth = month + 1;
 
             mDay = dayOfMonth;
 
 
-            String m_Month=String.valueOf( mMonth);
-            if (mMonth<10) {
-                m_Month="0"+mMonth;
+            String m_Month = String.valueOf(mMonth);
+            if (mMonth < 10) {
+                m_Month = "0" + mMonth;
             }
-            String m_Day=String.valueOf( mDay);
+            String m_Day = String.valueOf(mDay);
 
-            if(mDay<10){
-                m_Day="0"+mDay;
+            if (mDay < 10) {
+                m_Day = "0" + mDay;
             }
 
-            String selectedDate=year+"-"+m_Month+"-"+m_Day;
+            String selectedDate = year + "-" + m_Month + "-" + m_Day;
             endDate.setText(selectedDate);
-
-
         }
 
 
@@ -201,18 +186,18 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         @Override
         public void onClick(View v) {
 
-            System.out.println(startDate.getText()+"부터"+endDate.getText()+"까지 검색하겠습니다.");
+            System.out.println(startDate.getText() + "부터" + endDate.getText() + "까지 검색하겠습니다.");
 
 
-            try{
+            try {
 
                 JArray = Stock_status_Detail(JArray, "");
 
-                if (JArray!=null){
+                if (JArray != null) {
 
                     stockInputVoArrayList.clear();
                     stock_statusAdapter stock_statusAdapter = new stock_statusAdapter();
-                    for (int i =0; i <JArray.length();i++){
+                    for (int i = 0; i < JArray.length(); i++) {
                         JSONObject jo = JArray.getJSONObject(i);
                         String packing_date = jo.getString("INPUT_DATE");
                         String lot_no = jo.getString("LOT_BAR");
@@ -223,42 +208,34 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
                         String item_unit = jo.getString("UNIT_NM");
                         String quantity = jo.getString("CURR_AMT");
 
-                        stockInputVo=new StockInputVo(packing_date,lot_no,plan_no,CUST_NM,ITEM_NM,item_std,item_unit,quantity);
+                        stockInputVo = new StockInputVo(packing_date, lot_no, plan_no, CUST_NM, ITEM_NM, item_std, item_unit, quantity);
 
                         stock_statusAdapter.addItem(stockInputVo);
                     }
 
-                    if(stock_statusAdapter.getCount() == 0) {
+                    if (stock_statusAdapter.getCount() == 0) {
                         Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                     }
-                  gridView.setAdapter(stock_statusAdapter);
+                    gridView.setAdapter(stock_statusAdapter);
 
 
-
-
-                }
-                else{
+                } else {
                     Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 }
 
 
-
-
-            }
-            catch (SQLException | JSONException e) {
+            } catch (SQLException | JSONException e) {
                 e.printStackTrace();
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
             }
-            catch (Exception ex) {
-            System.out.println(ex.toString());
-            }
-
 
 
         }
     };
 
 
-    public JSONArray Stock_status_Detail(JSONArray JSONArray, String condition) throws SQLException, JSONException{
+    public JSONArray Stock_status_Detail(JSONArray JSONArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
 
@@ -283,12 +260,11 @@ gridView=rootView.findViewById(R.id.grid_stock_status);
         query.append("WHERE 1=1 \n");
 
         if (!startDate.getText().equals("")) {
-            query.append(" and A.INPUT_DATE>='"+startDate.getText()+"' \n");
+            query.append(" and A.INPUT_DATE>='" + startDate.getText() + "' \n");
         }
         if (!endDate.getText().equals("")) {
-            query.append(" and A.INPUT_DATE<='"+endDate.getText()+"' \n");
+            query.append(" and A.INPUT_DATE<='" + endDate.getText() + "' \n");
         }
-        System.out.println(query);
         JSONArray = dbInfo.SelectDB(query.toString());
         return JSONArray;
     }

@@ -89,7 +89,7 @@ public class raw_inputActivity extends Fragment {
 
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
         btn_input = rootView.findViewById(R.id.btn_input);
-        btn_input.setOnClickListener(btnInputClick);
+        btn_input.setOnClickListener(showDialog);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
@@ -109,9 +109,9 @@ public class raw_inputActivity extends Fragment {
     }
 
     public void Input_Order_Detail() {
-        JSONArray = null;
-        try {
 
+        try {
+            JSONArray = null;
             JSONArray = fn_Input_Order_Detail_List();
 
             if (JSONArray.length() != 0) {

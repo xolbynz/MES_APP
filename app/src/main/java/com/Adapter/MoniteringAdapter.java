@@ -17,8 +17,7 @@ public class MoniteringAdapter extends BaseAdapter {
 
     Context context;
     MoniteringVo moniteringVo;
-    ArrayList<MoniteringVo> arrayList;
-
+    ArrayList<MoniteringVo> arrayList = new ArrayList<>();
 
     @Override
     public int getCount() {
@@ -27,7 +26,7 @@ public class MoniteringAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return arrayList.get(position);
     }
 
     @Override
@@ -43,46 +42,41 @@ public class MoniteringAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
-        moniteringVo= new MoniteringVo();
+        moniteringVo = new MoniteringVo();
         moniteringVo = arrayList.get(position);
 
         if (convertView == null) {
             LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infaInflater.inflate(R.layout.adapter_raw_view, parent, false);
+            convertView = infaInflater.inflate(R.layout.adapter_moniter, parent, false);
 
 
-            TextView cust_cd = convertView.findViewById(R.id.rawView_tv_rawNm);
-            TextView cust_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
-            TextView inst_date = convertView.findViewById(R.id.rawView_tv_spec);
-            TextView deli_date = convertView.findViewById(R.id.rawView_tv_unit);
-            TextView item_cd = convertView.findViewById(R.id.rawView_tv_position);
-            TextView item_nm = convertView.findViewById(R.id.rawView_tv_inpAmt);
-            TextView lot_no = convertView.findViewById(R.id.rawView_tv_outpAmt);
-            TextView flow_count = convertView.findViewById(R.id.rawView_tv_amt);
-            TextView inst_amt = convertView.findViewById(R.id.rawView_tv_amt);
-            TextView processing = convertView.findViewById(R.id.rawView_tv_amt);
-            TextView poor_amt = convertView.findViewById(R.id.rawView_tv_amt);
-            TextView input_per = convertView.findViewById(R.id.rawView_tv_amt);
-            TextView poor_per = convertView.findViewById(R.id.rawView_tv_amt);
+            TextView cust_nm = convertView.findViewById(R.id.moniter_tv_custNm);
+            TextView inst_date = convertView.findViewById(R.id.moniter_tv_ordDate);
+            TextView deli_date = convertView.findViewById(R.id.moniter_tv_delDate);
+            TextView item_nm = convertView.findViewById(R.id.moniter_tv_itemNm);
+            TextView flow_count = convertView.findViewById(R.id.moniter_tv_workAmt);
+            TextView inst_amt = convertView.findViewById(R.id.moniter_tv_ordAmt);
+            TextView processing = convertView.findViewById(R.id.moniter_tv_workStep);
+            TextView input_Date = convertView.findViewById(R.id.moniter_tv_prodDate);
+            TextView input_amt = convertView.findViewById(R.id.moniter_tv_inpAmt);
+            TextView poor_amt = convertView.findViewById(R.id.moniter_tv_faultyAmt);
+            TextView poor_per = convertView.findViewById(R.id.moniter_tv_faultyRate);
 
 
-            cust_cd.setText(moniteringVo.getCust_cd()); //
             cust_nm.setText(moniteringVo.getCust_nm()); //
-            inst_date.setText(moniteringVo.getInst_date()); //
-            deli_date.setText(moniteringVo.getDeli_date());
-            item_cd.setText(moniteringVo.getItem_cd());
             item_nm.setText(moniteringVo.getItem_nm());
-            lot_no.setText(moniteringVo.getLot_no());
-            flow_count.setText(moniteringVo.getFlow_count());
+            deli_date.setText(moniteringVo.getDeli_date());
+            inst_date.setText(moniteringVo.getInst_date()); //
             inst_amt.setText(moniteringVo.getInst_amt());
             processing.setText(moniteringVo.getInst_amt());
+            flow_count.setText(moniteringVo.getFlow_count());
+            input_Date.setText(moniteringVo.getInput_date());
+            input_amt.setText(moniteringVo.getInput_amt());
             poor_amt.setText(moniteringVo.getPoor_amt());
-            input_per.setText(moniteringVo.getInput_per() + "%");
             poor_per.setText(moniteringVo.getPoor_per() + "%");
-
 
         }
         return convertView; // 뷰 객체 반환
     }
-    }
+
 }
