@@ -47,7 +47,9 @@ public class monitoringActivity extends Fragment {
     ArrayList<MoniteringVo> moniteringVoArrayList;
 
 
-    public  monitoringActivity(){}
+    public monitoringActivity() {
+    }
+
     public monitoringActivity(Context context) {
 
         this.context = context;
@@ -59,6 +61,7 @@ public class monitoringActivity extends Fragment {
 
         activity = (MainActivity) getActivity();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,8 +113,8 @@ public class monitoringActivity extends Fragment {
     View.OnClickListener showDate = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-         //   imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
-         //   imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
+            //   imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
+            //   imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
             switch (v.getId()) {
                 case R.id.edit_start_moniter:
 
@@ -129,7 +132,6 @@ public class monitoringActivity extends Fragment {
             }
         }
     };
-
 
 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
@@ -260,8 +262,9 @@ public class monitoringActivity extends Fragment {
                     if (jo.has("POOR_PER"))
                         Poor_per = jo.getString("POOR_PER");
 
-                    moniteringVo = new MoniteringVo(Cust_cd, Cust_nm, Inst_date, Deli_date, Item_cd,
-                            Item_nm, Lot_no, Flow_count, Processing, Inst_amt, Input_amt, Input_date,
+                    moniteringVo = new MoniteringVo(Cust_cd, Cust_nm, Inst_date, Deli_date,
+                            Item_cd, Item_nm, Lot_no, Flow_count,
+                            Inst_amt, Processing, Input_amt, Input_date,
                             Poor_amt, Input_per, Poor_per);
 
                     moniteringAdapter.addItem(moniteringVo);
@@ -276,8 +279,7 @@ public class monitoringActivity extends Fragment {
             System.out.println(e.toString());
             e.printStackTrace();
 
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.toString());
         }
     }
@@ -296,12 +298,12 @@ public class monitoringActivity extends Fragment {
         query.append("         ,(SELECT ITEM_NM FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] WHERE A.ITEM_CD = ITEM_CD) AS ITEM_NM \n");
         query.append("         ,A.LOT_NO \n");
         query.append("         ,(SELECT COUNT(*) FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] WHERE ITEM_CD = A.ITEM_CD) AS FLOW_COUNT \n");
-        query.append("         ,A.INST_AMT AS INST_AMT \n");
+        query.append("         ,CONVERT(INT, A.INST_AMT) AS INST_AMT \n");
         query.append("         ,(CASE WHEN B.LOT_NO IS NULL THEN '공정 미진행' WHEN A.LOT_NO = A.LOT_NO AND A.COMPLETE_YN = 'N' \n");
         query.append("         THEN '공정 진행중' ELSE '공정 완료' END) AS PROCESSING \n");
         query.append("         ,ISNULL(I.INPUT_AMT, 0) AS INPUT_AMT \n");
         query.append("         ,ISNULL(G.INPUT_DATE, '-') AS INPUT_DATE \n");
-        query.append("         ,ISNULL(F.POOR_AMT, 0) AS POOR_MAT \n");
+        query.append("         ,CONVERT(INT, ISNULL(F.POOR_AMT, 0)) AS POOR_AMT \n");
         query.append("         ,CONVERT(INT,ISNULL(I.INPUT_AMT,0)/A.INST_AMT * 100) AS INPUT_PER \n");
         query.append("         ,CONVERT(INT,ISNULL(F.POOR_AMT,0)/A.INST_AMT * 100)  AS POOR_PER \n");
         query.append(" FROM [" + dbInfo.Location + "].[dbo].[F_WORK_INST] A \n");
@@ -318,14 +320,14 @@ public class monitoringActivity extends Fragment {
         query.append(" ON G.LOT_NO = A.LOT_NO \n");
         query.append(" WHERE A.INST_AMT IS NOT NULL and A.INST_AMT > 0 \n");
 
-        if (condition1 != "" && condition2 != "")
+        if (!condition1.equals("") && !condition2.equals(""))
             query.append(" AND B.FLOW_DATE > '" + condition1 + "' AND B.FLOW_DATE < '" + condition2 + "' \n");
-        else if ((condition1 == "" && condition2 != ""))
+        else if ((condition1.equals("") && !condition2.equals("")))
             query.append(" AND B.FLOW_DATE < '" + condition2 + "' \n");
-        else if (condition1 != "" && condition2 == "")
+        else if (!condition1.equals("") && condition2.equals(""))
             query.append(" AND B.FLOW_DATE >  '" + condition2 + "' \n");
-        else if (condition1 == "" && condition2 == "")
-            query.append("");
+        else if (condition1.equals("") && condition2.equals(""))
+            
         query.append(" ORDER BY A.LOT_NO ");
         Jarray = dbInfo.SelectDB(query.toString());
         return Jarray;
