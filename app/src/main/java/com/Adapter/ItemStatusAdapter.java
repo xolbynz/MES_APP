@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.VO.*
+import com.VO.ItemStatusVo;
 import com.example.mes_app.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
