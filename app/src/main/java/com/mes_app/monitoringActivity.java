@@ -222,12 +222,12 @@ public class monitoringActivity extends Fragment {
                     String Lot_no = "";
                     String Flow_count = "";
                     String Processing = "";
-                    String Inst_amt = "";
-                    String Input_amt = "";
+                    String Inst_amt = "0";
+                    String Input_amt = "0";
                     String Input_date = "";
-                    String Poor_amt = "";
-                    String Input_per = "";
-                    String Poor_per = "";
+                    String Poor_amt = "0";
+                    String Input_per = "0";
+                    String Poor_per = "0";
 
                     if (jo.has("CUST_CD")) // Data값이 NULL인 경우 빈값으로 처리
                         Cust_cd = jo.getString("CUST_CD");

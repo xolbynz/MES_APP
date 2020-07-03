@@ -1,5 +1,6 @@
 package com.mes_app;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +35,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class work_viewActivity extends Fragment {
 
     InputMethodManager imm; //키보드 내리기
+    Context context;
     DBInfo dbInfo;
     GridView gv_inst;
     JSONArray JArray;
@@ -54,14 +61,21 @@ public class work_viewActivity extends Fragment {
     TextView et_lineNm;
     GridView gv_instDetail;
 
+    EditText et_start;
+    EditText et_end;
+    ImageButton btn_search;
+
     WorkInstRawVo workInstRawVo;
     WorkInstHalfVo workInstHalfVo;
 
+    int mYear, mMonth, mDay;
 
     public work_viewActivity() {
 
     }
-
+    public work_viewActivity(Context context) {
+this.context= context;
+    }
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
@@ -87,10 +101,32 @@ public class work_viewActivity extends Fragment {
         et_workNm = rootView.findViewById(R.id.workView_et_workNm);
         et_instDate = rootView.findViewById(R.id.workView_et_instDate);
 
+        et_start =rootView.findViewById(R.id.workInst_et_start);
+        et_end =rootView.findViewById(R.id.workInst_et_end);
+        btn_search=rootView.findViewById(R.id.workInst_tv_search);
 
+
+        Calendar cal = new GregorianCalendar();
+
+        mYear = cal.get(Calendar.YEAR);
+
+        mMonth = cal.get(Calendar.MONTH);
+
+        mDay = cal.get(Calendar.DAY_OF_MONTH);
+
+
+        et_start.setOnClickListener(showDate);
+        et_end.setOnClickListener(showDate);
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datebinding();
+            }
+        });
         gv_instDetail = rootView.findViewById(R.id.workInstRaw_gv_detail);
         dbInfo = new DBInfo();
-        datebinding();
+
         return rootView;
     }
 
@@ -147,6 +183,7 @@ public class work_viewActivity extends Fragment {
         }
     }
 
+
     public JSONArray work_inst(JSONArray JSONArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
@@ -178,6 +215,13 @@ public class work_viewActivity extends Fragment {
 
 
         query.append("where 1=1  \n");
+        query.append(condition);
+        if (!et_start.getText().equals("")) {
+            query.append(" and A.W_INST_DATE>='" + et_start.getText() + "' \n");
+        }
+        if (!et_end.getText().equals("")) {
+            query.append(" and A.W_INST_DATE<='" + et_end.getText() + "' \n");
+        }
         query.append("  order by A.W_INST_DATE desc, A.W_INST_CD desc  \n");
         query.append("\n");
         JSONArray = dbInfo.SelectDB(query.toString());
@@ -480,4 +524,86 @@ public class work_viewActivity extends Fragment {
         System.out.println(sb.toString());
         return JSONArray;
     }
+
+    View.OnClickListener showDate = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //   imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
+            //   imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
+            switch (v.getId()) {
+                case R.id.workInst_et_start:
+
+                    new DatePickerDialog(context, listener, mYear,
+
+                            mMonth, mDay).show();
+                    break;
+                case R.id.workInst_et_end:
+
+                    new DatePickerDialog(context, listener2, mYear,
+
+                            mMonth, mDay).show();
+                    break;
+
+            }
+        }
+    };
+
+    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            mYear = year;
+
+            mMonth = month + 1;
+
+            mDay = dayOfMonth;
+            String m_Month = String.valueOf(mMonth);
+            if (mMonth < 10) {
+                m_Month = "0" + mMonth;
+            }
+            String m_Day = String.valueOf(mDay);
+
+            if (mDay < 10) {
+                m_Day = "0" + mDay;
+            }
+
+            String selectedDate = year + "-" + m_Month + "-" + m_Day;
+            et_start.setText(selectedDate);
+
+
+        }
+
+
+    };
+
+    private DatePickerDialog.OnDateSetListener listener2 = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+            mYear = year;
+
+            mMonth = month + 1;
+
+            mDay = dayOfMonth;
+
+
+            String m_Month = String.valueOf(mMonth);
+            if (mMonth < 10) {
+                m_Month = "0" + mMonth;
+            }
+            String m_Day = String.valueOf(mDay);
+
+            if (mDay < 10) {
+                m_Day = "0" + mDay;
+            }
+
+            String selectedDate = year + "-" + m_Month + "-" + m_Day;
+            et_end.setText(selectedDate);
+
+
+        }
+
+
+    };
 }

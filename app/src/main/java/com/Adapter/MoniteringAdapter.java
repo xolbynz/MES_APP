@@ -68,7 +68,7 @@ public class MoniteringAdapter extends BaseAdapter {
             deli_date.setText(moniteringVo.getDeli_date());
             inst_date.setText(moniteringVo.getInst_date()); //
             inst_amt.setText(moniteringVo.getInst_amt());
-            processing.setText(moniteringVo.getInst_amt());
+            processing.setText(moniteringVo.getProcessing());
             flow_count.setText(moniteringVo.getFlow_count());
             input_Date.setText(moniteringVo.getInput_date());
             input_amt.setText(moniteringVo.getInput_amt());

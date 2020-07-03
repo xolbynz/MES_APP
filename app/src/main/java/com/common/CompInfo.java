@@ -2,20 +2,41 @@ package com.common;
 
 public  class CompInfo {
 
-    private static String COM_SAPU_NO = "";
-    private String COM_LOCATION = "";
-    private String COMPANY_NM = "";
-    private String SP_CODE = "";
-    private String PACK_GUBUN = "";
-    private static String COM_LOOG="";
+    static public  String COM_SAPU_NO = "";
+   static public String COM_LOCATION = "";
+   static public String COMPANY_NM = "";
+   static public String SP_CODE = "";
+   static public String PACK_GUBUN = "";
+    static public String COM_LOGO="";
+    static public  String STAFF_NM="";
 
-    public String getCOM_LOOG() {
-        return COM_LOOG;
+    public static String getComSapuNo() {
+        return COM_SAPU_NO;
     }
 
-    public void setCOM_LOOG(String COM_LOOG) {
-        this.COM_LOOG = COM_LOOG;
+    public static String getComLogo() {
+        return COM_LOGO;
     }
+
+    public static void setComLogo(String comLogo) {
+        COM_LOGO = comLogo;
+    }
+
+    public static void setComSapuNo(String comSapuNo) {
+        COM_SAPU_NO = comSapuNo;
+    }
+
+
+
+    public String getSTAFF_NM() {
+        return STAFF_NM;
+    }
+
+    public void setSTAFF_NM(String STAFF_NM) {
+        this.STAFF_NM = STAFF_NM;
+    }
+
+
 
     public CompInfo(){
 

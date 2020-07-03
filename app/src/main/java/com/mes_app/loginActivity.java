@@ -119,6 +119,7 @@ public class loginActivity extends AppCompatActivity {
 
                 if (getcompinfo(Saup_No.getText().toString(), Id.getText().toString(), Pw.getText().toString()) == true) {
 
+                    Toast.makeText(getApplicationContext(), compInfo.getSTAFF_NM()+"("+ compInfo.getCOMPANY_NM()+") LOGIN", Toast.LENGTH_SHORT).show();
                     PreferenceManager.setString(mContext, "saupNo", Saup_No.getText().toString());// 사업자번호 저장
                     Intent intent = new Intent(loginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -245,7 +246,8 @@ System.out.println(query);
                     compInfo.setPACK_GUBUN(rs.getString(4));
 
 
-                    compInfo.setCOM_LOOG(rs.getString("SAUP_LOGO"));
+                    compInfo.setComLogo(rs.getString("SAUP_LOGO"));
+compInfo.setSTAFF_NM(rs2.getString("STAFF_NM"));
 //                    dbInfo.mainConn.close();
                     return true;
                 } else {

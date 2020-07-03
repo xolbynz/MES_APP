@@ -136,6 +136,48 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
+                <EditText
+                    android:id="@+id/workInst_et_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:inputType="date"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+                    app:layout_constraintStart_toEndOf="@+id/txt_work"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/workInst_et_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginLeft="31dp"
+                    android:ems="10"
+                    android:focusableInTouchMode="false"
+                    android:inputType="date"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/workInst_et_start"
+                    app:layout_constraintStart_toEndOf="@+id/workInst_et_start"
+                    app:layout_constraintTop_toTopOf="@+id/workInst_et_start" />
+
+                <ImageButton
+                    android:id="@+id/workInst_tv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/workInst_et_end"
+                    app:layout_constraintStart_toEndOf="@+id/workInst_et_end"
+                    app:layout_constraintTop_toTopOf="@+id/workInst_et_end"
+                    app:srcCompat="@drawable/search2blue" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

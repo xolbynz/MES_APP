@@ -7,5 +7,4 @@
         android:title="LOG OUT"
         app:showAsAction="always|withText" />
 
-
 </menu>

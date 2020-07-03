@@ -2,7 +2,10 @@ package com.mes_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,11 +24,13 @@ import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
 
+import java.nio.ByteBuffer;
+
 public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
     raw_inputActivity frag_raw_input = new raw_inputActivity(this);
-    work_viewActivity frag_work_view = new work_viewActivity();
+    work_viewActivity frag_work_view = new work_viewActivity(this);
     work_processActivity frag_work_process = new work_processActivity();
     stock_statusActivity frag_stock_status = new stock_statusActivity(this);
     monitoringActivity frag_monMonitoring = new monitoringActivity(this);
@@ -72,21 +77,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //dg
         //jg
-        getSupportActionBar().setTitle("TEST회사MES");
+        getSupportActionBar().setTitle(compInfo.STAFF_NM+"("+compInfo.COMPANY_NM+")");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF339999));
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로가기 버튼
-
-//byte[] bytes = compInfo.getCOM_LOOG().getBytes();
-//
-//        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//
-//
-//        ImageView image = (ImageView) findViewById(R.id.image_saup);
-//
-//        image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(),
-//                image.getHeight(), false));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
+
+
+byte[] bytes = compInfo.COM_LOGO.getBytes();
+
+//        YuvImage yuvimage=new YuvImage(bytes, ImageFormat.NV21, 100, 100, null);
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        yuvimage.compressToJpeg(new Rect(0, 0, 100, 100), 80, baos);
+//        byte[] jdata = baos.toByteArray();
+////
+//       Bitmap bmp = BitmapFactory.decodeByteArray(jdata, 0, jdata.length);
+//        System.out.println("Bitmap Name 3" + bmp);
+
+
+
+//
+//
+//        Drawable drawable= new BitmapDrawable(bmp);
+//
+//
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.sf_logo_);
+//        getSupportActionBar().setHomeAsUpIndicator(drawable);
+
+
+
+        Bitmap bmp2 = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        bmp2.copyPixelsFromBuffer(buffer);
+        Drawable drawable= new BitmapDrawable(bmp2);
+        getSupportActionBar().setHomeAsUpIndicator(drawable);
         tab1 = (Button) findViewById(R.id.btn_rawmenu);
         tab2 = (Button) findViewById(R.id.btn_workmenu);
         tab3 = (Button) findViewById(R.id.btn_itemmenu);
