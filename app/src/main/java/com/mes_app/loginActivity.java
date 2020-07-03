@@ -246,7 +246,13 @@ System.out.println(query);
                     compInfo.setPACK_GUBUN(rs.getString(4));
 
 
-                    compInfo.setComLogo(rs.getString("SAUP_LOGO"));
+                   try {
+                       compInfo.setComLogo(rs.getString("SAUP_LOGO"));
+
+                   }
+                   catch (Exception ex){
+                       System.out.println(ex.toString());
+                   }
 compInfo.setSTAFF_NM(rs2.getString("STAFF_NM"));
 //                    dbInfo.mainConn.close();
                     return true;

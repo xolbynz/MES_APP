@@ -2,10 +2,7 @@ package com.mes_app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-
-import java.nio.ByteBuffer;
 
 public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
@@ -105,18 +100,18 @@ byte[] bytes = compInfo.COM_LOGO.getBytes();
 //        getSupportActionBar().setHomeAsUpIndicator(R.drawable.sf_logo_);
 //        getSupportActionBar().setHomeAsUpIndicator(drawable);
 
-
-try {
-    Bitmap bmp2 = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
-    ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    bmp2.copyPixelsFromBuffer(buffer);
-    Drawable drawable = new BitmapDrawable(bmp2);
-    getSupportActionBar().setHomeAsUpIndicator(drawable);
-}
-catch (Exception ex)
-{
-    System.out.println(ex.toString());
-}
+//
+//try {
+//    Bitmap bmp2 = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
+//    ByteBuffer buffer = ByteBuffer.wrap(bytes);
+//    bmp2.copyPixelsFromBuffer(buffer);
+//    Drawable drawable = new BitmapDrawable(bmp2);
+//    getSupportActionBar().setHomeAsUpIndicator(drawable);
+//}
+//catch (Exception ex)
+//{
+//    System.out.println(ex.toString());
+//}
         tab1 = (Button) findViewById(R.id.btn_rawmenu);
         tab2 = (Button) findViewById(R.id.btn_workmenu);
         tab3 = (Button) findViewById(R.id.btn_itemmenu);
