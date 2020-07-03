@@ -2,6 +2,8 @@ package com.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +30,13 @@ public class RawInputAdapter extends BaseAdapter {
     TextView spec;
     TextView order_amt;
     TextView orderNon_amt;
-    public EditText input_amt;
+    EditText input_amt;
+
+    int position;
 
     public void addItem(OrderVo orderVo) {
         arrayList.add(orderVo);
+
     }
 
     @Override
@@ -50,10 +55,11 @@ public class RawInputAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
         orderVo = arrayList.get(position);
+        this.position = position;
 
         if (convertView == null) {
             LayoutInflater infaInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -73,12 +79,39 @@ public class RawInputAdapter extends BaseAdapter {
             order_amt.setText(orderVo.getOrder_Amt());
             spec.setText(orderVo.getSpec());
             orderNon_amt.setText(orderVo.getInput_NeedAmt());
-            input_amt.setText("");
+            input_amt.setText(orderVo.getTemp_amt());
+
+
+            input_amt.addTextChangedListener(new TextWatcher() {
+
+
+                @Override
+
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    // 입력되는 텍스트에 변화가 있을 때
+                }
+
+                @Override public void afterTextChanged(Editable arg0) {
+
+                    // 입력이 끝났을 때
+//                    orderVo.setTemp_amt(input_amt.getText().toString());
+//                    String yy = input_amt.getText().toString();
+//                    arrayList.set(position , orderVo);
+                }
+
+                @Override
+
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // 입력하기 전에
+
+                }
+
+            });
         }
         return convertView;
     }
 
-    public String getInsert_Amt(int position){
-        return input_amt.getText().toString();
-    }
+
 }

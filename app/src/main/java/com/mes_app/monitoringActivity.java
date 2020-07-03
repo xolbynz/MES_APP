@@ -327,7 +327,7 @@ public class monitoringActivity extends Fragment {
         else if (!condition1.equals("") && condition2.equals(""))
             query.append(" AND B.FLOW_DATE >  '" + condition2 + "' \n");
         else if (condition1.equals("") && condition2.equals(""))
-            
+
         query.append(" ORDER BY A.LOT_NO ");
         Jarray = dbInfo.SelectDB(query.toString());
         return Jarray;

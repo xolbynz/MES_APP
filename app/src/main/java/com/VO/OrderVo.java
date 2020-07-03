@@ -20,9 +20,9 @@ public class OrderVo {
     String TotalMoney;
     String Check;
     String Check_Yn;
-    String Order_Amt;
-    String Input_Amt;
-    String Input_NeedAmt;
+    String Order_Amt; // 주문량
+    String Input_Amt; // 생산량
+    String Input_NeedAmt; // 미입고량
     String Storage;
 
     public OrderVo() {

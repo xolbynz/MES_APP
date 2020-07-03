@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,6 +107,7 @@ public class raw_inputActivity extends Fragment {
 //                }
 //            }
 //        });
+
 
         return rootView;
     }
@@ -286,7 +289,7 @@ public class raw_inputActivity extends Fragment {
         public void onClick(View v) {
 
             int position = gridView.getAdapter().getCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
-            
+
             for (int i = 0; i <= position - 1; i++) {
 
                 orderVo = null; // 초기화
@@ -295,7 +298,8 @@ public class raw_inputActivity extends Fragment {
                 String Raw_mat_cd = orderVo.getRawmat_Cd();
                 String Spec = orderVo.getSpec();
                 String Unit_cd = orderVo.getUnit_cd();
-                String Temp_amt = rawInputAdapter.input_amt.getText().toString();
+                EditText child = (EditText) gridView.getChildAt(i).findViewById(R.id.rawView_et_inpAmt);
+                String Temp_amt = child.getText().toString();
 
                 String Total_amt = "";
                 String Curr_amt = "";
@@ -314,11 +318,8 @@ public class raw_inputActivity extends Fragment {
                 String Loc_cd = "";
                 String Loc_nm = "";
 
-
             }
         }
 
     };
-
-
 }
