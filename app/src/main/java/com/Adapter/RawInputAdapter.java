@@ -46,7 +46,7 @@ public class RawInputAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -78,16 +78,7 @@ public class RawInputAdapter extends BaseAdapter {
         return convertView;
     }
 
-
-    EditText.OnKeyListener onKeyListener = new View.OnKeyListener() {
-        @Override
-        public boolean onKey(View v, int keyCode, KeyEvent event) {
-            if ((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
-
-            }
-            return false;
-        }
-    };
-
-
+    public String getInsert_Amt(int position){
+        return input_amt.getText().toString();
+    }
 }

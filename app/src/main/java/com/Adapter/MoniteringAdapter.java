@@ -62,7 +62,6 @@ public class MoniteringAdapter extends BaseAdapter {
             TextView poor_amt = convertView.findViewById(R.id.moniter_tv_faultyAmt);
             TextView poor_per = convertView.findViewById(R.id.moniter_tv_faultyRate);
 
-
             cust_nm.setText(moniteringVo.getCust_nm()); //
             item_nm.setText(moniteringVo.getItem_nm());
             deli_date.setText(moniteringVo.getDeli_date());

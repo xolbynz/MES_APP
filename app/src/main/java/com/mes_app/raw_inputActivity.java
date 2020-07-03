@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class raw_inputActivity extends Fragment {
 
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
         btn_input = rootView.findViewById(R.id.btn_input);
-        btn_input.setOnClickListener(showDialog);
+        btn_input.setOnClickListener(btnInputClick);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
@@ -196,8 +197,7 @@ public class raw_inputActivity extends Fragment {
                     rawInputAdapter.addItem(orderVo);
                 }
                 gridView.setAdapter(rawInputAdapter);
-            }
-            else{
+            } else {
                 Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
             }
 
@@ -266,7 +266,7 @@ public class raw_inputActivity extends Fragment {
         query.append("ORDER BY X.CUST_CD, A.ORDER_DATE desc, A.ORDER_CD desc, B.SEQ desc \n");
 
         JSONArray = dbInfo.SelectDB(query.toString());
-        System.out.println("쿼리: \n"+query.toString());
+        System.out.println("쿼리: \n" + query.toString());
         return JSONArray;
     }
 
@@ -285,8 +285,9 @@ public class raw_inputActivity extends Fragment {
         @Override
         public void onClick(View v) {
 
-            int position = rawInputAdapter.getCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
-            for(int i = 0; i <= position-1; i++) {
+            int position = gridView.getAdapter().getCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
+            
+            for (int i = 0; i <= position - 1; i++) {
 
                 orderVo = null; // 초기화
                 orderVo = (OrderVo) rawInputAdapter.getItem(i);
@@ -312,11 +313,12 @@ public class raw_inputActivity extends Fragment {
                 String Storage_cd = "";
                 String Loc_cd = "";
                 String Loc_nm = "";
+
+
             }
         }
 
     };
-
 
 
 }
