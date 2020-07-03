@@ -106,12 +106,17 @@ byte[] bytes = compInfo.COM_LOGO.getBytes();
 //        getSupportActionBar().setHomeAsUpIndicator(drawable);
 
 
-
-        Bitmap bmp2 = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
-        ByteBuffer buffer = ByteBuffer.wrap(bytes);
-        bmp2.copyPixelsFromBuffer(buffer);
-        Drawable drawable= new BitmapDrawable(bmp2);
-        getSupportActionBar().setHomeAsUpIndicator(drawable);
+try {
+    Bitmap bmp2 = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
+    ByteBuffer buffer = ByteBuffer.wrap(bytes);
+    bmp2.copyPixelsFromBuffer(buffer);
+    Drawable drawable = new BitmapDrawable(bmp2);
+    getSupportActionBar().setHomeAsUpIndicator(drawable);
+}
+catch (Exception ex)
+{
+    System.out.println(ex.toString());
+}
         tab1 = (Button) findViewById(R.id.btn_rawmenu);
         tab2 = (Button) findViewById(R.id.btn_workmenu);
         tab3 = (Button) findViewById(R.id.btn_itemmenu);

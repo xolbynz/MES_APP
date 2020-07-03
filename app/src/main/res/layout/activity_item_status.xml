@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextDate"
+                android:id="@+id/itemStatus_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextDate2"
+                android:id="@+id/itemStatus_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -59,9 +59,9 @@
                 android:ems="10"
                 android:inputType="date"
                 android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextDate"
+                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_start"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/editTextDate" />
+                app:layout_constraintTop_toTopOf="@+id/itemStatus_start" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -70,19 +70,19 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:text="~"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextDate"
-                app:layout_constraintStart_toEndOf="@+id/editTextDate"
-                app:layout_constraintTop_toTopOf="@+id/editTextDate" />
+                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_start"
+                app:layout_constraintStart_toEndOf="@+id/itemStatus_start"
+                app:layout_constraintTop_toTopOf="@+id/itemStatus_start" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/itemStatus_btn_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextDate2"
-                app:layout_constraintStart_toEndOf="@+id/editTextDate2"
-                app:layout_constraintTop_toTopOf="@+id/editTextDate2"
+                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_end"
+                app:layout_constraintStart_toEndOf="@+id/itemStatus_end"
+                app:layout_constraintTop_toTopOf="@+id/itemStatus_end"
                 app:srcCompat="@drawable/search2blue" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
