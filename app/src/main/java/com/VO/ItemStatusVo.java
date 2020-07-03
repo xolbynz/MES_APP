@@ -1,6 +1,6 @@
 package com.VO;
 
-public class itemStatusVo {
+public class ItemStatusVo {
 
     String itemNm;
     String spec;
@@ -8,7 +8,8 @@ public class itemStatusVo {
     String faultyAmt;
     String Amt;
 
-    public itemStatusVo(String itemNm, String spec, String pstvAmt, String faultyAmt, String amt) {
+    public ItemStatusVo(){}
+    public ItemStatusVo(String itemNm, String spec, String pstvAmt, String faultyAmt, String amt) {
         this.itemNm = itemNm;
         this.spec = spec;
         this.pstvAmt = pstvAmt;
