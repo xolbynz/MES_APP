@@ -35,55 +35,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/itemStatus_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="25dp"
-                android:ems="10"
-                android:inputType="date"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/itemStatus_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:ems="10"
-                android:inputType="date"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_start"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/itemStatus_start" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:text="~"
-                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_start"
-                app:layout_constraintStart_toEndOf="@+id/itemStatus_start"
-                app:layout_constraintTop_toTopOf="@+id/itemStatus_start" />
-
             <ImageButton
                 android:id="@+id/itemStatus_btn_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_end"
-                app:layout_constraintStart_toEndOf="@+id/itemStatus_end"
-                app:layout_constraintTop_toTopOf="@+id/itemStatus_end"
+                android:layout_marginStart="63dp"
+                android:layout_marginLeft="63dp"
+                app:layout_constraintBottom_toBottomOf="@+id/itemStatus_et_item"
+                app:layout_constraintStart_toEndOf="@+id/itemStatus_et_item"
+                app:layout_constraintTop_toTopOf="@+id/itemStatus_et_item"
                 app:srcCompat="@drawable/search2blue" />
+
+            <EditText
+                android:id="@+id/itemStatus_et_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginLeft="23dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,18 +64,16 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout5"
+                android:id="@+id/constraintLayout6"
                 android:layout_width="1145dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/_dynamic"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="@+id/itemStatus_gv"
                 app:layout_constraintStart_toStartOf="@+id/itemStatus_gv"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/itemStatus_tv_itemNm"
-                    android:layout_width="300dp"
+                    android:layout_width="340dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
@@ -130,7 +101,7 @@
 
                 <TextView
                     android:id="@+id/itemStatus_tv_positive"
-                    android:layout_width="200dp"
+                    android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
@@ -143,7 +114,7 @@
 
                 <TextView
                     android:id="@+id/itemStatus_tv_faulty"
-                    android:layout_width="200dp"
+                    android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
@@ -157,7 +128,7 @@
 
                 <TextView
                     android:id="@+id/itemStatus_tv_amt"
-                    android:layout_width="200dp"
+                    android:layout_width="180dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
@@ -168,6 +139,20 @@
                     app:layout_constraintStart_toEndOf="@+id/itemStatus_tv_faulty"
                     app:layout_constraintTop_toTopOf="@+id/itemStatus_tv_itemNm"
                     app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/itemStatus_tv_unit"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:gravity="center"
+                    android:text="단위"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/itemStatus_tv_amt"
+                    app:layout_constraintTop_toTopOf="@+id/itemStatus_tv_itemNm"
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <GridView
@@ -176,7 +161,7 @@
                 android:layout_height="423dp"
                 android:layout_marginStart="53dp"
                 android:layout_marginLeft="53dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="81dp"
                 android:layout_marginRight="81dp"
                 android:layout_marginBottom="36dp"
@@ -184,8 +169,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

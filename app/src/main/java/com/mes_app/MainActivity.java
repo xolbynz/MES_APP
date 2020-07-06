@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     stock_statusActivity frag_stock_status = new stock_statusActivity(this);
     monitoringActivity frag_monMonitoring = new monitoringActivity(this);
 
+    item_statusActivity frag_itemStatus = new item_statusActivity(this);
+item_trackingActivity frag_itemTracking = new item_trackingActivity(this);
     Button tab1;//메뉴바
     Button tab2;
     Button tab3;
@@ -258,6 +260,34 @@ byte[] bytes = compInfo.COM_LOGO.getBytes();
 
                             break;
 
+
+                        case R.id.menu_item2: // 제품재고현황
+
+
+                            try {
+
+                                replaceFragment(frag_itemStatus);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
+
+                        case R.id.menu_item3: // 제품추적조회
+
+
+                            try {
+
+                                replaceFragment(frag_itemTracking);
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
 
                     }
                     return true;

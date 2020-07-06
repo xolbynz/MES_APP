@@ -7,15 +7,27 @@ public class ItemStatusVo {
     String pstvAmt;
     String faultyAmt;
     String Amt;
+    String unitNm;
 
-    public ItemStatusVo(){}
-    public ItemStatusVo(String itemNm, String spec, String pstvAmt, String faultyAmt, String amt) {
+    public ItemStatusVo(String itemNm, String spec, String pstvAmt, String faultyAmt, String amt, String unitNm) {
         this.itemNm = itemNm;
         this.spec = spec;
         this.pstvAmt = pstvAmt;
         this.faultyAmt = faultyAmt;
-        this.Amt = amt;
+        Amt = amt;
+        this.unitNm = unitNm;
     }
+
+    public String getUnitNm() {
+        return unitNm;
+    }
+
+    public void setUnitNm(String unitNm) {
+        this.unitNm = unitNm;
+    }
+
+    public ItemStatusVo(){}
+
 
     public String getItemNm() {
         return itemNm;

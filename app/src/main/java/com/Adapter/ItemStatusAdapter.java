@@ -53,6 +53,7 @@ public class ItemStatusAdapter extends BaseAdapter {
             TextView positive= convertView.findViewById(R.id.itemStatus_tv_positive);
             TextView faulty= convertView.findViewById(R.id.itemStatus_tv_faulty);
             TextView amt= convertView.findViewById(R.id.itemStatus_tv_amt);
+            TextView unit = convertView.findViewById(R.id.itemStatus_tv_unit);
 
 
             itemNm.setText(itemStatusVo.getItemNm());
@@ -60,6 +61,7 @@ public class ItemStatusAdapter extends BaseAdapter {
             positive.setText(itemStatusVo.getPstvAmt());
             faulty.setText(itemStatusVo.getFaultyAmt());
             amt.setText(itemStatusVo.getAmt());
+            unit.setText(itemStatusVo.getUnitNm());
         }
         return convertView;
     }

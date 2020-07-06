@@ -1,24 +1,30 @@
 package com.mes_app;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.Adapter.ItemStatusAdapter;
+import com.VO.ItemStatusVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -29,10 +35,10 @@ public class item_statusActivity extends Fragment {
     DBInfo dbInfo;
     ViewGroup rootView;
     InputMethodManager imm;
-    EditText et_start;
-    EditText et_end;
+EditText et_item;
+    JSONArray jsonArray;
+    ItemStatusVo itemStatusVo;
 
-    int mYear, mMonth, mDay;
     GridView gridView;
     ImageButton btn_search;
     public  item_statusActivity(){}
@@ -58,109 +64,104 @@ public class item_statusActivity extends Fragment {
         gridView=rootView.findViewById(R.id.itemStatus_gv);
         btn_search=rootView.findViewById(R.id.itemStatus_btn_search);
 
-        et_end= rootView.findViewById(R.id.itemStatus_start);
-        et_start=rootView.findViewById(R.id.itemStatus_end);
+        et_item=rootView.findViewById(R.id.itemStatus_et_item);
         btn_search.setOnClickListener(btn_SearchClick);
-        et_end.setOnClickListener(showDate);
-        et_start.setOnClickListener(showDate);
         Calendar cal = new GregorianCalendar();
 
-        mYear = cal.get(Calendar.YEAR);
 
-        mMonth = cal.get(Calendar.MONTH);
 
-        mDay = cal.get(Calendar.DAY_OF_MONTH);
+        datebind();
         return rootView;
     }
 
    View.OnClickListener btn_SearchClick = new View.OnClickListener() {
        @Override
        public void onClick(View v) {
-
+           datebind();
        }
    };
 
-    View.OnClickListener showDate = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //   imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
-            //   imm.hideSoftInputFromWindow(edit_endDate.getWindowToken(), 0);
-            switch (v.getId()) {
-                case R.id.itemStatus_start:
 
-                    new DatePickerDialog(context, listener, mYear,
 
-                            mMonth, mDay).show();
-                    break;
-                case R.id.itemStatus_end:
 
-                    new DatePickerDialog(context, listener2, mYear,
 
-                            mMonth, mDay).show();
-                    break;
+    public  void datebind(){
+        try {
 
+            jsonArray = null;
+            jsonArray = item_status(jsonArray,"and A.ITEM_NM LIKE '%"+et_item.getText()+"%' ");
+
+            if (jsonArray.length() != 0) {
+
+                final ItemStatusAdapter itemStatusAdapter = new ItemStatusAdapter();
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jo = jsonArray.getJSONObject(i);
+
+                    String ITEM_NM = "";
+                    String SPEC = "";
+                    String PROP_STOCK = "0";
+                    String BAL_STOCK = "0";
+                    String POOR_AMT = "0";
+                    String UNIT_NM = "";
+
+
+                    if (jo.has("ITEM_NM")) // Data값이 NULL인 경우 빈값으로 처리
+                        ITEM_NM = jo.getString("ITEM_NM");
+                    if (jo.has("SPEC")) // Data값이 NULL인 경우 빈값으로 처리
+                        SPEC = jo.getString("SPEC");
+
+                    if (jo.has("PROP_STOCK")) // Data값이 NULL인 경우 빈값으로 처리
+                        PROP_STOCK = jo.getString("PROP_STOCK");
+                    if (jo.has("BAL_STOCK")) // Data값이 NULL인 경우 빈값으로 처리
+                        BAL_STOCK = jo.getString("BAL_STOCK");
+                    if (jo.has("POOR_AMT")) // Data값이 NULL인 경우 빈값으로 처리
+                        POOR_AMT = jo.getString("POOR_AMT");
+
+                    if (jo.has("UNIT_NM")) // Data값이 NULL인 경우 빈값으로 처리
+                        UNIT_NM = jo.getString("UNIT_NM");
+
+
+itemStatusVo = new ItemStatusVo(ITEM_NM,SPEC,PROP_STOCK,POOR_AMT,BAL_STOCK,UNIT_NM);
+                   itemStatusAdapter.addItem(itemStatusVo);
+                }
+                gridView.setAdapter(itemStatusAdapter);
+
+            } else {
+                Toast.makeText(context, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                gridView.setAdapter(null);
             }
+        } catch (SQLException | JSONException e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
-    };
+    }
+
+    private JSONArray item_status(JSONArray Jarray, String condition) throws SQLException, JSONException {
 
 
+        StringBuilder sb = new StringBuilder();
 
-    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+        sb.append("     select A.ITEM_CD, A.ITEM_NM, A.SPEC,      ");
+        sb.append("     convert(int,isnull(A.BASIC_STOCK,0)) as BASIC_STOCK,       ");
+        sb.append("     convert(int,isnull(A.BAL_STOCK,0)) as BAL_STOCK,     ");
+        sb.append("     convert(int,isnull(A.PROP_STOCK,0)) as PROP_STOCK,     ");
+        sb.append("     convert(int,ISNULL(SUM(C.POOR_AMT),0)) AS POOR_AMT,     ");
+        sb.append("      (SELECT UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE UNIT_CD = A.UNIT_CD) AS UNIT_NM,     ");
+        sb.append("      A.ITEM_GUBUN     ");
+        sb.append("     from [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] A     ");
+        sb.append("     left outer join [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] B ON A.ITEM_CD = B.ITEM_CD     ");
+        sb.append("     left outer join [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] C ON B.LOT_NO = C.LOT_NO     ");
+        sb.append("      WHERE 1=1   ");
+        sb.append(condition);
+        sb.append("     group by A.ITEM_CD ,A.ITEM_NM, A.SPEC, BASIC_STOCK,  BAL_STOCK, PROP_STOCK ,UNIT_CD,ITEM_GUBUN ");
+        sb.append("     order by A.ITEM_CD     ");
 
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            mYear = year;
-
-            mMonth = month + 1;
-
-            mDay = dayOfMonth;
-            String m_Month = String.valueOf(mMonth);
-            if (mMonth < 10) {
-                m_Month = "0" + mMonth;
-            }
-            String m_Day = String.valueOf(mDay);
-
-            if (mDay < 10) {
-                m_Day = "0" + mDay;
-            }
-
-            String selectedDate = year + "-" + m_Month + "-" + m_Day;
-            et_start.setText(selectedDate);
-
-
-        }
-
-
-    };
-
-    private DatePickerDialog.OnDateSetListener listener2 = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-            mYear = year;
-
-            mMonth = month + 1;
-
-            mDay = dayOfMonth;
-
-
-            String m_Month = String.valueOf(mMonth);
-            if (mMonth < 10) {
-                m_Month = "0" + mMonth;
-            }
-            String m_Day = String.valueOf(mDay);
-
-            if (mDay < 10) {
-                m_Day = "0" + mDay;
-            }
-
-            String selectedDate = year + "-" + m_Month + "-" + m_Day;
-            et_end.setText(selectedDate);
-
-
-        }
-
-
-    };
+        Jarray = dbInfo.SelectDB(sb.toString());
+        return Jarray;
+    }
 }
