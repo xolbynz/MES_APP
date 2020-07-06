@@ -304,6 +304,32 @@ byte[] bytes = compInfo.COM_LOGO.getBytes();
 
                             break;
 
+                        case R.id.menu_setting1: // 로그아웃
+
+                            try {
+
+
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
+
+                        case R.id.menu_setting2: // 이용약관관
+
+                           try {
+
+
+                            } catch (Exception ex) {
+
+                                System.out.println(ex.toString());
+                            }
+
+
+                            break;
+
                     }
                     return true;
                 }
