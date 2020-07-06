@@ -1,11 +1,14 @@
 package com.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -76,6 +79,7 @@ public class RawInputAdapter extends BaseAdapter {
             order_amt.setText(orderVo.getOrder_Amt());
             spec.setText(orderVo.getSpec());
             orderNon_amt.setText(orderVo.getInput_NeedAmt());
+            input_amt.setText(orderVo.getTemp_amt());
 
 
             input_amt.addTextChangedListener(new TextWatcher() {

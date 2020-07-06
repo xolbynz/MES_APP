@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.Adapter.RawInputAdapter;
@@ -48,7 +50,9 @@ public class raw_inputActivity extends Fragment {
     OrderVo orderVo;
     RawInputAdapter rawInputAdapter;
     ArrayList<OrderVo> OrderVoArrayList;
+    ConstraintLayout Layout_Main;
 
+    InputMethodManager imm;
 
     public raw_inputActivity() {
         dbInfo = new DBInfo();
@@ -91,11 +95,13 @@ public class raw_inputActivity extends Fragment {
         dbInfo = new DBInfo();
 
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
+        Layout_Main = rootView.findViewById(R.id.RawInput_Main);
         btn_input = rootView.findViewById(R.id.btn_input);
         btn_input.setOnClickListener(btnInputClick);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
+        Layout_Main.setOnClickListener(myClickListener);
 
         Input_Order_Detail();
 
@@ -288,9 +294,9 @@ public class raw_inputActivity extends Fragment {
         @Override
         public void onClick(View v) {
 
-            int position = gridView.getAdapter().getCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
+            int position = gridView.getChildCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
 
-            for (int i = 0; i <= position - 1; i++) {
+            for (int i = 0; i <= position; i++) {
 
                 orderVo = null; // 초기화
                 orderVo = (OrderVo) rawInputAdapter.getItem(i);
@@ -322,4 +328,14 @@ public class raw_inputActivity extends Fragment {
         }
 
     };
+
+    View.OnClickListener myClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) { // 키보드 내리기
+            imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0 );
+        }
+    };
+
+
 }

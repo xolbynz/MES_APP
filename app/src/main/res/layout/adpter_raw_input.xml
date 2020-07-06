@@ -110,8 +110,10 @@
         android:layout_marginLeft="2dp"
         android:background="#818181"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textColor="#FBFBFB"
+        android:digits="0123456789"
+
         app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_nonInpAmt"
         app:layout_constraintStart_toEndOf="@+id/rawView_tv_nonInpAmt"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_nonInpAmt"
