@@ -105,15 +105,6 @@ public class raw_inputActivity extends Fragment {
 
         Input_Order_Detail();
 
-//        gridView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                for(int i =0; i <= rawInputAdapter.getCount(); i++){
-//                    rawInputAdapter.getItemId(5);
-//                }
-//            }
-//        });
-
 
         return rootView;
     }
@@ -333,7 +324,7 @@ public class raw_inputActivity extends Fragment {
         @Override
         public void onClick(View v) { // 키보드 내리기
             imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0 );
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
     };
 
