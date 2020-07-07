@@ -51,6 +51,7 @@ public class raw_inputActivity extends Fragment {
     RawInputAdapter rawInputAdapter;
     ArrayList<OrderVo> OrderVoArrayList;
     ConstraintLayout Layout_Main;
+    EditText child_text;
 
     InputMethodManager imm;
 
@@ -107,6 +108,8 @@ public class raw_inputActivity extends Fragment {
 
 
         return rootView;
+
+
     }
 
     public void Input_Order_Detail() {
@@ -285,40 +288,40 @@ public class raw_inputActivity extends Fragment {
         @Override
         public void onClick(View v) {
 
-            int position = gridView.getChildCount(); // ArrayList<OrderVo>의 사이즈(행) 반환
-
-            for (int i = 0; i <= position; i++) {
-
-                orderVo = null; // 초기화
-                orderVo = (OrderVo) rawInputAdapter.getItem(i);
-
-                String Raw_mat_cd = orderVo.getRawmat_Cd();
-                String Spec = orderVo.getSpec();
-                String Unit_cd = orderVo.getUnit_cd();
-                EditText child = (EditText) gridView.getChildAt(i).findViewById(R.id.rawView_et_inpAmt);
-                String Temp_amt = child.getText().toString();
-
-                String Total_amt = "";
-                String Curr_amt = "";
-                String Price = "0";
-                String Total_money = "0";
-                String Heat_no = "";
-                String Heat_time = "";
-                String OrderDate = orderVo.getOrder_Date();
-                String Ordercd = orderVo.getOrder_Cd();
-                String OrderSeq = orderVo.getOrder_Seq();
-                String Complete_yn = orderVo.getComplete_Yn();
-                String Instaff = "";
-                String Intime = "";
-                String Comment = "모바일 입고";
-                String Storage_cd = "";
-                String Loc_cd = "";
-                String Loc_nm = "";
-
-            }
+//            int position = gridView.getPositionForView(gridView);
+//
+//            orderVo = null; // 초기화
+////                orderVo = (OrderVo) rawInputAdapter.getItem(i);
+//
+//            String Raw_mat_cd = orderVo.getRawmat_Cd();
+//            String Spec = orderVo.getSpec();
+//            String Unit_cd = orderVo.getUnit_cd();
+//            EditText child = (EditText) gridView.getChildAt(position).findViewById(R.id.rawInp_et_inpAmt);
+//            String Temp_amt = child.getText().toString();
+//
+//            String Total_amt = "";
+//            String Curr_amt = "";
+//            String Price = "0";
+//            String Total_money = "0";
+//            String Heat_no = "";
+//            String Heat_time = "";
+//            String OrderDate = orderVo.getOrder_Date();
+//            String Ordercd = orderVo.getOrder_Cd();
+//            String OrderSeq = orderVo.getOrder_Seq();
+//            String Complete_yn = orderVo.getComplete_Yn();
+//            String Instaff = "";
+//            String Intime = "";
+//            String Comment = "모바일 입고";
+//            String Storage_cd = "";
+//            String Loc_cd = "";
+//            String Loc_nm = "";
+//
+//            Toast.makeText(context, child.getText().toString(), Toast.LENGTH_SHORT).show();
         }
 
     };
+
+
 
     View.OnClickListener myClickListener = new View.OnClickListener() {
         @Override
@@ -327,6 +330,4 @@ public class raw_inputActivity extends Fragment {
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
     };
-
-
 }
