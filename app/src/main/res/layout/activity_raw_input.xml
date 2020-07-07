@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="1016dp"
+        android:layout_width="1156dp"
         android:layout_height="53dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/rawinput_gv"
@@ -124,7 +124,7 @@
 
     <GridView
         android:id="@+id/rawinput_gv"
-        android:layout_width="1009dp"
+        android:layout_width="1156dp"
         android:layout_height="332dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
@@ -134,7 +134,7 @@
 
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 

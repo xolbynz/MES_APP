@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="1016dp"
+    android:layout_width="1156dp"
     android:layout_height="55dp">
 
     <TextView
@@ -116,5 +116,15 @@
         app:layout_constraintStart_toEndOf="@+id/rawView_tv_nonInpAmt"
         app:layout_constraintTop_toTopOf="@+id/rawView_tv_nonInpAmt"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/rawView_btn_input"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:text="입 고 요 청"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rawView_et_inpAmt"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
