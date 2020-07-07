@@ -6,7 +6,7 @@
     android:layout_height="55dp">
 
     <TextView
-        android:id="@+id/rawView_tv_rawNm"
+        android:id="@+id/rawInp_tv_rawNm"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.666" />
 
     <TextView
-        android:id="@+id/rawView_tv_custNm"
+        android:id="@+id/rawInp_tv_custNm"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -34,12 +34,12 @@
         android:text="구매처"
         android:textColor="#FBFBFB"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm" />
+        app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_rawNm"
+        app:layout_constraintTop_toTopOf="@+id/rawInp_tv_rawNm" />
 
     <TextView
-        android:id="@+id/rawView_tv_orderDate"
+        android:id="@+id/rawInp_tv_orderDate"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -49,13 +49,13 @@
         android:text="발주일자"
         android:textColor="#FBFBFB"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_custNm"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_custNm"
+        app:layout_constraintTop_toTopOf="@+id/rawInp_tv_rawNm"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/rawView_tv_spec"
+        android:id="@+id/rawInp_tv_spec"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -65,13 +65,13 @@
         android:text="규격"
         android:textColor="#FBFBFB"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderDate"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_orderDate"
+        app:layout_constraintTop_toTopOf="@+id/rawInp_tv_rawNm"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/rawView_tv_orderAmt"
+        android:id="@+id/rawInp_tv_orderAmt"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -81,13 +81,13 @@
         android:text="발주량"
         android:textColor="#FBFBFB"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_spec"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_spec"
+        app:layout_constraintTop_toTopOf="@+id/rawInp_tv_rawNm"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/rawView_tv_nonInpAmt"
+        android:id="@+id/rawInp_tv_nonInpAmt"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -97,13 +97,13 @@
         android:text="미입고량"
         android:textColor="#FBFBFB"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_rawNm"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_orderAmt"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_rawNm"
+        app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_rawNm"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_orderAmt"
+        app:layout_constraintTop_toTopOf="@+id/rawInp_tv_rawNm"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/rawView_et_inpAmt"
+        android:id="@+id/rawInp_et_inpAmt"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
@@ -114,19 +114,19 @@
         android:textColor="#FBFBFB"
         android:digits="0123456789"
 
-        app:layout_constraintBottom_toBottomOf="@+id/rawView_tv_nonInpAmt"
-        app:layout_constraintStart_toEndOf="@+id/rawView_tv_nonInpAmt"
-        app:layout_constraintTop_toTopOf="@+id/rawView_tv_nonInpAmt"
+        app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_nonInpAmt"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_nonInpAmt"
+        app:layout_constraintTop_toTopOf="@+id/rawInp_tv_nonInpAmt"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/rawView_btn_input"
+        android:id="@+id/rawInp_btn_input"
         android:layout_width="140dp"
         android:layout_height="55dp"
         android:text="입 고 요 청"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rawView_et_inpAmt"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_et_inpAmt"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
