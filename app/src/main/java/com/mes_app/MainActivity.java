@@ -2,7 +2,11 @@ package com.mes_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,12 +25,14 @@ import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
 
+import java.nio.ByteBuffer;
+
 public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
     raw_inputActivity frag_raw_input = new raw_inputActivity(this);
     work_viewActivity frag_work_view = new work_viewActivity(this);
-    work_processActivity frag_work_process = new work_processActivity();
+    work_progressActivity frag_work_process = new work_progressActivity();
     stock_statusActivity frag_stock_status = new stock_statusActivity(this);
     monitoringActivity frag_monMonitoring = new monitoringActivity(this);
     item_releaseActivity frag_itemRleace = new item_releaseActivity(this);
@@ -81,27 +87,27 @@ item_trackingActivity frag_itemTracking = new item_trackingActivity(this);
 
 
 
+if(!compInfo.COM_LOGO.toString().equals("")) {
 
 
-byte[] bytes = compInfo.COM_LOGO.getBytes();
+    byte[] bytes = compInfo.COM_LOGO.getBytes();
+    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    Bitmap bmp = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
+    ByteBuffer buffer = ByteBuffer.wrap(bytes);
+    bmp.copyPixelsFromBuffer(buffer);
 
-//        YuvImage yuvimage=new YuvImage(bytes, ImageFormat.NV21, 100, 100, null);
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        yuvimage.compressToJpeg(new Rect(0, 0, 100, 100), 80, baos);
-//        byte[] jdata = baos.toByteArray();
-////
-//       Bitmap bmp = BitmapFactory.decodeByteArray(jdata, 0, jdata.length);
-//        System.out.println("Bitmap Name 3" + bmp);
-
+    Drawable drawable = new BitmapDrawable(bmp);
 
 
 //
 //
-//        Drawable drawable= new BitmapDrawable(bmp);
-//
-//
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.sf_logo_);
-//        getSupportActionBar().setHomeAsUpIndicator(drawable);
+    getSupportActionBar().setHomeAsUpIndicator(drawable);
+}else {
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.sf_logo_);
+}
+
+
+
 
 //
 //try {
@@ -137,6 +143,22 @@ byte[] bytes = compInfo.COM_LOGO.getBytes();
 
     }
 
+
+    public static void reverseByteArray(byte[] array) {
+        if (array == null) {
+            return;
+        }
+        int i = 0;
+        int j = array.length - 1;
+        byte tmp;
+        while (j > i) {
+            tmp = array[j];
+            array[j] = array[i];
+            array[i] = tmp;
+            j--;
+            i++;
+        }
+    }
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

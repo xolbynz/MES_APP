@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class work_processActivity  extends Fragment {
+public class work_progressActivity extends Fragment {
 
     ViewGroup rootView;
     MainActivity activity;
@@ -50,7 +50,7 @@ public class work_processActivity  extends Fragment {
 
 
 
-    public work_processActivity() {
+    public work_progressActivity() {
         dbInfo = new DBInfo();
     }
 
@@ -76,7 +76,7 @@ public class work_processActivity  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = (ViewGroup) inflater.inflate(R.layout.activity_work_process, container, false);
+        rootView = (ViewGroup) inflater.inflate(R.layout.activity_work_progress, container, false);
 
         return rootView;
     }

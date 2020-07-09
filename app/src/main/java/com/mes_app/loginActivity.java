@@ -203,7 +203,7 @@ public class loginActivity extends AppCompatActivity {
         query.append("COMPANY_NM, ");
         query.append("A.SP_CODE,");
         query.append("B.SP_SITE, ");
-        query.append("C.SAUP_LOGO, ");
+        query.append("isnull(C.SAUP_LOGO,'') as SAUP_LOGO, ");
         query.append("C.LOGO_SIZE ");
         query.append("FROM [SM_FACTORY_COM].[dbo].[T_COMP_LOGIN] A ");
         query.append("left outer join [SM_FACTORY_COM].[dbo].[T_SUPPLY_CODE] B ");
@@ -243,12 +243,14 @@ System.out.println(query);
                     compInfo.setCOM_LOCATION(rs.getString(1));
                     compInfo.setCOMPANY_NM(rs.getString(2));
                     compInfo.setSP_CODE(rs.getString(3));
+
+
                     compInfo.setPACK_GUBUN(rs.getString(4));
 
 
-
-                   //    compInfo.setComLogo(rs.getString("SAUP_LOGO"));
-
+                    if (    ! rs.getString("SAUP_LOGO").equals("")) {
+                        compInfo.setComLogo(rs.getString("SAUP_LOGO"));
+                    }
 compInfo.setSTAFF_NM(rs2.getString("STAFF_NM"));
 //                    dbInfo.mainConn.close();
                     return true;

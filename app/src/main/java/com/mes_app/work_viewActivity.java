@@ -102,7 +102,10 @@ this.context= context;
         et_instDate = rootView.findViewById(R.id.workView_et_instDate);
 
         et_start =rootView.findViewById(R.id.workInst_et_start);
+        et_start.setText("");
         et_end =rootView.findViewById(R.id.workInst_et_end);
+        et_end.setText("");
+
         btn_search=rootView.findViewById(R.id.workInst_tv_search);
 
 
@@ -216,10 +219,10 @@ this.context= context;
 
         query.append("where 1=1  \n");
         query.append(condition);
-        if (!et_start.getText().equals("")) {
+        if (!et_start.getText().toString().equals("")) {
             query.append(" and A.W_INST_DATE>='" + et_start.getText() + "' \n");
         }
-        if (!et_end.getText().equals("")) {
+        if (!et_end.getText().toString().equals("")) {
             query.append(" and A.W_INST_DATE<='" + et_end.getText() + "' \n");
         }
         query.append("  order by A.W_INST_DATE desc, A.W_INST_CD desc  \n");
