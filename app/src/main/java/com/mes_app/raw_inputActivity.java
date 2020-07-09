@@ -98,14 +98,28 @@ public class raw_inputActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
         Layout_Main = rootView.findViewById(R.id.RawInput_Main);
         btn_input = rootView.findViewById(R.id.btn_input);
-        btn_input.setOnClickListener(btnInputClick);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
         Layout_Main.setOnClickListener(myClickListener);
 
+
         Input_Order_Detail();
 
+//        final ArrayList<String> edittextValues = new ArrayList<String>();
+//        for (int j = 0; j < gridView.getChildCount(); j++) {
+//            View view = (View) gridView.getChildAt(j);
+//            final EditText edit_input_amt = (EditText) view.findViewById(R.id.rawInp_et_inpAmt);
+//            edittextValues.add(edit_input_amt.getText().toString());
+//
+//            Button btn_input = (Button) view.findViewById(R.id.rawInp_btn_input);
+//            btn_input.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(context, edit_input_amt.getText().toString(), Toast.LENGTH_LONG).show();
+//                }
+//            });
+//        }
 
         return rootView;
 
@@ -200,6 +214,7 @@ public class raw_inputActivity extends Fragment {
                     rawInputAdapter.addItem(orderVo);
                 }
                 gridView.setAdapter(rawInputAdapter);
+
             } else {
                 Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
             }
@@ -283,45 +298,6 @@ public class raw_inputActivity extends Fragment {
 
         }
     };
-
-    Button.OnClickListener btnInputClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-//            int position = gridView.getPositionForView(gridView);
-//
-//            orderVo = null; // 초기화
-////                orderVo = (OrderVo) rawInputAdapter.getItem(i);
-//
-//            String Raw_mat_cd = orderVo.getRawmat_Cd();
-//            String Spec = orderVo.getSpec();
-//            String Unit_cd = orderVo.getUnit_cd();
-//            EditText child = (EditText) gridView.getChildAt(position).findViewById(R.id.rawInp_et_inpAmt);
-//            String Temp_amt = child.getText().toString();
-//
-//            String Total_amt = "";
-//            String Curr_amt = "";
-//            String Price = "0";
-//            String Total_money = "0";
-//            String Heat_no = "";
-//            String Heat_time = "";
-//            String OrderDate = orderVo.getOrder_Date();
-//            String Ordercd = orderVo.getOrder_Cd();
-//            String OrderSeq = orderVo.getOrder_Seq();
-//            String Complete_yn = orderVo.getComplete_Yn();
-//            String Instaff = "";
-//            String Intime = "";
-//            String Comment = "모바일 입고";
-//            String Storage_cd = "";
-//            String Loc_cd = "";
-//            String Loc_nm = "";
-//
-//            Toast.makeText(context, child.getText().toString(), Toast.LENGTH_SHORT).show();
-        }
-
-    };
-
-
 
     View.OnClickListener myClickListener = new View.OnClickListener() {
         @Override

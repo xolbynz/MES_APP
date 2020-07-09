@@ -1,5 +1,6 @@
 package com.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.VO.OrderVo;
 import com.example.mes_app.R;
+import com.mes_app.CustomDialog;
 
 import java.util.ArrayList;
 
@@ -24,14 +26,9 @@ public class RawInputAdapter extends BaseAdapter {
     Context context;
     OrderVo orderVo = new OrderVo();
     private ArrayList<OrderVo> arrayList = new ArrayList<>();
+    private Activity activity;
+    private int layout;
 
-    TextView raw_mat_nm;
-    TextView cust_nm;
-    TextView order_date;
-    TextView spec;
-    TextView order_amt;
-    TextView orderNon_amt;
-    EditText input_amt;
     private Button btn_input;
     InputMethodManager imm;
 
@@ -59,29 +56,64 @@ public class RawInputAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, final View convertView, ViewGroup parent) {
-
-        final View gridView;
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
         orderVo = arrayList.get(position);
 
+        RawInputAdapter.ListViewHolder holder = null;
+
+        final int adptPosition = position;
+
+        final TextView raw_mat_nm;
+        final TextView cust_nm;
+        final TextView order_date;
+        final TextView spec;
+        final TextView order_amt;
+        final TextView orderNon_amt;
+        final EditText input_amt;
+        final Button btn_input;
+
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            gridView = inflater.inflate(R.layout.adapter_raw_input, null);
+            LayoutInflater inflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.adapter_raw_input, parent, false);
+
+            raw_mat_nm = convertView.findViewById(R.id.rawInp_tv_rawNm);
+            cust_nm = convertView.findViewById(R.id.rawInp_tv_custNm);
+            order_date = convertView.findViewById(R.id.rawInp_tv_orderDate);
+            spec = convertView.findViewById(R.id.rawInp_tv_spec);
+            order_amt = convertView.findViewById(R.id.rawInp_tv_orderAmt);
+            orderNon_amt = convertView.findViewById(R.id.rawInp_tv_nonInpAmt);
+            input_amt = convertView.findViewById(R.id.rawInp_et_inpAmt);
+            btn_input = convertView.findViewById(R.id.rawInp_btn_input);
+
+            holder = new RawInputAdapter.ListViewHolder();
+
+            holder.raw_mat_nm = raw_mat_nm;
+            holder.cust_nm = cust_nm;
+            holder.order_date = order_date;
+            holder.spec = spec;
+            holder.order_amt = order_amt;
+            holder.orderNon_amt = orderNon_amt;
+            holder.input_amt = input_amt;
+            holder.btn_input = btn_input;
+
+            convertView.setTag(holder);
 
         } else {
-            gridView = convertView;
-        }
 
-        raw_mat_nm = gridView.findViewById(R.id.rawInp_tv_rawNm);
-        cust_nm = gridView.findViewById(R.id.rawInp_tv_custNm);
-        order_date = gridView.findViewById(R.id.rawInp_tv_orderDate);
-        spec = gridView.findViewById(R.id.rawInp_tv_spec);
-        order_amt = gridView.findViewById(R.id.rawInp_tv_orderAmt);
-        orderNon_amt = gridView.findViewById(R.id.rawInp_tv_nonInpAmt);
-        input_amt = gridView.findViewById(R.id.rawInp_et_inpAmt);
-        btn_input = gridView.findViewById(R.id.rawInp_btn_input);
+            holder = (RawInputAdapter.ListViewHolder) convertView.getTag();
+
+            raw_mat_nm = holder.raw_mat_nm;
+            cust_nm = holder.cust_nm;
+            order_date = holder.order_date;
+            spec = holder.spec;
+            order_amt = holder.order_amt;
+            orderNon_amt = holder.orderNon_amt;
+            input_amt = holder.input_amt;
+            btn_input = holder.btn_input;
+
+        }
 
         raw_mat_nm.setText(orderVo.getRawmat_Nm());
         cust_nm.setText(orderVo.getCust_Nm());
@@ -89,25 +121,44 @@ public class RawInputAdapter extends BaseAdapter {
         order_amt.setText(orderVo.getOrder_Amt());
         spec.setText(orderVo.getSpec());
         orderNon_amt.setText(orderVo.getInput_NeedAmt());
-
-        input_amt.addTextChangedListener(textWatcher);
         input_amt.setOnKeyListener(onKeyListener);
-        input_amt.addTextChangedListener(textWatcher);
+
 
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText input_amt = (EditText) v.findViewById(R.id.rawInp_et_inpAmt);
-                String text = input_amt.getText().toString();
-                Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+                CustomDialog oDialog = new CustomDialog(context);
+                oDialog.setCancelable(false);
+                oDialog.show();
+                Toast.makeText(context, btn_input.getTag().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        input_amt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (input_amt.getText().equals("0")) {
+                    input_amt.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
         input_amt.setText("0");
         btn_input.setTag((int) position);
 
-        return gridView;
+        return convertView;
     }
+
     EditText.OnKeyListener onKeyListener = new View.OnKeyListener() {
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -121,25 +172,16 @@ public class RawInputAdapter extends BaseAdapter {
         }
     };
 
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            if (input_amt.getText().equals("0")) {
-                input_amt.setText("");
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
+    private class ListViewHolder {
+        TextView raw_mat_nm;
+        TextView cust_nm;
+        TextView order_date;
+        TextView spec;
+        TextView order_amt;
+        TextView orderNon_amt;
+        EditText input_amt;
+        Button btn_input;
+    }
 
 
 }
