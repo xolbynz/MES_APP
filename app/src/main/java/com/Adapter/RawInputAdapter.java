@@ -121,6 +121,7 @@ public class RawInputAdapter extends BaseAdapter {
         order_amt.setText(orderVo.getOrder_Amt());
         spec.setText(orderVo.getSpec());
         orderNon_amt.setText(orderVo.getInput_NeedAmt());
+
         input_amt.setOnKeyListener(onKeyListener);
 
 

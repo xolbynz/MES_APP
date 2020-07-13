@@ -206,6 +206,7 @@ public class monitoringActivity extends Fragment {
 
             jsonArray = null;
             jsonArray = fn_Monitering(jsonArray, edit_startDate.getText().toString(), edit_endDate.getText().toString());
+            gridView.setAdapter(null);
 
             if (jsonArray.length() != 0) {
 
