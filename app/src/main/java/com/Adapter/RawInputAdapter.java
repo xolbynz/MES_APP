@@ -127,25 +127,25 @@ public class RawInputAdapter extends BaseAdapter {
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialog oDialog = new CustomDialog(context);
-                oDialog.setCancelable(false);
-                oDialog.show();
-                Toast.makeText(context, btn_input.getTag().toString(), Toast.LENGTH_LONG).show();
+
             }
         });
 
         input_amt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if (input_amt.getText().equals("0")) {
+                    input_amt.setText(null);
+                }
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (input_amt.getText().equals("0")) {
-                    input_amt.setText("");
+                    input_amt.setText(null);
                 }
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {

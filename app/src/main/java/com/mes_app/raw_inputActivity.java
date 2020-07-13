@@ -106,21 +106,6 @@ public class raw_inputActivity extends Fragment {
 
         Input_Order_Detail();
 
-//        final ArrayList<String> edittextValues = new ArrayList<String>();
-//        for (int j = 0; j < gridView.getChildCount(); j++) {
-//            View view = (View) gridView.getChildAt(j);
-//            final EditText edit_input_amt = (EditText) view.findViewById(R.id.rawInp_et_inpAmt);
-//            edittextValues.add(edit_input_amt.getText().toString());
-//
-//            Button btn_input = (Button) view.findViewById(R.id.rawInp_btn_input);
-//            btn_input.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(context, edit_input_amt.getText().toString(), Toast.LENGTH_LONG).show();
-//                }
-//            });
-//        }
-
         return rootView;
 
 

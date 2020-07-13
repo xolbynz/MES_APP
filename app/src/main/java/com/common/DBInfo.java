@@ -90,7 +90,6 @@ public class DBInfo {
                     obj.put(column_name, rs.getObject(column_name));
                 }
             }
-
             jsonArray.put(obj);
         }
 

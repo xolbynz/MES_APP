@@ -30,8 +30,10 @@ import org.json.JSONObject;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class stock_statusActivity extends Fragment {
@@ -92,6 +94,12 @@ public class stock_statusActivity extends Fragment {
 
         dbInfo = new DBInfo();
 
+        long now = System.currentTimeMillis();
+        Date mDate = new Date(now);
+        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String today = mFormat.format(mDate);
+        startDate.setText(today);
+
 
         return rootView;
     }
@@ -118,7 +126,6 @@ public class stock_statusActivity extends Fragment {
 
                             mMonth, mDay).show();
                     break;
-
             }
 
         }
