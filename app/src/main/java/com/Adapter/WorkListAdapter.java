@@ -12,20 +12,21 @@ import com.example.mes_app.R;
 
 import java.util.ArrayList;
 
-public class WorkListAdapter extends BaseAdapter
-{
-Context context;
-WorkListVo workListVo= new WorkListVo();
-ArrayList<WorkListVo> arrayList = new ArrayList<>();
+public class WorkListAdapter extends BaseAdapter {
+    Context context;
+    WorkListVo workListVo = new WorkListVo();
+    ArrayList<WorkListVo> arrayList = new ArrayList<>();
 
     @Override
     public int getCount() {
         return arrayList.size();
     }
+
     public void addItem(WorkListVo workListVo) {
         arrayList.add(workListVo);
 
     }
+
     @Override
     public Object getItem(int position) {
         return arrayList.get(position);
@@ -39,10 +40,10 @@ ArrayList<WorkListVo> arrayList = new ArrayList<>();
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        context= parent.getContext();
+        context = parent.getContext();
         workListVo = arrayList.get(position);
 
-        WorkListAdapter.ListViewHolder  holder = null;
+        WorkListAdapter.ListViewHolder holder = null;
 
         final int adptPosition = position;
 
@@ -53,38 +54,37 @@ ArrayList<WorkListVo> arrayList = new ArrayList<>();
         final TextView spec;
         final TextView completeYN;
 
-        if(convertView ==null){
-            LayoutInflater inflater =(LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.adapter_work_list, parent, false);
 
-            custNm=convertView.findViewById(R.id.worklist_tv_custNm);
-            lotNo=convertView.findViewById(R.id.worklist_tv_lotNo);
-            itemNm=convertView.findViewById(R.id.worklist_tv_itemNm);
-            instAmt=convertView.findViewById(R.id.worklist_tv_instAmt);
-            spec=convertView.findViewById(R.id.worklist_tv_spec);
-            completeYN=convertView.findViewById(R.id.worklist_tv_completeYN);
+            custNm = convertView.findViewById(R.id.worklist_tv_custNm);
+            lotNo = convertView.findViewById(R.id.worklist_tv_lotNo);
+            itemNm = convertView.findViewById(R.id.worklist_tv_itemNm);
+            instAmt = convertView.findViewById(R.id.worklist_tv_instAmt);
+            spec = convertView.findViewById(R.id.worklist_tv_spec);
+            completeYN = convertView.findViewById(R.id.worklist_tv_completeYN);
 
             holder = new WorkListAdapter.ListViewHolder();
 
-            holder.completeYN=completeYN;
-            holder.custNm=custNm;
-            holder.instAmt=instAmt;
-            holder.itemNm=itemNm;
-            holder.lotNo= lotNo;
-            holder.spec=spec;
+            holder.completeYN = completeYN;
+            holder.custNm = custNm;
+            holder.instAmt = instAmt;
+            holder.itemNm = itemNm;
+            holder.lotNo = lotNo;
+            holder.spec = spec;
 
             convertView.setTag(holder);
 
-        }
-        else {
+        } else {
 
-            holder= (WorkListAdapter.ListViewHolder) convertView.getTag();
-            completeYN=holder.completeYN;
-           custNm=holder.custNm;
-            instAmt=holder.instAmt;
-            itemNm=holder.itemNm;
-            lotNo= holder.lotNo;
-           spec=holder.spec;
+            holder = (WorkListAdapter.ListViewHolder) convertView.getTag();
+            completeYN = holder.completeYN;
+            custNm = holder.custNm;
+            instAmt = holder.instAmt;
+            itemNm = holder.itemNm;
+            lotNo = holder.lotNo;
+            spec = holder.spec;
 
         }
 
