@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     raw_viewActivity frag_raw_view = new raw_viewActivity(); //프래그먼트 객채셍성
     raw_inputActivity frag_raw_input = new raw_inputActivity(this);
     work_viewActivity frag_work_view = new work_viewActivity(this);
-    work_progressActivity frag_work_process = new work_progressActivity();
+    work_progressActivity frag_work_process = new work_progressActivity(this);
     stock_statusActivity frag_stock_status = new stock_statusActivity(this);
     monitoringActivity frag_monMonitoring = new monitoringActivity(this);
     item_releaseActivity frag_itemRleace = new item_releaseActivity(this);

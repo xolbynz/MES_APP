@@ -58,22 +58,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
-        android:text="지시일자"
-        app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_itemNm2"
-        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_workAmt"
-        app:layout_constraintTop_toBottomOf="@+id/workPrg_tv_itemNm"
+        android:text="생산완료율"
+        app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_workAmt2"
+        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_workAmt2"
+        app:layout_constraintTop_toBottomOf="@+id/workPrg_tv_workAmt"
         app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/workPrg_tv_workAmt"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginLeft="18dp"
-        android:text="지시일자"
-        app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_instAmt2"
-        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_instAmt2"
-        app:layout_constraintTop_toTopOf="@+id/workPrg_tv_instAmt2" />
 
     <TextView
         android:id="@+id/workPrg_tv_instAmt2"
@@ -193,11 +182,20 @@
         android:id="@+id/workPrg_tv_workRate"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginLeft="18dp"
         android:text="생산완료율"
         app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_itemNm"
-        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_workAmt"
         app:layout_constraintTop_toTopOf="@+id/workPrg_tv_itemNm"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="844dp" />
+
+    <TextView
+        android:id="@+id/workPrg_tv_workAmt2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:text="생산수량"
+        app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_instAmt2"
+        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_instAmt2"
+        app:layout_constraintTop_toTopOf="@+id/workPrg_tv_instAmt2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
