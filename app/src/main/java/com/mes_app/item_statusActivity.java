@@ -35,15 +35,18 @@ public class item_statusActivity extends Fragment {
     DBInfo dbInfo;
     ViewGroup rootView;
     InputMethodManager imm;
-EditText et_item;
+    EditText et_item;
     JSONArray jsonArray;
     ItemStatusVo itemStatusVo;
 
     GridView gridView;
     ImageButton btn_search;
-    public  item_statusActivity(){}
-    public  item_statusActivity(Context context){
-        this.context=context;
+
+    public item_statusActivity() {
+    }
+
+    public item_statusActivity(Context context) {
+        this.context = context;
         dbInfo = new DBInfo();
     }
 
@@ -61,35 +64,31 @@ EditText et_item;
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_item_status, container, false);
         imm = (InputMethodManager) getContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
 
-        gridView=rootView.findViewById(R.id.itemStatus_gv);
-        btn_search=rootView.findViewById(R.id.itemStatus_btn_search);
+        gridView = rootView.findViewById(R.id.itemStatus_gv);
+        btn_search = rootView.findViewById(R.id.itemStatus_btn_search);
 
-        et_item=rootView.findViewById(R.id.itemStatus_et_item);
+        et_item = rootView.findViewById(R.id.itemStatus_et_item);
         btn_search.setOnClickListener(btn_SearchClick);
         Calendar cal = new GregorianCalendar();
-
 
 
         datebind();
         return rootView;
     }
 
-   View.OnClickListener btn_SearchClick = new View.OnClickListener() {
-       @Override
-       public void onClick(View v) {
-           datebind();
-       }
-   };
+    View.OnClickListener btn_SearchClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            datebind();
+        }
+    };
 
 
-
-
-
-    public  void datebind(){
+    public void datebind() {
         try {
 
             jsonArray = null;
-            jsonArray = item_status(jsonArray,"and A.ITEM_NM LIKE '%"+et_item.getText()+"%' ");
+            jsonArray = item_status(jsonArray, "and A.ITEM_NM LIKE '%" + et_item.getText() + "%' ");
 
             if (jsonArray.length() != 0) {
 
@@ -123,8 +122,8 @@ EditText et_item;
                         UNIT_NM = jo.getString("UNIT_NM");
 
 
-itemStatusVo = new ItemStatusVo(ITEM_NM,SPEC,PROP_STOCK,POOR_AMT,BAL_STOCK,UNIT_NM);
-                   itemStatusAdapter.addItem(itemStatusVo);
+                    itemStatusVo = new ItemStatusVo(ITEM_NM, SPEC, PROP_STOCK, POOR_AMT, BAL_STOCK, UNIT_NM);
+                    itemStatusAdapter.addItem(itemStatusVo);
                 }
                 gridView.setAdapter(itemStatusAdapter);
 

@@ -78,7 +78,7 @@ public class loginActivity extends AppCompatActivity {
 
         image_saup.requestFocus();//시작시 이미지에 포커스 주기
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
     }
 
     // 이벤트 핸들러
@@ -87,7 +87,7 @@ public class loginActivity extends AppCompatActivity {
     View.OnKeyListener PasswordEnterKeyListener = new View.OnKeyListener() { // 패스워드에서 엔터치면 키보드 내려가게 하기
         @Override
         public boolean onKey(View v, int i, KeyEvent event) {
-            switch (i){
+            switch (i) {
                 case KeyEvent.KEYCODE_ENTER:
                     imm.hideSoftInputFromWindow(Pw.getWindowToken(), 0);
                     break;
@@ -119,7 +119,7 @@ public class loginActivity extends AppCompatActivity {
 
                 if (getcompinfo(Saup_No.getText().toString(), Id.getText().toString(), Pw.getText().toString()) == true) {
 
-                    Toast.makeText(getApplicationContext(), compInfo.getSTAFF_NM()+"("+ compInfo.getCOMPANY_NM()+") LOGIN", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), compInfo.getSTAFF_NM() + "(" + compInfo.getCOMPANY_NM() + ") LOGIN", Toast.LENGTH_SHORT).show();
                     PreferenceManager.setString(mContext, "saupNo", Saup_No.getText().toString());// 사업자번호 저장
                     Intent intent = new Intent(loginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -136,7 +136,6 @@ public class loginActivity extends AppCompatActivity {
 
     ///모든 뷰 클릭시 이벤트 발동
     /// 사업자 번호 , 아이디 , 패스워드를 제외한  뷰 클릭시 키보드 내림
-    /// 6.17 문세진 리스너 객체 생성해서 불러내기 수정
     View.OnClickListener myClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -210,7 +209,7 @@ public class loginActivity extends AppCompatActivity {
         query.append("on A.SP_CODE = B.SP_CODE ");
         query.append("left outer join [SM_FACTORY_COM].[dbo].[T_SAUP_CODE] as C on C.SAUP_NO=A.COM_SAUP_NO\n");
         query.append("where A.COM_SAUP_NO = '" + saupNo + "'");
-System.out.println(query);
+        System.out.println(query);
         Statement stmt = conn.createStatement();
 
         rs = stmt.executeQuery(query.toString());
@@ -248,10 +247,10 @@ System.out.println(query);
                     compInfo.setPACK_GUBUN(rs.getString(4));
 
 
-                    if (    ! rs.getString("SAUP_LOGO").equals("")) {
+                    if (!rs.getString("SAUP_LOGO").equals("")) {
                         compInfo.setComLogo(rs.getString("SAUP_LOGO"));
                     }
-compInfo.setSTAFF_NM(rs2.getString("STAFF_NM"));
+                    compInfo.setSTAFF_NM(rs2.getString("STAFF_NM"));
 //                    dbInfo.mainConn.close();
                     return true;
                 } else {

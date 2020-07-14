@@ -118,6 +118,8 @@ public class RawInputAdapter extends BaseAdapter {
         raw_mat_nm.setText(orderVo.getRawmat_Nm());
         cust_nm.setText(orderVo.getCust_Nm());
         order_date.setText(orderVo.getOrder_Date());
+        order_date.setTag(orderVo.getOrder_Cd());
+        order_date.setHint(orderVo.getOrder_Seq());
         order_amt.setText(orderVo.getOrder_Amt());
         spec.setText(orderVo.getSpec());
         orderNon_amt.setText(orderVo.getInput_NeedAmt());
@@ -128,34 +130,13 @@ public class RawInputAdapter extends BaseAdapter {
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String Orer_Date = order_date.getText().toString();
+                String Order_Cd = order_date.getTag().toString();
+                String Order_Seq = order_date.getHint().toString();
 
+                Toast.makeText(context,Orer_Date + "/" + Order_Cd + "/" + Order_Seq , Toast.LENGTH_LONG).show();
             }
         });
-
-        input_amt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (input_amt.getText().equals("0")) {
-                    input_amt.setText(null);
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (input_amt.getText().equals("0")) {
-                    input_amt.setText(null);
-                }
-            }
-
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        input_amt.setText("0");
-        btn_input.setTag((int) position);
 
         return convertView;
     }
@@ -182,6 +163,10 @@ public class RawInputAdapter extends BaseAdapter {
         TextView orderNon_amt;
         EditText input_amt;
         Button btn_input;
+    }
+
+    private void input_Logic(String Order_date, String Order_cd, String Orcder_seq){
+
     }
 
 
