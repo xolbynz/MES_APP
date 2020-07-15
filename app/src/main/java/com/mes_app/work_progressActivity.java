@@ -82,9 +82,14 @@ public class work_progressActivity extends Fragment {
     View.OnClickListener inst_Search = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            pop_workList oDialog = new pop_workList(context);
-            oDialog.setCancelable(false);
-            oDialog.show();
+            try {
+                pop_workList oDialog = new pop_workList(context);
+                oDialog.setCancelable(false);
+                oDialog.show();
+            }
+            catch (Exception ex){
+                System.out.println(ex.toString());
+            }
 
 
         }
