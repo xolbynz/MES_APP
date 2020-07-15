@@ -18,6 +18,10 @@ public class TraceListDetailVo {
     String Loss_amt;
     String poor;
 
+    public TraceListDetailVo(){
+
+    }
+
     public TraceListDetailVo(String gubun, String order1, String order2, String input_date,
                              String input_cd, String intime, String cust_nm, String raw_mat_nm,
                              String spec, String lot_no, String lot_sub, String unit_nm,

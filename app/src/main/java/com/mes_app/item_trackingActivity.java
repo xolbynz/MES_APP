@@ -139,42 +139,42 @@ public class item_trackingActivity extends Fragment {
                         String poor = "";
 
 
-                        if (jo.has("INPUT_DATE")) // Data값이 NULL인 경우 빈값으로 처리
-                            gubun = jo.getString("INPUT_DATE");
+                        if (jo.has("GUBUN")) // Data값이 NULL인 경우 빈값으로 처리
+                            gubun = jo.getString("GUBUN");
+                        if (jo.has("ORDER1"))
+                            order1 = jo.getString("ORDER1");
+                        if (jo.has("ORDER2"))
+                            order2 = jo.getString("ORDER2");
+                        if (jo.has("INPUT_DATE"))
+                            input_date = jo.getString("INPUT_DATE");
                         if (jo.has("INPUT_CD"))
-                            order1 = jo.getString("INPUT_CD");
-                        if (jo.has("W_INST_DATE"))
-                            order2 = jo.getString("W_INST_DATE");
-                        if (jo.has("W_INST_CD"))
-                            input_date = jo.getString("W_INST_CD");
-                        if (jo.has("DELIVERY_DATE"))
-                            input_cd = jo.getString("DELIVERY_DATE");
-                        if (jo.has("INST_NOTICE"))
-                            intime = jo.getString("INST_NOTICE");
-                        if (jo.has("COMPLETE_YN"))
-                            cust_nm = jo.getString("COMPLETE_YN");
+                            input_cd = jo.getString("INPUT_CD");
+                        if (jo.has("INTIME"))
+                            intime = jo.getString("INTIME");
+                        if (jo.has("CUST_NM"))
+                            cust_nm = jo.getString("CUST_NM");
                         if (jo.has("RAW_MAT_CD"))
                             raw_mat_nm = jo.getString("RAW_MAT_CD");
-                        if (jo.has("INST_AMT"))
-                            spec = jo.getString("INST_AMT");
-                        if (jo.has("INST_AMT"))
-                            lot_no = jo.getString("INST_AMT");
-                        if (jo.has("INST_AMT"))
-                            lot_sub = jo.getString("INST_AMT");
-                        if (jo.has("INST_AMT"))
-                            unit_nm = jo.getString("INST_AMT");
-                        if (jo.has("INST_AMT"))
-                            total_amt = jo.getString("INST_AMT");
-                        if (jo.has("INST_AMT"))
-                            loss_amt = jo.getString("INST_AMT");
-                        if (jo.has("INST_AMT"))
-                            poor = jo.getString("INST_AMT");
+                        if (jo.has("SPEC"))
+                            spec = jo.getString("SPEC");
+                        if (jo.has("LOT_NO"))
+                            lot_no = jo.getString("LOT_NO");
+                        if (jo.has("LOT_SUB"))
+                            lot_sub = jo.getString("LOT_SUB");
+                        if (jo.has("UNIT_NM"))
+                            unit_nm = jo.getString("UNIT_NM");
+                        if (jo.has("TOTAL_AMT"))
+                            total_amt = jo.getString("TOTAL_AMT");
+                        if (jo.has("LOSS_AMT"))
+                            loss_amt = jo.getString("LOSS_AMT");
+                        if (jo.has("POOR"))
+                            poor = jo.getString("POOR");
 
-                        traceListDetailVo = new TraceListDetailVo(gubun,order1,order2,input_date,
-                                input_cd,intime,cust_nm,raw_mat_nm,spec,lot_no,lot_sub,unit_nm,
-                                total_amt,loss_amt,poor);
+                        traceListDetailVo = new TraceListDetailVo(gubun, order1, order2, input_date,
+                                input_cd, intime, cust_nm, raw_mat_nm, spec, lot_no, lot_sub, unit_nm,
+                                total_amt, loss_amt, poor);
                     }
-                    
+
                 }
 
             } else if (jsonArray.length() > 1) {
@@ -183,10 +183,12 @@ public class item_trackingActivity extends Fragment {
                 Toast.makeText(context, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
             }
         } catch (SQLException | JSONException e) {
+            Toast.makeText(context, "검색 오류", Toast.LENGTH_SHORT).show();
             System.out.println(e.toString());
             e.printStackTrace();
 
         } catch (Exception ex) {
+            Toast.makeText(context, "시스템 오류", Toast.LENGTH_SHORT).show();
             System.out.println(ex.toString());
         }
     }
