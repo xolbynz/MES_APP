@@ -69,9 +69,8 @@
                 android:id="@+id/constraintLayout8"
                 android:layout_width="1269dp"
                 android:layout_height="55dp"
-                app:layout_constraintEnd_toEndOf="@+id/gridLayout"
-                app:layout_constraintStart_toStartOf="@+id/gridLayout"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="1dp">
 
                 <TextView
                     android:id="@+id/itemTracking_tv_list"
@@ -176,23 +175,20 @@
                     app:layout_constraintVertical_bias="1.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.gridlayout.widget.GridLayout
-                android:id="@+id/gridLayout"
-                android:layout_width="1269dp"
-                android:layout_height="482dp"
+            <GridView
+                android:layout_width="1277dp"
+                android:layout_height="484dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginLeft="1dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="9dp"
-                android:layout_marginRight="9dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
                 android:layout_marginBottom="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
-            </androidx.gridlayout.widget.GridLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
