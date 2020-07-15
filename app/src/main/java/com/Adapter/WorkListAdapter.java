@@ -79,6 +79,7 @@ public class WorkListAdapter extends BaseAdapter {
         } else {
 
             holder = (WorkListAdapter.ListViewHolder) convertView.getTag();
+
             completeYN = holder.completeYN;
             custNm = holder.custNm;
             instAmt = holder.instAmt;
