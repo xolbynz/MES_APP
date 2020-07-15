@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -14,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.Adapter.ItemStatusAdapter;
+import com.Adapter.ItemTraceAdapter;
 import com.common.DBInfo;
 import com.example.mes_app.R;
 import com.VO.TraceListVO;
@@ -28,16 +29,19 @@ import java.sql.SQLException;
 
 public class item_trackingActivity extends Fragment {
 
+    MainActivity activity;
     ViewGroup rootView;
     Context context;
     DBInfo dbInfo;
     JSONArray jsonArray;
-    GridView gridView;
-    EditText editText;
+    EditText Barcode;
     Button btn_search;
     String Lot_no = "";
     TraceListVO traceListVO;
     TraceListDetailVo traceListDetailVo;
+    InputMethodManager imm;
+    GridView gridView;
+
 
 
     public item_trackingActivity() {
@@ -45,19 +49,49 @@ public class item_trackingActivity extends Fragment {
     }
 
     public item_trackingActivity(Context context) {
+        this.context = context;
         dbInfo = new DBInfo();
+    }
+
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        activity = (MainActivity) getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_item_tracking, container, false);
+        imm = (InputMethodManager) getContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+
+        Barcode = rootView.findViewById(R.id.itemTracking_et_barcode);
+        btn_search = rootView.findViewById(R.id.itemTracking_btn_search);
+        gridView = rootView.findViewById(R.id.itemTracking_tv_fault);
+
+        btn_search.setOnClickListener(onClickListener);
 
         return rootView;
     }
 
+   Button.OnClickListener onClickListener = new View.OnClickListener() {
+       @Override
+       public void onClick(View v) {
+           imm.hideSoftInputFromWindow(Barcode.getWindowToken(), 0);
 
-    public void datebind() {
+           if (Barcode.getText().length() != 13 || Barcode.getText().equals("")) {
+               Toast.makeText(context, "잘못된 LOT 번호 입니다.", Toast.LENGTH_LONG).show();
+           } else {
+               Lot_no = Barcode.getText().toString();
+               databind();
+           }
+       }
+   };
+
+
+    public void databind() {
         try {
 
             jsonArray = null;
@@ -65,7 +99,7 @@ public class item_trackingActivity extends Fragment {
 
             if (jsonArray.length() != 0 && jsonArray != null) {
 
-                final ItemStatusAdapter itemStatusAdapter = new ItemStatusAdapter();
+                final ItemTraceAdapter itemTraceAdapter = new ItemTraceAdapter();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -173,8 +207,10 @@ public class item_trackingActivity extends Fragment {
                         traceListDetailVo = new TraceListDetailVo(gubun, order1, order2, input_date,
                                 input_cd, intime, cust_nm, raw_mat_nm, spec, lot_no, lot_sub, unit_nm,
                                 total_amt, loss_amt, poor);
-                    }
 
+                        itemTraceAdapter.addItem(traceListDetailVo);
+                    }
+                    gridView.setAdapter(itemTraceAdapter);
                 }
 
             } else if (jsonArray.length() > 1) {
