@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,10 +45,11 @@ public class raw_viewActivity extends Fragment {
     Button btn_search;
     Spinner spinner_search;
     ViewGroup rootView;
-
-    DBInfo dbInfo;
+    CheckBox checkBox;
     GridView gridView;
     EditText editSearch;
+
+    DBInfo dbInfo;
     JSONArray JArray;
     RawVo rawVo;
 
@@ -66,7 +69,6 @@ public class raw_viewActivity extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
         activity = null;
     }
 
@@ -90,6 +92,7 @@ public class raw_viewActivity extends Fragment {
         spinner_search = rootView.findViewById(R.id.spinner_raw_search);
         editSearch = rootView.findViewById(R.id.edit_search);
         gridView = rootView.findViewById(R.id.raw_GridView);
+        checkBox = rootView.findViewById(R.id.rawView_chk);
 
         editSearch.setOnFocusChangeListener(OutFocus);
         btn_search.setOnClickListener(Raw_Search);
@@ -130,6 +133,9 @@ public class raw_viewActivity extends Fragment {
             }
         }
     };
+
+
+
 
     public void getLogic() {
         try {
@@ -244,10 +250,12 @@ public class raw_viewActivity extends Fragment {
                 query.append("");
         } else if (spinner_search.getSelectedItem().toString().equals("거래처")) {
             if (!condition.equals(""))
-                query.append("AND CUST_NM  = '%" + getCustcd(condition) + "%'");
+                query.append("AND CUST_CD  = '%" + getCustcd(condition) + "%'");
             else
                 query.append("");
-
+        }
+        if(checkBox.isChecked()){
+            query.append(" AND A.BAL_STOCK != '0'");
         }
         JSONArray = dbInfo.SelectDB(query.toString());
         return JSONArray;
@@ -267,8 +275,6 @@ public class raw_viewActivity extends Fragment {
         }
         return list;
     }
-
-
     public String getCustcd(String Condition) throws SQLException, JSONException {
 
         JSONArray jsonArray;
@@ -283,9 +289,6 @@ public class raw_viewActivity extends Fragment {
 
         return jsonArray.getString(1);
     }
-
-
-
 
 
 }

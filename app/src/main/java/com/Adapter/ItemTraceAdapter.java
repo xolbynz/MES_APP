@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.VO.TraceListDetailVo;
 import com.example.mes_app.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ItemTraceAdapter extends BaseAdapter {
@@ -61,12 +62,10 @@ public class ItemTraceAdapter extends BaseAdapter {
         if (convertView == null) {
 
             LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.activity_item_tracking, parent, false);
-
+            convertView = layoutInflater.inflate(R.layout.adapter_item_tracking, parent, false);
 
             gubun = convertView.findViewById(R.id.itemTracking_tv_list);
             intime = convertView.findViewById(R.id.itemTracking_tv_date);
-            cust_nm = convertView.findViewById(R.id.itemStatus_tv_faulty);
             raw_mat_nm = convertView.findViewById(R.id.itemTracking_tv_detail);
             spec = convertView.findViewById(R.id.itemTracking_tv_spec);
             lot_no = convertView.findViewById(R.id.itemTracking_tv_lotNo);
@@ -77,7 +76,7 @@ public class ItemTraceAdapter extends BaseAdapter {
 
             holder.gubun = gubun;
             holder.intime = intime;
-            holder.cust_nm = cust_nm;
+//            holder.cust_nm = cust_nm;
             holder.raw_mat_nm = raw_mat_nm;
             holder.spec = spec;
             holder.lot_no = lot_no;
@@ -92,7 +91,7 @@ public class ItemTraceAdapter extends BaseAdapter {
 
             gubun = holder.gubun;
             intime = holder.intime;
-            cust_nm = holder.cust_nm;
+//            cust_nm = holder.cust_nm;
             raw_mat_nm = holder.raw_mat_nm;
             spec = holder.spec;
             lot_no = holder.lot_no;
@@ -102,12 +101,43 @@ public class ItemTraceAdapter extends BaseAdapter {
 
         gubun.setText(traceListDetailVo.getGubun()); //
         intime.setText(traceListDetailVo.getIntime());
-        cust_nm.setText(traceListDetailVo.getCust_nm());
+//        cust_nm.setText(traceListDetailVo.getCust_nm());
         raw_mat_nm.setText(traceListDetailVo.getRaw_mat_nm());
         spec.setText(traceListDetailVo.getSpec());
         lot_no.setText(traceListDetailVo.getLot_no());
-        total_amt.setText(traceListDetailVo.getLot_sub());
-        poor.setText(traceListDetailVo.getPoor());
+
+
+
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        if (traceListDetailVo.getTotal_amt().contains("/"))
+        {
+            String[] sTemp = traceListDetailVo.getTotal_amt().split("/");
+            String sTemp2 = df.format(Double.parseDouble(sTemp[0]));
+            sTemp2 += " / " + df.format(Double.parseDouble(sTemp[1]));
+            total_amt.setText(sTemp2);
+        }
+        else  if (traceListDetailVo.getTotal_amt().contains("x"))
+        {
+            String[] sTemp = traceListDetailVo.getTotal_amt().split("x");
+            String sTemp2 = df.format(Double.parseDouble(sTemp[0]));
+            String[] sTemp3 = sTemp[1].split("=");
+            sTemp2 += " x " + df.format(Double.parseDouble(sTemp3[0]));
+            sTemp2 += " = " + df.format(Double.parseDouble(sTemp3[1]));
+            total_amt.setText(sTemp2);
+        }
+        else
+        {
+            total_amt.setText(df.format(Double.parseDouble(traceListDetailVo.getTotal_amt())));
+        }
+        if (traceListDetailVo.getPoor() != null && !traceListDetailVo.getPoor().equals(""))
+        {
+            poor.setText(df.format(Double.parseDouble(traceListDetailVo.getPoor())));
+        }
+        else
+        {
+            poor.setText("0");
+        }
 
         return convertView;
     }
@@ -115,11 +145,18 @@ public class ItemTraceAdapter extends BaseAdapter {
     private class ListViewHolder {
         TextView gubun;
         TextView intime;
-        TextView cust_nm;
+        //        TextView cust_nm;
         TextView raw_mat_nm;
         TextView spec;
         TextView lot_no;
         TextView total_amt;
         TextView poor;
     }
+
+//    public static String fmt(double d) {
+//        if (d == (long) d)
+//            return String.format("%d", (long) d);
+//        else
+//            return String.format("%s", d);
+//    }
 }

@@ -18,7 +18,7 @@ public class TraceListDetailVo {
     String Loss_amt;
     String poor;
 
-    public TraceListDetailVo(){
+    public TraceListDetailVo() {
 
     }
 

@@ -42,8 +42,9 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginLeft="28dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="바코드"
+                android:inputType="numberDecimal"
+                android:text=""
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
@@ -138,7 +139,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    android:text="세부항목"
+                    android:text="LOT_NO"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/itemTracking_tv_spec"

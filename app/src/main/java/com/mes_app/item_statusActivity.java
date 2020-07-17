@@ -64,7 +64,7 @@ public class item_statusActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_item_status, container, false);
         imm = (InputMethodManager) getContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
 
-        gridView = rootView.findViewById(R.id.itemStatus_gv);
+        gridView = rootView.findViewById(R.id.itemTracking_gv_grid);
         btn_search = rootView.findViewById(R.id.itemStatus_btn_search);
 
         et_item = rootView.findViewById(R.id.itemStatus_et_item);
