@@ -11,6 +11,7 @@ public class WorkListVo {
     String completeYN;
     String instDate;
     String delivertDate;
+    String maxSeq;
 
     public String getInstDate() {
         return instDate;
@@ -28,12 +29,20 @@ public class WorkListVo {
         this.delivertDate = delivertDate;
     }
 
+    public String getMaxSeq() {
+        return maxSeq;
+    }
+
+    public void setMaxSeq(String maxSeq) {
+        this.maxSeq = maxSeq;
+    }
+
     public  WorkListVo(
 
     ){
 
     }
-    public WorkListVo(String custNm, String lotNo, String itemNm, String instAmt, String spec, String completeYN,String instDate,String delivertDate) {
+    public WorkListVo(String custNm, String lotNo, String itemNm, String instAmt, String spec, String completeYN,String instDate,String delivertDate,String maxSeq) {
         this.custNm = custNm;
         this.lotNo = lotNo;
         this.itemNm = itemNm;
@@ -42,6 +51,7 @@ public class WorkListVo {
         this.completeYN = completeYN;
         this.instDate= instDate;
         this.delivertDate= delivertDate;
+        this.maxSeq= maxSeq;
     }
 
     public String getCustNm() {

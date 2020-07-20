@@ -43,11 +43,12 @@ public class pop_workList extends Dialog {
     public String selected_spec;
     public String selected_instDate;
     public String selected_deleveryDate;
+    public String selected_maxSeq;
 
 private  pop_workListListner pop_workListListner;
 
 public  interface pop_workListListner{
-    void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate);
+    void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate,String maxSeq);
 }
 
     public pop_workList(Context context, pop_workListListner pop_workListListner) {
@@ -99,6 +100,7 @@ this.pop_workListListner= pop_workListListner;
                     String lotNo = "";
                     String instDate ="";
                     String deleveryDate="";
+                    String maxSeq="";
 
                     String completeYN;
 
@@ -110,8 +112,9 @@ this.pop_workListListner= pop_workListListner;
                     completeYN = jo.getString("COMPLETE_YN");
                     instDate =jo.getString("W_INST_DATE");
                     deleveryDate=jo.getString("DELIVERY_DATE");
+                    maxSeq=jo.getString("maxSeq");
 
-                    workListVo = new WorkListVo(custNm, lotNo, itemNm, instAmt, spec, completeYN,instDate,deleveryDate);
+                    workListVo = new WorkListVo(custNm, lotNo, itemNm, instAmt, spec, completeYN,instDate,deleveryDate,maxSeq);
                     workListAdapter.addItem(workListVo);
 
                 }
@@ -132,10 +135,11 @@ this.pop_workListListner= pop_workListListner;
                         selected_itemNm=workListAdapter.arrayList.get(position).getItemNm().toString();
                         selected_instAmt=workListAdapter.arrayList.get(position).getInstAmt().toString();
                         selected_spec=workListAdapter.arrayList.get(position).getSpec().toString();
-                        selected_instAmt=workListAdapter.arrayList.get(position).getInstDate().toString();
+                        selected_instDate=workListAdapter.arrayList.get(position).getInstDate().toString();
                         selected_deleveryDate=workListAdapter.arrayList.get(position).getDelivertDate().toString();
-
-                        pop_workListListner.ClickBtn(selected_lotNo,selected_custNm,selected_itemNm,selected_instAmt,selected_spec,selected_instDate,selected_deleveryDate);
+                        selected_maxSeq=workListAdapter.arrayList.get(position).getMaxSeq().toString();
+                        pop_workListListner.ClickBtn(selected_lotNo,selected_custNm,selected_itemNm,selected_instAmt,selected_spec,selected_instDate,selected_deleveryDate,selected_maxSeq);
+                        //String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate
                         m_oDialog.dismiss();
 
                     }
@@ -173,6 +177,7 @@ this.pop_workListListner= pop_workListListner;
         sb.append("     ,A.PLAN_ITEM ");
         sb.append("     ,A.INSTAFF ");
         sb.append("     ,A.INST_NOTICE ");
+        sb.append("     ,F.maxSeq ");
 
         sb.append("     ,A.CUST_CD  ");
         sb.append("    ,isnull('0',B.BAL_STOCK) as  BAL_STOCK ");
@@ -180,15 +185,16 @@ this.pop_workListListner= pop_workListListner;
         sb.append("        ,A.DELIVERY_DATE ");
         sb.append("        ,C.COMPLETE_YN  as COMPLETE ");
         sb.append("     ,CASE WHEN ISNULL(C.COMPLETE_YN,'N')='Y' THEN '완료' ELSE ( CASE WHEN ISNULL(C.COMPLETE_YN,'N')='S' THEN '진행중' ELSE '미완료' END ) END COMPLETE_YN   ");
-        sb.append(" from  [" + dbInfo.Location + "].[dbo].[F_WORK_INST] A ");
-        sb.append(" LEFT OUTER JOIN  [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] B ");
-        sb.append(" ON A.ITEM_CD = B.ITEM_CD ");
-        sb.append(" LEFT OUTER JOIN  [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] C ");
-        sb.append(" ON A.LOT_NO = C.LOT_NO ");
-        sb.append(" left join  [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD=A.CUST_CD  ");
-        sb.append("where 1=1");
-        sb.append(condition);
-        sb.append(" order by A.W_INST_DATE desc, A.W_INST_CD desc ");
+        sb.append(" from  [" + dbInfo.Location + "].[dbo].[F_WORK_INST] A \n");
+        sb.append(" LEFT OUTER JOIN  [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] B \n");
+        sb.append(" ON A.ITEM_CD = B.ITEM_CD \n");
+        sb.append(" LEFT OUTER JOIN  [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] C \n");
+        sb.append(" ON A.LOT_NO = C.LOT_NO \n");
+        sb.append(" left join  [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD=A.CUST_CD  \n");
+        sb.append(" LEFT OUTER JOIN  (select max(seq)as maxSeq,ITEM_CD from [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] group by ITEM_CD) as F ON F.ITEM_CD = B.ITEM_CD   \n");
+        sb.append("where 1=1\n");
+        sb.append(condition+"\n");
+        sb.append(" order by A.W_INST_DATE desc, A.W_INST_CD desc \n");
 
         JSONArray = dbInfo.SelectDB(sb.toString());
 

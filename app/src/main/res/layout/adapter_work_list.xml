@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="650dp"
-    android:layout_height="35dp">
+    android:layout_height="35dp"
+    android:background="#504E4E">
 
     <TextView
         android:id="@+id/worklist_tv_custNm"

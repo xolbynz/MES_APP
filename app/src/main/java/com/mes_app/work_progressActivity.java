@@ -2,10 +2,10 @@ package com.mes_app;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -48,6 +48,7 @@ public class work_progressActivity extends Fragment {
     public String selected_spec;
     public String selected_instDate;
     public String selected_deleveryDate;
+    public String selected_maxSeq;
 
 
     TextView tv_itemNm;
@@ -121,7 +122,7 @@ public class work_progressActivity extends Fragment {
             try {
                 final pop_workList oDialog = new pop_workList(context, new pop_workList.pop_workListListner() {
                     @Override
-                    public void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt, String spec,String instDate, String deleveryDate ) {
+                    public void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt, String spec,String instDate, String deleveryDate ,String maxSeq) {
                         selected_lotNo=lotNo;
                         selected_custNm=custNm;
                         selected_itemNm=itemNm;
@@ -129,6 +130,7 @@ public class work_progressActivity extends Fragment {
                         selected_spec=spec;
                         selected_instDate=instDate;
                         selected_deleveryDate=deleveryDate;
+                        selected_maxSeq=maxSeq;
 
 
                         try{
@@ -138,6 +140,7 @@ public class work_progressActivity extends Fragment {
                             tv_instAmt.setText(selected_instAmt);
                             tv_date.setText(selected_instDate);
                             tv_delDate.setText(selected_deleveryDate);
+                            tv_workNum.setText(selected_maxSeq);
 
 
                         }catch (Exception ex){
@@ -147,8 +150,9 @@ public class work_progressActivity extends Fragment {
                 });
 
 
-                WindowManager.LayoutParams wm = oDialog.getWindow().getAttributes();  //다이얼로그의 높이 너비 설정하기위해
-                wm.copyFrom(oDialog.getWindow().getAttributes());  //여기서 설정한값을 그대로 다이얼로그에 넣겠다는의미
+
+                oDialog.getWindow().setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+
 
 
 
