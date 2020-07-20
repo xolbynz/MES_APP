@@ -46,6 +46,8 @@ public class work_progressActivity extends Fragment {
     public String selected_itemNm;
     public String selected_instAmt;
     public String selected_spec;
+    public String selected_instDate;
+    public String selected_deleveryDate;
 
 
     TextView tv_itemNm;
@@ -119,12 +121,14 @@ public class work_progressActivity extends Fragment {
             try {
                 final pop_workList oDialog = new pop_workList(context, new pop_workList.pop_workListListner() {
                     @Override
-                    public void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt, String spec) {
+                    public void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt, String spec,String instDate, String deleveryDate ) {
                         selected_lotNo=lotNo;
                         selected_custNm=custNm;
                         selected_itemNm=itemNm;
                         selected_instAmt=instAmt;
                         selected_spec=spec;
+                        selected_instDate=instDate;
+                        selected_deleveryDate=deleveryDate;
 
 
                         try{
@@ -132,6 +136,8 @@ public class work_progressActivity extends Fragment {
                             tv_itemNm.setText(selected_itemNm);
                             tv_lotNo.setText(selected_lotNo);
                             tv_instAmt.setText(selected_instAmt);
+                            tv_date.setText(selected_instDate);
+                            tv_delDate.setText(selected_deleveryDate);
 
 
                         }catch (Exception ex){

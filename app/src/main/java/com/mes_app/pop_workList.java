@@ -41,11 +41,13 @@ public class pop_workList extends Dialog {
     public String selected_itemNm;
     public String selected_instAmt;
     public String selected_spec;
+    public String selected_instDate;
+    public String selected_deleveryDate;
 
 private  pop_workListListner pop_workListListner;
 
 public  interface pop_workListListner{
-    void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt,String spec);
+    void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate);
 }
 
     public pop_workList(Context context, pop_workListListner pop_workListListner) {
@@ -95,6 +97,9 @@ this.pop_workListListner= pop_workListListner;
                     String spec = "";
                     String instAmt;
                     String lotNo = "";
+                    String instDate ="";
+                    String deleveryDate="";
+
                     String completeYN;
 
                     custNm = jo.getString("CUST_NM");
@@ -103,8 +108,10 @@ this.pop_workListListner= pop_workListListner;
                     instAmt = jo.getString("INST_AMT");
                     spec = jo.getString("SPEC");
                     completeYN = jo.getString("COMPLETE_YN");
+                    instDate =jo.getString("W_INST_DATE");
+                    deleveryDate=jo.getString("DELIVERY_DATE");
 
-                    workListVo = new WorkListVo(custNm, lotNo, itemNm, instAmt, spec, completeYN);
+                    workListVo = new WorkListVo(custNm, lotNo, itemNm, instAmt, spec, completeYN,instDate,deleveryDate);
                     workListAdapter.addItem(workListVo);
 
                 }
@@ -125,8 +132,10 @@ this.pop_workListListner= pop_workListListner;
                         selected_itemNm=workListAdapter.arrayList.get(position).getItemNm().toString();
                         selected_instAmt=workListAdapter.arrayList.get(position).getInstAmt().toString();
                         selected_spec=workListAdapter.arrayList.get(position).getSpec().toString();
+                        selected_instAmt=workListAdapter.arrayList.get(position).getInstDate().toString();
+                        selected_deleveryDate=workListAdapter.arrayList.get(position).getDelivertDate().toString();
 
-                        pop_workListListner.ClickBtn(selected_lotNo,selected_custNm,selected_itemNm,selected_instAmt,selected_spec);
+                        pop_workListListner.ClickBtn(selected_lotNo,selected_custNm,selected_itemNm,selected_instAmt,selected_spec,selected_instDate,selected_deleveryDate);
                         m_oDialog.dismiss();
 
                     }
@@ -157,7 +166,7 @@ this.pop_workListListner= pop_workListListner;
         sb.append("     ,B.ITEM_NM ");
         sb.append("     ,B.ITEM_GUBUN ");
         sb.append("     ,B.SPEC ");
-        sb.append("     ,A.INST_AMT ");
+        sb.append("     ,convert(int,A.INST_AMT) as INST_AMT");
         sb.append("     ,A.CHARGE_AMT ");
         sb.append("     ,A.PACK_AMT ");
         sb.append("     ,A.PLAN_NUM ");

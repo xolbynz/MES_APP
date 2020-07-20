@@ -9,19 +9,39 @@ public class WorkListVo {
     String instAmt;
     String spec;
     String completeYN;
+    String instDate;
+    String delivertDate;
+
+    public String getInstDate() {
+        return instDate;
+    }
+
+    public void setInstDate(String instDate) {
+        this.instDate = instDate;
+    }
+
+    public String getDelivertDate() {
+        return delivertDate;
+    }
+
+    public void setDelivertDate(String delivertDate) {
+        this.delivertDate = delivertDate;
+    }
 
     public  WorkListVo(
 
     ){
 
     }
-    public WorkListVo(String custNm, String lotNo, String itemNm, String instAmt, String spec, String completeYN) {
+    public WorkListVo(String custNm, String lotNo, String itemNm, String instAmt, String spec, String completeYN,String instDate,String delivertDate) {
         this.custNm = custNm;
         this.lotNo = lotNo;
         this.itemNm = itemNm;
         this.instAmt = instAmt;
         this.spec = spec;
         this.completeYN = completeYN;
+        this.instDate= instDate;
+        this.delivertDate= delivertDate;
     }
 
     public String getCustNm() {
