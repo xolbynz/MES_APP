@@ -197,7 +197,7 @@ public class item_trackingActivity extends Fragment {
                     if (traceListVO.getComplete_yn().equals("Y")) {
                         CompleteYn.setText("완료");
                     } else {
-                        CompleteYn.setText("미완료");
+                        CompleteYn.setText("미   완료");
                     }
                 }
 

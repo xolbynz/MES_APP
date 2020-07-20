@@ -19,9 +19,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.VO.OrderVo;
+import com.common.DBInfo;
 import com.example.mes_app.R;
+import com.google.gson.JsonArray;
 import com.mes_app.CustomDialog;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RawInputAdapter extends BaseAdapter {
@@ -29,10 +35,16 @@ public class RawInputAdapter extends BaseAdapter {
     Context context;
     OrderVo orderVo = new OrderVo();
     private ArrayList<OrderVo> arrayList = new ArrayList<>();
+
+    DBInfo dbInfo;
     private Activity activity;
     private int layout;
+    boolean flag = false;
 
-    private Button btn_input;
+    String Order_Date;
+    String Order_Cd;
+    String Order_Seq;
+
     InputMethodManager imm;
 
     public void addItem(OrderVo orderVo) {
@@ -60,7 +72,7 @@ public class RawInputAdapter extends BaseAdapter {
 
         context = parent.getContext(); // activity 정보를 읽어오기
         orderVo = arrayList.get(position);
-
+        dbInfo = new DBInfo();
         RawInputAdapter.ListViewHolder holder = null;
 
         final int adptPosition = position;
@@ -128,37 +140,63 @@ public class RawInputAdapter extends BaseAdapter {
 
         input_amt.setOnKeyListener(onKeyListener);
 
+        input_amt.setText("0");
+
+        input_amt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (input_amt.getText().toString().equals("0")) {
+                    input_amt.setText("");
+                } else if (input_amt.getText().toString().equals("")) {
+                    input_amt.setText("0");
+                }
+            }
+        });
 
         btn_input.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                final String Orer_Date = order_date.getText().toString();
-                final String Order_Cd = order_date.getTag().toString();
-                final String Order_Seq = order_date.getHint().toString();
 
-                final double needamt;
-                final double inputamt;
+                Order_Date = order_date.getText().toString();
+                Order_Cd = order_date.getTag().toString();
+                Order_Seq = order_date.getHint().toString();
 
-                needamt = Double.parseDouble(orderNon_amt.getText().toString());
+                final double Dneedamt;
+                final double Dinputamt;
 
+                Dneedamt = Double.parseDouble(orderNon_amt.getText().toString());
                 if (!input_amt.getText().toString().equals("")) {
-                    inputamt = Double.parseDouble(input_amt.getText().toString());
-                }else{
-                    inputamt = 0;
+                    Dinputamt = Double.parseDouble(input_amt.getText().toString());
+                } else {
+                    Dinputamt = 0;
                 }
-                if (needamt < inputamt) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                try {
+                    flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 확인
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (Dneedamt < Dinputamt) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("현재 입고하려는 수량이 미입고 수량보다 많습니다. 진행하시겠습니까?");
 
                     builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //do things
+                            if (flag == true) {
+
+                            } else {
+                                Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
 
                     builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            input_amt.setText("");
+                            input_amt.setText((int) Dneedamt + "");
                         }
                     });
 
@@ -168,9 +206,19 @@ public class RawInputAdapter extends BaseAdapter {
 //                    });
                     AlertDialog alert = builder.create();
                     alert.show();
-                }
-                else{
-                    input_Logic(Orer_Date, Order_Cd, Order_Seq);
+                } else {
+                    try {
+                        flag = Check(Order_Date, Order_Cd, Order_Seq);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if (flag == true) {
+
+                    } else {
+                        Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -201,10 +249,51 @@ public class RawInputAdapter extends BaseAdapter {
         TextView orderNon_amt;
         EditText input_amt;
         Button btn_input;
+
     }
 
     private void input_Logic(String Order_date, String Order_cd, String Orcder_seq) {
 
+    }
+
+    private boolean Check(String Order_date, String Order_cd, String Order_seq) throws SQLException, JSONException {
+
+
+        StringBuilder sb = new StringBuilder();
+        JSONArray jsonArray;
+
+        sb.append(" select A.ORDER_DATE,A.ORDER_CD,B.SEQ,C.ORDER_AMT, C.INPUT_AMT");
+        sb.append(" FROM F_ORDER A ");
+        sb.append(" LEFT OUTER JOIN F_ORDER_DETAIL B  ");
+        sb.append(" ON A.ORDER_DATE = B.ORDER_DATE ");
+        sb.append("     AND A.ORDER_CD = B.ORDER_CD ");
+        sb.append(" LEFT OUTER JOIN(	 ");
+        sb.append("                     SELECT AA.ORDER_DATE	 ");
+        sb.append("                           ,AA.ORDER_CD       ");
+        sb.append("                           ,AA.SEQ ");
+        sb.append("                           ,FLOOR(ISNULL(AA.TOTAL_AMT,0)) AS ORDER_AMT ");
+        sb.append("                           ,ISNULL(SUM(BB.TOTAL_AMT),0) AS INPUT_AMT ");
+        sb.append("                           , ISNULL(AA.TOTAL_AMT,0)-ISNULL(SUM(BB.TOTAL_AMT),0) AS NO_INPUT_AMT ");
+        sb.append("                     FROM F_ORDER_DETAIL AA ");
+        sb.append("                     LEFT OUTER JOIN F_RAW_DETAIL BB ");
+        sb.append("                     ON AA.ORDER_DATE = BB.ORDER_DATE ");
+        sb.append("                         AND AA.ORDER_CD = BB.ORDER_CD ");
+        sb.append("                         AND AA.SEQ = BB.ORDER_SEQ ");
+        sb.append("                     GROUP BY AA.ORDER_DATE,AA.ORDER_CD,AA.SEQ,AA.TOTAL_AMT)C ");
+        sb.append(" ON A.ORDER_DATE = C.ORDER_DATE  ");
+        sb.append("     AND A.ORDER_CD = C.ORDER_CD ");
+        sb.append("     AND B.SEQ = C.SEQ  ");
+        sb.append(" WHERE A.ORDER_DATE = '" + Order_date + "' ");
+        sb.append("      AND A.ORDER_CD = '" + Order_cd + "' ");
+        sb.append("      AND B.SEQ = '" + Order_seq + "' ");
+
+        jsonArray = dbInfo.SelectDB(sb.toString());
+
+        if (jsonArray.length() == 0 || jsonArray == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

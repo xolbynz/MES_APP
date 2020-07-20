@@ -43,7 +43,6 @@ public class raw_inputActivity extends Fragment {
     GridView gridView;
     DBInfo dbInfo;
     JSONArray JSONArray;
-    JsonObject jsonObject;
     OrderVo orderVo;
     RawInputAdapter rawInputAdapter;
     ArrayList<OrderVo> OrderVoArrayList;
@@ -133,14 +132,14 @@ public class raw_inputActivity extends Fragment {
                     String Unit_cd = "";
                     String Unit_Nm = "";
                     String Cust_Cd = "";
-                    String Cust_Nm = "";
+                    String Cust_Nm = "-";
                     String Price = "";
                     String TotalMoney = "";
                     String Check = "";
                     String Check_Yn = "";
-                    String Order_Amt = "";
-                    String Input_Amt = "";
-                    String Input_NeedAmt = "";
+                    String Order_Amt = "0";
+                    String Input_Amt = "0";
+                    String Input_NeedAmt = "0";
                     String Storage = "";
 
                     if (jo.has("ORDER_DATE")) // Data값이 NULL인 경우 빈값으로 처리
