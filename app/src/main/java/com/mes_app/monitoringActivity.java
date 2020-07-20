@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -86,14 +87,16 @@ public class monitoringActivity extends Fragment {
         imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
         btnSearch.setOnClickListener(Monitering_Search);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = new GregorianCalendar();
+        String Today = sdf.format(cal.getTime());
+        edit_endDate.setText(Today);
 
-        mYear = cal.get(Calendar.YEAR);
+        cal.add(Calendar.DAY_OF_MONTH, - 30);
+        String Daybefore30 = sdf.format(cal.getTime());
+        edit_startDate.setText(Daybefore30);
 
-        mMonth = cal.get(Calendar.MONTH);
-
-        mDay = cal.get(Calendar.DAY_OF_MONTH);
-
+        getLogic();
 
         return rootView;
     }
@@ -166,7 +169,6 @@ public class monitoringActivity extends Fragment {
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
             mYear = year;
 
             mMonth = month + 1;
@@ -186,8 +188,6 @@ public class monitoringActivity extends Fragment {
 
             String selectedDate = year + "-" + m_Month + "-" + m_Day;
             edit_endDate.setText(selectedDate);
-
-
         }
 
 

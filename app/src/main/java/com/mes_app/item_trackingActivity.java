@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,7 @@ public class item_trackingActivity extends Fragment {
     TraceListDetailVo traceListDetailVo;
     InputMethodManager imm;
     GridView gridView;
+    TextView CompleteYn;
 
 
     public item_trackingActivity() {
@@ -72,6 +74,8 @@ public class item_trackingActivity extends Fragment {
         Barcode = rootView.findViewById(R.id.itemTracking_et_barcode);
         btn_search = rootView.findViewById(R.id.itemTracking_btn_search);
         gridView = rootView.findViewById(R.id.itemTracking_gv_grid);
+        CompleteYn = rootView.findViewById(R.id.itemTracking_CompleteYn);
+
 
         Barcode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -106,6 +110,8 @@ public class item_trackingActivity extends Fragment {
         btn_search.setOnClickListener(onClickListener);
         gridView.setOnItemClickListener(hideKeyboard1);
         rootView.setOnClickListener(hideKeyboard2);
+
+        Barcode.findFocus();
 
         return rootView;
     }
@@ -189,9 +195,9 @@ public class item_trackingActivity extends Fragment {
                             work_inst_cd, delivery_date, inst_notice, complete_yn, raw_mat_cd, inst_amt);
 
                     if (traceListVO.getComplete_yn().equals("Y")) {
-
+                        CompleteYn.setText("완료");
                     } else {
-
+                        CompleteYn.setText("미완료");
                     }
                 }
 

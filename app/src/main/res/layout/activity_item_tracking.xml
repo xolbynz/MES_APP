@@ -60,6 +60,18 @@
                 app:layout_constraintStart_toEndOf="@+id/itemTracking_et_barcode"
                 app:layout_constraintTop_toTopOf="@+id/itemTracking_et_barcode" />
 
+            <TextView
+                android:id="@+id/itemTracking_CompleteYn"
+                android:layout_width="129dp"
+                android:layout_height="44dp"
+                android:text="TextView"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.077"
+                app:layout_constraintStart_toEndOf="@+id/itemTracking_btn_search"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

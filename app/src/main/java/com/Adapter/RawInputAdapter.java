@@ -2,6 +2,7 @@ package com.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.VO.OrderVo;
 import com.example.mes_app.R;
@@ -31,9 +34,6 @@ public class RawInputAdapter extends BaseAdapter {
 
     private Button btn_input;
     InputMethodManager imm;
-
-
-    int position;
 
     public void addItem(OrderVo orderVo) {
         arrayList.add(orderVo);
@@ -117,9 +117,11 @@ public class RawInputAdapter extends BaseAdapter {
 
         raw_mat_nm.setText(orderVo.getRawmat_Nm());
         cust_nm.setText(orderVo.getCust_Nm());
-        order_date.setText(orderVo.getOrder_Date());
+
+        order_date.setText(orderVo.getOrder_Date()); // 발주서 DATE, CD ,SEQ
         order_date.setTag(orderVo.getOrder_Cd());
         order_date.setHint(orderVo.getOrder_Seq());
+
         order_amt.setText(orderVo.getOrder_Amt());
         spec.setText(orderVo.getSpec());
         orderNon_amt.setText(orderVo.getInput_NeedAmt());
@@ -130,11 +132,46 @@ public class RawInputAdapter extends BaseAdapter {
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Orer_Date = order_date.getText().toString();
-                String Order_Cd = order_date.getTag().toString();
-                String Order_Seq = order_date.getHint().toString();
+                final String Orer_Date = order_date.getText().toString();
+                final String Order_Cd = order_date.getTag().toString();
+                final String Order_Seq = order_date.getHint().toString();
 
-                Toast.makeText(context,Orer_Date + "/" + Order_Cd + "/" + Order_Seq , Toast.LENGTH_LONG).show();
+                final double needamt;
+                final double inputamt;
+
+                needamt = Double.parseDouble(orderNon_amt.getText().toString());
+
+                if (!input_amt.getText().toString().equals("")) {
+                    inputamt = Double.parseDouble(input_amt.getText().toString());
+                }else{
+                    inputamt = 0;
+                }
+                if (needamt < inputamt) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("현재 입고하려는 수량이 미입고 수량보다 많습니다. 진행하시겠습니까?");
+
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //do things
+                        }
+                    });
+
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            input_amt.setText("");
+                        }
+                    });
+
+//                    builder.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                        }
+//                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+                else{
+                    input_Logic(Orer_Date, Order_Cd, Order_Seq);
+                }
             }
         });
 
@@ -154,6 +191,7 @@ public class RawInputAdapter extends BaseAdapter {
         }
     };
 
+
     private class ListViewHolder {
         TextView raw_mat_nm;
         TextView cust_nm;
@@ -165,7 +203,7 @@ public class RawInputAdapter extends BaseAdapter {
         Button btn_input;
     }
 
-    private void input_Logic(String Order_date, String Order_cd, String Orcder_seq){
+    private void input_Logic(String Order_date, String Order_cd, String Orcder_seq) {
 
     }
 

@@ -64,7 +64,7 @@ public class item_statusActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_item_status, container, false);
         imm = (InputMethodManager) getContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
 
-        gridView = rootView.findViewById(R.id.itemTracking_gv_grid);
+        gridView = rootView.findViewById(R.id.itemStatus_gv);
         btn_search = rootView.findViewById(R.id.itemStatus_btn_search);
 
         et_item = rootView.findViewById(R.id.itemStatus_et_item);
@@ -88,7 +88,7 @@ public class item_statusActivity extends Fragment {
         try {
 
             jsonArray = null;
-            jsonArray = item_status(jsonArray, "and A.ITEM_NM LIKE '%" + et_item.getText() + "%' ");
+            jsonArray = item_status(jsonArray, et_item.getText().toString());
 
             if (jsonArray.length() != 0) {
 
@@ -110,14 +110,12 @@ public class item_statusActivity extends Fragment {
                         ITEM_NM = jo.getString("ITEM_NM");
                     if (jo.has("SPEC")) // Data값이 NULL인 경우 빈값으로 처리
                         SPEC = jo.getString("SPEC");
-
                     if (jo.has("PROP_STOCK")) // Data값이 NULL인 경우 빈값으로 처리
                         PROP_STOCK = jo.getString("PROP_STOCK");
                     if (jo.has("BAL_STOCK")) // Data값이 NULL인 경우 빈값으로 처리
                         BAL_STOCK = jo.getString("BAL_STOCK");
                     if (jo.has("POOR_AMT")) // Data값이 NULL인 경우 빈값으로 처리
                         POOR_AMT = jo.getString("POOR_AMT");
-
                     if (jo.has("UNIT_NM")) // Data값이 NULL인 경우 빈값으로 처리
                         UNIT_NM = jo.getString("UNIT_NM");
 
@@ -156,7 +154,10 @@ public class item_statusActivity extends Fragment {
         sb.append("     left outer join [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] B ON A.ITEM_CD = B.ITEM_CD     ");
         sb.append("     left outer join [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] C ON B.LOT_NO = C.LOT_NO     ");
         sb.append("      WHERE 1=1   ");
-        sb.append(condition);
+        if (!condition.equals(""))
+            sb.append("     and A.ITEM_NM LIKE '%" + condition + "%' ");
+        else
+            sb.append("");
         sb.append("     group by A.ITEM_CD ,A.ITEM_NM, A.SPEC, BASIC_STOCK,  BAL_STOCK, PROP_STOCK ,UNIT_CD,ITEM_GUBUN ");
         sb.append("     order by A.ITEM_CD     ");
 

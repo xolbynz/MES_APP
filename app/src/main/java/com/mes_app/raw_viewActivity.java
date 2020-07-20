@@ -70,6 +70,7 @@ public class raw_viewActivity extends Fragment {
     public void onDetach() {
         super.onDetach();
         activity = null;
+
     }
 
     @Override
@@ -80,6 +81,7 @@ public class raw_viewActivity extends Fragment {
 
     @Override
     public void onStart() {
+        dbInfo = new DBInfo();
         super.onStart();
     }
 
@@ -110,8 +112,7 @@ public class raw_viewActivity extends Fragment {
             }
         });
 
-
-        dbInfo = new DBInfo();
+        getLogic();
         return rootView;
     }
 

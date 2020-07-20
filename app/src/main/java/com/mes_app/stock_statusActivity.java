@@ -83,22 +83,18 @@ public class stock_statusActivity extends Fragment {
         endDate.setOnClickListener(onClickListener);
         btn_stockSearch.setOnClickListener(stockSearch);
 
-        Calendar cal = new GregorianCalendar();
-
-        mYear = cal.get(Calendar.YEAR);
-
-        mMonth = cal.get(Calendar.MONTH);
-
-        mDay = cal.get(Calendar.DAY_OF_MONTH);
 
 
         dbInfo = new DBInfo();
 
-        long now = System.currentTimeMillis();
-        Date mDate = new Date(now);
-        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String today = mFormat.format(mDate);
-        startDate.setText(today);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = new GregorianCalendar();
+        String Today = sdf.format(cal.getTime());
+        endDate.setText(Today);
+
+        cal.add(Calendar.DAY_OF_MONTH, - 30);
+        String Daybefore30 = sdf.format(cal.getTime());
+        startDate.setText(Daybefore30);
 
 
         return rootView;
@@ -259,10 +255,10 @@ public class stock_statusActivity extends Fragment {
 
         query.append("FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] as A  \n");
 
-        query.append("inner join  [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] as B on B.ITEM_CD=A.ITEM_CD \n");
-        query.append("left join [" + dbInfo.Location + "].[dbo].[F_WORK_INST] as C on C.LOT_NO=A.LOT_NO \n");
-        query.append("inner join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD= C.CUST_CD \n");
-        query.append("inner join [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on E.UNIT_CD=B.UNIT_CD \n");
+        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] as B on B.ITEM_CD=A.ITEM_CD \n");
+        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_WORK_INST] as C on C.LOT_NO=A.LOT_NO \n");
+        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD= C.CUST_CD \n");
+        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on E.UNIT_CD=B.UNIT_CD \n");
 
         query.append("WHERE 1=1 \n");
 
