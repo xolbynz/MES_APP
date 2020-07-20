@@ -8,9 +8,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
-        android:layout_width="match_parent"
+        android:layout_width="530dp"
         android:layout_height="35dp"
+        android:layout_marginTop="183dp"
         app:layout_constraintEnd_toEndOf="@+id/worklist_gv"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/worklist_gv"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,6 +24,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
+            android:background="#5E5B5B"
             android:text="거래처명"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +39,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
+            android:background="#5E5B5B"
             android:text="LotNo"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,6 +55,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
+            android:background="#5E5B5B"
             android:text="제품명"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,6 +71,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
+            android:background="#5E5B5B"
             android:text="지시수량"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,6 +87,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
+            android:background="#5E5B5B"
             android:text="규격"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -96,6 +103,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
+            android:background="#5E5B5B"
             android:text="완료여부"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,8 +114,8 @@
 
     <GridView
         android:id="@+id/worklist_gv"
-        android:layout_width="531dp"
-        android:layout_height="668dp"
+        android:layout_width="549dp"
+        android:layout_height="482dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginEnd="1dp"
@@ -115,7 +123,27 @@
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.713"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/worklist_btn_cancel"
+        android:layout_width="212dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginLeft="236dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="225dp"
+        android:layout_marginRight="225dp"
+        android:layout_marginBottom="47dp"
+        android:background="#F10202"
+        android:text="취소"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/worklist_gv"
+        app:layout_constraintVertical_bias="0.617" />
 </androidx.constraintlayout.widget.ConstraintLayout>

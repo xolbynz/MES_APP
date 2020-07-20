@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class WorkListAdapter extends BaseAdapter {
     Context context;
     WorkListVo workListVo = new WorkListVo();
-    ArrayList<WorkListVo> arrayList = new ArrayList<>();
+  public   ArrayList<WorkListVo> arrayList = new ArrayList<>();
 
     @Override
     public int getCount() {

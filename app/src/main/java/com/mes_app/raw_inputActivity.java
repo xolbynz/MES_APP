@@ -1,14 +1,11 @@
 package com.mes_app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -97,7 +94,7 @@ public class raw_inputActivity extends Fragment {
 
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
         Layout_Main = rootView.findViewById(R.id.RawInput_Main);
-        btn_input = rootView.findViewById(R.id.btn_input);
+        btn_input = rootView.findViewById(R.id.rawInp_btn_input);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
@@ -273,16 +270,16 @@ public class raw_inputActivity extends Fragment {
         return JSONArray;
     }
 
-    View.OnClickListener showDialog = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            CustomDialog oDialog = new CustomDialog(context);
-            oDialog.setCancelable(false);
-            oDialog.show();
-
-        }
-    };
+//    View.OnClickListener showDialog = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//
+//            CustomDialog oDialog = new CustomDialog(context);
+//            oDialog.setCancelable(false);
+//            oDialog.show();
+//
+//        }
+//    };
 
     View.OnClickListener myClickListener = new View.OnClickListener() {
         @Override

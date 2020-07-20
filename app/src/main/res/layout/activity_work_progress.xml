@@ -71,12 +71,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="지시수량"
-        app:layout_constraintBottom_toBottomOf="@+id/teworkPrg_workNum2"
-        app:layout_constraintStart_toEndOf="@+id/teworkPrg_workNum2"
-        app:layout_constraintTop_toTopOf="@+id/teworkPrg_workNum2" />
+        app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_workNum2"
+        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_workNum2"
+        app:layout_constraintTop_toTopOf="@+id/workPrg_tv_workNum2" />
 
     <TextView
-        android:id="@+id/teworkPrg_workNum2"
+        android:id="@+id/workPrg_tv_workNum2"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -143,7 +143,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/teworkPrg_workNum"
+        android:id="@+id/workPrg_tv_workNum"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -162,7 +162,7 @@
         android:layout_marginLeft="16dp"
         android:text="지시수량"
         app:layout_constraintBottom_toBottomOf="@+id/workPrg_tv_itemNm"
-        app:layout_constraintStart_toEndOf="@+id/teworkPrg_workNum"
+        app:layout_constraintStart_toEndOf="@+id/workPrg_tv_workNum"
         app:layout_constraintTop_toTopOf="@+id/workPrg_tv_itemNm"
         app:layout_constraintVertical_bias="0.0" />
 
