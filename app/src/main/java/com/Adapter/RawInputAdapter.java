@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +86,7 @@ public class RawInputAdapter extends BaseAdapter {
         final TextView orderNon_amt;
         final EditText input_amt;
         final Button btn_input;
+        final Spinner spin_storage;
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -98,6 +100,8 @@ public class RawInputAdapter extends BaseAdapter {
             orderNon_amt = convertView.findViewById(R.id.rawInp_tv_nonInpAmt);
             input_amt = convertView.findViewById(R.id.rawInp_et_inpAmt);
             btn_input = convertView.findViewById(R.id.rawInp_btn_input);
+            spin_storage = convertView.findViewById(R.id.rawInp_Spin_Storage);
+
 
             holder = new RawInputAdapter.ListViewHolder();
 
@@ -109,6 +113,7 @@ public class RawInputAdapter extends BaseAdapter {
             holder.orderNon_amt = orderNon_amt;
             holder.input_amt = input_amt;
             holder.btn_input = btn_input;
+            holder.spin_storage = spin_storage;
 
             convertView.setTag(holder);
 
@@ -124,6 +129,7 @@ public class RawInputAdapter extends BaseAdapter {
             orderNon_amt = holder.orderNon_amt;
             input_amt = holder.input_amt;
             btn_input = holder.btn_input;
+            spin_storage = holder.spin_storage;
 
         }
 
@@ -134,14 +140,13 @@ public class RawInputAdapter extends BaseAdapter {
         order_date.setTag(orderVo.getOrder_Cd());
         order_date.setHint(orderVo.getOrder_Seq());
 
-        order_amt.setText(orderVo.getOrder_Amt());
+        order_amt.setText(orderVo.getOrder_Amt() + "" + orderVo.getUnit_Nm());
+        orderNon_amt.setText(orderVo.getInput_NeedAmt() + "" + orderVo.getUnit_Nm());
         spec.setText(orderVo.getSpec());
-        orderNon_amt.setText(orderVo.getInput_NeedAmt());
-
-        input_amt.setOnKeyListener(onKeyListener);
 
         input_amt.setText("0");
 
+        input_amt.setOnKeyListener(onKeyListener);
         input_amt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -249,6 +254,7 @@ public class RawInputAdapter extends BaseAdapter {
         TextView orderNon_amt;
         EditText input_amt;
         Button btn_input;
+        Spinner spin_storage;
 
     }
 
