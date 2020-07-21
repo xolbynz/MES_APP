@@ -104,20 +104,21 @@
 
     <EditText
         android:id="@+id/rawInp_et_inpAmt"
-        android:layout_width="170dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:background="#818181"
+
+        android:digits="0123456789"
         android:ems="10"
         android:inputType="number"
         android:textColor="#FBFBFB"
-        android:digits="0123456789"
-
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_nonInpAmt"
-        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_nonInpAmt"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_Spin_Storage"
         app:layout_constraintTop_toTopOf="@+id/rawInp_tv_nonInpAmt"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/rawInp_btn_input"
@@ -127,6 +128,17 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rawInp_et_inpAmt"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/rawInp_Spin_Storage"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#818181"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rawInp_tv_nonInpAmt"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
