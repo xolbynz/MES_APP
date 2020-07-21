@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +28,10 @@ import com.mes_app.CustomDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RawInputAdapter extends BaseAdapter {
@@ -47,6 +50,9 @@ public class RawInputAdapter extends BaseAdapter {
     String Order_Seq;
 
     InputMethodManager imm;
+    JSONArray jsonArray;
+    ArrayList<String> storageList;
+    ArrayAdapter<String> storageAdapter;
 
     public void addItem(OrderVo orderVo) {
         arrayList.add(orderVo);
@@ -135,14 +141,46 @@ public class RawInputAdapter extends BaseAdapter {
 
         raw_mat_nm.setText(orderVo.getRawmat_Nm());
         cust_nm.setText(orderVo.getCust_Nm());
+        cust_nm.setTag(orderVo.getCust_Cd());
 
         order_date.setText(orderVo.getOrder_Date()); // 발주서 DATE, CD ,SEQ
         order_date.setTag(orderVo.getOrder_Cd());
         order_date.setHint(orderVo.getOrder_Seq());
 
-        order_amt.setText(orderVo.getOrder_Amt() + "" + orderVo.getUnit_Nm());
-        orderNon_amt.setText(orderVo.getInput_NeedAmt() + "" + orderVo.getUnit_Nm());
+        order_amt.setText(orderVo.getOrder_Amt() + " " + orderVo.getUnit_Nm());
+        orderNon_amt.setTag(orderVo.getUnit_Nm());
+        orderNon_amt.setText(orderVo.getInput_NeedAmt() + " " + orderVo.getUnit_Nm());
         spec.setText(orderVo.getSpec());
+
+
+        try { // 창고 스피너
+            jsonArray = new JSONArray();
+            jsonArray = getStorage();
+            storageList = new ArrayList<>();
+            if (jsonArray.length() != 0) {
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jo = jsonArray.getJSONObject(i);
+
+                    String storage_cd = "";
+                    String storage_nm = "";
+
+                    if (jo.has("STORAGE_CD")) // Data값이 NULL인 경우 빈값으로 처리
+                        storage_cd = jo.getString("STORAGE_CD");
+                    if (jo.has("STORAGE_NM"))
+                        storage_nm = jo.getString("STORAGE_NM");
+
+                    storageList.add(storage_nm);
+                }
+                storageAdapter = new ArrayAdapter<String>(context.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, storageList);
+                spin_storage.setAdapter(storageAdapter);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         input_amt.setText("0");
 
@@ -150,9 +188,11 @@ public class RawInputAdapter extends BaseAdapter {
         input_amt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (input_amt.getText().toString().equals("0")) {
+                if (hasFocus && input_amt.getText().toString().equals("0")) {
                     input_amt.setText("");
-                } else if (input_amt.getText().toString().equals("")) {
+                } else if (!hasFocus && input_amt.getText().toString().equals("0")) {
+                    input_amt.setText("0");
+                } else if (!hasFocus && input_amt.getText().toString().equals("")) {
                     input_amt.setText("0");
                 }
             }
@@ -163,34 +203,58 @@ public class RawInputAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
+
                 Order_Date = order_date.getText().toString();
                 Order_Cd = order_date.getTag().toString();
                 Order_Seq = order_date.getHint().toString();
 
+
                 final double Dneedamt;
                 final double Dinputamt;
 
-                Dneedamt = Double.parseDouble(orderNon_amt.getText().toString());
-                if (!input_amt.getText().toString().equals("")) {
-                    Dinputamt = Double.parseDouble(input_amt.getText().toString());
-                } else {
+                if (input_amt.getText().toString().contains(" ")) {
+                    String[] sTemp = input_amt.getText().toString().split(" ");
+                    Dinputamt = Double.parseDouble(sTemp[0]);
+                } else if (input_amt.getText().toString().equals("")) {
                     Dinputamt = 0;
+                } else {
+                    Dinputamt = Double.parseDouble(input_amt.getText().toString());
+                }
+                if (orderNon_amt.getText().toString().contains(" ")) {
+                    String[] sTemp2 = orderNon_amt.getText().toString().split(" ");
+                    Dneedamt = Double.parseDouble(sTemp2[0]);
+                } else {
+                    Dneedamt = Double.parseDouble(orderNon_amt.getText().toString());
                 }
 
-                try {
-                    flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 확인
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (Dinputamt == 0) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("입고 수량을 기입해주세요");
+
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            return;
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    return;
                 }
 
-                if (Dneedamt < Dinputamt) {
+                if (Dneedamt < Dinputamt) { // 입고량, 미입고량 비교
                     final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("현재 입고하려는 수량이 미입고 수량보다 많습니다. 진행하시겠습니까?");
 
                     builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 정상 확인
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             if (flag == true) {
 
                             } else {
@@ -213,16 +277,44 @@ public class RawInputAdapter extends BaseAdapter {
                     alert.show();
                 } else {
                     try {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage(cust_nm.getText().toString() + " | " + raw_mat_nm.getText().toString() + " " + input_amt.getText().toString()
+                                + orderNon_amt.getTag() + "입고를 진행 하시겠습니까?");
+
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                try {
+                                    flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 정상 확인
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (flag == true) {
+
+                                } else {
+                                    Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                return;
+                            }
+                        });
+
+//                    builder.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                        }
+//                    });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                         flag = Check(Order_Date, Order_Cd, Order_Seq);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
-                    if (flag == true) {
-
-                    } else {
-                        Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -269,19 +361,19 @@ public class RawInputAdapter extends BaseAdapter {
         JSONArray jsonArray;
 
         sb.append(" select A.ORDER_DATE,A.ORDER_CD,B.SEQ,C.ORDER_AMT, C.INPUT_AMT");
-        sb.append(" FROM F_ORDER A ");
-        sb.append(" LEFT OUTER JOIN F_ORDER_DETAIL B  ");
+        sb.append(" FROM [" + dbInfo.Location + "].[dbo].[F_ORDER] A ");
+        sb.append(" LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_ORDER_DETAIL] B  ");
         sb.append(" ON A.ORDER_DATE = B.ORDER_DATE ");
         sb.append("     AND A.ORDER_CD = B.ORDER_CD ");
         sb.append(" LEFT OUTER JOIN(	 ");
         sb.append("                     SELECT AA.ORDER_DATE	 ");
-        sb.append("                           ,AA.ORDER_CD       ");
+        sb.append("                             ,AA.ORDER_CD       ");
         sb.append("                           ,AA.SEQ ");
         sb.append("                           ,FLOOR(ISNULL(AA.TOTAL_AMT,0)) AS ORDER_AMT ");
         sb.append("                           ,ISNULL(SUM(BB.TOTAL_AMT),0) AS INPUT_AMT ");
         sb.append("                           , ISNULL(AA.TOTAL_AMT,0)-ISNULL(SUM(BB.TOTAL_AMT),0) AS NO_INPUT_AMT ");
-        sb.append("                     FROM F_ORDER_DETAIL AA ");
-        sb.append("                     LEFT OUTER JOIN F_RAW_DETAIL BB ");
+        sb.append("                     FROM [" + dbInfo.Location + "].[dbo].[F_ORDER_DETAIL] AA ");
+        sb.append("                     LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] BB ");
         sb.append("                     ON AA.ORDER_DATE = BB.ORDER_DATE ");
         sb.append("                         AND AA.ORDER_CD = BB.ORDER_CD ");
         sb.append("                         AND AA.SEQ = BB.ORDER_SEQ ");
@@ -300,6 +392,18 @@ public class RawInputAdapter extends BaseAdapter {
         } else {
             return true;
         }
+    }
+
+    public JSONArray getStorage() throws SQLException, JSONException {
+
+        JSONArray jsonArray = null;
+
+        StringBuilder query = new StringBuilder();
+
+        query.append("SELECT STORAGE_CD, STORAGE_NM FROM [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE]");
+        jsonArray = dbInfo.SelectDB(query.toString());
+        return jsonArray;
+
     }
 
 

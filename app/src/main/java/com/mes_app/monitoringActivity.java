@@ -45,6 +45,8 @@ public class monitoringActivity extends Fragment {
     GridView gridView;
     JSONArray jsonArray;
     MoniteringVo moniteringVo;
+    String Today;
+    String Daybefore30;
     ArrayList<MoniteringVo> moniteringVoArrayList;
 
 
@@ -81,25 +83,33 @@ public class monitoringActivity extends Fragment {
         edit_startDate.setOnClickListener(showDate);
         edit_endDate.setOnClickListener(showDate);
 
-//        edit_startDate.setOnFocusChangeListener(hideKeyboard);
-//        edit_endDate.setOnFocusChangeListener(hideKeyboard);
-
         imm.hideSoftInputFromWindow(edit_startDate.getWindowToken(), 0);
+
         btnSearch.setOnClickListener(Monitering_Search);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = new GregorianCalendar();
-        String Today = sdf.format(cal.getTime());
+
+        mYear = cal.get(Calendar.YEAR);
+
+        mMonth = cal.get(Calendar.MONTH);
+
+        mDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Today = sdf.format(cal.getTime());
         edit_endDate.setText(Today);
 
-        cal.add(Calendar.DAY_OF_MONTH, - 30);
-        String Daybefore30 = sdf.format(cal.getTime());
+        cal.add(Calendar.DAY_OF_MONTH, -30);
+        Daybefore30 = sdf.format(cal.getTime());
         edit_startDate.setText(Daybefore30);
 
         getLogic();
 
         return rootView;
     }
+
+
 
 //    View.OnFocusChangeListener hideKeyboard = new View.OnFocusChangeListener() {
 //        @Override
@@ -329,7 +339,7 @@ public class monitoringActivity extends Fragment {
             query.append(" AND B.FLOW_DATE >  '" + condition2 + "' \n");
         else if (condition1.equals("") && condition2.equals(""))
 
-        query.append(" ORDER BY A.LOT_NO ");
+            query.append(" ORDER BY A.LOT_NO ");
         Jarray = dbInfo.SelectDB(query.toString());
         return Jarray;
 

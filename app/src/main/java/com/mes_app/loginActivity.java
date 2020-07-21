@@ -163,7 +163,7 @@ public class loginActivity extends AppCompatActivity {
             // TODO
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
             String dbIp = "218.38.14.36";    // 뒤에 :1443 은 입력하지 않는다.
-            String dbName = "SM_FACTORY_COM"; //임시로 COM에들어감
+            String dbName = "SM_FACTORY_COM"; //임시로 COM 접속
             String dbUser = "smartUser";
             String dbUserPass = "smart/?25";
             ConnectionClass connClass = new ConnectionClass();
@@ -242,8 +242,6 @@ public class loginActivity extends AppCompatActivity {
                     compInfo.setCOM_LOCATION(rs.getString(1));
                     compInfo.setCOMPANY_NM(rs.getString(2));
                     compInfo.setSP_CODE(rs.getString(3));
-
-
                     compInfo.setPACK_GUBUN(rs.getString(4));
 
 

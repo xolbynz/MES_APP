@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -67,6 +68,9 @@ public class work_viewActivity extends Fragment {
 
     WorkInstRawVo workInstRawVo;
     WorkInstHalfVo workInstHalfVo;
+
+    String Today;
+    String Daybefore30;
 
     int mYear, mMonth, mDay;
 
@@ -120,6 +124,15 @@ this.context= context;
 
         et_start.setOnClickListener(showDate);
         et_end.setOnClickListener(showDate);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Today = sdf.format(cal.getTime());
+        et_end.setText(Today);
+
+        cal.add(Calendar.DAY_OF_MONTH, -30);
+        Daybefore30 = sdf.format(cal.getTime());
+        et_start.setText(Daybefore30);
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override

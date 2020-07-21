@@ -1,10 +1,13 @@
 package com.VO;
 
-class StorageVo {
+public class StorageVo {
 
     String Storage_cd;
     String Storage_nm;
     String Comment;
+
+    public StorageVo() {
+    }
 
     public StorageVo(String storage_cd, String storage_nm, String comment) {
         Storage_cd = storage_cd;

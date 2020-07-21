@@ -86,9 +86,15 @@ public class stock_statusActivity extends Fragment {
 
 
         dbInfo = new DBInfo();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = new GregorianCalendar();
+
+        mYear = cal.get(Calendar.YEAR);
+
+        mMonth = cal.get(Calendar.MONTH);
+
+        mDay = cal.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         String Today = sdf.format(cal.getTime());
         endDate.setText(Today);
 
