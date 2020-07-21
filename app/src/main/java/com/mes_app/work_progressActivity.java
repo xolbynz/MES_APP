@@ -157,7 +157,7 @@ public class work_progressActivity extends Fragment {
 
 
 
-             //   oDialog.setCancelable(false);
+             //   oDialog.setCancelable(false)ss;
 
 
                 oDialog.show();
