@@ -12,6 +12,25 @@ public class WorkListVo {
     String instDate;
     String delivertDate;
     String maxSeq;
+    String itemCd;
+
+    public String getItemCd() {
+        return itemCd;
+    }
+
+    public void setItemCd(String itemCd) {
+        this.itemCd = itemCd;
+    }
+
+    public String getCustCd() {
+        return custCd;
+    }
+
+    public void setCustCd(String custCd) {
+        this.custCd = custCd;
+    }
+
+    String custCd;
 
     public String getInstDate() {
         return instDate;
@@ -42,7 +61,7 @@ public class WorkListVo {
     ){
 
     }
-    public WorkListVo(String custNm, String lotNo, String itemNm, String instAmt, String spec, String completeYN,String instDate,String delivertDate,String maxSeq) {
+    public WorkListVo(String custNm, String lotNo, String itemNm, String instAmt, String spec, String completeYN,String instDate,String delivertDate,String maxSeq,String itemCd,String custCd) {
         this.custNm = custNm;
         this.lotNo = lotNo;
         this.itemNm = itemNm;
@@ -52,6 +71,8 @@ public class WorkListVo {
         this.instDate= instDate;
         this.delivertDate= delivertDate;
         this.maxSeq= maxSeq;
+        this.itemCd=itemCd;
+        this.custCd=custCd;
     }
 
     public String getCustNm() {

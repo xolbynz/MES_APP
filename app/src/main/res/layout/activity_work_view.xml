@@ -113,9 +113,9 @@
                     android:id="@+id/txt_work"
                     android:layout_width="198dp"
                     android:layout_height="36dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="[작업지시 항목]"
 
                     android:textSize="24sp"
@@ -128,11 +128,11 @@
                     android:layout_height="500dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="6dp"
                     android:layout_marginRight="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.677"
+                    app:layout_constraintHorizontal_bias="0.516"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
@@ -140,57 +140,43 @@
                     android:id="@+id/workInst_et_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginLeft="26dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:focusable="false"
                     android:inputType="date"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
                     app:layout_constraintStart_toEndOf="@+id/txt_work"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/workInst_et_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginLeft="27dp"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginLeft="31dp"
                     android:ems="10"
                     android:focusableInTouchMode="false"
                     android:inputType="date"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@+id/workInst_et_start"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/workInst_et_start"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintStart_toEndOf="@+id/workInst_et_start"
+                    app:layout_constraintTop_toTopOf="@+id/workInst_et_start" />
 
                 <ImageButton
                     android:id="@+id/workInst_tv_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
                     android:layout_marginBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="@+id/workInst_et_end"
                     app:layout_constraintStart_toEndOf="@+id/workInst_et_end"
                     app:layout_constraintTop_toTopOf="@+id/workInst_et_end"
-                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/search2blue" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="13dp"
-                    android:layout_height="18dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginLeft="28dp"
-                    android:text="~"
-                    app:layout_constraintBottom_toBottomOf="@+id/workInst_et_start"
-                    app:layout_constraintStart_toEndOf="@+id/workInst_et_start"
-                    app:layout_constraintTop_toTopOf="@+id/workInst_et_start" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -423,12 +409,11 @@
                             android:id="@+id/workView_et_memo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
                             app:layout_constraintBottom_toBottomOf="@+id/textView27"
                             app:layout_constraintStart_toEndOf="@+id/textView27"
-                            app:layout_constraintTop_toTopOf="@+id/textView27"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:layout_constraintTop_toTopOf="@+id/textView27" />
 
                         <TextView
                             android:id="@+id/workView_et_instCd"
@@ -670,5 +655,4 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

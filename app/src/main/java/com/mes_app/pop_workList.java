@@ -44,11 +44,13 @@ public class pop_workList extends Dialog {
     public String selected_instDate;
     public String selected_deleveryDate;
     public String selected_maxSeq;
+    public String selected_itemCd;
+    public String selected_custCd;
 
 private  pop_workListListner pop_workListListner;
 
 public  interface pop_workListListner{
-    void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate,String maxSeq);
+    void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate,String maxSeq,String itemCd,String custCd);
 }
 
     public pop_workList(Context context, pop_workListListner pop_workListListner) {
@@ -101,6 +103,8 @@ this.pop_workListListner= pop_workListListner;
                     String instDate ="";
                     String deleveryDate="";
                     String maxSeq="";
+                    String itemCd="";
+                    String custCd="";
 
                     String completeYN;
 
@@ -113,8 +117,10 @@ this.pop_workListListner= pop_workListListner;
                     instDate =jo.getString("W_INST_DATE");
                     deleveryDate=jo.getString("DELIVERY_DATE");
                     maxSeq=jo.getString("maxSeq");
+                    itemCd=jo.getString("ITEM_CD");
+                    custCd=jo.getString("CUST_CD");
 
-                    workListVo = new WorkListVo(custNm, lotNo, itemNm, instAmt, spec, completeYN,instDate,deleveryDate,maxSeq);
+                    workListVo = new WorkListVo(custNm, lotNo, itemNm, instAmt, spec, completeYN,instDate,deleveryDate,maxSeq,itemCd,custCd);
                     workListAdapter.addItem(workListVo);
 
                 }
@@ -138,7 +144,9 @@ this.pop_workListListner= pop_workListListner;
                         selected_instDate=workListAdapter.arrayList.get(position).getInstDate().toString();
                         selected_deleveryDate=workListAdapter.arrayList.get(position).getDelivertDate().toString();
                         selected_maxSeq=workListAdapter.arrayList.get(position).getMaxSeq().toString();
-                        pop_workListListner.ClickBtn(selected_lotNo,selected_custNm,selected_itemNm,selected_instAmt,selected_spec,selected_instDate,selected_deleveryDate,selected_maxSeq);
+                        selected_itemCd=workListAdapter.arrayList.get(position).getItemCd().toString();
+                        selected_custCd=workListAdapter.arrayList.get(position).getCustCd().toString();
+                        pop_workListListner.ClickBtn(selected_lotNo,selected_custNm,selected_itemNm,selected_instAmt,selected_spec,selected_instDate,selected_deleveryDate,selected_maxSeq,selected_itemCd,selected_custCd);
                         //String lotNo, String custNm, String itemNm, String instAmt,String spec,String instDate,String deleveryDate
                         m_oDialog.dismiss();
 

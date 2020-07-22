@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.VO.RawVo;
@@ -21,7 +23,10 @@ import com.common.DBInfo;
 import com.example.mes_app.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class work_progressActivity extends Fragment {
@@ -49,6 +54,8 @@ public class work_progressActivity extends Fragment {
     public String selected_instDate;
     public String selected_deleveryDate;
     public String selected_maxSeq;
+    public String selected_itemCd;
+    public String selected_custCd;
 
 
     TextView tv_itemNm;
@@ -59,7 +66,10 @@ public class work_progressActivity extends Fragment {
     TextView tv_instAmt;
     TextView tv_workAmt;
     TextView tv_workRate;
+   LinearLayout llo_bottom;
 
+   ConstraintLayout llo_mian;
+   TextView tv_flow_title;
 
 
 
@@ -108,6 +118,10 @@ public class work_progressActivity extends Fragment {
          tv_instAmt=rootView.findViewById(R.id.workPrg_tv_instAmt2);
          tv_workAmt=rootView.findViewById(R.id.workPrg_tv_workAmt2);
          tv_workRate=rootView.findViewById(R.id.workPrg_tv_workRate2);
+tv_flow_title=rootView.findViewById(R.id.workPrg_tv_title);
+        llo_bottom=rootView.findViewById(R.id.workPrg_llo_bottom);
+        llo_mian=rootView.findViewById(R.id.workPrg_llo_main);
+        llo_mian.setVisibility(View.INVISIBLE);
 
         return rootView;
     }
@@ -122,7 +136,7 @@ public class work_progressActivity extends Fragment {
             try {
                 final pop_workList oDialog = new pop_workList(context, new pop_workList.pop_workListListner() {
                     @Override
-                    public void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt, String spec,String instDate, String deleveryDate ,String maxSeq) {
+                    public void ClickBtn(String lotNo, String custNm, String itemNm, String instAmt, String spec,String instDate, String deleveryDate ,String maxSeq,String itemCd,String custCd) {
                         selected_lotNo=lotNo;
                         selected_custNm=custNm;
                         selected_itemNm=itemNm;
@@ -131,6 +145,8 @@ public class work_progressActivity extends Fragment {
                         selected_instDate=instDate;
                         selected_deleveryDate=deleveryDate;
                         selected_maxSeq=maxSeq;
+                          selected_itemCd=itemCd;
+                          selected_custCd=custCd;
 
 
                         try{
@@ -141,6 +157,9 @@ public class work_progressActivity extends Fragment {
                             tv_date.setText(selected_instDate);
                             tv_delDate.setText(selected_deleveryDate);
                             tv_workNum.setText(selected_maxSeq);
+
+
+                            pushButton(Integer.valueOf(maxSeq));
 
 
                         }catch (Exception ex){
@@ -172,8 +191,74 @@ public class work_progressActivity extends Fragment {
         }
     };
 
+private  final int DYNAMIC_VIEW_ID = 0x8000;
+
+    //동적으로 버튼 생성
+    private  void pushButton(int seq){
+        llo_bottom.removeAllViews(); // 포함 뷰 클리어
 
 
 
+        JArray = null;
+        try {
+            JArray = item_flow_info(JArray, selected_itemCd);
+
+            if (JArray!=null){
+                for (int i=0;i<JArray.length();i++)
+                {
+                    JSONObject jo = JArray.getJSONObject(i);
+
+                  final   Button dynamicButton = new Button(context);
+
+                    dynamicButton.setId(DYNAMIC_VIEW_ID + i);
+                    dynamicButton.setText(jo.getString("FLOW_NM"));
+                    dynamicButton.setTag(jo.getString("FLOW_CD"));
+                    dynamicButton.setTextSize(30);
+                    final  int posiotion=i;
+                    dynamicButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            System.out.println(posiotion + dynamicButton.getText().toString());
+tv_flow_title.setText(dynamicButton.getText().toString());
+
+                            llo_mian.setVisibility(View.VISIBLE);
+
+
+                        }
+                    });
+
+                    llo_bottom.addView(dynamicButton, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.toString());
+        }
+
+
+
+
+
+    }
+
+
+    public JSONArray item_flow_info(JSONArray JSONArray, String condition) throws SQLException, JSONException {
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("select B.FLOW_NM,A.ITEM_CD,B.FLOW_CD \n");
+        sb.append("from  [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] A  \n");
+        sb.append("INNER JOIN  [" + dbInfo.Location + "].[dbo].[N_FLOW_CODE] AS B ON B.FLOW_CD=A.FLOW_CD\n");
+        sb.append("where 1=1 \n");
+        sb.append("and ITEM_CD='"+condition+"'\n");
+
+
+
+        JSONArray = dbInfo.SelectDB(sb.toString());
+
+        System.out.println("쿼리: \n" + sb.toString());
+        return JSONArray;
+    }
 
 }
