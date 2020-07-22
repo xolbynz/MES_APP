@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AlertDialog;
 
 import android.util.Log;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ public class DBInfo {
 
     static public Connection mainConn = null;
     static public String Location = null;
+
 
     static void InsertDB() {
 
@@ -98,9 +102,27 @@ public class DBInfo {
     }
 
     public void Insert(String query) throws SQLException {
-        Statement statement = null;
-        statement = mainConn.createStatement();
-        statement.executeQuery(query);
+
+        boolean state = false;
+        Savepoint savepoint = mainConn.setSavepoint("BEFORE (INSERT / UPDATE/ DELETE ) SAVEPOINT");
+        try {
+            mainConn.setAutoCommit(false); // 여러개의 쿼리 문장이 하나의 작업으로 수행 되어야 할 경우 각각의 문장이 자동으로 작동되지 못하게 막음
+
+            Statement statement = null;
+            statement = mainConn.createStatement();
+            statement.executeUpdate(query);
+            state = true;
+        } catch (SQLException e){
+            e.printStackTrace();;
+        } finally {
+            if (state == false) {
+                mainConn.rollback(savepoint);
+            } else {
+                mainConn.commit();
+            }
+        }
+
+
     }
 }
 

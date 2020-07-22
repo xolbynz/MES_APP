@@ -119,7 +119,7 @@ public class loginActivity extends AppCompatActivity {
 
                 if (getcompinfo(Saup_No.getText().toString(), Id.getText().toString(), Pw.getText().toString()) == true) {
 
-                    Toast.makeText(getApplicationContext(), compInfo.getSTAFF_NM() + "(" + compInfo.getCOMPANY_NM() + ") LOGIN", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), compInfo.getStaffNm() + "(" + compInfo.getCompanyNm() + ") LOGIN", Toast.LENGTH_SHORT).show();
                     PreferenceManager.setString(mContext, "saupNo", Saup_No.getText().toString());// 사업자번호 저장
                     Intent intent = new Intent(loginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -238,17 +238,18 @@ public class loginActivity extends AppCompatActivity {
                 rs2 = stmt2.executeQuery(query2.toString());
 
                 if (rs2.next()) {
-                    compInfo.setCOM_SAPU_NO(saupNo);
-                    compInfo.setCOM_LOCATION(rs.getString(1));
-                    compInfo.setCOMPANY_NM(rs.getString(2));
-                    compInfo.setSP_CODE(rs.getString(3));
-                    compInfo.setPACK_GUBUN(rs.getString(4));
+                    compInfo.setComSapuNo(saupNo);
+                    compInfo.setComLocation(rs.getString(1));
+                    compInfo.setCompanyNm(rs.getString(2));
+                    compInfo.setSpCode(rs.getString(3));
+                    compInfo.setPackGubun(rs.getString(4));
 
 
                     if (!rs.getString("SAUP_LOGO").equals("")) {
                         compInfo.setComLogo(rs.getString("SAUP_LOGO"));
                     }
-                    compInfo.setSTAFF_NM(rs2.getString("STAFF_NM"));
+                    compInfo.setStaffCd(rs2.getString("STAFF_CD"));
+                    compInfo.setStaffNm(rs2.getString("STAFF_NM"));
 //                    dbInfo.mainConn.close();
                     return true;
                 } else {

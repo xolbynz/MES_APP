@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -21,7 +22,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.VO.OrderVo;
+import com.VO.StorageVo;
+import com.common.CompInfo;
 import com.common.DBInfo;
+import com.common.wnDm;
 import com.example.mes_app.R;
 import com.google.gson.JsonArray;
 import com.mes_app.CustomDialog;
@@ -32,7 +36,10 @@ import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class RawInputAdapter extends BaseAdapter {
 
@@ -41,6 +48,7 @@ public class RawInputAdapter extends BaseAdapter {
     private ArrayList<OrderVo> arrayList = new ArrayList<>();
 
     DBInfo dbInfo;
+    CompInfo compInfo;
     private Activity activity;
     private int layout;
     boolean flag = false;
@@ -49,14 +57,20 @@ public class RawInputAdapter extends BaseAdapter {
     String Order_Cd;
     String Order_Seq;
 
+    wnDm wnDm;
+
     InputMethodManager imm;
     JSONArray jsonArray;
-    ArrayList<String> storageList;
-    ArrayAdapter<String> storageAdapter;
+//    ArrayList<String> storageList;
+//    ArrayAdapter<String> storageAdapter;
+
+    StorageAdapter storageAdapter;
+    StorageVo storageVo;
+    ArrayList<StorageVo> storageList;
+
 
     public void addItem(OrderVo orderVo) {
         arrayList.add(orderVo);
-
     }
 
     @Override
@@ -93,6 +107,7 @@ public class RawInputAdapter extends BaseAdapter {
         final EditText input_amt;
         final Button btn_input;
         final Spinner spin_storage;
+        final Spinner spin_loc;
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -148,14 +163,18 @@ public class RawInputAdapter extends BaseAdapter {
         order_date.setHint(orderVo.getOrder_Seq());
 
         order_amt.setText(orderVo.getOrder_Amt() + " " + orderVo.getUnit_Nm());
+        order_amt.setTag(orderVo.getTax_cd());
+        order_amt.setHint(orderVo.getVat_cd());
         orderNon_amt.setTag(orderVo.getUnit_Nm());
         orderNon_amt.setText(orderVo.getInput_NeedAmt() + " " + orderVo.getUnit_Nm());
         spec.setText(orderVo.getSpec());
 
 
         try { // 창고 스피너
+
             jsonArray = new JSONArray();
-            jsonArray = getStorage();
+            jsonArray = getStorage(); //창고 정보 가져오기
+            storageAdapter = new StorageAdapter();
             storageList = new ArrayList<>();
             if (jsonArray.length() != 0) {
 
@@ -165,17 +184,29 @@ public class RawInputAdapter extends BaseAdapter {
 
                     String storage_cd = "";
                     String storage_nm = "";
+                    String comment = "";
 
                     if (jo.has("STORAGE_CD")) // Data값이 NULL인 경우 빈값으로 처리
                         storage_cd = jo.getString("STORAGE_CD");
                     if (jo.has("STORAGE_NM"))
                         storage_nm = jo.getString("STORAGE_NM");
+                    if (jo.has("COMMENT"))
+                        comment = jo.getString("COMMENT");
 
-                    storageList.add(storage_nm);
+                    storageVo = new StorageVo(storage_cd, storage_nm, comment);
+
+                    storageAdapter.addItem(storageVo);
+
+//                    storageList.add(0, storage_cd);
                 }
-                storageAdapter = new ArrayAdapter<String>(context.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, storageList);
-                spin_storage.setAdapter(storageAdapter);
+            } else {
+                spin_storage.setAdapter(null);
             }
+
+//            storageAdapter = new ArrayAdapter<String>(context.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, storageList);
+            spin_storage.setAdapter(storageAdapter);
+//            spin_storage.setSelection(0); // 기본값 설정
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -243,6 +274,7 @@ public class RawInputAdapter extends BaseAdapter {
                 }
 
                 if (Dneedamt < Dinputamt) { // 입고량, 미입고량 비교
+
                     final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("현재 입고하려는 수량이 미입고 수량보다 많습니다. 진행하시겠습니까?");
 
@@ -250,16 +282,22 @@ public class RawInputAdapter extends BaseAdapter {
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 정상 확인
+
+                                if (flag == true) {
+                                    try {
+                                        input_Logic(Order_Date, Order_Cd, Order_Seq);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
+                                }
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if (flag == true) {
 
-                            } else {
-                                Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
-                            }
                         }
                     });
 
@@ -275,7 +313,9 @@ public class RawInputAdapter extends BaseAdapter {
 //                    });
                     AlertDialog alert = builder.create();
                     alert.show();
+
                 } else {
+
                     try {
                         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setMessage(cust_nm.getText().toString() + " | " + raw_mat_nm.getText().toString() + " " + input_amt.getText().toString()
@@ -284,17 +324,23 @@ public class RawInputAdapter extends BaseAdapter {
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 try {
+
                                     flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 정상 확인
+                                    if (flag == true) {
+                                        try {
+                                            input_Logic(Order_Date, Order_Cd, Order_Seq);
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
+                                    }
                                 } catch (SQLException e) {
                                     e.printStackTrace();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                if (flag == true) {
 
-                                } else {
-                                    Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
-                                }
                             }
                         });
 
@@ -350,8 +396,88 @@ public class RawInputAdapter extends BaseAdapter {
 
     }
 
-    private void input_Logic(String Order_date, String Order_cd, String Orcder_seq) {
+    private void input_Logic(String Order_date, String Order_cd, String Orcder_seq) throws SQLException, JSONException {
+        Calendar cal = new GregorianCalendar();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String Today = sdf.format(cal.getTime()); // 오늘 날짜 ( #### - ## - ## )
+
+        StringBuilder sb = new StringBuilder();
+
+        String all_total_money = "0";
+        String all_supply_money = "0";
+        String all_tax_money = "0";
+
+        sb.append("declare @seq int ");
+        sb.append("select @seq =ISNULL(MAX(INPUT_CD),0)+1 from [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT] ");
+        sb.append("where INPUT_DATE = '" + Today + "' ");
+
+        sb.append("declare @buy_seq int ");
+        sb.append("select @buy_seq =ISNULL(convert(int,MAX(BUY_CD)),0)+1 from [" + dbInfo.Location + "].[dbo].[F_BUY] ");
+        sb.append("where BUY_DATE = '" + Today + "' ");
+
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT](");
+        sb.append("     INPUT_DATE");
+        sb.append("     ,INPUT_CD ");
+        sb.append("     ,CUST_CD ");
+        sb.append("     ,COMPLETE_YN ");
+        sb.append("     ,COMMENT ");
+        sb.append("     ,INSTAFF ");
+        sb.append("     ,INTIME ");
+
+        sb.append(" ) values ( ");
+        sb.append("      '" + Today + "' ");
+        sb.append("     ,@seq");
+        sb.append("     ,'" + orderVo.getCust_Cd() + "' ");
+        sb.append("     ,'N' ");
+        sb.append("     ,'모바일 입고' ");
+        sb.append("     ,'" + compInfo.getStaffCd() + "' ");
+        sb.append("     ,convert(varchar, getdate(), 120) ");
+        sb.append(" ) ");
+
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_BUY] (");
+        sb.append("     BUY_DATE");
+        sb.append("     ,BUY_CD ");
+        sb.append("     ,BUY_GUBUN ");
+        sb.append("     ,CUST_CD ");
+        sb.append("     ,ALL_TOTAL_MONEY ");
+        sb.append("     ,ALL_SUPPLY_MONEY ");
+        sb.append("     ,ALL_TAX_MONEY ");
+        sb.append("     ,INSTAFF ");
+        sb.append("     ,INTIME ");
+        sb.append("     ,VAT_CD ");
+        sb.append("     ,INPUT_DATE ");
+        sb.append("     ,INPUT_CD ");
+        sb.append(" ) values ( ");
+        sb.append("      '" + Today + "' ");
+        sb.append("     ,@buy_seq");
+        sb.append("     ,'1' ");
+        sb.append("     ,'" + orderVo + "' ");
+        sb.append("     ,'" + all_total_money.replace(",", "") + "' ");
+        sb.append("     ,'" + all_supply_money.replace(",", "") + "' ");
+        sb.append("     ,'" + all_tax_money.replace(",", "") + "' ");
+        sb.append("     ,'" + compInfo.STAFF_CD + "' ");
+        sb.append("     ,convert(varchar, getdate(), 120) ");
+        sb.append("     ,'" + orderVo.getVat_cd() + "' ");
+        sb.append("     ,'" + Today + "' ");
+        sb.append("     ,@seq ");
+        sb.append(" ) ");
+        wnDm = new wnDm();
+        boolean isCustDay = wnDm.isCustDayTotal(Today, orderVo.getCust_Cd());
+
+        if(!isCustDay){
+            sb.append("insert into [" + dbInfo.Location + "].[dbo].[T_CUST_DAY_TOTAL](");
+            sb.append("     INPUT_DATE ");
+            sb.append("     ,CUST_CD ");
+            sb.append(" ) values ( ");
+            sb.append("      '" + Today + "'  ");
+            sb.append("      ,'" + orderVo.getCust_Cd() + "'  ");
+            sb.append(" ) ");
+        }
+
+
+        dbInfo.Insert(sb.toString());
     }
 
     private boolean Check(String Order_date, String Order_cd, String Order_seq) throws SQLException, JSONException {
@@ -367,17 +493,17 @@ public class RawInputAdapter extends BaseAdapter {
         sb.append("     AND A.ORDER_CD = B.ORDER_CD ");
         sb.append(" LEFT OUTER JOIN(	 ");
         sb.append("                     SELECT AA.ORDER_DATE	 ");
-        sb.append("                             ,AA.ORDER_CD       ");
-        sb.append("                           ,AA.SEQ ");
-        sb.append("                           ,FLOOR(ISNULL(AA.TOTAL_AMT,0)) AS ORDER_AMT ");
-        sb.append("                           ,ISNULL(SUM(BB.TOTAL_AMT),0) AS INPUT_AMT ");
-        sb.append("                           , ISNULL(AA.TOTAL_AMT,0)-ISNULL(SUM(BB.TOTAL_AMT),0) AS NO_INPUT_AMT ");
+        sb.append("                            ,AA.ORDER_CD       ");
+        sb.append("                            ,AA.SEQ ");
+        sb.append("                            ,FLOOR(ISNULL(AA.TOTAL_AMT,0)) AS ORDER_AMT ");
+        sb.append("                            ,ISNULL(SUM(BB.TOTAL_AMT),0) AS INPUT_AMT ");
+        sb.append("                            ,ISNULL(AA.TOTAL_AMT,0)-ISNULL(SUM(BB.TOTAL_AMT),0) AS NO_INPUT_AMT ");
         sb.append("                     FROM [" + dbInfo.Location + "].[dbo].[F_ORDER_DETAIL] AA ");
         sb.append("                     LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] BB ");
         sb.append("                     ON AA.ORDER_DATE = BB.ORDER_DATE ");
-        sb.append("                         AND AA.ORDER_CD = BB.ORDER_CD ");
-        sb.append("                         AND AA.SEQ = BB.ORDER_SEQ ");
-        sb.append("                     GROUP BY AA.ORDER_DATE,AA.ORDER_CD,AA.SEQ,AA.TOTAL_AMT)C ");
+        sb.append("                     AND AA.ORDER_CD = BB.ORDER_CD ");
+        sb.append("                     AND AA.SEQ = BB.ORDER_SEQ ");
+        sb.append("                     GROUP BY AA.ORDER_DATE,AA.ORDER_CD,AA.SEQ,AA.TOTAL_AMT) C ");
         sb.append(" ON A.ORDER_DATE = C.ORDER_DATE  ");
         sb.append("     AND A.ORDER_CD = C.ORDER_CD ");
         sb.append("     AND B.SEQ = C.SEQ  ");
@@ -400,7 +526,7 @@ public class RawInputAdapter extends BaseAdapter {
 
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT STORAGE_CD, STORAGE_NM FROM [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE]");
+        query.append("SELECT STORAGE_CD, STORAGE_NM, COMMENT FROM [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE]");
         jsonArray = dbInfo.SelectDB(query.toString());
         return jsonArray;
 

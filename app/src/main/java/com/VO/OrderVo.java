@@ -24,39 +24,39 @@ public class OrderVo {
     String Input_Amt; // 생산량
     String Input_NeedAmt; // 미입고량
     String Storage;
-
-    public OrderVo() {
-
-    }
+    String Tax_cd;
+    String Vat_cd;
 
     public OrderVo(String order_Date, String order_Cd, String order_Seq, String input_Req_Date,
                    String complete_Yn, String rawmat_Cd, String rawmat_Nm, String rawmat_Gubun,
                    String rawmat_Gubun_Nm, String spec, String unit_cd, String unit_Nm,
                    String cust_Cd, String cust_Nm, String price, String totalMoney, String check,
                    String check_Yn, String order_Amt, String input_Amt, String input_NeedAmt,
-                   String storage) {
-        this.Order_Date = order_Date;
-        this.Order_Cd = order_Cd;
-        this.Order_Seq = order_Seq;
-        this.Input_Req_Date = input_Req_Date;
-        this.Complete_Yn = complete_Yn;
-        this.Rawmat_Cd = rawmat_Cd;
-        this.Rawmat_Nm = rawmat_Nm;
-        this.Rawmat_Gubun = rawmat_Gubun;
-        this.Rawmat_Gubun_Nm = rawmat_Gubun_Nm;
-        this.Spec = spec;
-        this.Unit_cd = unit_cd;
-        this.Unit_Nm = unit_Nm;
-        this.Cust_Cd = cust_Cd;
-        this.Cust_Nm = cust_Nm;
-        this.Price = price;
-        this.TotalMoney = totalMoney;
-        this.Check = check;
-        this.Check_Yn = check_Yn;
-        this.Order_Amt = order_Amt;
-        this.Input_Amt = input_Amt;
-        this.Input_NeedAmt = input_NeedAmt;
-        this.Storage = storage;
+                   String storage, String tax_cd, String vat_cd) {
+        Order_Date = order_Date;
+        Order_Cd = order_Cd;
+        Order_Seq = order_Seq;
+        Input_Req_Date = input_Req_Date;
+        Complete_Yn = complete_Yn;
+        Rawmat_Cd = rawmat_Cd;
+        Rawmat_Nm = rawmat_Nm;
+        Rawmat_Gubun = rawmat_Gubun;
+        Rawmat_Gubun_Nm = rawmat_Gubun_Nm;
+        Spec = spec;
+        Unit_cd = unit_cd;
+        Unit_Nm = unit_Nm;
+        Cust_Cd = cust_Cd;
+        Cust_Nm = cust_Nm;
+        Price = price;
+        TotalMoney = totalMoney;
+        Check = check;
+        Check_Yn = check_Yn;
+        Order_Amt = order_Amt;
+        Input_Amt = input_Amt;
+        Input_NeedAmt = input_NeedAmt;
+        Storage = storage;
+        Tax_cd = tax_cd;
+        Vat_cd = vat_cd;
     }
 
     public String getOrder_Date() {
@@ -64,7 +64,7 @@ public class OrderVo {
     }
 
     public void setOrder_Date(String order_Date) {
-        this.Order_Date = order_Date;
+        Order_Date = order_Date;
     }
 
     public String getOrder_Cd() {
@@ -72,7 +72,7 @@ public class OrderVo {
     }
 
     public void setOrder_Cd(String order_Cd) {
-        this.Order_Cd = order_Cd;
+        Order_Cd = order_Cd;
     }
 
     public String getOrder_Seq() {
@@ -80,7 +80,7 @@ public class OrderVo {
     }
 
     public void setOrder_Seq(String order_Seq) {
-        this.Order_Seq = order_Seq;
+        Order_Seq = order_Seq;
     }
 
     public String getInput_Req_Date() {
@@ -88,7 +88,7 @@ public class OrderVo {
     }
 
     public void setInput_Req_Date(String input_Req_Date) {
-        this.Input_Req_Date = input_Req_Date;
+        Input_Req_Date = input_Req_Date;
     }
 
     public String getComplete_Yn() {
@@ -96,7 +96,7 @@ public class OrderVo {
     }
 
     public void setComplete_Yn(String complete_Yn) {
-        this.Complete_Yn = complete_Yn;
+        Complete_Yn = complete_Yn;
     }
 
     public String getRawmat_Cd() {
@@ -104,7 +104,7 @@ public class OrderVo {
     }
 
     public void setRawmat_Cd(String rawmat_Cd) {
-        this.Rawmat_Cd = rawmat_Cd;
+        Rawmat_Cd = rawmat_Cd;
     }
 
     public String getRawmat_Nm() {
@@ -112,7 +112,7 @@ public class OrderVo {
     }
 
     public void setRawmat_Nm(String rawmat_Nm) {
-        this.Rawmat_Nm = rawmat_Nm;
+        Rawmat_Nm = rawmat_Nm;
     }
 
     public String getRawmat_Gubun() {
@@ -120,7 +120,7 @@ public class OrderVo {
     }
 
     public void setRawmat_Gubun(String rawmat_Gubun) {
-        this.Rawmat_Gubun = rawmat_Gubun;
+        Rawmat_Gubun = rawmat_Gubun;
     }
 
     public String getRawmat_Gubun_Nm() {
@@ -128,7 +128,7 @@ public class OrderVo {
     }
 
     public void setRawmat_Gubun_Nm(String rawmat_Gubun_Nm) {
-        this.Rawmat_Gubun_Nm = rawmat_Gubun_Nm;
+        Rawmat_Gubun_Nm = rawmat_Gubun_Nm;
     }
 
     public String getSpec() {
@@ -136,7 +136,7 @@ public class OrderVo {
     }
 
     public void setSpec(String spec) {
-        this.Spec = spec;
+        Spec = spec;
     }
 
     public String getUnit_cd() {
@@ -144,7 +144,7 @@ public class OrderVo {
     }
 
     public void setUnit_cd(String unit_cd) {
-        this.Unit_cd = unit_cd;
+        Unit_cd = unit_cd;
     }
 
     public String getUnit_Nm() {
@@ -152,7 +152,7 @@ public class OrderVo {
     }
 
     public void setUnit_Nm(String unit_Nm) {
-        this.Unit_Nm = unit_Nm;
+        Unit_Nm = unit_Nm;
     }
 
     public String getCust_Cd() {
@@ -160,7 +160,7 @@ public class OrderVo {
     }
 
     public void setCust_Cd(String cust_Cd) {
-        this.Cust_Cd = cust_Cd;
+        Cust_Cd = cust_Cd;
     }
 
     public String getCust_Nm() {
@@ -168,7 +168,7 @@ public class OrderVo {
     }
 
     public void setCust_Nm(String cust_Nm) {
-        this.Cust_Nm = cust_Nm;
+        Cust_Nm = cust_Nm;
     }
 
     public String getPrice() {
@@ -176,7 +176,7 @@ public class OrderVo {
     }
 
     public void setPrice(String price) {
-        this.Price = price;
+        Price = price;
     }
 
     public String getTotalMoney() {
@@ -184,7 +184,7 @@ public class OrderVo {
     }
 
     public void setTotalMoney(String totalMoney) {
-        this.TotalMoney = totalMoney;
+        TotalMoney = totalMoney;
     }
 
     public String getCheck() {
@@ -192,7 +192,7 @@ public class OrderVo {
     }
 
     public void setCheck(String check) {
-        this.Check = check;
+        Check = check;
     }
 
     public String getCheck_Yn() {
@@ -200,7 +200,7 @@ public class OrderVo {
     }
 
     public void setCheck_Yn(String check_Yn) {
-        this.Check_Yn = check_Yn;
+        Check_Yn = check_Yn;
     }
 
     public String getOrder_Amt() {
@@ -208,7 +208,7 @@ public class OrderVo {
     }
 
     public void setOrder_Amt(String order_Amt) {
-        this.Order_Amt = order_Amt;
+        Order_Amt = order_Amt;
     }
 
     public String getInput_Amt() {
@@ -216,7 +216,7 @@ public class OrderVo {
     }
 
     public void setInput_Amt(String input_Amt) {
-        this.Input_Amt = input_Amt;
+        Input_Amt = input_Amt;
     }
 
     public String getInput_NeedAmt() {
@@ -224,7 +224,7 @@ public class OrderVo {
     }
 
     public void setInput_NeedAmt(String input_NeedAmt) {
-        this.Input_NeedAmt = input_NeedAmt;
+        Input_NeedAmt = input_NeedAmt;
     }
 
     public String getStorage() {
@@ -232,6 +232,28 @@ public class OrderVo {
     }
 
     public void setStorage(String storage) {
-        this.Storage = storage;
+        Storage = storage;
     }
+
+    public String getTax_cd() {
+        return Tax_cd;
+    }
+
+    public void setTax_cd(String tax_cd) {
+        Tax_cd = tax_cd;
+    }
+
+    public String getVat_cd() {
+        return Vat_cd;
+    }
+
+    public void setVat_cd(String vat_cd) {
+        Vat_cd = vat_cd;
+    }
+
+    public OrderVo() {
+
+    }
+
+
 }

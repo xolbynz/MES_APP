@@ -141,6 +141,8 @@ public class raw_inputActivity extends Fragment {
                     String Input_Amt = "0";
                     String Input_NeedAmt = "0";
                     String Storage = "";
+                    String Tax_cd = "";
+                    String Vat_cd = "";
 
                     if (jo.has("ORDER_DATE")) // Data값이 NULL인 경우 빈값으로 처리
                         Order_Date = jo.getString("ORDER_DATE");
@@ -186,11 +188,15 @@ public class raw_inputActivity extends Fragment {
                         Input_NeedAmt = jo.getString("INPUT_NEEDAMT");
                     if (jo.has("STORAGE"))
                         Storage = jo.getString("STORAGE");
+                    if (jo.has("TAX_CD"))
+                        Tax_cd = jo.getString("TAX_CD");
+                    if (jo.has("VAT_CD"))
+                        Vat_cd = jo.getString("VAT_CD");
 
                     orderVo = new OrderVo(Order_Date, Order_Cd, Order_Seq, Input_Req_Date, Complete_Yn,
                             Rawmat_Cd, Rawmat_Nm, Rawmat_Gubun, Rawmat_Gubun_Nm, Spec, Unit_cd,
                             Unit_Nm, Cust_Cd, Cust_Nm, Price, TotalMoney, Check, Check_Yn, Order_Amt,
-                            Input_Amt, Input_NeedAmt, Storage);
+                            Input_Amt, Input_NeedAmt, Storage, Tax_cd, Vat_cd);
 
                     rawInputAdapter.addItem(orderVo);
                 }
@@ -239,6 +245,8 @@ public class raw_inputActivity extends Fragment {
         query.append("        , convert(int,ISNULL(C.INPUT_AMT, 0)) AS INPUT_AMT \n");
         query.append("        , convert(int,ISNULL(C.NO_INPUT_AMT, 0)) AS INPUT_NEEDAMT \n");
         query.append("        , D.RAW_STORAGE AS STORAGE \n");
+        query.append("        , D.TAX_CD AS TAX_CD \n");
+        query.append("        , X.TAX_cD AS VAT_CD \n");
         query.append("FROM [" + dbInfo.Location + "].[dbo].[F_ORDER] A \n");
         query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] X ON A.CUST_CD = X.CUST_CD \n");
         query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_ORDER_DETAIL] B \n");
