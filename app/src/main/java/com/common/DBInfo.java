@@ -104,7 +104,7 @@ public class DBInfo {
     public void Insert(String query) throws SQLException {
 
         boolean state = false;
-        Savepoint savepoint = mainConn.setSavepoint("BEFORE (INSERT / UPDATE/ DELETE ) SAVEPOINT");
+//        Savepoint savepoint = mainConn.setSavepoint("BEFORE (INSERT / UPDATE/ DELETE ) SAVEPOINT");
         try {
             mainConn.setAutoCommit(false); // 여러개의 쿼리 문장이 하나의 작업으로 수행 되어야 할 경우 각각의 문장이 자동으로 작동되지 못하게 막음
 
@@ -116,7 +116,7 @@ public class DBInfo {
             e.printStackTrace();;
         } finally {
             if (state == false) {
-                mainConn.rollback(savepoint);
+                mainConn.rollback();
             } else {
                 mainConn.commit();
             }

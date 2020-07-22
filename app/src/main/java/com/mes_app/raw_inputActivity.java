@@ -30,6 +30,8 @@ import org.json.JSONObject;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class raw_inputActivity extends Fragment {
@@ -218,10 +220,11 @@ public class raw_inputActivity extends Fragment {
 
         StringBuilder query = new StringBuilder();
 
-        SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.KOREAN);
-        SimpleDateFormat month = new SimpleDateFormat("mm", Locale.KOREAN);
-        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.KOREAN);
-        String today = year.toString() + "-" + month.toString() + "-" + day.toString();
+        Calendar cal = new GregorianCalendar();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String Today = sdf.format(cal.getTime()); // 오늘 날짜 ( #### - ## - ## )
 
         query.append("select  A.ORDER_DATE  \n");
         query.append("        , A.ORDER_CD \n");
@@ -269,7 +272,7 @@ public class raw_inputActivity extends Fragment {
         query.append("AND B.SEQ = C.SEQ \n");
         query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] D \n");
         query.append("ON B.RAW_MAT_CD = D.RAW_MAT_CD \n");
-        query.append("WHERE C.NO_INPUT_AMT > 0 and A.ORDER_DATE <= '" + today + "' \n");
+        query.append("WHERE C.NO_INPUT_AMT > 0 and A.ORDER_DATE <= '" + Today + "' \n");
         query.append("ORDER BY X.CUST_CD, A.ORDER_DATE desc, A.ORDER_CD desc, B.SEQ desc \n");
 
         JSONArray = dbInfo.SelectDB(query.toString());

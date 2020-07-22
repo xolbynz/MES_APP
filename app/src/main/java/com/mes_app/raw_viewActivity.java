@@ -36,6 +36,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.jar.JarEntry;
 
@@ -206,10 +208,11 @@ public class raw_viewActivity extends Fragment {
 
         StringBuilder query = new StringBuilder();
 
-        SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.KOREAN);
-        SimpleDateFormat month = new SimpleDateFormat("mm", Locale.KOREAN);
-        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.KOREAN);
-        String today = year + "-" + month + "-" + day;
+        Calendar cal = new GregorianCalendar();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String Today = sdf.format(cal.getTime()); // 오늘 날짜 ( #### - ## - ## )
 
         query.append("  SELECT \n");
         query.append("  A.RAW_MAT_CD \n");
@@ -231,14 +234,14 @@ public class raw_viewActivity extends Fragment {
         query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] A \n");
         query.append("          LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE] B \n");
         query.append("          ON A.STORAGE_CD = B.STORAGE_CD \n");
-        query.append("         where INPUT_DATE = '" + today + "' \n");
+        query.append("         where INPUT_DATE = '" + Today + "' \n");
         query.append("          group by RAW_MAT_CD,B.STORAGE_NM,A.LOC_NM) B \n");
         query.append("  ON A.RAW_MAT_CD = B.RAW_MAT_CD \n");
         query.append("  LEFT OUTER JOIN( \n");
         query.append("          select RAW_MAT_CD \n");
         query.append("          , SUM(ISNULL(TOTAL_AMT,0)) as OUTPUT_AMT \n");
         query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_OUTPUT] \n");
-        query.append("         where OUTPUT_DATE = '" + today + "' \n");
+        query.append("         where OUTPUT_DATE = '" + Today + "' \n");
         query.append("          group by RAW_MAT_CD) C \n");
         query.append("  ON A.RAW_MAT_CD = C.RAW_MAT_CD \n");
         query.append("  left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD = A.CUST_CD \n");
