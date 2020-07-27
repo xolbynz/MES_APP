@@ -133,19 +133,15 @@
 
     <GridView
         android:id="@+id/rawinput_gv"
-        android:layout_width="1148dp"
-        android:layout_height="333dp"
+        android:layout_width="1270dp"
+        android:layout_height="385dp"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="26dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:horizontalSpacing="1dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="1dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
@@ -153,46 +149,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_bottom"
-        android:layout_width="1148dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_width="1273dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rawinput_gv">
-
-        <Button
-            android:id="@+id/rawInp_btn_input"
-            android:layout_width="181dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="499dp"
-            android:layout_marginLeft="499dp"
-            android:layout_marginEnd="477dp"
-            android:layout_marginRight="477dp"
-            android:background="#050505"
-            android:onClick="showDialog"
-            android:text="입고진행"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="251dp"
             android:layout_height="43dp"
             android:layout_marginStart="466dp"
             android:layout_marginLeft="466dp"
-            android:layout_marginTop="17dp"
             android:layout_marginEnd="443dp"
             android:layout_marginRight="443dp"
             android:layout_marginBottom="1dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rawInp_btn_input">
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
                 android:id="@+id/btn_unstc"
@@ -210,57 +184,4 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="618dp"
-        android:background="#4E4C4C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:text="입고량 입력"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_input"
-            android:layout_width="111dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginRight="6dp"
-            android:ems="10"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="107dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginBottom="250dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_input" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

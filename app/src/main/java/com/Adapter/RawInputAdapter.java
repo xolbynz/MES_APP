@@ -213,6 +213,21 @@ public class RawInputAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
+        spin_storage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String storage_cd = storageAdapter.arrayList.get(position).getStorage_cd();
+                if(position != 0)
+                    Toast.makeText(context,storage_cd,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         input_amt.setText("0");
 
         input_amt.setOnKeyListener(onKeyListener);

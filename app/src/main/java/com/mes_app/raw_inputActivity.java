@@ -95,7 +95,6 @@ public class raw_inputActivity extends Fragment {
 
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_raw_input, container, false);
         Layout_Main = rootView.findViewById(R.id.RawInput_Main);
-        btn_input = rootView.findViewById(R.id.rawInp_btn_input);
         OrderVoArrayList = new ArrayList<>();
         rawInputAdapter = new RawInputAdapter();
         gridView = rootView.findViewById(R.id.rawinput_gv);
