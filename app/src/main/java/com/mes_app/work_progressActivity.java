@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -296,6 +298,7 @@ public class work_progressActivity extends Fragment {
 
             try {
                 input_Logic();
+                Toast.makeText(context,"생산완료",Toast.LENGTH_LONG);
 
             }
             catch (Exception ex)
@@ -317,6 +320,7 @@ chart.clear();
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // Y축 텍스트컬러설정
         yAxis.setGridColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // Y축 줄의 컬러 설정
+        yAxis.setAxisMaxValue( Integer.valueOf(selected_instAmt));
         chart.getAxisLeft().setAxisLineColor(R.color.design_default_color_background);
         chart.getAxisLeft().setGridColor(R.color.design_default_color_background);
 
@@ -364,25 +368,24 @@ chart.clear();
         return JSONArray;
     }
 
-    ArrayList F_SUB_AMTList;
-    ArrayList POOR_AMTList;
+
     public ArrayList 진행중인공정일때(String lotNo,String flow_cd) {
-        ArrayList arrayList = new ArrayList();
-        ArrayList F_SUB_AMTList = new ArrayList();
-        ArrayList POOR_AMTList = new ArrayList();
+        ArrayList<BarEntry> arrayList = new ArrayList<>();
+
         try {
 
             JArray = null;
             JArray = Processing(JArray,lotNo,flow_cd );
 
             if (JArray.length() != 0) {
-
-
+                float[] F_SubAmtFloats = new float [JArray.length()];
+                float[] PoorAmtFloats = new float [JArray.length()];
+float sumSubAmt=0;
                 for (int i = 0; i < JArray.length(); i++) {
                     JSONObject jo = JArray.getJSONObject(i);
 
-                    int F_SUB_AMT = 0;
-                    int POOR_AMT = 0;
+                    float F_SUB_AMT = 0;
+                    float POOR_AMT = 0;
                     int INPUT_AMT = 0;
 
 
@@ -393,10 +396,10 @@ chart.clear();
                     if (jo.has("INPUT_AMT"))
                         INPUT_AMT = jo.getInt("INPUT_AMT");
 
+                    F_SubAmtFloats[i]=F_SUB_AMT;
+                    PoorAmtFloats[i]=POOR_AMT;
 
-                    F_SUB_AMTList.add(F_SUB_AMT);
-                    POOR_AMTList.add(POOR_AMT);
-
+                    sumSubAmt+=F_SUB_AMT;
 
 
 
@@ -404,14 +407,16 @@ chart.clear();
 
 
                 }
-
-
+                float instAmtfloat=Integer.valueOf(selected_instAmt);
+                float instAmtfloat2=instAmtfloat-sumSubAmt;
+                arrayList.add(new BarEntry( F_SubAmtFloats,0 ));
+                arrayList.add(new BarEntry( PoorAmtFloats,1 ));
+                arrayList.add(new BarEntry( instAmtfloat2,2 ));
             }
 
             else{
-                F_SUB_AMTList.add(0);
-                POOR_AMTList.add(0);
 
+                arrayList.add(new BarEntry( Integer.valueOf(selected_instAmt),2 ));
 
             }
 
@@ -431,7 +436,9 @@ chart.clear();
 
         StringBuilder sb = new StringBuilder();
 
-
+        sb.append("DECLARE @NUM INT");
+        sb.append(" select @NUM=COUNT(*)  from [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] ");
+        sb.append("where LOT_NO='" + selected_lotNo + "'");
         sb.append("declare @f_step int \n ");
         sb.append("select @f_step=SEQ  from [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] \n ");
         sb.append("where ITEM_CD = '" + selected_itemCd + "' \n ");
@@ -441,6 +448,26 @@ chart.clear();
         sb.append("select @seq=ISNULL(MAX(SEQ),0)+1  from [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] \n ");
         sb.append("where LOT_NO = '" + selected_lotNo + "' \n ");
         sb.append("and FLOW_CD = '" + selected_flow_Cd + "' \n ");
+
+
+        sb.append("IF(@NUM != 1)\n");
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] (");
+
+        sb.append("      LOT_NO \n");
+        sb.append("     ,FLOW_DATE\n");
+        sb.append("     ,ITEM_CD\n");
+        sb.append("     ,COMPLETE_YN ");
+        sb.append("     ,INSTAFF \n");
+        sb.append("     ,INTIME \n");
+        sb.append(" ) values ( ");
+
+        sb.append("     '" + selected_lotNo + "'\n");
+        sb.append("      ,'" + Today + "'\n");
+        sb.append("      ,'" + selected_itemCd + "' \n");
+        sb.append("     ,'S'");
+        sb.append("     ,'" + compInfo.getStaffCd() + "' \n");
+        sb.append("     ,convert(varchar, getdate(), 120)\n ");
+        sb.append(" ) ");
 
         sb.append(" INSERT INTO [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] ( ");
         sb.append("  LOT_NO ");
