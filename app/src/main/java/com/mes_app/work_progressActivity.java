@@ -364,7 +364,7 @@ chart.clear();
         return JSONArray;
     }
 
-    ArrayList F_SUB_AMTList
+    ArrayList F_SUB_AMTList;
     ArrayList POOR_AMTList;
     public ArrayList 진행중인공정일때(String lotNo,String flow_cd) {
         ArrayList arrayList = new ArrayList();

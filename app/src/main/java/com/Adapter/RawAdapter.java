@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.VO.RawVo;
 import com.example.mes_app.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RawAdapter extends BaseAdapter {
@@ -101,12 +102,14 @@ public class RawAdapter extends BaseAdapter {
 
         }
 
+        DecimalFormat df = new DecimalFormat("#.#");
+
         raw_mat_nm.setText(rawVo.getRaw_mat_nm()); //
         spec.setText(rawVo.getSpec()); //
         unit_nm.setText(rawVo.getUnit_nm());
-        input_amt.setText(rawVo.getInput_amt());
-        output_amt.setText(rawVo.getOutput_amt());
-        curr_amt.setText(rawVo.getCurr_amt());
+        input_amt.setText(df.format(Double.parseDouble(rawVo.getInput_amt())));
+        output_amt.setText(df.format(Double.parseDouble(rawVo.getOutput_amt())));
+        curr_amt.setText(df.format(Double.parseDouble(rawVo.getCurr_amt())));
         loc.setText(rawVo.getLoc());
 
         return convertView; // 뷰 객체 반환
