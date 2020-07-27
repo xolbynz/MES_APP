@@ -101,7 +101,7 @@ public class DBInfo {
 
     }
 
-    public void Insert(String query) throws SQLException {
+    public boolean Insert(String query) throws SQLException {
 
         boolean state = false;
 //        Savepoint savepoint = mainConn.setSavepoint("BEFORE (INSERT / UPDATE/ DELETE ) SAVEPOINT");
@@ -114,11 +114,14 @@ public class DBInfo {
             state = true;
         } catch (SQLException e){
             e.printStackTrace();;
+            return false;
         } finally {
             if (state == false) {
                 mainConn.rollback();
+                return false;
             } else {
                 mainConn.commit();
+                return true;
             }
         }
 

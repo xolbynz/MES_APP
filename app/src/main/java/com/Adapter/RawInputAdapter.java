@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.VO.LocVo;
 import com.VO.OrderVo;
 import com.VO.StorageVo;
 import com.common.CompInfo;
@@ -56,6 +57,9 @@ public class RawInputAdapter extends BaseAdapter {
     String Order_Date;
     String Order_Cd;
     String Order_Seq;
+    String Storage_cd;
+    String Loc_cd;
+    String Loc_nm;
 
     wnDm wnDm;
 
@@ -66,7 +70,11 @@ public class RawInputAdapter extends BaseAdapter {
 
     StorageAdapter storageAdapter;
     StorageVo storageVo;
-    ArrayList<StorageVo> storageList;
+    ArrayList<StorageVo> storageVoArrayList;
+
+    LocAdapter locAdapter;
+    LocVo locVo;
+    ArrayList<LocVo> locVoArrayList;
 
 
     public void addItem(OrderVo orderVo) {
@@ -122,6 +130,7 @@ public class RawInputAdapter extends BaseAdapter {
             input_amt = convertView.findViewById(R.id.rawInp_et_inpAmt);
             btn_input = convertView.findViewById(R.id.rawInp_btn_input);
             spin_storage = convertView.findViewById(R.id.rawInp_Spin_Storage);
+            spin_loc = convertView.findViewById(R.id.rawInp_Spin_Loc);
 
 
             holder = new RawInputAdapter.ListViewHolder();
@@ -135,6 +144,7 @@ public class RawInputAdapter extends BaseAdapter {
             holder.input_amt = input_amt;
             holder.btn_input = btn_input;
             holder.spin_storage = spin_storage;
+            holder.spin_loc = spin_loc;
 
             convertView.setTag(holder);
 
@@ -151,6 +161,7 @@ public class RawInputAdapter extends BaseAdapter {
             input_amt = holder.input_amt;
             btn_input = holder.btn_input;
             spin_storage = holder.spin_storage;
+            spin_loc = holder.spin_loc;
 
         }
 
@@ -175,9 +186,8 @@ public class RawInputAdapter extends BaseAdapter {
             jsonArray = new JSONArray();
             jsonArray = getStorage(); //창고 정보 가져오기
             storageAdapter = new StorageAdapter();
-            storageList = new ArrayList<>();
+            storageVoArrayList = new ArrayList<>();
             if (jsonArray.length() != 0) {
-
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject jo = jsonArray.getJSONObject(i);
@@ -199,13 +209,11 @@ public class RawInputAdapter extends BaseAdapter {
 
 //                    storageList.add(0, storage_cd);
                 }
+                spin_storage.setAdapter(storageAdapter);
             } else {
                 spin_storage.setAdapter(null);
             }
 
-//            storageAdapter = new ArrayAdapter<String>(context.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, storageList);
-            spin_storage.setAdapter(storageAdapter);
-//            spin_storage.setSelection(0); // 기본값 설정
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -218,8 +226,44 @@ public class RawInputAdapter extends BaseAdapter {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String storage_cd = storageAdapter.arrayList.get(position).getStorage_cd();
-                if(position != 0)
-                    Toast.makeText(context,storage_cd,Toast.LENGTH_LONG).show();
+                try {
+                    jsonArray = new JSONArray();
+                    jsonArray = getLoc(storage_cd); //위치 정보 가져오기
+                    if (jsonArray.length() != 0 || jsonArray == null) {
+
+                        locAdapter = new LocAdapter();
+                        locVoArrayList = new ArrayList<>();
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+
+                            JSONObject jo = jsonArray.getJSONObject(i);
+
+                            String loc_cd = "";
+                            String loc_nm = "";
+                            String comment = "";
+
+                            if (jo.has("LOC_CD")) // Data값이 NULL인 경우 빈값으로 처리
+                                loc_cd = jo.getString("LOC_CD");
+                            if (jo.has("LOC_NM"))
+                                loc_nm = jo.getString("LOC_NM");
+                            if (jo.has("COMMENT"))
+                                comment = jo.getString("COMMENT");
+
+                            locVo = new LocVo(storage_cd, loc_cd, loc_nm, comment);
+
+                            locAdapter.addItem(locVo);
+                        }
+                        spin_loc.setAdapter(locAdapter);
+                    } else {
+                        spin_loc.setAdapter(null);
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
@@ -227,6 +271,7 @@ public class RawInputAdapter extends BaseAdapter {
 
             }
         });
+
 
         input_amt.setText("0");
 
@@ -237,9 +282,9 @@ public class RawInputAdapter extends BaseAdapter {
                 if (hasFocus && input_amt.getText().toString().equals("0")) {
                     input_amt.setText("");
                 } else if (!hasFocus && input_amt.getText().toString().equals("0")) {
-                    input_amt.setText("0");
+                    input_amt.setText("0\n ");
                 } else if (!hasFocus && input_amt.getText().toString().equals("")) {
-                    input_amt.setText("0");
+                    input_amt.setText("0\n ");
                 }
             }
         });
@@ -254,6 +299,12 @@ public class RawInputAdapter extends BaseAdapter {
                 Order_Cd = order_date.getTag().toString();
                 Order_Seq = order_date.getHint().toString();
 
+                int position2 = spin_storage.getSelectedItemPosition();
+                int position3 = spin_loc.getSelectedItemPosition();
+
+                Storage_cd = storageAdapter.arrayList.get(position2).getStorage_cd();
+                Loc_cd = locAdapter.arrayList.get(position3).getLoc_cd();
+                Loc_nm = locAdapter.arrayList.get(position3).getLoc_nm();
 
                 final double Dneedamt;
                 final double Dinputamt;
@@ -293,90 +344,91 @@ public class RawInputAdapter extends BaseAdapter {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("현재 입고하려는 수량이 미입고 수량보다 많습니다. 진행하시겠습니까?");
 
-                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        // ----
                         public void onClick(DialogInterface dialog, int id) {
-                            try {
-                                flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 정상 확인
-
-                                if (flag == true) {
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage(cust_nm.getText().toString() + " / " + raw_mat_nm.getText().toString() + " / " + input_amt.getText().toString() +
+                                    orderVo.getUnit_Nm() + " 입고를 진행 하시겠습니까?");
+                            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
                                     try {
-                                        input_Logic(Order_Date, Order_Cd, Order_Seq);
+                                        flag = Check(Order_Date, Order_Cd, Order_Seq);
+                                        if (flag) {
+                                            flag = input_Logic(orderVo, Storage_cd, Loc_cd, Loc_nm, input_amt.getText().toString());
+                                            if (flag) {
+                                                Toast.makeText(context, "입고 완료", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(context, "입고 실패", Toast.LENGTH_LONG).show();
+                                            }
+                                        } else {
+                                            Toast.makeText(context, "발주서 조회 오류", Toast.LENGTH_LONG).show();
+                                        }
                                     } catch (SQLException e) {
                                         e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                            builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                            return;
+                        }
+                        //           ----//
+                    });
+
+                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    return;
+                } else {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage(cust_nm.getText().toString() + " / " + raw_mat_nm.getText().toString() + " / " + input_amt.getText().toString() +
+                            orderVo.getUnit_Nm() + " 입고를 진행 하시겠습니까?");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                flag = Check(Order_Date, Order_Cd, Order_Seq);
+                                if (flag) {
+                                    flag = input_Logic(orderVo, Storage_cd, Loc_cd, Loc_nm, input_amt.getText().toString());
+                                    if (flag) {
+                                        Toast.makeText(context, "입고 완료", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(context, "입고 실패", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "발주서 조회 오류", Toast.LENGTH_LONG).show();
                                 }
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     });
-
-                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            input_amt.setText((int) Dneedamt + "");
+                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
                         }
                     });
-
-//                    builder.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                        }
-//                    });
                     AlertDialog alert = builder.create();
                     alert.show();
-
-                } else {
-
-                    try {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setMessage(cust_nm.getText().toString() + " | " + raw_mat_nm.getText().toString() + " " + input_amt.getText().toString()
-                                + orderNon_amt.getTag() + "입고를 진행 하시겠습니까?");
-
-                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                try {
-
-                                    flag = Check(Order_Date, Order_Cd, Order_Seq); // 발주서 정상 확인
-                                    if (flag == true) {
-                                        try {
-                                            input_Logic(Order_Date, Order_Cd, Order_Seq);
-                                        } catch (SQLException e) {
-                                            e.printStackTrace();
-                                        }
-                                    } else {
-                                        Toast.makeText(context, "발주서 조회 중 오류가 있습니다", Toast.LENGTH_LONG).show();
-                                    }
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
-                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                return;
-                            }
-                        });
-
-//                    builder.setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                        }
-//                    });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                        flag = Check(Order_Date, Order_Cd, Order_Seq);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    return;
                 }
             }
         });
@@ -408,10 +460,14 @@ public class RawInputAdapter extends BaseAdapter {
         EditText input_amt;
         Button btn_input;
         Spinner spin_storage;
+        Spinner spin_loc;
 
     }
 
-    private void input_Logic(String Order_date, String Order_cd, String Orcder_seq) throws SQLException, JSONException {
+    private boolean input_Logic(OrderVo orderVo, String Storage_cd, String Loc_cd, String Loc_nm, String total_amt) throws SQLException, JSONException {
+
+        boolean flag = true;
+
         Calendar cal = new GregorianCalendar();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -425,14 +481,14 @@ public class RawInputAdapter extends BaseAdapter {
         String all_tax_money = "0";
 
         sb.append("declare @seq int \n ");
-        sb.append("select @seq =ISNULL(MAX(INPUT_CD),0)+1 from [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT] \n ");
+        sb.append("select @seq =ISNULL(MAX(INPUT_CD),0)+1 from [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT] \n");
         sb.append("where INPUT_DATE = '" + Today + "' \n ");
 
         sb.append("declare @buy_seq int \n ");
-        sb.append("select @buy_seq =ISNULL(convert(int,MAX(BUY_CD)),0)+1 from [" + dbInfo.Location + "].[dbo].[F_BUY] \n ");
+        sb.append("select @buy_seq =ISNULL(convert(int,MAX(BUY_CD)),0)+1 from [" + dbInfo.Location + "].[dbo].[F_BUY] \n");
         sb.append("where BUY_DATE = '" + Today + "' \n ");
 
-        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT](\n ");
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT]( \n");
         sb.append("     INPUT_DATE\n ");
         sb.append("     ,INPUT_CD \n ");
         sb.append("     ,CUST_CD \n ");
@@ -479,9 +535,10 @@ public class RawInputAdapter extends BaseAdapter {
         sb.append("     ,@seq \n ");
         sb.append(" ) \n ");
         wnDm = new wnDm();
+
         boolean isCustDay = wnDm.isCustDayTotal(Today, orderVo.getCust_Cd());
 
-        if(!isCustDay){
+        if (!isCustDay) {
             sb.append("insert into [" + dbInfo.Location + "].[dbo].[T_CUST_DAY_TOTAL](\n ");
             sb.append("     INPUT_DATE \n ");
             sb.append("     ,CUST_CD \n ");
@@ -491,8 +548,127 @@ public class RawInputAdapter extends BaseAdapter {
             sb.append(" ) \n ");
         }
 
+        sb.append("declare @input_seq int, @chk_gbn  nvarchar(1), @chk_yn nvarchar(1), @final_amt nvarchar(20) \n ");
+        sb.append("select @input_seq =ISNULL(MAX(SEQ),0)+1 from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] \n ");
+        sb.append("where INPUT_DATE = '" + Today + "' \n ");
+        sb.append("and INPUT_CD =  @seq \n ");
 
-        dbInfo.Insert(sb.toString());
+        sb.append("select @chk_gbn = check_gubun from [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] \n ");
+        sb.append("where RAW_MAT_CD = '" + orderVo.getRawmat_Cd() + "' \n ");
+
+        sb.append("IF @chk_gbn = '1' BEGIN set @chk_yn = 'S' set @final_amt = '0' END \n "); //원자재 검사여부가 검사일 경우 'S' 대기
+        sb.append("ELSE BEGIN set @chk_yn = 'O' set @final_amt = '" + total_amt + "' END \n "); //원자재 검사여부가 생략일 경우 'O'
+
+//        sb.append("declare @buy_seq int \n ");
+//        sb.append("select @buy_seq =ISNULL(convert(int,MAX(SEQ)),0)+1 from [" + dbInfo.Location + "].[dbo].[F_BUY_DETAIL] \n ");
+//        sb.append("where BUY_DATE = '" + Today + "' \n ");
+//        sb.append("and BUY_CD =  @buy_seq \n ");
+
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL](\n ");
+        sb.append("     INPUT_DATE \n ");
+        sb.append("     ,INPUT_CD \n ");
+        sb.append("     ,SEQ \n ");
+        sb.append("     ,RAW_MAT_CD \n ");
+        sb.append("     ,SPEC \n ");
+        sb.append("     ,UNIT_CD \n ");
+        sb.append("     ,TEMP_AMT \n ");
+        sb.append("     ,TOTAL_AMT \n ");
+        sb.append("     ,CURR_AMT \n ");
+        sb.append("     ,PRICE \n ");
+        sb.append("     ,TOTAL_MONEY \n ");
+        sb.append("     ,HEAT_NO \n ");
+        sb.append("     ,HEAT_TIME \n ");
+        sb.append("     ,ORDER_DATE \n ");
+        sb.append("     ,ORDER_CD \n ");
+        sb.append("     ,ORDER_SEQ \n ");
+        sb.append("     ,COMPLETE_YN \n ");
+        sb.append("     ,CHECK_YN \n ");
+        sb.append("     ,INSTAFF \n ");
+        sb.append("     ,INTIME \n ");
+        sb.append("     ,COMMENT \n ");
+        sb.append("     ,STORAGE_CD \n ");
+        sb.append("     ,LOC_CD \n ");
+        sb.append("     ,LOC_NM \n ");
+        sb.append("  )values ( \n ");
+        sb.append("     '" + Today + "' \n ");
+        sb.append("     ,@seq \n ");
+        sb.append("     ,@input_seq \n ");
+        sb.append("     ,'" + orderVo.getRawmat_Cd() + "' \n ");
+        sb.append("     ,'" + orderVo.getSpec() + "' \n ");
+        sb.append("     ,'" + orderVo.getUnit_cd() + "' \n ");
+        sb.append("     ,'" + total_amt.replace(",", "") + "' \n "); //가입고
+        sb.append("     ,@final_amt \n "); //최종입고
+        sb.append("     ,@final_amt \n "); //현재입고
+        sb.append("     ,'0' \n ");
+        sb.append("     ,'0' \n ");
+        sb.append("     ,'' \n ");
+        sb.append("     ,'' \n ");
+        sb.append("     ,'" + orderVo.getOrder_Date() + "' \n ");
+        sb.append("     ,'" + orderVo.getOrder_Cd() + "' \n ");
+        sb.append("     ,'" + orderVo.getOrder_Seq() + "' \n ");
+        sb.append("     ,'N' \n ");
+
+        sb.append("     , @chk_yn  \n "); //BE
+        sb.append("     ,'" + compInfo.getStaffCd() + "' \n ");
+        sb.append("     ,convert(varchar, getdate(), 120)  \n ");
+        sb.append("     ,'모바일 입고' \n ");
+        sb.append("     ,'" + Storage_cd + "' \n ");
+        sb.append("     ,'" + Loc_cd + "' \n ");
+        sb.append("     ,'" + Loc_nm + "' \n ");
+        sb.append("  )\n ");
+
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_BUY_DETAIL](\n ");
+        sb.append("      BUY_DATE   \n ");      //1
+        sb.append("     ,BUY_CD    \n ");       //2
+        sb.append("     ,SEQ    \n ");          //3
+        sb.append("     ,RAW_MAT_CD    \n ");   //4
+        sb.append("     ,INPUT_DATE    \n ");   //5
+        sb.append("     ,INPUT_CD    \n ");     //6
+        sb.append("     ,INPUT_SEQ    \n ");    //7
+        sb.append("     ,TOTAL_AMT    \n ");    //8
+        sb.append("     ,TOTAL_PRICE    \n ");  //9
+        sb.append("     ,TOTAL_MONEY    \n ");  //10
+        sb.append("     ,SUPPLY_MONEY    \n "); //11
+        sb.append("     ,TAX_MONEY    \n ");    //12
+        sb.append("     ,INTIME    \n ");       //13
+        sb.append("     ,INSTAFF    \n ");      //14
+        sb.append("     ,TAX_CD    \n ");       //15
+        sb.append("  ) values ( \n ");
+        sb.append("     '" + Today + "' \n ");                                                                   //1
+        sb.append("      ,@buy_seq \n ");                                                                             // 2
+        sb.append("     ,@buy_seq \n ");                                                                     //  3
+        sb.append("     ,'" + orderVo.getRawmat_Cd() + "' \n ");                                 //  4
+        sb.append("     ,'" + Today + "' \n ");                                                                  //  5
+        sb.append("     ,@seq  \n ");                                                                                 //  6
+        sb.append("     ,@input_seq \n ");                                                                  //  7
+        sb.append("     ,'" + total_amt + "' \n ");       //  8
+        sb.append("     ,'0' \n ");           //  9
+        sb.append("     ,'0' \n ");
+        sb.append("     ,'0' \n ");
+        sb.append("     ,'0' \n ");
+        sb.append("     ,convert(varchar, getdate(), 120)  \n ");                                                     //  13
+        sb.append("     ,'" + compInfo.getStaffCd() + "' \n ");                                                         //  14
+        sb.append("     ,'" + orderVo.getTax_cd() + "' \n ");                          //  15
+        sb.append("  )\n ");
+
+
+        sb.append(" update [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] set \n ");
+        sb.append("     BAL_STOCK = ISNULL(BAL_STOCK,0) +" + total_amt + " \n ");
+        sb.append(" where RAW_MAT_CD = '" + orderVo.getRawmat_Cd() + "' \n ");
+
+
+//        if (input_yn == "Y") // 원자재는 수입검사 생략이기에 이부분 패스
+//        {
+//            sb.append(" update F_ORDER set ");
+//            sb.append("   COMPLETE_YN='Y'");
+//            sb.append("   where ORDER_DATE='" + in_rm_dgv.Rows[i].Cells["ORDER_DATE"].Value + "' and ORDER_CD='" + in_rm_dgv.Rows[i].Cells["ORDER_CD"].Value + "'");
+//
+//        }
+        flag = dbInfo.Insert(sb.toString());
+        if (flag)
+            return true;
+        else
+            return false;
     }
 
     private boolean Check(String Order_date, String Order_cd, String Order_seq) throws SQLException, JSONException {
@@ -541,7 +717,20 @@ public class RawInputAdapter extends BaseAdapter {
 
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT STORAGE_CD, STORAGE_NM, COMMENT FROM [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE]");
+        query.append("SELECT STORAGE_CD, STORAGE_NM, COMMENT FROM [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE] \n ");
+        jsonArray = dbInfo.SelectDB(query.toString());
+        return jsonArray;
+
+    }
+
+    public JSONArray getLoc(String Storage_cd) throws SQLException, JSONException {
+
+        JSONArray jsonArray = null;
+
+        StringBuilder query = new StringBuilder();
+
+        query.append("SELECT STORAGE_CD, LOC_CD, LOC_NM, COMMENT FROM [" + dbInfo.Location + "].[dbo].[N_LOC_CODE] \n ");
+        query.append("WHERE STORAGE_CD = '" + Storage_cd + "'\n ");
         jsonArray = dbInfo.SelectDB(query.toString());
         return jsonArray;
 
