@@ -16,18 +16,32 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.VO.RawVo;
+import com.common.CompInfo;
 import com.common.DBInfo;
+import com.common.wnDm;
 import com.example.mes_app.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 
 public class work_progressActivity extends Fragment {
 
@@ -40,7 +54,7 @@ public class work_progressActivity extends Fragment {
     Context context;
     Button btn_search;
     Spinner spinner_search;
-
+    CompInfo compInfo;
     GridView gridView;
     EditText editSearch;
     JSONArray JArray;
@@ -66,13 +80,18 @@ public class work_progressActivity extends Fragment {
     TextView tv_instAmt;
     TextView tv_workAmt;
     TextView tv_workRate;
-   LinearLayout llo_bottom;
 
-   ConstraintLayout llo_mian;
-   TextView tv_flow_title;
+    EditText ed_instAmt;
+    EditText ed_faulty;
+    LinearLayout llo_bottom;
+    wnDm wnDm;
+    ConstraintLayout llo_mian;
+    TextView tv_flow_title;
+
+    Button btn_complete;
 
 
-
+    private BarChart chart;
 
     public work_progressActivity(Context context) {
         dbInfo = new DBInfo();
@@ -110,18 +129,26 @@ public class work_progressActivity extends Fragment {
 
 
 
-         tv_itemNm=rootView.findViewById(R.id.workPrg_tv_itemNm2);
-         tv_date=rootView.findViewById(R.id.workPrg_tv_date2);
-         tv_delDate=rootView.findViewById(R.id.workPrg_tv_delDate2);
-         tv_lotNo=rootView.findViewById(R.id.workPrg_tv_lotNo2);
-         tv_workNum=rootView.findViewById(R.id.workPrg_tv_workNum2);
-         tv_instAmt=rootView.findViewById(R.id.workPrg_tv_instAmt2);
-         tv_workAmt=rootView.findViewById(R.id.workPrg_tv_workAmt2);
-         tv_workRate=rootView.findViewById(R.id.workPrg_tv_workRate2);
-tv_flow_title=rootView.findViewById(R.id.workPrg_tv_title);
+        tv_itemNm=rootView.findViewById(R.id.workPrg_tv_itemNm2);
+        tv_date=rootView.findViewById(R.id.workPrg_tv_date2);
+        tv_delDate=rootView.findViewById(R.id.workPrg_tv_delDate2);
+        tv_lotNo=rootView.findViewById(R.id.workPrg_tv_lotNo2);
+        tv_workNum=rootView.findViewById(R.id.workPrg_tv_workNum2);
+        tv_instAmt=rootView.findViewById(R.id.workPrg_tv_instAmt2);
+        tv_workAmt=rootView.findViewById(R.id.workPrg_tv_workAmt2);
+        tv_workRate=rootView.findViewById(R.id.workPrg_tv_workRate2);
+        tv_flow_title=rootView.findViewById(R.id.workPrg_tv_title);
         llo_bottom=rootView.findViewById(R.id.workPrg_llo_bottom);
         llo_mian=rootView.findViewById(R.id.workPrg_llo_main);
         llo_mian.setVisibility(View.INVISIBLE);
+
+        btn_complete=rootView.findViewById(R.id.workPrg_btn_complete);
+        btn_complete.setOnClickListener(combplteclick);
+        ed_instAmt=rootView.findViewById(R.id.workPrg_ed_instAmt);
+        ed_faulty=rootView.findViewById(R.id.workPrg_ed_faultyAmt);
+        chart=rootView.findViewById(R.id.chart);
+
+
 
         return rootView;
     }
@@ -145,8 +172,8 @@ tv_flow_title=rootView.findViewById(R.id.workPrg_tv_title);
                         selected_instDate=instDate;
                         selected_deleveryDate=deleveryDate;
                         selected_maxSeq=maxSeq;
-                          selected_itemCd=itemCd;
-                          selected_custCd=custCd;
+                        selected_itemCd=itemCd;
+                        selected_custCd=custCd;
 
 
                         try{
@@ -176,7 +203,7 @@ tv_flow_title=rootView.findViewById(R.id.workPrg_tv_title);
 
 
 
-             //   oDialog.setCancelable(false)ss;
+                //   oDialog.setCancelable(false)ss;
 
 
                 oDialog.show();
@@ -191,8 +218,9 @@ tv_flow_title=rootView.findViewById(R.id.workPrg_tv_title);
         }
     };
 
-private  final int DYNAMIC_VIEW_ID = 0x8000;
+    private  final int DYNAMIC_VIEW_ID = 0x8000;
 
+    String selected_flow_Cd="";
     //동적으로 버튼 생성
     private  void pushButton(int seq){
         llo_bottom.removeAllViews(); // 포함 뷰 클리어
@@ -208,7 +236,7 @@ private  final int DYNAMIC_VIEW_ID = 0x8000;
                 {
                     JSONObject jo = JArray.getJSONObject(i);
 
-                  final   Button dynamicButton = new Button(context);
+                    final   Button dynamicButton = new Button(context);
 
                     dynamicButton.setId(DYNAMIC_VIEW_ID + i);
                     dynamicButton.setText(jo.getString("FLOW_NM"));
@@ -219,9 +247,10 @@ private  final int DYNAMIC_VIEW_ID = 0x8000;
                         @Override
                         public void onClick(View v) {
                             System.out.println(posiotion + dynamicButton.getText().toString());
-tv_flow_title.setText(dynamicButton.getText().toString());
-
+                            tv_flow_title.setText(dynamicButton.getText().toString());
+                            selected_flow_Cd=dynamicButton.getTag().toString();
                             llo_mian.setVisibility(View.VISIBLE);
+                            drawChart();
 
 
                         }
@@ -261,4 +290,206 @@ tv_flow_title.setText(dynamicButton.getText().toString());
         return JSONArray;
     }
 
+    View.OnClickListener combplteclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            try {
+                input_Logic();
+
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.toString());
+            }
+        }
+    };
+
+    public void drawChart()
+    {
+chart.clear();
+
+        XAxis xAxis = chart.getXAxis(); // x 축 설정
+        xAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // X축 텍스트컬러설정
+        xAxis.setGridColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // X축 줄의 컬러 설정
+
+
+        YAxis yAxis = chart.getAxisLeft();
+        yAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // Y축 텍스트컬러설정
+        yAxis.setGridColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // Y축 줄의 컬러 설정
+        chart.getAxisLeft().setAxisLineColor(R.color.design_default_color_background);
+        chart.getAxisLeft().setGridColor(R.color.design_default_color_background);
+
+
+
+
+        ArrayList <String>title = new ArrayList<String>();
+        title.add("통과");
+        title.add("불량");
+        title.add("미투입량");
+        ArrayList arrayList=진행중인공정일때(selected_lotNo,selected_flow_Cd);
+        BarDataSet barDataSet = new BarDataSet(arrayList,"공정"); // 바 텍스트 컬러
+        barDataSet.setValueFormatter(new PercentFormatter());
+        barDataSet.setValueTextColor( R.color.design_default_color_background);
+        chart.animateY(1000);
+
+        BarData barData = new BarData(title,barDataSet);
+        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS); //
+        chart.setData(barData);
+        chart.invalidate();
+
+
+    }
+
+
+    public JSONArray Processing(JSONArray JSONArray, String LOT_NO,String Flow_cd) throws SQLException, JSONException {
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("select \n");
+        sb.append("isnull(convert(int,F_SUB_AMT),0) as F_SUB_AMT \n" +
+                ",isnull(convert(int,POOR_AMT),0) as  POOR_AMT\n" +
+                ",isnull(convert(int,INPUT_AMT),0) as INPUT_AMT ");
+        sb.append("from  [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] A  \n");
+        sb.append("where 1=1 \n");
+        sb.append("and LOT_NO='"+LOT_NO+"'\n");
+        sb.append("and FLOW_CD='"+Flow_cd+"'\n");
+
+
+
+
+        JSONArray = dbInfo.SelectDB(sb.toString());
+
+        System.out.println("쿼리: \n" + sb.toString());
+        return JSONArray;
+    }
+
+    ArrayList F_SUB_AMTList
+    ArrayList POOR_AMTList;
+    public ArrayList 진행중인공정일때(String lotNo,String flow_cd) {
+        ArrayList arrayList = new ArrayList();
+        ArrayList F_SUB_AMTList = new ArrayList();
+        ArrayList POOR_AMTList = new ArrayList();
+        try {
+
+            JArray = null;
+            JArray = Processing(JArray,lotNo,flow_cd );
+
+            if (JArray.length() != 0) {
+
+
+                for (int i = 0; i < JArray.length(); i++) {
+                    JSONObject jo = JArray.getJSONObject(i);
+
+                    int F_SUB_AMT = 0;
+                    int POOR_AMT = 0;
+                    int INPUT_AMT = 0;
+
+
+                    if (jo.has("F_SUB_AMT"))
+                        F_SUB_AMT = jo.getInt("F_SUB_AMT");
+                    if (jo.has("POOR_AMT"))
+                        POOR_AMT = jo.getInt("POOR_AMT");
+                    if (jo.has("INPUT_AMT"))
+                        INPUT_AMT = jo.getInt("INPUT_AMT");
+
+
+                    F_SUB_AMTList.add(F_SUB_AMT);
+                    POOR_AMTList.add(POOR_AMT);
+
+
+
+
+
+
+
+                }
+
+
+            }
+
+            else{
+                F_SUB_AMTList.add(0);
+                POOR_AMTList.add(0);
+
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println("어댑터"+ex.toString());
+        }
+        return  arrayList;
+    }
+
+    private void input_Logic() throws SQLException, JSONException {
+
+        Calendar cal = new GregorianCalendar();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String Today = sdf.format(cal.getTime()); // 오늘 날짜 ( #### - ## - ## )
+
+        StringBuilder sb = new StringBuilder();
+
+
+        sb.append("declare @f_step int \n ");
+        sb.append("select @f_step=SEQ  from [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] \n ");
+        sb.append("where ITEM_CD = '" + selected_itemCd + "' \n ");
+        sb.append("and FLOW_CD = '" + selected_flow_Cd + "' \n ");
+
+        sb.append("declare @seq int \n ");
+        sb.append("select @seq=ISNULL(MAX(SEQ),0)+1  from [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] \n ");
+        sb.append("where LOT_NO = '" + selected_lotNo + "' \n ");
+        sb.append("and FLOW_CD = '" + selected_flow_Cd + "' \n ");
+
+        sb.append(" INSERT INTO [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] ( ");
+        sb.append("  LOT_NO ");
+        sb.append("  ,LOT_SUB ");
+        sb.append("  ,F_STEP ");
+        sb.append("  ,FLOW_CD ");
+        sb.append("  ,SEQ ");
+        sb.append("  ,F_SUB_DATE ");
+        sb.append("  ,F_SUB_AMT ");
+        sb.append("  ,INPUT_AMT ");
+        sb.append("  ,POOR_AMT ");
+        sb.append("  ,LOSS ");
+
+        sb.append("  ,COMPLETE_YN ");
+        sb.append("  ,CHECK_YN ");
+        sb.append("  ,ITEM_CHECK_YN ");
+        sb.append("  ,INPUT_YN ");
+        sb.append("  ,CUST_CD ");
+        sb.append("  ,ITEM_CD ");
+        sb.append("  ,INSTAFF ");
+        sb.append("  ,INTIME ");
+        sb.append("  ,COMMENT ");
+        sb.append(" ) VALUES ( ");
+        sb.append(" '" + selected_lotNo + "' \n "); //lotno
+        sb.append(" ,'" + 1 + "' \n "); //lot sub
+        sb.append(" ,@f_step  \n"); //f_step
+        sb.append(" ,'"+selected_flow_Cd+"'  \n"); // flow_cd
+        sb.append(" ,@seq  \n"); //f_step
+        sb.append("     ,'" + Today + "' \n ");
+        sb.append("     ,'" + Integer.valueOf(ed_instAmt.getText().toString()) + "' \n ");
+        sb.append("     ,'" + Integer.valueOf(ed_instAmt.getText().toString()) + "' \n "); //input_AMT 일단 보류
+        sb.append("     ,'" + Integer.valueOf(ed_faulty.getText().toString()) + "' \n ");
+        sb.append("     ,'0' \n ");
+        sb.append("     ,'Y' \n ");
+        sb.append("     ,'S' \n ");
+        sb.append("     ,'S' \n ");
+        sb.append("     ,'Y' \n ");
+
+        sb.append(" ,'"+selected_custCd+"'  \n");
+        sb.append(" ,'"+selected_itemCd+"'  \n");
+        sb.append("     ,'" + compInfo.getStaffCd() + "' \n ");
+        sb.append("     ,convert(varchar, getdate(), 120) \n ");
+        sb.append(" ,'모바일입고'  \n");
+        sb.append(" ) \n ");
+
+
+
+
+
+        dbInfo.Insert(sb.toString());
+    }
 }
