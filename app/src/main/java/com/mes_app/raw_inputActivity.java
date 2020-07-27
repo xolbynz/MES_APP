@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -100,13 +101,24 @@ public class raw_inputActivity extends Fragment {
         gridView = rootView.findViewById(R.id.rawinput_gv);
         Layout_Main.setOnClickListener(myClickListener);
 
+        gridView.setOnItemClickListener(onItemClickListener);
+
 
         Input_Order_Detail();
 
         return rootView;
 
-
     }
+
+    GridView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Input_Order_Detail();
+        }
+    };
+
+
+
 
     public void Input_Order_Detail() {
 
