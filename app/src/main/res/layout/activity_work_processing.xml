@@ -122,7 +122,7 @@
         <GridView
             android:id="@+id/workprocessing_gv"
             android:layout_width="1276dp"
-            android:layout_height="210"
+            android:layout_height="210dp"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
