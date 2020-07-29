@@ -226,9 +226,6 @@ public class work_progressActivity extends Fragment {
     //동적으로 버튼 생성
     private  void pushButton(int seq){
         llo_bottom.removeAllViews(); // 포함 뷰 클리어
-
-
-
         JArray = null;
         try {
             JArray = item_flow_info(JArray, selected_itemCd);

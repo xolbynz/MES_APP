@@ -219,7 +219,6 @@ public class raw_viewActivity extends Fragment {
         query.append(", A.RAW_MAT_NM \n");
         query.append(", A.SPEC \n");
         query.append(", E.UNIT_NM \n");
-        query.append(", ISNULL(B.LOC, '-') AS LOC \n");
         query.append(", ISNULL(D.CUST_NM, '') AS CUST_NM \n");
         query.append(", CONVERT(FLOAT,ISNULL(B.INPUT_AMT,0)) AS INPUT_AMT \n");
         query.append(", CONVERT(FLOAT,ISNULL(C.OUTPUT_AMT,0)) AS OUTPUT_AMT \n");
@@ -230,12 +229,9 @@ public class raw_viewActivity extends Fragment {
         query.append("  LEFT OUTER JOIN( \n");
         query.append("          select RAW_MAT_CD \n");
         query.append("          ,SUM(ISNULL(TOTAL_AMT,0)) as INPUT_AMT \n");
-        query.append("          ,B.STORAGE_NM + ' / ' + A.LOC_NM AS LOC \n");
         query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] A \n");
-        query.append("          LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE] B \n");
-        query.append("          ON A.STORAGE_CD = B.STORAGE_CD \n");
         query.append("          where INPUT_DATE <= '" + Today + "' \n");
-        query.append("          group by RAW_MAT_CD,B.STORAGE_NM,A.LOC_NM) B \n");
+        query.append("          group by RAW_MAT_CD) B \n");
         query.append("  ON A.RAW_MAT_CD = B.RAW_MAT_CD \n");
         query.append("  LEFT OUTER JOIN( \n");
         query.append("          select RAW_MAT_CD \n");

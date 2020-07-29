@@ -39,7 +39,7 @@ import java.util.GregorianCalendar;
 public class RawInputAdapter extends BaseAdapter {
 
     Context context;
-    OrderVo orderVo = new OrderVo();
+    OrderVo orderVo;
     private ArrayList<OrderVo> arrayList = new ArrayList<>();
 
     DBInfo dbInfo;
@@ -94,11 +94,10 @@ public class RawInputAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
+        orderVo = new OrderVo();
         orderVo = arrayList.get(position);
         dbInfo = new DBInfo();
         RawInputAdapter.ListViewHolder holder = null;
-
-        final int adptPosition = position;
 
         final TextView raw_mat_nm;
         final TextView cust_nm;
@@ -288,7 +287,7 @@ public class RawInputAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-
+                orderVo = arrayList.get(position);
                 Order_Date = order_date.getText().toString();
                 Order_Cd = order_date.getTag().toString();
                 Order_Seq = order_date.getHint().toString();

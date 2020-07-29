@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="650dp"
@@ -15,10 +15,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="2dp"
         android:text="거래처명"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/worklist_tv_lotNo"
@@ -29,11 +26,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="2dp"
         android:text="LotNo"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/worklist_tv_custNm"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/worklist_tv_itemNm"
@@ -44,11 +37,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="2dp"
         android:text="제품명"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/worklist_tv_lotNo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/worklist_tv_instAmt"
@@ -59,26 +48,18 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="2dp"
         android:text="지시수량"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/worklist_tv_itemNm"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/worklist_tv_spec"
-        android:layout_width="100dp"
+        android:layout_width="105dp"
         android:layout_height="30dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="2dp"
         android:text="규격"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/worklist_tv_instAmt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/worklist_tv_completeYN"
@@ -89,9 +70,5 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="2dp"
         android:text="완료여부"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/worklist_tv_spec"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="18sp" />
+</LinearLayout>
