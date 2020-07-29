@@ -9,7 +9,7 @@
         android:label="스마트팩토리"
 
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.Design.NoActionBar">
         <activity android:name="com.mes_app.loginActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="landscape">

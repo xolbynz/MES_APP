@@ -12,13 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.Adapter.RawAdapter;
 import com.Adapter.WorkProcessAdapter;
-import com.VO.RawVo;
 import com.VO.WorkProcessVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +68,8 @@ class work_processingActivity extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.activity_work_processing, container, false);
 
         gridView = rootView.findViewById(R.id.workprocessing_gv);
+
+        getLogic();
 
         return rootView;
     }

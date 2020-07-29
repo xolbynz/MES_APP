@@ -2,18 +2,15 @@ package com.mes_app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.PopupMenu;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +22,11 @@ import com.common.CompInfo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
 
-import java.nio.ByteBuffer;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
     FragmentTransaction transaction;
@@ -38,21 +39,25 @@ public class MainActivity extends AppCompatActivity {
     item_releaseActivity frag_itemRleace = new item_releaseActivity(this);
 
     item_statusActivity frag_itemStatus = new item_statusActivity(this);
-item_trackingActivity frag_itemTracking = new item_trackingActivity(this);
+    item_trackingActivity frag_itemTracking = new item_trackingActivity(this);
     Button tab1;//메뉴바
     Button tab2;
     Button tab3;
     Button tab4;
-
+    TextView tv_logout;
+    TextView tv_staffNm;
     CompInfo compInfo;
-
+    Context context = this;
+    LinearLayout llo_subMenu;
+    JSONArray jsonArray;
     FragmentManager fragmentManager;
-
+    LinearLayout llo_topMenu;
+    DBInfo dbInfo;
     InputMethodManager imm; //키보드 내리기
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionbar, menu);
+
         return true;
     }
 
@@ -62,7 +67,7 @@ item_trackingActivity frag_itemTracking = new item_trackingActivity(this);
 
         if (id == R.id.action_logout) {
             Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,loginActivity.class);
+            Intent intent = new Intent(this, loginActivity.class);
             DBInfo.mainConn = null;
             startActivity(intent);
             finish();
@@ -73,40 +78,14 @@ item_trackingActivity frag_itemTracking = new item_trackingActivity(this);
     }
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //dg
         //jg
-        getSupportActionBar().setTitle(compInfo.STAFF_NM+"("+compInfo.COMPANY_NM+")");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF339999));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-if(!compInfo.COM_LOGO.toString().equals("")) {
-
-
-    byte[] bytes = compInfo.COM_LOGO.getBytes();
-    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    Bitmap bmp = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
-    ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    bmp.copyPixelsFromBuffer(buffer);
-
-    Drawable drawable = new BitmapDrawable(bmp);
-
-
-//
-//
-    getSupportActionBar().setHomeAsUpIndicator(drawable);
-}else {
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.sf_logo_);
-}
-
-
+        dbInfo = new DBInfo();
 
 
 //
@@ -121,10 +100,6 @@ if(!compInfo.COM_LOGO.toString().equals("")) {
 //{
 //    System.out.println(ex.toString());
 //}
-        tab1 = (Button) findViewById(R.id.btn_rawmenu);
-        tab2 = (Button) findViewById(R.id.btn_workmenu);
-        tab3 = (Button) findViewById(R.id.btn_itemmenu);
-        tab4 = (Button) findViewById(R.id.btn_setting);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
         //프래그먼트 추가
@@ -136,11 +111,17 @@ if(!compInfo.COM_LOGO.toString().equals("")) {
 //        transaction.commitNow();
         System.out.println("첫페이지 실행");
 
-        tab1.setOnClickListener(menuClickListenr);
-        tab2.setOnClickListener(menuClickListenr);
-        tab3.setOnClickListener(menuClickListenr);
-        tab4.setOnClickListener(menuClickListenr);
 
+        tv_logout = (TextView) findViewById(R.id.Main_tv_logout);
+        tv_logout.setOnClickListener(logoutClick);
+        tv_staffNm = (TextView) findViewById(R.id.Main_tv_staffNm);
+        tv_staffNm.setText(compInfo.getStaffNm());
+
+
+        llo_subMenu = (LinearLayout) findViewById(R.id.Main_llo_submenu);
+        llo_topMenu = (LinearLayout) findViewById(R.id.Main_llo_Topmene);
+
+        TopMenuCreate();
     }
 
 
@@ -159,7 +140,8 @@ if(!compInfo.COM_LOGO.toString().equals("")) {
             i++;
         }
     }
-    private void replaceFragment(Fragment fragment) {
+
+    public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentBorC, fragment).commit();
@@ -167,202 +149,134 @@ if(!compInfo.COM_LOGO.toString().equals("")) {
 
     }
 
-    View.OnClickListener menuClickListenr = new View.OnClickListener() {
-
+    View.OnClickListener logoutClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            PopupMenu p = new PopupMenu(
-                    getApplicationContext(), // 현재 화면의 제어권자
-                    v);
-
-            System.out.print(v.getId());
-            switch (v.getId()) {
-                case R.id.btn_rawmenu:
-                    getMenuInflater().inflate(R.menu.menu_raw, p.getMenu());
-
-                    break;
-                case R.id.btn_workmenu:
-                    getMenuInflater().inflate(R.menu.menu_work, p.getMenu());
-
-                    break;
-                case R.id.btn_itemmenu:
-                    getMenuInflater().inflate(R.menu.menu_item, p.getMenu());
-                    break;
-                case R.id.btn_setting:
-                    getMenuInflater().inflate(R.menu.menu_setting, p.getMenu());
-                    break;
-                default:
-                    break;
-            }
-
-
-            p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-
-                    switch (item.getItemId()) {
-                        case R.id.menu_raw1:
-                            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-
-//                                Intent intent = new Intent(MainActivity.this, raw_viewActivity.class);
-//                                startActivity(intent);
-
-                            try {
-
-
-                                replaceFragment(frag_raw_view);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-                            break;
-
-                        case R.id.menu_raw2:
-                            Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-
-                            try {
-
-                                replaceFragment(frag_raw_input);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-                            break;
-                        case R.id.menu_work1: //작업지시서 조회
-                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-
-                            try {
-
-                                replaceFragment(frag_work_view);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-                        case R.id.menu_work2: //공정 진행 현황
-                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-
-                            try {
-
-                                replaceFragment(frag_work_process);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-                        case R.id.menu_work3: //제품 입고 현황
-                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-
-                            try {
-
-                                replaceFragment(frag_stock_status);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-                        case R.id.menu_work5: //현황판 모니터링
-                            Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
-
-                            try {
-
-                                replaceFragment(frag_monMonitoring);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-
-                        case R.id.menu_item1: // 제품출고
-
-
-                            try {
-
-                                replaceFragment(frag_itemRleace);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-                        case R.id.menu_item2: // 제품재고현황
-
-
-                            try {
-
-                                replaceFragment(frag_itemStatus);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-                        case R.id.menu_item3: // 제품추적조회
-
-
-                            try {
-
-                                replaceFragment(frag_itemTracking);
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-                        case R.id.menu_setting1: // 로그아웃
-
-                            try {
-
-
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-                        case R.id.menu_setting2: // 이용약관관
-
-                           try {
-
-
-                            } catch (Exception ex) {
-
-                                System.out.println(ex.toString());
-                            }
-
-
-                            break;
-
-                    }
-                    return true;
-                }
-
-
-            });
-            p.show(); // 메뉴를 띄우기
-
+            Toast.makeText(context, "Log Out", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, loginActivity.class);
+            DBInfo.mainConn = null;
+            startActivity(intent);
+            finish();
         }
     };
 
+
+    Button TopMenu;
+    Button SubMenu;
+    String path;
+    public void TopMenuCreate() {
+
+        try {
+            jsonArray = null;
+            jsonArray = TopMenuSelect(jsonArray, "");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jo = jsonArray.getJSONObject(i);
+
+                String TopID = "";
+                String TopName = "";
+
+
+                if (jo.has("TopID"))
+                    TopID = jo.getString("TopID");
+                if (jo.has("TopName"))
+                    TopName = jo.getString("TopName");
+
+                TopMenu = new Button(context);
+                TopMenu.setId(Integer.parseInt(TopID));
+                TopMenu.setText(TopName);
+                TopMenu.setTag(TopID);
+
+                TopMenu.setTextSize(25);
+
+                TopMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        jsonArray = null;
+                        try {
+                            System.out.println(v.getId());
+                            jsonArray = SubMenuSelect(jsonArray, String.valueOf(v.getId()));
+                            llo_subMenu.removeAllViews();// 뷰 클리어
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jo = jsonArray.getJSONObject(i);
+
+                                String SubID = "";
+                                String SubName = "";
+                                 path="";
+
+                                if (jo.has("SubID"))
+                                    SubID = jo.getString("SubID");
+                                if (jo.has("SubName"))
+                                    SubName = jo.getString("SubName");
+                                if (jo.has("path"))
+                                    path = jo.getString("path");
+                                SubMenu = new Button(context);
+                                SubMenu.setId(Integer.parseInt(SubID));
+                                SubMenu.setText(SubName);
+                                SubMenu.setTag(SubID);
+
+
+                                SubMenu.setTextSize(19);
+                                SubMenu.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Fragment fragment = null;
+                                        try {
+
+                                            fragment = (Fragment) Class.forName("com.mes_app."+path).newInstance();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        replaceFragment(fragment);
+
+                                    }
+                                });
+                                llo_subMenu.addView(SubMenu, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+                llo_topMenu.addView(TopMenu, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            }
+
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+    private JSONArray TopMenuSelect(JSONArray Jarray, String condition) throws SQLException, JSONException {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Select TopID,TopName ");
+        sb.append(" from [" + dbInfo.Location + "].[dbo].[M_TopMenu]   \n");
+        System.out.println(sb.toString());
+        Jarray = dbInfo.SelectDB(sb.toString());
+
+        return Jarray;
+    }
+
+    private JSONArray SubMenuSelect(JSONArray Jarray, String condition) throws SQLException, JSONException {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Select A.SubName,A.SubID,A.TopID,B.TopName,A.path \n ");
+        sb.append(" from [" + dbInfo.Location + "].[dbo].[M_SubMenu]  as A \n");
+        sb.append("inner join [" + dbInfo.Location + "].[dbo].[M_TopMenu] as B on A.TopID=B.TopID \n");
+        sb.append("where 1=1 and \n");
+        sb.append("A.TopID='" + condition + "'");
+        System.out.println(sb.toString());
+        Jarray = dbInfo.SelectDB(sb.toString());
+
+        return Jarray;
+    }
 }
 
 

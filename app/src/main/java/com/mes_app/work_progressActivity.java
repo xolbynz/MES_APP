@@ -1,6 +1,8 @@
 package com.mes_app;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -221,7 +223,7 @@ public class work_progressActivity extends Fragment {
     };
 
     private  final int DYNAMIC_VIEW_ID = 0x8000;
-
+       Button dynamicButton;
     String selected_flow_Cd="";
     //동적으로 버튼 생성
     private  void pushButton(int seq){
@@ -235,7 +237,7 @@ public class work_progressActivity extends Fragment {
                 {
                     JSONObject jo = JArray.getJSONObject(i);
 
-                    final   Button dynamicButton = new Button(context);
+                    dynamicButton  = new Button(context);
 
                     dynamicButton.setId(DYNAMIC_VIEW_ID + i);
                     dynamicButton.setText(jo.getString("FLOW_NM"));
@@ -294,8 +296,36 @@ public class work_progressActivity extends Fragment {
         public void onClick(View v) {
 
             try {
-                input_Logic();
+
                 Toast.makeText(context,"생산완료",Toast.LENGTH_LONG);
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes 버튼을 클릭했을때 처리
+                                try {
+                                    input_Logic();
+                                    dynamicButton.performClick();
+
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No 버튼을 클릭했을때 처리
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("작업을 진행하겠습니까?").setPositiveButton("예", dialogClickListener)
+                        .setNegativeButton("아니오", dialogClickListener).show();
 
             }
             catch (Exception ex)
@@ -353,10 +383,8 @@ chart.clear();
                 ",isnull(convert(int,INPUT_AMT),0) as INPUT_AMT ");
         sb.append("from  [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] A  \n");
         sb.append("where 1=1 \n");
-        sb.append("and LOT_NO='"+LOT_NO+"'\n");
-        sb.append("and FLOW_CD='"+Flow_cd+"'\n");
-
-
+        sb.append("and LOT_NO='" + LOT_NO + "'\n");
+        sb.append("and FLOW_CD='" + Flow_cd + "'\n");
 
 
         JSONArray = dbInfo.SelectDB(sb.toString());
