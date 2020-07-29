@@ -33,7 +33,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class stock_statusActivity extends Fragment {
@@ -62,6 +61,11 @@ public class stock_statusActivity extends Fragment {
     public stock_statusActivity(Context context) {
         this.context = context;
         dbInfo = new DBInfo();
+    }
+    public  stock_statusActivity()
+    {
+        dbInfo = new DBInfo();
+
     }
 
 

@@ -163,13 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button TopMenu;
     Button SubMenu;
-    String path;
+
     public void TopMenuCreate() {
 
         try {
             jsonArray = null;
             jsonArray = TopMenuSelect(jsonArray, "");
-
+            dbInfo = new DBInfo();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jo = jsonArray.getJSONObject(i);
 
@@ -193,16 +193,19 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         jsonArray = null;
+
                         try {
                             System.out.println(v.getId());
+                            dbInfo = new DBInfo();
                             jsonArray = SubMenuSelect(jsonArray, String.valueOf(v.getId()));
                             llo_subMenu.removeAllViews();// 뷰 클리어
+
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jo = jsonArray.getJSONObject(i);
 
                                 String SubID = "";
                                 String SubName = "";
-                                 path="";
+                                String path="";
 
                                 if (jo.has("SubID"))
                                     SubID = jo.getString("SubID");
@@ -213,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                                 SubMenu = new Button(context);
                                 SubMenu.setId(Integer.parseInt(SubID));
                                 SubMenu.setText(SubName);
-                                SubMenu.setTag(SubID);
+                                SubMenu.setTag(path);
 
 
                                 SubMenu.setTextSize(19);
@@ -222,8 +225,9 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         Fragment fragment = null;
                                         try {
-
-                                            fragment = (Fragment) Class.forName("com.mes_app."+path).newInstance();
+                                            dbInfo = new DBInfo();
+                                            System.out.println(v.getTag().toString());
+                                            fragment = (Fragment) Class.forName("com.mes_app."+v.getTag().toString()).newInstance();
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }

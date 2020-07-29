@@ -101,6 +101,10 @@ public class work_progressActivity extends Fragment {
         dbInfo = new DBInfo();
         this.context=context;
     }
+    public work_progressActivity( ) {
+        dbInfo = new DBInfo();
+
+    }
 
     @Override
     public void onDetach() {

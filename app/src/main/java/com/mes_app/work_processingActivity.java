@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 import java.sql.SQLException;
 
-class work_processingActivity extends Fragment {
+public class work_processingActivity extends Fragment {
 
     DBInfo dbInfo;
     Context context;
@@ -38,6 +38,10 @@ class work_processingActivity extends Fragment {
     public work_processingActivity(Context context) {
         dbInfo = new DBInfo();
         this.context = context;
+    }
+    public work_processingActivity( ) {
+        dbInfo = new DBInfo();
+
     }
 
     @Override
