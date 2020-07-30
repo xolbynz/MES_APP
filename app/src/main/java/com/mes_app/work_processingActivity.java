@@ -35,10 +35,6 @@ public class work_processingActivity extends Fragment {
     WorkProcessAdapter workProcessAdapter;
     JSONArray JArray;
 
-    public work_processingActivity(Context context) {
-        dbInfo = new DBInfo();
-        this.context = context;
-    }
     public work_processingActivity( ) {
         dbInfo = new DBInfo();
 
@@ -58,9 +54,9 @@ public class work_processingActivity extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
     }
-
     @Override
     public void onStart() {
+        dbInfo = new DBInfo();
         super.onStart();
     }
 
@@ -129,7 +125,7 @@ public class work_processingActivity extends Fragment {
                 gridView.setAdapter(workProcessAdapter);
 
             } else {
-                Toast.makeText(activity, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
                 gridView.setAdapter(null);
             }
         } catch (SQLException | JSONException e) {

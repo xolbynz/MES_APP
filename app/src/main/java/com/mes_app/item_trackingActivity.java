@@ -76,6 +76,8 @@ public class item_trackingActivity extends Fragment {
         gridView = rootView.findViewById(R.id.itemTracking_gv_grid);
         CompleteYn = rootView.findViewById(R.id.itemTracking_CompleteYn);
 
+        dbInfo = new DBInfo();
+
 
         Barcode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -120,13 +122,6 @@ public class item_trackingActivity extends Fragment {
         @Override
         public void onClick(View v) {
             imm.hideSoftInputFromWindow(Barcode.getWindowToken(), 0);
-            if (Barcode.getText().length() != 10 || Barcode.getText().equals("")) {
-                Toast.makeText(context, "잘못된 LOT 번호 입니다.", Toast.LENGTH_LONG).show();
-                gridView.setAdapter(null);
-            } else {
-                Lot_no = Barcode.getText().toString();
-                databind();
-            }
         }
     };
 
