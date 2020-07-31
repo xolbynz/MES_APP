@@ -256,8 +256,6 @@ public class work_progressActivity extends Fragment {
                             selected_flow_Cd=dynamicButton.getTag().toString();
                             llo_mian.setVisibility(View.VISIBLE);
                             drawChart();
-
-
                         }
                     });
 

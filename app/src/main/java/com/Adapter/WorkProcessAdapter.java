@@ -18,7 +18,7 @@ public class WorkProcessAdapter extends BaseAdapter {
     DBInfo dbInfo;
     Context context;
     WorkProcessVo workProcessVo;
-    private ArrayList<WorkProcessVo> workProcessVoArrayList = new ArrayList<>();
+    public ArrayList<WorkProcessVo> workProcessVoArrayList = new ArrayList<>();
 
     public void addItem(WorkProcessVo workProcessVo) {
         workProcessVoArrayList.add(workProcessVo);

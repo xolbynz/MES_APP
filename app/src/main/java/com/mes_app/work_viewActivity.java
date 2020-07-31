@@ -325,8 +325,6 @@ this.context= context;
                     et_workNm.setText(WORKDER_NM);
                     et_lineNm.setText(LINE_NM);
                     et_delDate.setText(DELIVERY_DATE);
-
-
                 }
 
             }
