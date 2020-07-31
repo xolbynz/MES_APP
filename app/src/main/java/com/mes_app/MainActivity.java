@@ -239,14 +239,17 @@ public class MainActivity extends AppCompatActivity {
                                                 ex.printStackTrace();
                                             } catch (InstantiationException ex) {
                                                 ex.printStackTrace();
-                                            
+
                                             } catch (ClassNotFoundException ex) {
                                                 ex.printStackTrace();
                                             }
                                             e.printStackTrace();
                                             System.out.println(e.toString());
                                         }
-                                        replaceFragment(fragment);
+                                        finally {
+                                            replaceFragment(fragment);
+
+                                        }
 
                                     }
                                 });
