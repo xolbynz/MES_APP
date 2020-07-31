@@ -17,7 +17,7 @@
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1251dp"
+        android:layout_width="1232dp"
         android:layout_height="78dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout11"
-        android:layout_width="1249dp"
+        android:layout_width="1232dp"
         android:layout_height="58dp"
         android:background="#C42A2F43"
         app:layout_constraintEnd_toEndOf="parent"

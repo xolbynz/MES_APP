@@ -13,12 +13,14 @@ import com.example.mes_app.R;
 public class item_releaseActivity extends Fragment {
 
     ViewGroup rootView;
+    Context context;
     public item_releaseActivity(){
 
     }
     public  item_releaseActivity(Context context)
     {
 
+        this.context=context;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         llo_topMenu = (LinearLayout) findViewById(R.id.Main_llo_Topmene);
 
         TopMenuCreate();
+
+
+
     }
 
 
@@ -227,9 +230,11 @@ public class MainActivity extends AppCompatActivity {
                                         try {
                                             dbInfo = new DBInfo();
                                             System.out.println(v.getTag().toString());
-                                            fragment = (Fragment) Class.forName("com.mes_app."+v.getTag().toString()).newInstance();
+                                            fragment = (Fragment) Class.forName("com.mes_app."+v.getTag().toString()).getDeclaredConstructor(Context.class).newInstance(context);
+                                            //getDeclaredConstructor (파라메터 타입).newInstance(파라메터) 는  class clazz= new class(paramenter) 와 같다.
                                         } catch (Exception e) {
                                             e.printStackTrace();
+                                            System.out.println(e.toString());
                                         }
                                         replaceFragment(fragment);
 

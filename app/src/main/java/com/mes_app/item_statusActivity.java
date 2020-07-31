@@ -43,6 +43,7 @@ public class item_statusActivity extends Fragment {
     ImageButton btn_search;
 
     public item_statusActivity() {
+        dbInfo = new DBInfo();
     }
 
     public item_statusActivity(Context context) {

@@ -49,7 +49,7 @@ public class item_trackingActivity extends Fragment {
 
 
     public item_trackingActivity() {
-
+        dbInfo = new DBInfo();
     }
 
     public item_trackingActivity(Context context) {

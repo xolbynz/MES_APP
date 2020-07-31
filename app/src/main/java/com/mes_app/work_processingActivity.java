@@ -39,6 +39,11 @@ public class work_processingActivity extends Fragment {
         dbInfo = new DBInfo();
 
     }
+    public  work_processingActivity(Context context)
+    {
+        dbInfo = new DBInfo();
+        this.context=context;
+    }
 
     @Override
     public void onDetach() {
