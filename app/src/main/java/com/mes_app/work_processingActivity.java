@@ -151,7 +151,7 @@ public class work_processingActivity extends Fragment {
         query.append("         , (SELECT COUNT( *)FROM [" + dbInfo.Location + "].[dbo].[N_ITEM_FLOW] WHERE ITEM_CD = W.ITEM_CD)AS FLOW_COUNT ");
         query.append("         ,W.INST_AMT AS INST_AMT ");
         query.append("         , ISNULL(I.INPUT_AMT, 0) AS INPUT_AMT ");
-        query.append("         ,ISNULL(INPUT_AMT, 0) / W.INST_AMT * 100 AS INPUT_PER ");
+        query.append("         ,ISNULL(INPUT_AMT ,  0) / W.INST_AMT * 100 AS INPUT_PER ");
         query.append(" from [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] A ");
         query.append(" inner join [" + dbInfo.Location + "].[dbo].[F_WORK_INST] W ");
         query.append(" on A.LOT_NO = W.LOT_NO ");

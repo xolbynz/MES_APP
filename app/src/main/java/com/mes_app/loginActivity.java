@@ -229,7 +229,7 @@ public class loginActivity extends AppCompatActivity {
                 ConnectionClass connClass = new ConnectionClass();
                 dbInfo.mainConn = connClass.getConnection(dbUser, dbUserPass, dbName, dbIp);
 
-                query2.append("select * from [" + dbInfo.Location + "].[dbo].[N_STAFF_CODE] \n");
+                query2.append("select * from N_STAFF_CODE \n");
                 query2.append("where LOGIN_ID = '" + Id + "' and PW = '" + Pw + "'");
 
 

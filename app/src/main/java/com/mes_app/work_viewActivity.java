@@ -221,13 +221,13 @@ this.context= context;
         query.append(" ,isnull('0',B.BAL_STOCK) as  BAL_STOCK ,isnull(D.CUST_NM,'') as CUST_NM   ,A.DELIVERY_DATE    ,C.COMPLETE_YN  as COMPLETE  ,CASE WHEN ISNULL(C.COMPLETE_YN,'N')='Y' THEN '완료' ELSE ( CASE WHEN ISNULL(C.COMPLETE_YN,'N')='S' THEN '진행중' ELSE '미완료' END ) END COMPLETE_YN     \n");
 
 
-        query.append("from [" + dbInfo.Location + "].[dbo].[F_WORK_INST] as A ");
-        query.append("left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] as B ");
+        query.append("from F_WORK_INST as A ");
+        query.append("left outer join N_ITEM_CODE as B ");
         query.append(" ON A.ITEM_CD = B.ITEM_CD  ");
 
-        query.append("left outer join [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] as C  ");
+        query.append("left outer join F_WORK_FLOW as C  ");
         query.append(" ON A.LOT_NO = C.LOT_NO ");
-        query.append("left outer join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD=A.CUST_CD   ");
+        query.append("left outer join N_CUST_CODE as D on D.CUST_CD=A.CUST_CD   ");
 
 
         query.append("where 1=1  \n");
@@ -278,11 +278,11 @@ this.context= context;
         query.append(",isnull(D.STAFF_NM,'') as WORKDER_NM \n");
         query.append(",isnull(F.LINE_NM,'') as LINE_NM \n");
         query.append(",A.DELIVERY_DATE \n");
-        query.append("from [" + dbInfo.Location + "].[dbo].[F_WORK_INST] as A  \n");
-        query.append("left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as c on C.CUST_CD=A.CUST_CD \n");
-        query.append("left join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] as B on B.ITEM_CD=A.ITEM_CD \n");
-        query.append("left join [" + dbInfo.Location + "].[dbo].[N_STAFF_CODE] as D on D.STAFF_CD=A.WORKER_CD \n");
-        query.append("left join [" + dbInfo.Location + "].[dbo].[N_LINE_CODE] as F on F.LINE_CD= A.LINE_CD  \n");
+        query.append("from F_WORK_INST as A  \n");
+        query.append("left join N_CUST_CODE as c on C.CUST_CD=A.CUST_CD \n");
+        query.append("left join N_ITEM_CODE as B on B.ITEM_CD=A.ITEM_CD \n");
+        query.append("left join N_STAFF_CODE as D on D.STAFF_CD=A.WORKER_CD \n");
+        query.append("left join N_LINE_CODE as F on F.LINE_CD= A.LINE_CD  \n");
         query.append("where 1=1 \n");
         query.append("and A.LOT_NO='" + condition + "'\n");
 
@@ -408,20 +408,20 @@ this.context= context;
                 "                 ,B.CUST_CD \n" +
                 "                 ,C.CUST_NM \n" +
                 "                 ,B.INPUT_UNIT \n" +
-                "                 ,(select UNIT_NM from [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] where UNIT_CD = B.INPUT_UNIT) as INPUT_UNIT_NM  \n" +
+                "                 ,(select UNIT_NM from N_UNIT_CODE where UNIT_CD = B.INPUT_UNIT) as INPUT_UNIT_NM  \n" +
                 "                 ,B.OUTPUT_UNIT\n" +
-                "                 ,(select UNIT_NM from [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] where UNIT_CD = B.OUTPUT_UNIT) as OUTPUT_UNIT_NM   \n" +
+                "                 ,(select UNIT_NM from N_UNIT_CODE where UNIT_CD = B.OUTPUT_UNIT) as OUTPUT_UNIT_NM   \n" +
                 "                 ,A.SOYO_AMT  \n" +
                 "                 ,A.TOTAL_AMT as TOTAL_SOYO_AMT \n" +
                 "                 ,ISNULL(B.BAL_STOCK,0) AS BAL_STOCK  \n" +
                 "                 ,B.CVR_RATIO  \n" +
                 "                  \n");
-        sb.append("from [" + dbInfo.Location + "].[dbo].[F_WORK_INST_DETAIL] A \n" +
-                "             left outer join  [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] B\n" +
+        sb.append("from F_WORK_INST_DETAIL A \n" +
+                "             left outer join  N_RAW_CODE B\n" +
                 "             on A.RAW_MAT_CD = B.RAW_MAT_CD\n" +
-                "             left outer join  [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] C  \n" +
+                "             left outer join  N_CUST_CODE C  \n" +
                 "             on B.CUST_CD = C.CUST_CD\t \n" +
-                "             inner join  [" + dbInfo.Location + "].[dbo].[F_WORK_INST] F \n" +
+                "             inner join  F_WORK_INST F \n" +
                 "             on A.W_INST_DATE = F.W_INST_DATE \n" +
                 "                 and A.W_INST_CD = F.W_INST_CD \n" +
                 "      where 1=1     \n" + condition +

@@ -71,7 +71,6 @@ public class RawAdapter extends BaseAdapter {
             raw_mat_nm = convertView.findViewById(R.id.rawView_tv_rawNm);
             spec = convertView.findViewById(R.id.rawView_tv_spec);
             unit_nm = convertView.findViewById(R.id.rawView_tv_unit);
-            loc = convertView.findViewById(R.id.rawView_tv_position);
             input_amt = convertView.findViewById(R.id.rawView_tv_inpAmt);
             output_amt = convertView.findViewById(R.id.rawView_tv_outpAmt);
             curr_amt = convertView.findViewById(R.id.rawView_tv_amt);
@@ -81,7 +80,6 @@ public class RawAdapter extends BaseAdapter {
             holder.raw_mat_nm = raw_mat_nm;
             holder.spec = spec;
             holder.unit_nm = unit_nm;
-            holder.loc = loc;
             holder.input_amt = input_amt;
             holder.output_amt = output_amt;
             holder.curr_amt = curr_amt;
@@ -98,7 +96,6 @@ public class RawAdapter extends BaseAdapter {
             input_amt = holder.input_amt;
             output_amt = holder.output_amt;
             curr_amt = holder.curr_amt;
-            loc = holder.loc;
 
         }
 
@@ -110,7 +107,6 @@ public class RawAdapter extends BaseAdapter {
         input_amt.setText(df.format(Double.parseDouble(rawVo.getInput_amt())));
         output_amt.setText(df.format(Double.parseDouble(rawVo.getOutput_amt())));
         curr_amt.setText(df.format(Double.parseDouble(rawVo.getCurr_amt())));
-        loc.setText(rawVo.getLoc());
 
         return convertView; // 뷰 객체 반환
     }
@@ -119,7 +115,6 @@ public class RawAdapter extends BaseAdapter {
         TextView raw_mat_nm;
         TextView spec;
         TextView unit_nm;
-        TextView loc;
         TextView input_amt;
         TextView output_amt;
         TextView curr_amt;

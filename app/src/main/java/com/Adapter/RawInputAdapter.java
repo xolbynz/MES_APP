@@ -349,7 +349,7 @@ public class RawInputAdapter extends BaseAdapter {
                                         flag = Check(Order_Date, Order_Cd, Order_Seq);
                                         if (flag) {
                                             flag = input_Logic(orderVo, Storage_cd, Loc_cd, Loc_nm, input_amt.getText().toString());
-                                            if (flag) {
+                                             if (flag) {
                                                 Toast.makeText(context, "입고 완료", Toast.LENGTH_LONG).show();
                                             } else {
                                                 Toast.makeText(context, "입고 실패", Toast.LENGTH_LONG).show();
@@ -474,14 +474,14 @@ public class RawInputAdapter extends BaseAdapter {
         String all_tax_money = "0";
 
         sb.append("declare @seq int \n ");
-        sb.append("select @seq =ISNULL(MAX(INPUT_CD),0)+1 from [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT] \n");
+        sb.append("select @seq =ISNULL(MAX(INPUT_CD),0)+1 from F_RAW_INPUT \n");
         sb.append("where INPUT_DATE = '" + Today + "' \n ");
 
         sb.append("declare @buy_seq int \n ");
-        sb.append("select @buy_seq =ISNULL(convert(int,MAX(BUY_CD)),0)+1 from [" + dbInfo.Location + "].[dbo].[F_BUY] \n");
+        sb.append("select @buy_seq =ISNULL(convert(int,MAX(BUY_CD)),0)+1 from F_BUY \n");
         sb.append("where BUY_DATE = '" + Today + "' \n ");
 
-        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT]( \n");
+        sb.append("insert into F_RAW_INPUT( \n");
         sb.append("     INPUT_DATE\n ");
         sb.append("     ,INPUT_CD \n ");
         sb.append("     ,CUST_CD \n ");
@@ -500,7 +500,7 @@ public class RawInputAdapter extends BaseAdapter {
         sb.append("     ,convert(varchar, getdate(), 120) \n ");
         sb.append(" ) \n ");
 
-        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_BUY] (\n ");
+        sb.append("insert into F_BUY (\n ");
         sb.append("     BUY_DATE\n ");
         sb.append("     ,BUY_CD \n ");
         sb.append("     ,BUY_GUBUN \n ");
@@ -532,7 +532,7 @@ public class RawInputAdapter extends BaseAdapter {
         boolean isCustDay = wnDm.isCustDayTotal(Today, orderVo.getCust_Cd());
 
         if (!isCustDay) {
-            sb.append("insert into [" + dbInfo.Location + "].[dbo].[T_CUST_DAY_TOTAL](\n ");
+            sb.append("insert into T_CUST_DAY_TOTAL(\n ");
             sb.append("     INPUT_DATE \n ");
             sb.append("     ,CUST_CD \n ");
             sb.append(" ) values ( \n ");
@@ -542,11 +542,11 @@ public class RawInputAdapter extends BaseAdapter {
         }
 
         sb.append("declare @input_seq int, @chk_gbn  nvarchar(1), @chk_yn nvarchar(1), @final_amt nvarchar(20) \n ");
-        sb.append("select @input_seq =ISNULL(MAX(SEQ),0)+1 from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] \n ");
+        sb.append("select @input_seq =ISNULL(MAX(SEQ),0)+1 from F_RAW_DETAIL \n ");
         sb.append("where INPUT_DATE = '" + Today + "' \n ");
         sb.append("and INPUT_CD =  @seq \n ");
 
-        sb.append("select @chk_gbn = check_gubun from [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] \n ");
+        sb.append("select @chk_gbn = check_gubun from N_RAW_CODE \n ");
         sb.append("where RAW_MAT_CD = '" + orderVo.getRawmat_Cd() + "' \n ");
 
         sb.append("IF @chk_gbn = '1' BEGIN set @chk_yn = 'S' set @final_amt = '0' END \n "); //원자재 검사여부가 검사일 경우 'S' 대기
@@ -557,7 +557,7 @@ public class RawInputAdapter extends BaseAdapter {
 //        sb.append("where BUY_DATE = '" + Today + "' \n ");
 //        sb.append("and BUY_CD =  @buy_seq \n ");
 
-        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL](\n ");
+        sb.append("insert into F_RAW_DETAIL(\n ");
         sb.append("     INPUT_DATE \n ");
         sb.append("     ,INPUT_CD \n ");
         sb.append("     ,SEQ \n ");
@@ -610,7 +610,7 @@ public class RawInputAdapter extends BaseAdapter {
         sb.append("     ,'" + Loc_nm + "' \n ");
         sb.append("  )\n ");
 
-        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_BUY_DETAIL](\n ");
+        sb.append("insert into F_BUY_DETAIL(\n ");
         sb.append("      BUY_DATE   \n ");      //1
         sb.append("     ,BUY_CD    \n ");       //2
         sb.append("     ,SEQ    \n ");          //3
@@ -645,7 +645,7 @@ public class RawInputAdapter extends BaseAdapter {
         sb.append("  )\n ");
 
 
-        sb.append(" update [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] set \n ");
+        sb.append(" update N_RAW_CODE set \n ");
         sb.append("     BAL_STOCK = ISNULL(BAL_STOCK,0) +" + total_amt + " \n ");
         sb.append(" where RAW_MAT_CD = '" + orderVo.getRawmat_Cd() + "' \n ");
 
@@ -671,8 +671,8 @@ public class RawInputAdapter extends BaseAdapter {
         JSONArray jsonArray;
 
         sb.append(" select A.ORDER_DATE,A.ORDER_CD,B.SEQ,C.ORDER_AMT, C.INPUT_AMT\n ");
-        sb.append(" FROM [" + dbInfo.Location + "].[dbo].[F_ORDER] A \n ");
-        sb.append(" LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_ORDER_DETAIL] B  \n ");
+        sb.append(" FROM F_ORDER A \n ");
+        sb.append(" LEFT OUTER JOIN F_ORDER_DETAIL B  \n ");
         sb.append(" ON A.ORDER_DATE = B.ORDER_DATE \n ");
         sb.append("     AND A.ORDER_CD = B.ORDER_CD \n ");
         sb.append(" LEFT OUTER JOIN(	 \n ");
@@ -682,8 +682,8 @@ public class RawInputAdapter extends BaseAdapter {
         sb.append("                            ,FLOOR(ISNULL(AA.TOTAL_AMT,0)) AS ORDER_AMT \n ");
         sb.append("                            ,ISNULL(SUM(BB.TOTAL_AMT),0) AS INPUT_AMT \n ");
         sb.append("                            ,ISNULL(AA.TOTAL_AMT,0)-ISNULL(SUM(BB.TOTAL_AMT),0) AS NO_INPUT_AMT \n ");
-        sb.append("                     FROM [" + dbInfo.Location + "].[dbo].[F_ORDER_DETAIL] AA \n ");
-        sb.append("                     LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] BB \n ");
+        sb.append("                     FROM F_ORDER_DETAIL AA \n ");
+        sb.append("                     LEFT OUTER JOIN F_RAW_DETAIL BB \n ");
         sb.append("                     ON AA.ORDER_DATE = BB.ORDER_DATE \n ");
         sb.append("                     AND AA.ORDER_CD = BB.ORDER_CD \n ");
         sb.append("                     AND AA.SEQ = BB.ORDER_SEQ \n ");
@@ -710,7 +710,7 @@ public class RawInputAdapter extends BaseAdapter {
 
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT STORAGE_CD, STORAGE_NM, COMMENT FROM [" + dbInfo.Location + "].[dbo].[N_STORAGE_CODE] \n ");
+        query.append("SELECT STORAGE_CD, STORAGE_NM, COMMENT FROM N_STORAGE_CODE \n ");
         jsonArray = dbInfo.SelectDB(query.toString());
         return jsonArray;
 
@@ -722,7 +722,7 @@ public class RawInputAdapter extends BaseAdapter {
 
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT STORAGE_CD, LOC_CD, LOC_NM, COMMENT FROM [" + dbInfo.Location + "].[dbo].[N_LOC_CODE] \n ");
+        query.append("SELECT STORAGE_CD, LOC_CD, LOC_NM, COMMENT FROM N_LOC_CODE \n ");
         query.append("WHERE STORAGE_CD = '" + Storage_cd + "'\n ");
         jsonArray = dbInfo.SelectDB(query.toString());
         return jsonArray;

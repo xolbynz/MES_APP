@@ -226,23 +226,23 @@ Context context;
         query.append(", CONVERT(FLOAT,(ISNULL(B.INPUT_AMT,0) - ISNULL(C.OUTPUT_AMT,0))) AS CURR_AMT \n");
         query.append(", CONVERT(FLOAT,ISNULL(A.BAL_STOCK,0)) AS BAL_STOCK \n");
         query.append(", CONVERT(FLOAT,ISNULL(A.BASIC_STOCK,0)) AS BASIC_STOCK \n");
-        query.append("  from [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] A \n");
+        query.append("  from N_RAW_CODE A \n");
         query.append("  LEFT OUTER JOIN( \n");
         query.append("          select RAW_MAT_CD \n");
         query.append("          ,SUM(ISNULL(TOTAL_AMT,0)) as INPUT_AMT \n");
-        query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] A \n");
+        query.append("          from F_RAW_DETAIL A \n");
         query.append("          where INPUT_DATE <= '" + Today + "' \n");
         query.append("          group by RAW_MAT_CD) B \n");
         query.append("  ON A.RAW_MAT_CD = B.RAW_MAT_CD \n");
         query.append("  LEFT OUTER JOIN( \n");
         query.append("          select RAW_MAT_CD \n");
         query.append("               , SUM(ISNULL(TOTAL_AMT,0)) as OUTPUT_AMT \n");
-        query.append("          from [" + dbInfo.Location + "].[dbo].[F_RAW_OUTPUT] \n");
+        query.append("          from F_RAW_OUTPUT \n");
         query.append("          where OUTPUT_DATE <= '" + Today + "' \n");
         query.append("          group by RAW_MAT_CD) C \n");
         query.append("  ON A.RAW_MAT_CD = C.RAW_MAT_CD \n");
-        query.append("  left join [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD = A.CUST_CD \n");
-        query.append("  left join [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on A.INPUT_UNIT = E.UNIT_CD \n");
+        query.append("  left join N_CUST_CODE as D on D.CUST_CD = A.CUST_CD \n");
+        query.append("  left join N_UNIT_CODE as E on A.INPUT_UNIT = E.UNIT_CD \n");
         query.append("  where 1=1 \n");
         if (spinner_search.getSelectedItem().toString().equals("원자재")) {
             if (!condition.equals(""))

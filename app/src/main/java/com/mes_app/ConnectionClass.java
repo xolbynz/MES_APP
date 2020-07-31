@@ -21,7 +21,7 @@ public class ConnectionClass {
 
         try {
             DriverManager.registerDriver((Driver) Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance());
-            connection = DriverManager.getConnection("jdbc:jtds:sqlserver://" + server ,user,password);
+            connection = DriverManager.getConnection("jdbc:jtds:sqlserver://" + server + "/" + database ,user,password);
             Log.d("#DB", "after connection");
         } catch (
                 SQLException se) {
