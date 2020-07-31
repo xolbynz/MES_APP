@@ -7,15 +7,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,8 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.jar.JarEntry;
 
 public class raw_viewActivity extends Fragment {
 
@@ -50,12 +45,18 @@ public class raw_viewActivity extends Fragment {
     CheckBox checkBox;
     GridView gridView;
     EditText editSearch;
-
+Context context;
     DBInfo dbInfo;
     JSONArray JArray;
     RawVo rawVo;
 
     public raw_viewActivity() {
+        dbInfo = new DBInfo();
+    }
+
+    public  raw_viewActivity(Context context)
+    {
+       this. context=context;
         dbInfo = new DBInfo();
     }
 

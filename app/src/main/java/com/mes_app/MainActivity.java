@@ -233,6 +233,16 @@ public class MainActivity extends AppCompatActivity {
                                             fragment = (Fragment) Class.forName("com.mes_app."+v.getTag().toString()).getDeclaredConstructor(Context.class).newInstance(context);
                                             //getDeclaredConstructor (파라메터 타입).newInstance(파라메터) 는  class clazz= new class(paramenter) 와 같다.
                                         } catch (Exception e) {
+                                            try {
+                                                fragment = (Fragment) Class.forName("com.mes_app."+v.getTag().toString()).newInstance();
+                                            } catch (IllegalAccessException ex) {
+                                                ex.printStackTrace();
+                                            } catch (InstantiationException ex) {
+                                                ex.printStackTrace();
+                                            
+                                            } catch (ClassNotFoundException ex) {
+                                                ex.printStackTrace();
+                                            }
                                             e.printStackTrace();
                                             System.out.println(e.toString());
                                         }

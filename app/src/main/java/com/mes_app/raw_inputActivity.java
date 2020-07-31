@@ -22,7 +22,6 @@ import com.Adapter.RawInputAdapter;
 import com.VO.OrderVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class raw_inputActivity extends Fragment {
 
@@ -59,6 +57,7 @@ public class raw_inputActivity extends Fragment {
     }
 
     public raw_inputActivity(Context context) {
+        dbInfo = new DBInfo();
         this.context = context;
     }
 
