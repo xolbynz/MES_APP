@@ -364,6 +364,7 @@ chart.clear();
         BarDataSet barDataSet = new BarDataSet(arrayList,"공정"); // 바 텍스트 컬러
         barDataSet.setValueFormatter(new PercentFormatter());
         barDataSet.setValueTextColor( R.color.design_default_color_background);
+        barDataSet.setValueTextSize(19);
         chart.animateY(1000);
 
         BarData barData = new BarData(title,barDataSet);

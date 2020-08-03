@@ -189,7 +189,7 @@ this.pop_workListListner= pop_workListListner;
 
         sb.append("     ,A.CUST_CD  ");
         sb.append("    ,isnull('0',B.BAL_STOCK) as  BAL_STOCK ");
-        sb.append("        ,D.CUST_NM ");
+        sb.append("        ,isnull('',D.CUST_NM) as CUST_NM ");
         sb.append("        ,A.DELIVERY_DATE ");
         sb.append("        ,C.COMPLETE_YN  as COMPLETE ");
         sb.append("     ,CASE WHEN ISNULL(C.COMPLETE_YN,'N')='Y' THEN '완료' ELSE ( CASE WHEN ISNULL(C.COMPLETE_YN,'N')='S' THEN '진행중' ELSE '미완료' END ) END COMPLETE_YN   ");
