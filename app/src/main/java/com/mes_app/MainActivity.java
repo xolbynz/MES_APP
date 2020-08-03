@@ -185,8 +185,9 @@ public class MainActivity extends AppCompatActivity {
                 TopMenu.setId(Integer.parseInt(TopID));
                 TopMenu.setText(TopName);
                 TopMenu.setTag(TopID);
-
                 TopMenu.setTextSize(25);
+                TopMenu.setHeight(70);
+                TopMenu.setWidth(500);
 
                 TopMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -242,10 +243,7 @@ public class MainActivity extends AppCompatActivity {
                                             e.printStackTrace();
                                             System.out.println(e.toString());
                                         }
-                                        finally {
-                                            replaceFragment(fragment);
-
-                                        }
+                                        replaceFragment(fragment);
 
                                     }
                                 });

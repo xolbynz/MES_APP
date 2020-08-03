@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/fragmentBorC"
-        android:layout_width="1232dp"
-        android:layout_height="514dp"
+        android:layout_width="1278dp"
+        android:layout_height="552dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Main_llo_submenu">
@@ -17,7 +17,7 @@
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="1232dp"
+        android:layout_width="1278dp"
         android:layout_height="78dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,8 +65,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout11"
-        android:layout_width="1232dp"
-        android:layout_height="58dp"
+        android:layout_width="1285dp"
+        android:layout_height="39dp"
         android:background="#C42A2F43"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
 
     <LinearLayout
         android:id="@+id/Main_llo_submenu"
-        android:layout_width="1232dp"
+        android:layout_width="1278dp"
         android:layout_height="54dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,8 +120,8 @@
 
     <LinearLayout
         android:id="@+id/Main_llo_Topmene"
-        android:layout_width="1232dp"
-        android:layout_height="46dp"
+        android:layout_width="1278dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
