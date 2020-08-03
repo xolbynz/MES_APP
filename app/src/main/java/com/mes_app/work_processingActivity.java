@@ -31,6 +31,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -446,11 +447,10 @@ public class work_processingActivity extends Fragment {
         contents.add(new BarEntry(float_non_amt, 2));
 
         BarDataSet barDataSet = new BarDataSet(contents, "");
-        barDataSet.setValueFormatter(new PercentFormatter());
+        barDataSet.setValueFormatter(new DefaultValueFormatter(DecimalFormat.INTEGER_FIELD));
         barDataSet.setValueTextColor(R.color.design_default_color_background);
         barDataSet.setStackLabels(label);
-
-        barDataSet.setDrawValues(false);
+        barDataSet.setValueTextSize(14f);barDataSet.setDrawValues(false);
 
 
         BarData barData = new BarData(title, barDataSet);
@@ -609,7 +609,7 @@ public class work_processingActivity extends Fragment {
         query.append("      ,'-' as FLOW_CHK_YN \n");
         query.append("      ,'-' as FLOW_NM \n");
         query.append("      ,0 AS INPUT_AMT \n");
-        query.append("      ,D.POOR_AMT AS POOR_AMT \n");
+        query.append("      ,D.NON AS NON \n");
         query.append("from F_WORK_FLOW_DETAIL A \n");
 
         query.append("left outer join (select LOT_NO \n");
@@ -626,7 +626,7 @@ public class work_processingActivity extends Fragment {
         query.append("        group by LOT_NO ) C \n");
         query.append("ON A.LOT_NO = C.LOT_NO \n");
 
-        query.append("left outer join (select A.LOT_NO, A.INST_AMT - B.F_SUB_AMT AS POOR_AMT \n");
+        query.append("left outer join (select A.LOT_NO, A.INST_AMT - B.F_SUB_AMT AS NON \n");
         query.append("                  from F_WORK_INST A \n");
         query.append("                  inner join (select LOT_NO \n");
         query.append("                              ,SUM(ISNULL(F_SUB_AMT,0)) as F_SUB_AMT \n");
