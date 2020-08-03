@@ -154,7 +154,7 @@ public class work_progressActivity extends Fragment {
         btn_complete.setOnClickListener(combplteclick);
         ed_instAmt=rootView.findViewById(R.id.workPrg_ed_instAmt);
         ed_faulty=rootView.findViewById(R.id.workPrg_ed_faultyAmt);
-        chart=rootView.findViewById(R.id.chart);
+        chart=rootView.findViewById(R.id.workProcessing_chart);
 
 
 

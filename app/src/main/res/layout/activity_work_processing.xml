@@ -151,12 +151,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="40dp">
 
         <LinearLayout
             android:id="@+id/workprocess_linearlayout"
             android:layout_width="1238dp"
-            android:layout_height="62dp"
+            android:layout_height="40dp"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
@@ -171,17 +171,17 @@
 
         <com.github.mikephil.charting.charts.BarChart
 
-            android:id="@+id/chart"
+            android:id="@+id/workProcessing_chart"
 
             android:layout_width="618dp"
 
-            android:layout_height="375dp"
+            android:layout_height="0dp"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline"
@@ -209,12 +209,69 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/workprocess_tv_seq"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="SEQ"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/workprocess_tv_flow_date"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="일자"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/workprocess_tv_seq"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/workprocess_tv_sub_amt"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="완료"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/workprocess_tv_flow_date"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/workprocess_tv_poor_amt"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="불량"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/workprocess_tv_sub_amt"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/workprocess_tv_non_amt"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="미투입"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/workprocess_tv_poor_amt"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout20"
             android:layout_width="618dp"
-            android:layout_height="339dp"
+            android:layout_height="350dp"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
@@ -224,13 +281,13 @@
             <GridView
                 android:id="@+id/workprocessing_gv_detail"
                 android:layout_width="616dp"
-                android:layout_height="337dp"
+                android:layout_height="350dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

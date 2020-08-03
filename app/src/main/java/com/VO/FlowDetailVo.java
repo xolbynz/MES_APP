@@ -1,6 +1,6 @@
 package com.VO;
 
-class FlowDetailVo {
+public class FlowDetailVo {
 
     String LOT_NO;
     String LOT_SUB;
@@ -19,7 +19,7 @@ class FlowDetailVo {
     String FLOW_CHK_YN;
     String FLOW_NM;
     String INST_AMT;
-    String Non_Input_amt;
+    String NON_INPUT_AMT;
 
     public FlowDetailVo() {
 
@@ -29,7 +29,7 @@ class FlowDetailVo {
                         String f_SUB_DATE, String LOSS, String f_SUB_AMT, String POOR_CD,
                         String POOR_AMT, String COMPLETE_YN, String CHECK_YN, String INPUT_YN,
                         String INPUT_AMT, String FLOW_CHK_YN, String FLOW_NM, String INST_AMT,
-                        String non_Input_amt) {
+                        String NON_INPUT_AMT) {
         this.LOT_NO = LOT_NO;
         this.LOT_SUB = LOT_SUB;
         F_STEP = f_STEP;
@@ -47,7 +47,7 @@ class FlowDetailVo {
         this.FLOW_CHK_YN = FLOW_CHK_YN;
         this.FLOW_NM = FLOW_NM;
         this.INST_AMT = INST_AMT;
-        Non_Input_amt = non_Input_amt;
+        this.NON_INPUT_AMT = NON_INPUT_AMT;
     }
 
     public String getLOT_NO() {
@@ -186,11 +186,11 @@ class FlowDetailVo {
         this.INST_AMT = INST_AMT;
     }
 
-    public String getNon_Input_amt() {
-        return Non_Input_amt;
+    public String getNON_INPUT_AMT() {
+        return NON_INPUT_AMT;
     }
 
-    public void setNon_Input_amt(String non_Input_amt) {
-        Non_Input_amt = non_Input_amt;
+    public void setNON_INPUT_AMT(String NON_INPUT_AMT) {
+        this.NON_INPUT_AMT = NON_INPUT_AMT;
     }
 }

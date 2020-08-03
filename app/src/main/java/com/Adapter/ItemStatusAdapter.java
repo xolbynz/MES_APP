@@ -53,8 +53,8 @@ public class ItemStatusAdapter extends BaseAdapter {
         final TextView unit;
 
         if (convertView == null) {
-            LayoutInflater infaInflater = (LayoutInflater) context.getApplicationContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = infaInflater.inflate(R.layout.adapter_item_status, parent, false);
+            LayoutInflater Inflater = (LayoutInflater) context.getApplicationContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            convertView = Inflater.inflate(R.layout.adapter_item_status, parent, false);
 
             itemNm = convertView.findViewById(R.id.itemStatus_tv_itemNm);
             spec = convertView.findViewById(R.id.itemStatus_tv_spec);

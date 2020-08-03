@@ -343,7 +343,7 @@
 
                 <com.github.mikephil.charting.charts.BarChart
 
-                    android:id="@+id/chart"
+                    android:id="@+id/workProcessing_chart"
 
                     android:layout_width="706dp"
 
