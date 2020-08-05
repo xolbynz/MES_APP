@@ -46,6 +46,8 @@ public class item_trackingActivity extends Fragment {
     InputMethodManager imm;
     GridView gridView;
     TextView CompleteYn;
+    TextView Cust_nm;
+    TextView Unit_nm;
 
 
     public item_trackingActivity() {
@@ -75,6 +77,8 @@ public class item_trackingActivity extends Fragment {
         btn_search = rootView.findViewById(R.id.itemTracking_btn_search);
         gridView = rootView.findViewById(R.id.itemTracking_gv_grid);
         CompleteYn = rootView.findViewById(R.id.itemTracking_CompleteYn);
+        Cust_nm = rootView.findViewById(R.id.itemTracking_tv_Cust_nm);
+        Unit_nm = rootView.findViewById(R.id.itemTracking_tv_unit_nm);
 
         dbInfo = new DBInfo();
 
@@ -192,7 +196,7 @@ public class item_trackingActivity extends Fragment {
                     if (traceListVO.getComplete_yn().equals("Y")) {
                         CompleteYn.setText("완료");
                     } else {
-                        CompleteYn.setText("미   완료");
+                        CompleteYn.setText("미완료");
                     }
                 }
 
@@ -206,52 +210,51 @@ public class item_trackingActivity extends Fragment {
 
                         JSONObject jo = jsonArray.getJSONObject(i);
 
-                        String gubun = "";
-                        String order1 = "";
-                        String order2 = "";
-                        String input_date = "";
-                        String input_cd = "";
-                        String intime = "";
-                        String cust_nm = "";
-                        String raw_mat_nm = "";
-                        String spec = "";
-                        String lot_no = "";
-                        String lot_sub = "";
-                        String unit_nm = "";
-                        String total_amt = "";
-                        String loss_amt = "";
-                        String poor = "";
+                        String gubun = "-";
+                        String order1 = "-";
+                        String order2 = "-";
+                        String input_date = "-";
+                        String input_cd = "-";
+                        String intime = "-";
+                        String cust_nm = "-";
+                        String raw_mat_nm = "-";
+                        String spec = "-";
+                        String lot_no = "-";
+                        String lot_sub = "-";
+                        String unit_nm = "-";
+                        String total_amt = "0";
+                        String loss_amt = "0";
+                        String poor = "0";
 
-
-                        if (jo.has("GUBUN")) // Data값이 NULL인 경우 빈값으로 처리
+                        if (jo.has("GUBUN") || jo.equals("")) // Data값이 NULL인 경우 빈값으로 처리
                             gubun = jo.getString("GUBUN");
-                        if (jo.has("ORDER1"))
+                        if (jo.has("ORDER1") || jo.equals(""))
                             order1 = jo.getString("ORDER1");
-                        if (jo.has("ORDER2"))
+                        if (jo.has("ORDER2") || jo.equals(""))
                             order2 = jo.getString("ORDER2");
-                        if (jo.has("INPUT_DATE"))
+                        if (jo.has("INPUT_DATE") || jo.equals(""))
                             input_date = jo.getString("INPUT_DATE");
-                        if (jo.has("INPUT_CD"))
+                        if (jo.has("INPUT_CD") || jo.equals(""))
                             input_cd = jo.getString("INPUT_CD");
-                        if (jo.has("TIME"))
+                        if (jo.has("TIME") || jo.equals(""))
                             intime = jo.getString("TIME");
-                        if (jo.has("CUST_NM"))
+                        if (jo.has("CUST_NM") || jo.equals(""))
                             cust_nm = jo.getString("CUST_NM");
-                        if (jo.has("RAW_MAT_NM"))
+                        if (jo.has("RAW_MAT_NM") || jo.equals(""))
                             raw_mat_nm = jo.getString("RAW_MAT_NM");
-                        if (jo.has("SPEC"))
+                        if (jo.has("SPEC") || jo.equals(""))
                             spec = jo.getString("SPEC");
-                        if (jo.has("LOT_NO"))
+                        if (jo.has("LOT_NO") || jo.equals(""))
                             lot_no = jo.getString("LOT_NO");
-                        if (jo.has("LOT_SUB"))
+                        if (jo.has("LOT_SUB") || jo.equals(""))
                             lot_sub = jo.getString("LOT_SUB");
-                        if (jo.has("UNIT_NM"))
+                        if (jo.has("UNIT_NM") || jo.equals(""))
                             unit_nm = jo.getString("UNIT_NM");
-                        if (jo.has("TOTAL_AMT"))
+                        if (jo.has("TOTAL_AMT") || jo.equals(""))
                             total_amt = jo.getString("TOTAL_AMT");
-                        if (jo.has("LOSS_AMT"))
+                        if (jo.has("LOSS_AMT") || jo.equals(""))
                             loss_amt = jo.getString("LOSS_AMT");
-                        if (jo.has("POOR"))
+                        if (jo.has("POOR") || jo.equals(""))
                             poor = jo.getString("POOR");
 
                         traceListDetailVo = new TraceListDetailVo(gubun, order1, order2, input_date,
@@ -262,6 +265,8 @@ public class item_trackingActivity extends Fragment {
                         itemTraceAdapter.addItem(traceListDetailVo);
                     }
                     gridView.setAdapter(itemTraceAdapter);
+                    Cust_nm.setText(itemTraceAdapter.arrayList.get(0).getCust_nm());
+                    Unit_nm.setText(itemTraceAdapter.arrayList.get(0).getUnit_nm());
                 }
 
             } else if (jsonArray.length() > 1) {
@@ -323,17 +328,17 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,CONVERT(nvarchar,W.W_INST_CD) AS INPUT_CD \n");
         sb.append(" ,'' AS INPUT_SEQ  \n");
         sb.append(" ,W.INTIME AS TIME  \n");
-        sb.append(" ,(SELECT CUST_NM FROM [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] WHERE W.CUST_CD = CUST_CD) AS CUST_NM \n");
+        sb.append(" ,(SELECT CUST_NM FROM N_CUST_CODE WHERE W.CUST_CD = CUST_CD) AS CUST_NM \n");
         sb.append(" ,N.ITEM_NM AS RAW_MAT_NM  \n");
         sb.append(" ,N.SPEC \n");
         sb.append(" ,W.LOT_NO AS LOT_NO \n");
         sb.append(" ,'' AS LOT_SUB \n");
-        sb.append(" ,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.UNIT_CD = UNIT_CD) AS UNIT_NM \n");
+        sb.append(" ,(select UNIT_NM FROM N_UNIT_CODE WHERE N.UNIT_CD = UNIT_CD) AS UNIT_NM \n");
         sb.append(" ,CONVERT(nvarchar,W.INST_AMT) AS TOTAL_AMT \n");
         sb.append(" ,'' AS LOSS_AMT \n");
         sb.append(" ,'' AS POOR \n");
-        sb.append(" from [" + dbInfo.Location + "].[dbo].[F_WORK_INST] W \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] N  \n");
+        sb.append(" from F_WORK_INST W \n");
+        sb.append(" left outer join N_ITEM_CODE N  \n");
         sb.append(" on W.ITEM_CD = N.ITEM_CD  \n");
         sb.append(" where W.LOT_NO = '" + condition + "'  \n");
         sb.append("   \n");
@@ -346,30 +351,30 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,CONVERT(nvarchar,D.INPUT_CD ) \n");
         sb.append(" ,CONVERT(nvarchar,D.SEQ )  \n");
         sb.append(" ,W.INTIME AS TIME  \n");
-        sb.append(" ,(SELECT CUST_NM FROM [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] WHERE RI.CUST_CD = CUST_CD ) AS CUST_NM \n");
+        sb.append(" ,(SELECT CUST_NM FROM N_CUST_CODE WHERE RI.CUST_CD = CUST_CD ) AS CUST_NM \n");
         sb.append(" ,N.RAW_MAT_NM  \n");
         sb.append(" ,N.SPEC \n");
         sb.append(" ,'' AS LOT_NO  \n");
         sb.append(" ,'' AS LOT_SUB \n");
-        sb.append(" ,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.OUTPUT_UNIT = UNIT_CD ) AS UNIT_NM  \n");
+        sb.append(" ,(select UNIT_NM FROM N_UNIT_CODE WHERE N.OUTPUT_UNIT = UNIT_CD ) AS UNIT_NM  \n");
         sb.append(" ,CONVERT(nvarchar,O.TOTAL_AMT/I.SOYO_AMT)+'x'+CONVERT(nvarchar,I.SOYO_AMT)+'='+CONVERT(nvarchar,O.TOTAL_AMT) AS TOTAL_AMT  \n");
         sb.append(" ,'' AS LOSS_AMT  \n");
         sb.append(" ,'' AS POOR  \n");
-        sb.append(" from [" + dbInfo.Location + "].[dbo].[F_WORK_INST] W \n");
-        sb.append(" inner join [" + dbInfo.Location + "].[dbo].[F_WORK_INST_DETAIL] I  \n");
+        sb.append(" from F_WORK_INST W \n");
+        sb.append(" inner join F_WORK_INST_DETAIL I  \n");
         sb.append(" on W.W_INST_DATE = I.W_INST_DATE  \n");
         sb.append(" and W.W_INST_CD = I.W_INST_CD \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_RAW_OUTPUT] O \n");
+        sb.append(" left outer join F_RAW_OUTPUT O \n");
         sb.append(" on I.LOT_NO = O.LOT_NO \n");
         sb.append(" and I.RAW_MAT_CD = O.RAW_MAT_CD  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_RAW_DETAIL] D \n");
+        sb.append(" left outer join F_RAW_DETAIL D \n");
         sb.append(" on D.INPUT_DATE = O.INPUT_DATE \n");
         sb.append(" and D.INPUT_CD = O.INPUT_CD  \n");
         sb.append(" and D.SEQ = O.INPUT_SEQ  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_RAW_INPUT] RI \n");
+        sb.append(" left outer join F_RAW_INPUT RI \n");
         sb.append(" on D.INPUT_DATE = RI.INPUT_DATE  \n");
         sb.append(" and D.INPUT_CD = RI.INPUT_CD  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_RAW_CODE] N  \n");
+        sb.append(" left outer join N_RAW_CODE N  \n");
         sb.append(" on O.RAW_MAT_CD = N.RAW_MAT_CD \n");
         sb.append(" where O.LOT_NO = '" + condition + "' \n");
         sb.append("  union all \n");
@@ -386,21 +391,21 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,N.SPEC  \n");
         sb.append(" ,O.LOT_NO AS LOT_NO  \n");
         sb.append(" ,CONVERT(nvarchar,O.LOT_SUB) AS LOT_SUB  \n");
-        sb.append(" ,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
+        sb.append(" ,(select UNIT_NM FROM N_UNIT_CODE WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
         sb.append(" ,CONVERT(nvarchar,O.OUTPUT_AMT/I.SOYO_AMT)+'x'+CONVERT(nvarchar,I.SOYO_AMT)+'='+CONVERT(nvarchar,O.OUTPUT_AMT) AS TOTAL_AMT  \n");
         sb.append(" ,'' AS LOSS_AMT  \n");
         sb.append(" ,'' AS POOR  \n");
-        sb.append(" from [" + dbInfo.Location + "].[dbo].[F_WORK_INST] W \n");
-        sb.append(" inner join [" + dbInfo.Location + "].[dbo].[F_WORK_INST_HALF_DETAIL] I  \n");
+        sb.append(" from F_WORK_INST W \n");
+        sb.append(" inner join F_WORK_INST_HALF_DETAIL I  \n");
         sb.append(" on W.W_INST_DATE = I.W_INST_DATE  \n");
         sb.append(" and W.W_INST_CD = I.W_INST_CD \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_ITEM_OUT_DETAIL] O  \n");
+        sb.append(" left outer join F_ITEM_OUT_DETAIL O  \n");
         sb.append(" on I.LOT_NO = O.OUT_LOT  \n");
         sb.append(" and I.HALF_ITEM_CD = O.ITEM_CD \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] D \n");
+        sb.append(" left outer join F_ITEM_INPUT D \n");
         sb.append(" on D.INPUT_DATE = O.INPUT_DATE \n");
         sb.append(" and D.INPUT_CD = O.INPUT_CD  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] N \n");
+        sb.append(" left outer join N_ITEM_CODE N \n");
         sb.append(" on O.ITEM_CD = N.ITEM_CD  \n");
         sb.append(" where O.OUT_LOT = '" + condition + "' \n");
         sb.append("   \n");
@@ -414,7 +419,7 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,'' AS SEQ \n");
         sb.append(" ,W.INTIME AS TIME \n");
         sb.append(" ,CONVERT(nvarchar,W.LOT_SUB)+' ('+CONVERT(nvarchar,F.FLOW_NM)+')' AS CUST_NM  \n");
-        sb.append(" ,(SELECT FLOW_NM FROM [" + dbInfo.Location + "].[dbo].[N_FLOW_CODE] WHERE FLOW_CD = W.FLOW_CD ) AS RAW_MAT_NM  \n");
+        sb.append(" ,(SELECT FLOW_NM FROM N_FLOW_CODE WHERE FLOW_CD = W.FLOW_CD ) AS RAW_MAT_NM  \n");
         sb.append(" ,''  \n");
         sb.append(" ,W.LOT_NO \n");
         sb.append(" ,CONVERT(nvarchar,W.LOT_SUB) AS LOT_SUB  \n");
@@ -422,8 +427,8 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,CONVERT(nvarchar,W.F_SUB_AMT)+'/'+CONVERT(nvarchar,W.INPUT_AMT) AS TOTAL_AMT \n");
         sb.append(" ,CONVERT(nvarchar,W.LOSS) AS LOSS_AMT \n");
         sb.append(" ,CONVERT(nvarchar,W.POOR_AMT) AS POOR \n");
-        sb.append(" from [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] W \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_FLOW_CODE] F \n");
+        sb.append(" from F_WORK_FLOW_DETAIL W \n");
+        sb.append(" left outer join N_FLOW_CODE F \n");
         sb.append(" on W.FLOW_CD = F.FLOW_CD  \n");
         sb.append(" where W.LOT_NO = '" + condition + "' \n");
         sb.append("   \n");
@@ -438,7 +443,7 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,'' AS SEQ \n");
         sb.append(" ,'' AS TIME  \n");
         sb.append(" ,''+CONVERT(nvarchar,F.FLOW_NM)+' 합계' AS CUST_NM \n");
-        sb.append(" ,(SELECT FLOW_NM FROM [" + dbInfo.Location + "].[dbo].[N_FLOW_CODE] WHERE FLOW_CD = F.FLOW_CD ) AS RAW_MAT_NM  \n");
+        sb.append(" ,(SELECT FLOW_NM FROM N_FLOW_CODE WHERE FLOW_CD = F.FLOW_CD ) AS RAW_MAT_NM  \n");
         sb.append(" ,''  \n");
         sb.append(" ,W.LOT_NO \n");
         sb.append(" ,'' AS LOT_SUB \n");
@@ -446,8 +451,8 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,CONVERT(nvarchar,SUM(W.F_SUB_AMT))+'/'+CONVERT(nvarchar,SUM(W.INPUT_AMT)) AS TOTAL_AMT  \n");
         sb.append(" ,CONVERT(nvarchar,SUM(W.LOSS)) AS LOSS_AMT \n");
         sb.append(" ,CONVERT(nvarchar,SUM(W.POOR_AMT)) AS POOR \n");
-        sb.append(" from [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] W \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_FLOW_CODE] F \n");
+        sb.append(" from F_WORK_FLOW_DETAIL W \n");
+        sb.append(" left outer join N_FLOW_CODE F \n");
         sb.append(" on W.FLOW_CD = F.FLOW_CD  \n");
         sb.append(" where W.LOT_NO = '" + condition + "' \n");
         sb.append(" group by F.FLOW_CD,W.F_STEP,F.FLOW_NM,LOT_NO  \n");
@@ -479,8 +484,8 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,0 AS INPUT_AMT  \n");
         sb.append(" 		,SUM(A.LOSS) AS LOSS \n");
         sb.append(" 		,SUM(A.POOR_AMT) AS POOR_AMT \n");
-        sb.append(" 	 FROM [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW_DETAIL] A  \n");
-        sb.append(" 	 left outer join [" + dbInfo.Location + "].[dbo].[F_WORK_INST] B  \n");
+        sb.append(" 	 FROM F_WORK_FLOW_DETAIL A  \n");
+        sb.append(" 	 left outer join F_WORK_INST B  \n");
         sb.append(" 	 on A.LOT_NO = B.LOT_NO  \n");
         sb.append(" 	 where A.LOT_NO = '" + condition + "'  \n");
         sb.append(" 	 group by A.LOT_NO  \n");
@@ -493,7 +498,7 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,SUM(A.INPUT_AMT) AS INPUT_AMT \n");
         sb.append(" ,0 AS LOSS \n");
         sb.append(" ,0 AS POOR_AMT \n");
-        sb.append("  FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] A  \n");
+        sb.append("  FROM F_ITEM_INPUT A  \n");
         sb.append("  where A.LOT_NO = '" + condition + "' \n");
         sb.append("  group by A.LOT_NO \n");
         sb.append("   \n");
@@ -515,12 +520,12 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,N.SPEC  \n");
         sb.append(" ,I.LOT_NO \n");
         sb.append(" ,convert(nvarchar,I.LOT_SUB)  \n");
-        sb.append(" ,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
+        sb.append(" ,(select UNIT_NM FROM N_UNIT_CODE WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
         sb.append(" ,CONVERT(nvarchar,I.INPUT_AMT) AS TOTAL_AMT  \n");
         sb.append(" ,'' AS LOSS_AMT  \n");
         sb.append(" ,'' AS POOR  \n");
-        sb.append(" FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] I  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] N \n");
+        sb.append(" FROM F_ITEM_INPUT I  \n");
+        sb.append(" left outer join N_ITEM_CODE N \n");
         sb.append(" on N.ITEM_CD = I.ITEM_CD  \n");
         sb.append(" where I.LOT_NO = '" + condition + "' \n");
         sb.append("   \n");
@@ -538,12 +543,12 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,N.SPEC  \n");
         sb.append(" ,I.LOT_NO \n");
         sb.append(" ,'' AS LOT_SUB \n");
-        sb.append(" ,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
+        sb.append(" ,(select UNIT_NM FROM N_UNIT_CODE WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
         sb.append(" ,CONVERT(nvarchar,SUM(I.INPUT_AMT)) AS TOTAL_AMT  \n");
         sb.append(" ,'' AS LOSS_AMT  \n");
         sb.append(" ,'' AS POOR  \n");
-        sb.append(" FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] I  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] N \n");
+        sb.append(" FROM F_ITEM_INPUT I  \n");
+        sb.append(" left outer join N_ITEM_CODE N \n");
         sb.append(" on N.ITEM_CD = I.ITEM_CD  \n");
         sb.append(" where I.LOT_NO = '" + condition + "' \n");
         sb.append(" group by I.LOT_NO , N.ITEM_NM , N.SPEC , N.UNIT_CD \n");
@@ -557,23 +562,23 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,CONVERT(nvarchar,S.SALES_CD) \n");
         sb.append(" ,CONVERT(nvarchar,S.SEQ) AS INPUT_SEQ \n");
         sb.append(" ,SI.INTIME AS TIME \n");
-        sb.append(" ,(SELECT CUST_NM FROM [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] where CUST_CD = SI.CUST_CD ) AS CUST_NM \n");
+        sb.append(" ,(SELECT CUST_NM FROM N_CUST_CODE where CUST_CD = SI.CUST_CD ) AS CUST_NM \n");
         sb.append(" ,N.ITEM_NM AS RAW_MAT_NM  \n");
         sb.append(" ,N.SPEC  \n");
         sb.append(" ,I.LOT_NO \n");
         sb.append(" ,convert(nvarchar,I.LOT_SUB)  \n");
-        sb.append(" ,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
+        sb.append(" ,(select UNIT_NM FROM N_UNIT_CODE WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM  \n");
         sb.append(" ,CONVERT(nvarchar,S.TOTAL_AMT) AS TOTAL_AMT  \n");
         sb.append(" ,'' AS LOSS_AMT  \n");
         sb.append(" ,'' AS POOR  \n");
-        sb.append(" FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_OUT_DETAIL] I  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] N \n");
+        sb.append(" FROM F_ITEM_OUT_DETAIL I  \n");
+        sb.append(" left outer join N_ITEM_CODE N \n");
         sb.append(" on N.ITEM_CD = I.ITEM_CD  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_SALES_DETAIL] S  \n");
+        sb.append(" left outer join F_SALES_DETAIL S  \n");
         sb.append(" on S.OUTPUT_DATE = I.OUTPUT_DATE  \n");
         sb.append(" and S.OUTPUT_CD = I.OUTPUT_CD \n");
         sb.append(" and S.OUTPUT_SEQ = I.SEQ  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_SALES] SI \n");
+        sb.append(" left outer join F_SALES SI \n");
         sb.append(" on SI.SALES_DATE = S.SALES_DATE  \n");
         sb.append(" and SI.SALES_CD = S.SALES_CD  \n");
         sb.append(" where I.LOT_NO = '" + condition + "' and I.OUT_LOT is null and S.OUTPUT_DATE is not null \n");
@@ -593,18 +598,18 @@ public class item_trackingActivity extends Fragment {
         sb.append(" ,N.SPEC  \n");
         sb.append(" ,I.LOT_NO \n");
         sb.append(" ,'' AS LOT_SUB \n");
-        sb.append("  			,(select UNIT_NM FROM [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM \n");
+        sb.append("  			,(select UNIT_NM FROM N_UNIT_CODE WHERE N.UNIT_CD = UNIT_CD ) AS UNIT_NM \n");
         sb.append(" ,CONVERT(nvarchar,SUM(S.TOTAL_AMT)) AS TOTAL_AMT  \n");
         sb.append(" ,'' AS LOSS_AMT  \n");
         sb.append(" ,'' AS POOR  \n");
-        sb.append(" FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_OUT_DETAIL] I  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] N \n");
+        sb.append(" FROM F_ITEM_OUT_DETAIL I  \n");
+        sb.append(" left outer join N_ITEM_CODE N \n");
         sb.append(" on N.ITEM_CD = I.ITEM_CD  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_SALES_DETAIL] S  \n");
+        sb.append(" left outer join F_SALES_DETAIL S  \n");
         sb.append(" on S.OUTPUT_DATE = I.OUTPUT_DATE  \n");
         sb.append(" and S.OUTPUT_CD = I.OUTPUT_CD \n");
         sb.append(" and S.OUTPUT_SEQ = I.SEQ  \n");
-        sb.append(" left outer join [" + dbInfo.Location + "].[dbo].[F_SALES] SI \n");
+        sb.append(" left outer join F_SALES SI \n");
         sb.append(" on SI.SALES_DATE = S.SALES_DATE  \n");
         sb.append(" and SI.SALES_CD = S.SALES_CD  \n");
         sb.append(" where I.LOT_NO = '" + condition + "' and I.OUT_LOT is null and S.OUTPUT_DATE is not null \n");

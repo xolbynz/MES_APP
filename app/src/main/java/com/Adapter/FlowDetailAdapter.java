@@ -18,7 +18,7 @@ public class FlowDetailAdapter extends BaseAdapter {
     FlowDetailVo flowDetailVo = new FlowDetailVo();
     public ArrayList<FlowDetailVo> flowDetailVoArrayList = new ArrayList<>();
 
-    public void additem(FlowDetailVo flowDetailVo){
+    public void additem(FlowDetailVo flowDetailVo) {
         flowDetailVoArrayList.add(flowDetailVo);
     }
 
@@ -50,9 +50,9 @@ public class FlowDetailAdapter extends BaseAdapter {
         final TextView Poor_amt;
         final TextView Non_amt;
 
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getApplicationContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.adapter_flow_detail,parent,false);
+            convertView = inflater.inflate(R.layout.adapter_flow_detail, parent, false);
 
             Seq = convertView.findViewById(R.id.flowDetail_tv_Seq);
             Flow_date = convertView.findViewById(R.id.flowDetail_tv_Date);
@@ -69,7 +69,8 @@ public class FlowDetailAdapter extends BaseAdapter {
             holder.Non_amt = Non_amt;
 
             convertView.setTag(holder);
-        }else{
+
+        } else {
 
             holder = (FlowDetailAdapter.ListViewHolder) convertView.getTag();
 
@@ -80,10 +81,10 @@ public class FlowDetailAdapter extends BaseAdapter {
             Non_amt = holder.Non_amt;
         }
 
-        if(flowDetailVo.getSEQ().equals("99999")){
-            Seq.setText("계");
-        }else
-            Seq.setText(flowDetailVo.getSEQ());
+        if (flowDetailVo.getSEQ().equals("99999")) {
+            Seq.setText("합계");
+        } else
+            Seq.setText("SEQ" + flowDetailVo.getSEQ());
         Flow_date.setText(flowDetailVo.getF_SUB_DATE());
         F_sub_amt.setText(flowDetailVo.getF_SUB_AMT());
         Poor_amt.setText(flowDetailVo.getPOOR_AMT());
@@ -92,7 +93,7 @@ public class FlowDetailAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ListViewHolder{
+    private class ListViewHolder {
         TextView Seq;
         TextView Flow_date;
         TextView F_sub_amt;

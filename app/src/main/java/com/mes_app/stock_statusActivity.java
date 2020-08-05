@@ -87,15 +87,11 @@ public class stock_statusActivity extends Fragment {
         endDate.setOnClickListener(onClickListener);
         btn_stockSearch.setOnClickListener(stockSearch);
 
-
-
         dbInfo = new DBInfo();
         Calendar cal = new GregorianCalendar();
 
         mYear = cal.get(Calendar.YEAR);
-
         mMonth = cal.get(Calendar.MONTH);
-
         mDay = cal.get(Calendar.DAY_OF_MONTH);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -105,6 +101,7 @@ public class stock_statusActivity extends Fragment {
         cal.add(Calendar.DAY_OF_MONTH, - 30);
         String Daybefore30 = sdf.format(cal.getTime());
         startDate.setText(Daybefore30);
+
 
 
         return rootView;
@@ -263,12 +260,12 @@ public class stock_statusActivity extends Fragment {
         query.append(",convert(int,isnull(A.CURR_AMT,0)) as CURR_AMT \n");
 
 
-        query.append("FROM [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] as A  \n");
+        query.append("FROM F_ITEM_INPUT as A  \n");
 
-        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_ITEM_CODE] as B on B.ITEM_CD=A.ITEM_CD \n");
-        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[F_WORK_INST] as C on C.LOT_NO=A.LOT_NO \n");
-        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_CUST_CODE] as D on D.CUST_CD= C.CUST_CD \n");
-        query.append("LEFT OUTER JOIN [" + dbInfo.Location + "].[dbo].[N_UNIT_CODE] as E on E.UNIT_CD=B.UNIT_CD \n");
+        query.append("LEFT OUTER JOIN N_ITEM_CODE as B on B.ITEM_CD=A.ITEM_CD \n");
+        query.append("LEFT OUTER JOIN F_WORK_INST as C on C.LOT_NO=A.LOT_NO \n");
+        query.append("LEFT OUTER JOIN N_CUST_CODE as D on D.CUST_CD= C.CUST_CD \n");
+        query.append("LEFT OUTER JOIN N_UNIT_CODE as E on E.UNIT_CD=B.UNIT_CD \n");
 
         query.append("WHERE 1=1 \n");
 

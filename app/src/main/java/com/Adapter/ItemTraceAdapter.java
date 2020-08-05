@@ -19,7 +19,7 @@ public class ItemTraceAdapter extends BaseAdapter {
     TraceListDetailVo traceListDetailVo;
 
 
-    private ArrayList<TraceListDetailVo> arrayList = new ArrayList<>();
+    public ArrayList<TraceListDetailVo> arrayList = new ArrayList<>();
 
     public void addItem(TraceListDetailVo traceListDetailVo) {
         arrayList.add(traceListDetailVo);
@@ -54,7 +54,7 @@ public class ItemTraceAdapter extends BaseAdapter {
         final TextView cust_nm;
         final TextView raw_mat_nm;
         final TextView spec;
-        final TextView lot_no;
+        final TextView unit_nm;
         final TextView total_amt;
         final TextView poor;
 
@@ -67,8 +67,8 @@ public class ItemTraceAdapter extends BaseAdapter {
             gubun = convertView.findViewById(R.id.itemTracking_tv_list);
             intime = convertView.findViewById(R.id.itemTracking_tv_date);
             raw_mat_nm = convertView.findViewById(R.id.itemTracking_tv_detail);
-            spec = convertView.findViewById(R.id.itemTracking_tv_spec);
-            lot_no = convertView.findViewById(R.id.itemTracking_tv_lotNo);
+//            spec = convertView.findViewById(R.id.itemTracking_tv_spec);
+            unit_nm = convertView.findViewById(R.id.itemTracking_ttv_unit_nm);
             total_amt = convertView.findViewById(R.id.itemTracking_tv_amt);
             poor = convertView.findViewById(R.id.itemTracking_tv_fault);
 
@@ -78,8 +78,8 @@ public class ItemTraceAdapter extends BaseAdapter {
             holder.intime = intime;
 //            holder.cust_nm = cust_nm;
             holder.raw_mat_nm = raw_mat_nm;
-            holder.spec = spec;
-            holder.lot_no = lot_no;
+//            holder.spec = spec;
+            holder.unit_nm = unit_nm;
             holder.total_amt = total_amt;
             holder.poor = poor;
 
@@ -93,18 +93,20 @@ public class ItemTraceAdapter extends BaseAdapter {
             intime = holder.intime;
 //            cust_nm = holder.cust_nm;
             raw_mat_nm = holder.raw_mat_nm;
-            spec = holder.spec;
-            lot_no = holder.lot_no;
+//            spec = holder.spec;
+            unit_nm = holder.unit_nm;
             total_amt = holder.total_amt;
             poor = holder.poor;
         }
 
         gubun.setText(traceListDetailVo.getGubun()); //
         intime.setText(traceListDetailVo.getIntime());
-//        cust_nm.setText(traceListDetailVo.getCust_nm());
-        raw_mat_nm.setText(traceListDetailVo.getRaw_mat_nm());
-        spec.setText(traceListDetailVo.getSpec());
-        lot_no.setText(traceListDetailVo.getLot_no());
+        if(traceListDetailVo.getCust_nm().contains("합계")) {
+            raw_mat_nm.setText(traceListDetailVo.getCust_nm());
+        }else {
+            raw_mat_nm.setText(traceListDetailVo.getRaw_mat_nm());
+        }
+        unit_nm.setText(traceListDetailVo.getUnit_nm());
 
 
 
@@ -145,10 +147,8 @@ public class ItemTraceAdapter extends BaseAdapter {
     private class ListViewHolder {
         TextView gubun;
         TextView intime;
-        //        TextView cust_nm;
         TextView raw_mat_nm;
-        TextView spec;
-        TextView lot_no;
+        TextView unit_nm;
         TextView total_amt;
         TextView poor;
     }

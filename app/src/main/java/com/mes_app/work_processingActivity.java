@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -143,14 +144,83 @@ public class work_processingActivity extends Fragment {
         linearLayout.removeAllViews();
     }
 
+    private void getLogic() { // 공정 진행중인 작업지시서 조회
+        try {
+            JArray = null;
+            JArray = workProcssing(JArray);
+
+            if (JArray.length() != 0) {
+
+                workProcessAdapter = new WorkProcessAdapter();
+                DecimalFormat df = new DecimalFormat("#.#");
+
+                for (int i = 0; i < JArray.length(); i++) {
+
+                    JSONObject jo = JArray.getJSONObject(i);
+
+                    String inst_date = "";
+                    String deli_date = "";
+                    String item_cd = "";
+                    String item_nm = "";
+                    String lot_no = "";
+                    String flow_count = "";
+                    String inst_amt = "";
+                    String input_amt = "";
+                    String input_per = "";
+
+                    if (jo.has("INST_DATE")) // Data값이 NULL인 경우 빈값으로 처리
+                        inst_date = jo.getString("INST_DATE");
+                    if (jo.has("DELI_DATE"))
+                        deli_date = jo.getString("DELI_DATE");
+                    if (jo.has("ITEM_CD"))
+                        item_cd = jo.getString("ITEM_CD");
+                    if (jo.has("ITEM_NM"))
+                        item_nm = jo.getString("ITEM_NM");
+                    if (jo.has("LOT_NO"))
+                        lot_no = jo.getString("LOT_NO");
+                    if (jo.has("FLOW_COUNT"))
+                        flow_count = jo.getString("FLOW_COUNT");
+                    if (jo.has("INST_AMT")) {
+                        inst_amt = jo.getString("INST_AMT");
+                        inst_amt = df.format(Double.parseDouble(inst_amt));
+                    }
+                    if (jo.has("INPUT_AMT")) {
+                        input_amt = jo.getString("INPUT_AMT");
+                        input_amt = df.format(Double.parseDouble(input_amt));
+                    }
+                    if (jo.has("INPUT_PER")) {
+                        input_per = jo.getString("INPUT_PER");
+                        input_per = df.format(Double.parseDouble(input_per)) + "%";
+                    }
+
+                    workProcessVo = new WorkProcessVo(inst_date, deli_date, item_cd, item_nm,
+                            lot_no, flow_count, inst_amt, input_amt,
+                            input_per);
+
+                    workProcessAdapter.addItem(workProcessVo);
+                }
+                grd_flow.setAdapter(workProcessAdapter);
+
+            } else {
+                Toast.makeText(context, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                grd_flow.setAdapter(null);
+
+            }
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private final int DYNAMIC_VIEW_ID = 0x8000;
 
     GridView.OnItemClickListener getDetail = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             String item_cd = workProcessAdapter.workProcessVoArrayList.get(position).getItem_cd();
             String lot_no = workProcessAdapter.workProcessVoArrayList.get(position).getLot_no();
+
             try {
                 JArray = null;
                 JArray = getItemFlowList(JArray, item_cd);
@@ -191,6 +261,7 @@ public class work_processingActivity extends Fragment {
             JArray = null;
             try {
                 Button btntemp = (Button) v;
+                btntemp.setHighlightColor( Color.WHITE);
                 String[] temp = btntemp.getHint().toString().split("/");
                 String lot_no = temp[0];
                 String item_cd = temp[1];
@@ -309,72 +380,7 @@ public class work_processingActivity extends Fragment {
         }
     };
 
-    private void getLogic() {
-        try {
-            JArray = null;
-            JArray = workProcssing(JArray);
 
-            if (JArray.length() != 0) {
-
-                workProcessAdapter = new WorkProcessAdapter();
-                DecimalFormat df = new DecimalFormat("#.#");
-
-                for (int i = 0; i < JArray.length(); i++) {
-
-                    JSONObject jo = JArray.getJSONObject(i);
-
-                    String inst_date = "";
-                    String deli_date = "";
-                    String item_cd = "";
-                    String item_nm = "";
-                    String lot_no = "";
-                    String flow_count = "";
-                    String inst_amt = "";
-                    String input_amt = "";
-                    String input_per = "";
-
-                    if (jo.has("INST_DATE")) // Data값이 NULL인 경우 빈값으로 처리
-                        inst_date = jo.getString("INST_DATE");
-                    if (jo.has("DELI_DATE"))
-                        deli_date = jo.getString("DELI_DATE");
-                    if (jo.has("ITEM_CD"))
-                        item_cd = jo.getString("ITEM_CD");
-                    if (jo.has("ITEM_NM"))
-                        item_nm = jo.getString("ITEM_NM");
-                    if (jo.has("LOT_NO"))
-                        lot_no = jo.getString("LOT_NO");
-                    if (jo.has("FLOW_COUNT"))
-                        flow_count = jo.getString("FLOW_COUNT");
-                    if (jo.has("INST_AMT")) {
-                        inst_amt = jo.getString("INST_AMT");
-                        inst_amt = df.format(Double.parseDouble(inst_amt));
-                    }
-                    if (jo.has("INPUT_AMT")) {
-                        input_amt = jo.getString("INPUT_AMT");
-                        input_amt = df.format(Double.parseDouble(input_amt));
-                    }
-                    if (jo.has("INPUT_PER")) {
-                        input_per = jo.getString("INPUT_PER");
-                        input_per = df.format(Double.parseDouble(input_per)) + "%";
-                    }
-
-                    workProcessVo = new WorkProcessVo(inst_date, deli_date, item_cd, item_nm,
-                            lot_no, flow_count, inst_amt, input_amt,
-                            input_per);
-
-                    workProcessAdapter.addItem(workProcessVo);
-                }
-                grd_flow.setAdapter(workProcessAdapter);
-
-            } else {
-                Toast.makeText(context, "검색된 정보가 없습니다", Toast.LENGTH_SHORT).show();
-                grd_flow.setAdapter(null);
-
-            }
-        } catch (SQLException | JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void DrawChart(FlowDetailAdapter flowDetailAdapter) {
 
@@ -383,7 +389,7 @@ public class work_processingActivity extends Fragment {
         chart.clear();
         String inst_amt = flowDetailAdapter.flowDetailVoArrayList.get(0).getINST_AMT();
 
-        XAxis xAxis = chart.getXAxis(); // x 축 설정
+        XAxis xAxis = chart.getXAxis(); // X 축 설정
         xAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // X축 텍스트컬러설정
         xAxis.setGridColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // X축 줄의 컬러 설정
 
@@ -394,7 +400,7 @@ public class work_processingActivity extends Fragment {
         yAxis.setTextSize(16f);
 
         yAxis = chart.getAxisRight();
-        yAxis.setDrawLabels(false); // 우측은 안보이게
+        yAxis.setDrawLabels(false); // 우측 Y축은 안보이게
 
         chart.getAxisLeft().setAxisLineColor(R.color.design_default_color_background);
         chart.getAxisLeft().setGridColor(R.color.design_default_color_background);
@@ -413,21 +419,22 @@ public class work_processingActivity extends Fragment {
         title.add("완료");
         title.add("불량");
         title.add("미투입량");
-        ArrayList<BarEntry> contents = new ArrayList<>();
+        ArrayList<BarEntry> contents = new ArrayList<>(); // 컨텐츠
         float[] float_sub_amt = new float[flowDetailAdapter.getCount()];
         float[] float_poor_amt = new float[flowDetailAdapter.getCount()];
         float[] float_non_amt = new float[flowDetailAdapter.getCount()];
-        String[] label = new String[flowDetailAdapter.getCount() + 1];
+
+        String[] label = new String[flowDetailAdapter.getCount()]; // 컨텐츠 레전드
 
         float f_sub_amt = 0;
         float poor_amt = 0;
         float non_amt = 0;
         String seq = "";
 
-        for (int i = 0; i < flowDetailAdapter.getCount()-1; i++) {
+        for (int i = 0; i < flowDetailAdapter.getCount(); i++) {
 
-            if (!flowDetailAdapter.flowDetailVoArrayList.get(i).getSEQ().equals("99999")) {
-                System.out.println(flowDetailAdapter.flowDetailVoArrayList.get(i).getSEQ());
+            if (!flowDetailAdapter.flowDetailVoArrayList.get(i).getSEQ().equals("99999")) { // 99999는 합계
+
                 f_sub_amt = Float.parseFloat(flowDetailAdapter.flowDetailVoArrayList.get(i).getF_SUB_AMT());
                 poor_amt = Float.parseFloat(flowDetailAdapter.flowDetailVoArrayList.get(i).getPOOR_AMT());
                 non_amt = Float.parseFloat(flowDetailAdapter.flowDetailVoArrayList.get(i).getNON_INPUT_AMT());
@@ -436,9 +443,11 @@ public class work_processingActivity extends Fragment {
                 float_sub_amt[i] = f_sub_amt;
                 float_poor_amt[i] = poor_amt;
                 float_non_amt[i] = 0;
-                label[i] = "SEQ" + seq;
+                label[i] = "SEQ" + seq; // 라벨 생성
             }
         }
+        float_sub_amt[flowDetailAdapter.getCount()-1] = 0;
+        float_poor_amt[flowDetailAdapter.getCount()-1] = 0;
         float_non_amt[flowDetailAdapter.getCount()-1] = non_amt; // 미투입량은 마지막으로 실행된 공정 미투입량 기입
         label[flowDetailAdapter.getCount()-1] = "최종 미투입량";
 
@@ -447,10 +456,12 @@ public class work_processingActivity extends Fragment {
         contents.add(new BarEntry(float_non_amt, 2));
 
         BarDataSet barDataSet = new BarDataSet(contents, "");
-        barDataSet.setValueFormatter(new DefaultValueFormatter(DecimalFormat.INTEGER_FIELD));
-        barDataSet.setValueTextColor(R.color.design_default_color_background);
+//        barDataSet.setValueFormatter(new DefaultValueFormatter(DecimalFormat.INTEGER_FIELD));
+//        barDataSet.setValueTextColor(R.color.design_default_color_primary_dark);
         barDataSet.setStackLabels(label);
-        barDataSet.setValueTextSize(14f);barDataSet.setDrawValues(false);
+        barDataSet.setDrawValues(false);
+
+
 
 
         BarData barData = new BarData(title, barDataSet);
@@ -491,35 +502,6 @@ public class work_processingActivity extends Fragment {
         return jsonArray;
     }
 
-    public JSONArray fn_select_processing_flow(JSONArray jsonArray, String condition) throws SQLException, JSONException {
-
-        StringBuilder query = new StringBuilder();
-        query.append("select ITEM_CD");
-        query.append("      ,A.SEQ ");
-        query.append("      ,A.FLOW_CD");
-        query.append("      ,B.FLOW_INSERT_YN");
-        query.append("      ,A.ITEM_IDEN_YN");
-        query.append("      ,B.FLOW_CHK_YN");
-        query.append("      ,A.FLOW_SEQ");
-        query.append("      ,A.COMMENT");
-        query.append("      ,B.FLOW_NM");
-        query.append("      ,case when A.ITEM_IDEN_YN ='Y' then '발행'else '미발행' end 식별표");
-        query.append("      ,C.TYPE_CD");
-        query.append("      ,A.COMMENT AS FLOW_COMMENT ");
-        query.append(" from N_ITEM_FLOW A ");
-        query.append(" LEFT OUTER JOIN N_FLOW_CODE B ");
-        query.append(" ON A.FLOW_CD = B.FLOW_CD ");
-        query.append(" LEFT OUTER JOIN N_TYPE_CODE C  ");
-        query.append(" ON B.POOR_TYPE_CD = C.TYPE_CD ");
-
-
-        query.append(condition);
-        query.append(" order by A.ITEM_CD,A.SEQ ");
-
-        jsonArray = dbInfo.SelectDB(query.toString());
-        return jsonArray;
-    }
-
     private JSONArray getItemFlowList(JSONArray jsonArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
@@ -545,7 +527,7 @@ public class work_processingActivity extends Fragment {
 
         query.append(" where A.ITEM_CD = '" + condition + "' \n");
         query.append(" and B.FLOW_INSERT_YN = 'Y' \n");
-        query.append(" order by A.ITEM_CD,A.SEQ ");
+        query.append(" order by A.FLOW_CD ");
 
         jsonArray = dbInfo.SelectDB(query.toString());
         return jsonArray;
@@ -583,10 +565,10 @@ public class work_processingActivity extends Fragment {
         query.append("                     ,FLOW_CD \n");
         query.append("                     ,SEQ \n");
         query.append("                     ,SUM(isnull(f_sub_amt,0)) as f_sub_amt \n");
-        query.append("			           ,INPUT_AMT - F_SUB_AMT AS NON \n");
+        query.append("			           ,INPUT_AMT - F_SUB_AMT - POOR_AMT AS NON \n");
         query.append("              from F_WORK_FLOW_DETAIL \n");
         query.append("              where LOT_NO = '" + Lot_no + "' AND FLOW_CD = '" + Flow_cd + "' \n");
-        query.append("              group by LOT_NO,FLOW_CD,SEQ,INPUT_AMT,F_SUB_AMT ) F \n");
+        query.append("              group by LOT_NO,FLOW_CD,SEQ,INPUT_AMT,F_SUB_AMT,POOR_AMT ) F \n");
         query.append("              on A.LOT_NO = f.LOT_NO and A.FLOW_CD = f.FLOW_CD AND A.SEQ = f.SEQ \n");
         query.append("where A.LOT_NO = '" + Lot_no + "' AND A.ITEM_CD = '" + Item_cd + "' AND A.FLOW_CD = '" + Flow_cd + "'\n");
 
@@ -626,14 +608,26 @@ public class work_processingActivity extends Fragment {
         query.append("        group by LOT_NO ) C \n");
         query.append("ON A.LOT_NO = C.LOT_NO \n");
 
-        query.append("left outer join (select A.LOT_NO, A.INST_AMT - B.F_SUB_AMT AS NON \n");
+        query.append("left outer join (select A.LOT_NO, D.INPUT_AMT - B.F_SUB_AMT - C.POOR_AMT AS NON  \n");
         query.append("                  from F_WORK_INST A \n");
         query.append("                  inner join (select LOT_NO \n");
         query.append("                              ,SUM(ISNULL(F_SUB_AMT,0)) as F_SUB_AMT \n");
         query.append("                              from F_WORK_FLOW_DETAIL \n");
         query.append("                              where LOT_NO = '" + Lot_no + "' AND FLOW_CD = '" + Flow_cd + "' AND ITEM_CD = '" + Item_cd + "' \n");
-        query.append("                              group by LOT_NO) B \n");
-        query.append("                  ON A.LOT_NO = B.LOT_NO) D \n");
+        query.append("                              group by LOT_NO) B \n"); //
+        query.append("                  ON A.LOT_NO = B.LOT_NO \n");
+        query.append("                  inner join (select LOT_NO \n");
+        query.append("                              ,SUM(ISNULL(POOR_AMT,0)) as POOR_AMT \n");
+        query.append("                              from F_WORK_FLOW_DETAIL \n");
+        query.append("                              where LOT_NO = '" + Lot_no + "' AND FLOW_CD = '" + Flow_cd + "' AND ITEM_CD = '" + Item_cd + "' \n");
+        query.append("                              group by LOT_NO) C \n"); //
+        query.append("                  ON A.LOT_NO = C.LOT_NO \n");
+        query.append("                  inner join (select LOT_NO\n");
+        query.append("                              ,INPUT_AMT\n");
+        query.append("                              FROM F_WORK_FLOW_DETAIL\n");
+        query.append("                              where LOT_NO = '" + Lot_no + "' AND FLOW_CD = '" + Flow_cd + "' AND ITEM_CD = '" + Item_cd + "' AND SEQ = 1 \n");
+        query.append("                              ) D \n"); //
+        query.append("                  ON A.LOT_NO = D.LOT_NO) D \n") ;
         query.append("ON A.LOT_NO = D.LOT_NO \n");
         query.append("        where A.LOT_NO = '" + Lot_no + "' AND A.FLOW_CD = '" + Flow_cd + "' AND A.ITEM_CD = '" + Item_cd + "' \n");
         query.append("order by A.SEQ \n");

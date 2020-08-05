@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.VO.MoniteringVo;
 import com.example.mes_app.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MoniteringAdapter extends BaseAdapter {
@@ -59,6 +60,7 @@ public class MoniteringAdapter extends BaseAdapter {
         final TextView poor_amt;
         final TextView poor_per;
 
+        DecimalFormat df = new DecimalFormat("#.#");
 
         if (convertView == null) {
 
@@ -121,7 +123,7 @@ public class MoniteringAdapter extends BaseAdapter {
         input_Date.setText(moniteringVo.getInput_date());
         input_amt.setText(moniteringVo.getInput_amt());
         poor_amt.setText(moniteringVo.getPoor_amt());
-        poor_per.setText(moniteringVo.getPoor_per());
+        poor_per.setText(moniteringVo.getPoor_per() + "%");
 
         return convertView; // 뷰 객체 반환
     }

@@ -2,12 +2,14 @@ package com.mes_app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.Adapter.RawAdapter;
+import com.Dialog.Dailog_Raw_View;
 import com.VO.RawVo;
 import com.common.DBInfo;
 import com.example.mes_app.R;
@@ -45,18 +48,18 @@ public class raw_viewActivity extends Fragment {
     CheckBox checkBox;
     GridView gridView;
     EditText editSearch;
-Context context;
+    Context context;
     DBInfo dbInfo;
     JSONArray JArray;
+    RawAdapter rawAdapter;
     RawVo rawVo;
 
     public raw_viewActivity() {
         dbInfo = new DBInfo();
     }
 
-    public  raw_viewActivity(Context context)
-    {
-       this. context=context;
+    public raw_viewActivity(Context context) {
+        this.context = context;
         dbInfo = new DBInfo();
     }
 
@@ -101,23 +104,25 @@ Context context;
 
         editSearch.setOnFocusChangeListener(OutFocus);
         btn_search.setOnClickListener(Raw_Search);
-
-        editSearch.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    getLogic();
-                    InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    return true;
-                } else
-                    return false;
-            }
-        });
+        gridView.setOnItemClickListener(onItemClickListener);
+        editSearch.setOnKeyListener(onKeyListener);
 
         getLogic();
         return rootView;
     }
+
+    EditText.OnKeyListener onKeyListener = new View.OnKeyListener() { // 엔터치면 검색
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
+                getLogic();
+                InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                return true;
+            } else
+                return false;
+        }
+    };
 
     View.OnClickListener Raw_Search = new View.OnClickListener() {
         @Override
@@ -138,8 +143,14 @@ Context context;
         }
     };
 
-
-
+    GridView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(context, Dailog_Raw_View.class.getClass());
+            intent.putExtra("raw_mat_cd", rawAdapter.arrayList.get(position).getRaw_mat_cd());
+            startActivityForResult(intent,1);
+        }
+    };
 
     public void getLogic() {
         try {
@@ -148,7 +159,7 @@ Context context;
 
             if (JArray.length() != 0) {
 
-                RawAdapter rawAdapter = new RawAdapter();
+                rawAdapter = new RawAdapter();
                 for (int i = 0; i < JArray.length(); i++) {
 
                     JSONObject jo = JArray.getJSONObject(i);
@@ -205,6 +216,8 @@ Context context;
     }
 
 
+
+
     public JSONArray fn_Raw_Detail(JSONArray JSONArray, String condition) throws SQLException, JSONException {
 
         StringBuilder query = new StringBuilder();
@@ -255,7 +268,7 @@ Context context;
             else
                 query.append("");
         }
-        if(checkBox.isChecked()){
+        if (checkBox.isChecked()) {
             query.append(" AND A.BAL_STOCK != '0'");
         }
         JSONArray = dbInfo.SelectDB(query.toString());
@@ -276,6 +289,7 @@ Context context;
         }
         return list;
     }
+
     public String getCustcd(String Condition) throws SQLException, JSONException {
 
         JSONArray jsonArray;

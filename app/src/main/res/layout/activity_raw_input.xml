@@ -118,7 +118,7 @@
             android:textColor="@color/mr_cast_meta_default_text_color"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/rawInp_tv_nonInpAmt"
-            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintStart_toEndOf="@+id/rawInp_tv_Loc"
             app:layout_constraintTop_toTopOf="@+id/rawInp_tv_rawNm"
             app:layout_constraintVertical_bias="1.0" />
 
@@ -137,7 +137,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/rawInp_tv_Loc"
             android:layout_width="130dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
