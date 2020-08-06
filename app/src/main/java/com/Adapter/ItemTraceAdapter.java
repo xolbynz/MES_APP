@@ -1,6 +1,7 @@
 package com.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,8 @@ public class ItemTraceAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         context = parent.getContext(); // activity 정보를 읽어오기
-        traceListDetailVo = new TraceListDetailVo();
+
+//        traceListDetailVo = new TraceListDetailVo();
         traceListDetailVo = arrayList.get(position);
 
         ItemTraceAdapter.ListViewHolder holder = null;
@@ -67,8 +69,8 @@ public class ItemTraceAdapter extends BaseAdapter {
             gubun = convertView.findViewById(R.id.itemTracking_tv_list);
             intime = convertView.findViewById(R.id.itemTracking_tv_date);
             raw_mat_nm = convertView.findViewById(R.id.itemTracking_tv_detail);
-//            spec = convertView.findViewById(R.id.itemTracking_tv_spec);
-            unit_nm = convertView.findViewById(R.id.itemTracking_ttv_unit_nm);
+            spec = convertView.findViewById(R.id.itemTracking_tv_spec);
+//            unit_nm = convertView.findViewById(R.id.itemTracking_tv_unit_nm);
             total_amt = convertView.findViewById(R.id.itemTracking_tv_amt);
             poor = convertView.findViewById(R.id.itemTracking_tv_fault);
 
@@ -78,8 +80,8 @@ public class ItemTraceAdapter extends BaseAdapter {
             holder.intime = intime;
 //            holder.cust_nm = cust_nm;
             holder.raw_mat_nm = raw_mat_nm;
-//            holder.spec = spec;
-            holder.unit_nm = unit_nm;
+            holder.spec = spec;
+//            holder.unit_nm = unit_nm;
             holder.total_amt = total_amt;
             holder.poor = poor;
 
@@ -93,20 +95,27 @@ public class ItemTraceAdapter extends BaseAdapter {
             intime = holder.intime;
 //            cust_nm = holder.cust_nm;
             raw_mat_nm = holder.raw_mat_nm;
-//            spec = holder.spec;
+            spec = holder.spec;
             unit_nm = holder.unit_nm;
             total_amt = holder.total_amt;
             poor = holder.poor;
         }
 
+
+
         gubun.setText(traceListDetailVo.getGubun()); //
-        intime.setText(traceListDetailVo.getIntime());
+        if(traceListDetailVo.getIntime().equals("")){
+            intime.setText("==================");
+        }else {
+            intime.setText(traceListDetailVo.getIntime());
+        }
+        spec.setText(traceListDetailVo.getSpec());
         if(traceListDetailVo.getCust_nm().contains("합계")) {
             raw_mat_nm.setText(traceListDetailVo.getCust_nm());
         }else {
             raw_mat_nm.setText(traceListDetailVo.getRaw_mat_nm());
         }
-        unit_nm.setText(traceListDetailVo.getUnit_nm());
+//        unit_nm.setText(traceListDetailVo.getUnit_nm());
 
 
 
@@ -141,6 +150,22 @@ public class ItemTraceAdapter extends BaseAdapter {
             poor.setText("0");
         }
 
+        if(traceListDetailVo.getIntime().equals("") && traceListDetailVo.getInput_date().equals("") && traceListDetailVo.getInput_cd().equals("")){
+            gubun.setBackgroundColor(Color.LTGRAY);
+            intime.setBackgroundColor(Color.LTGRAY);
+            raw_mat_nm.setBackgroundColor(Color.LTGRAY);
+            spec.setBackgroundColor(Color.LTGRAY);
+            total_amt.setBackgroundColor(Color.LTGRAY);
+            poor.setBackgroundColor(Color.LTGRAY);
+        }else{
+            gubun.setBackgroundColor(Color.DKGRAY);
+            intime.setBackgroundColor(Color.DKGRAY);
+            raw_mat_nm.setBackgroundColor(Color.DKGRAY);
+            spec.setBackgroundColor(Color.DKGRAY);
+            total_amt.setBackgroundColor(Color.DKGRAY);
+            poor.setBackgroundColor(Color.DKGRAY);
+        }
+
         return convertView;
     }
 
@@ -148,6 +173,7 @@ public class ItemTraceAdapter extends BaseAdapter {
         TextView gubun;
         TextView intime;
         TextView raw_mat_nm;
+        TextView spec;
         TextView unit_nm;
         TextView total_amt;
         TextView poor;

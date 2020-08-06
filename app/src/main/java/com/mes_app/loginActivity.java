@@ -4,12 +4,14 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,7 +34,7 @@ public class loginActivity extends AppCompatActivity {
     CompInfo compInfo;
     DBInfo dbInfo;
     InputMethodManager imm; //키보드 내리기
-    Button btn_Login;
+    ImageButton btn_Login;
     EditText Saup_No;
     EditText Id;
     EditText Pw;
@@ -56,7 +58,7 @@ public class loginActivity extends AppCompatActivity {
         dbInfo = new DBInfo();
         compInfo = new CompInfo();
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); //키보드 내리기
-        btn_Login = (Button) findViewById(R.id.btn_login);
+        btn_Login = (ImageButton) findViewById(R.id.btn_login);
         Saup_No = (EditText) findViewById(R.id.edit_사업자번호);
         Id = (EditText) findViewById(R.id.edit_ID);
         Pw = (EditText) findViewById(R.id.edit_PW);
@@ -70,6 +72,10 @@ public class loginActivity extends AppCompatActivity {
         layour_main.setOnClickListener(myClickListener);
         layour_login.setOnClickListener(myClickListener);
         image_saup.setOnClickListener(myClickListener);
+
+        Saup_No.setOnFocusChangeListener(onFocusChangeListener);
+        Id.setOnFocusChangeListener(onFocusChangeListener);
+        Pw.setOnFocusChangeListener(onFocusChangeListener);
 
 
         image_saup.setFocusableInTouchMode(true);
@@ -149,6 +155,18 @@ public class loginActivity extends AppCompatActivity {
                     break;
                 case R.id.image_saup:
                     break;
+            }
+        }
+    };
+
+    EditText.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            EditText tmp = (EditText) v;
+            if(tmp.hasFocus()){
+                tmp.setBackgroundColor(0XFF444444);
+            }else{
+                tmp.setBackgroundColor(Color.WHITE);
             }
         }
     };

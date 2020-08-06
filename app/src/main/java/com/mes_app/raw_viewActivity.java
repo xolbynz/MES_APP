@@ -67,7 +67,6 @@ public class raw_viewActivity extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
         activity = (MainActivity) getActivity();
     }
 
@@ -146,7 +145,7 @@ public class raw_viewActivity extends Fragment {
     GridView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(context, Dailog_Raw_View.class.getClass());
+            Intent intent = new Intent(activity, Dailog_Raw_View.class.getClass());
             intent.putExtra("raw_mat_cd", rawAdapter.arrayList.get(position).getRaw_mat_cd());
             startActivityForResult(intent,1);
         }
