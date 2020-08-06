@@ -77,14 +77,15 @@
         android:id="@+id/itemTracking_tv_amt"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="2dp"
         android:gravity="center"
         android:text="소요수량"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/itemTracking_ttv_unit_nm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/itemTracking_tv_unit_nm"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

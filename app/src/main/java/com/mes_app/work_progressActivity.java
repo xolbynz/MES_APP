@@ -3,6 +3,7 @@ package com.mes_app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.common.DBInfo;
 import com.common.wnDm;
 import com.example.mes_app.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -228,6 +230,7 @@ public class work_progressActivity extends Fragment {
 
     private  final int DYNAMIC_VIEW_ID = 0x8000;
        Button dynamicButton;
+    Button b;
     String selected_flow_Cd="";
     //동적으로 버튼 생성
     private  void pushButton(int seq){
@@ -252,8 +255,10 @@ public class work_progressActivity extends Fragment {
                         @Override
                         public void onClick(View v) {
                             System.out.println(posiotion + dynamicButton.getText().toString());
-                            tv_flow_title.setText(dynamicButton.getText().toString());
-                            selected_flow_Cd=dynamicButton.getTag().toString();
+                             b = (Button)v;
+                            tv_flow_title.setText(b.getText().toString());
+                            selected_flow_Cd=b.getTag().toString();
+                            System.out.println("눌러지는 공정"+dynamicButton.getText().toString()+"///"+selected_flow_Cd);
                             llo_mian.setVisibility(View.VISIBLE);
                             drawChart();
                         }
@@ -309,7 +314,7 @@ public class work_progressActivity extends Fragment {
                                 //Yes 버튼을 클릭했을때 처리
                                 try {
                                     input_Logic();
-                                    dynamicButton.performClick();
+                                    b.performClick();
 
                                 } catch (SQLException e) {
                                     e.printStackTrace();
@@ -339,19 +344,34 @@ public class work_progressActivity extends Fragment {
 
     public void drawChart()
     {
-chart.clear();
+        chart.clear();
+  
 
-        XAxis xAxis = chart.getXAxis(); // x 축 설정
+        XAxis xAxis = chart.getXAxis(); // X 축 설정
         xAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // X축 텍스트컬러설정
         xAxis.setGridColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // X축 줄의 컬러 설정
 
-
-        YAxis yAxis = chart.getAxisLeft();
+        YAxis yAxis = chart.getAxisLeft(); // 좌측 Y축
         yAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // Y축 텍스트컬러설정
         yAxis.setGridColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background)); // Y축 줄의 컬러 설정
-        yAxis.setAxisMaxValue( Integer.valueOf(selected_instAmt));
+
+        yAxis.setTextSize(16f);
+
+        yAxis = chart.getAxisRight();
+        yAxis.setDrawLabels(false); // 우측 Y축은 안보이게
+
         chart.getAxisLeft().setAxisLineColor(R.color.design_default_color_background);
         chart.getAxisLeft().setGridColor(R.color.design_default_color_background);
+        chart.animateY(1000);
+        chart.getLegend().setTextSize(16f);
+        chart.getLegend().setTextColor(Color.WHITE);
+
+        chart.getLegend().setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
+        chart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
+
+        chart.getXAxis().setTextSize(20f);
+        chart.getXAxis().setTextColor(Color.WHITE);
+        chart.getRendererLeftYAxis().getPaintAxisLabels().setTextSize(16f);
 
 
 
@@ -478,6 +498,17 @@ float sumSubAmt=0;
         sb.append("and FLOW_CD = '" + selected_flow_Cd + "' \n ");
 
 
+        sb.append("declare @last_flow\t nvarchar(10) \n");
+        sb.append("select top 1 @last_flow=FLOW_CD  from N_ITEM_FLOW \n");
+        sb.append("where ITEM_CD='00003' \n");
+        sb.append("\torder by seq desc \n");
+
+        sb.append("declare @input_cd int \n ");
+        sb.append("select @input_cd=ISNULL(MAX(INPUT_CD),0)+1  from [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] \n ");
+        sb.append("where INPUT_DATE = '" +Today + "' \n ");
+
+
+
         sb.append("IF(@NUM != 1)\n");
         sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_WORK_FLOW] (");
 
@@ -542,9 +573,42 @@ float sumSubAmt=0;
         sb.append(" ) \n ");
 
 
+        sb.append("IF(@last_flow = '"+selected_flow_Cd+"')\n");
+        sb.append("insert into [" + dbInfo.Location + "].[dbo].[F_ITEM_INPUT] (");
+        sb.append("INPUT_DATE, ");
+        sb.append("INPUT_CD, ");
+        sb.append("ITEM_CD, ");
+        sb.append("INPUT_AMT, ");
+        sb.append("LOT_NO, ");
+        sb.append("LOT_SUB, ");
+        sb.append("SEQ, ");
+        sb.append("F_STEP, ");
+        sb.append("FLOW_CD, ");
+        sb.append("INSTAFF, ");
+        sb.append("INTIME, ");
+        sb.append("CURR_AMT, ");
+        sb.append("COMPLETE_YN ");
+        sb.append(" ) VALUES ( ");
+        sb.append("     '" + Today + "' \n ");
+        sb.append(",@input_cd");
+        sb.append("      ,'" + selected_itemCd + "' \n");
+        sb.append("     ,'" + Integer.valueOf(ed_instAmt.getText().toString()) + "' \n ");
+        sb.append(" ,'" + selected_lotNo + "' \n "); //lotno
+        sb.append(" ,'" + 1 + "' \n "); //lot sub
+        sb.append(" ,@seq  \n"); //f_step
+        sb.append(" ,@f_step  \n"); //f_step
+        sb.append(" ,'"+selected_flow_Cd+"'  \n"); // flow_cd
+        sb.append("     ,'" + compInfo.getStaffCd() + "' \n ");
+        sb.append("     ,convert(varchar, getdate(), 120) \n ");
+        sb.append("     ,'" + Integer.valueOf(ed_instAmt.getText().toString()) + "' \n ");
+
+        sb.append(",'N'");
+        sb.append(")");
 
 
 
+
+System.out.println(sb);
         dbInfo.Insert(sb.toString());
     }
 }
