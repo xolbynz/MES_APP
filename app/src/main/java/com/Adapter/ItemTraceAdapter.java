@@ -68,7 +68,7 @@ public class ItemTraceAdapter extends BaseAdapter {
             intime = convertView.findViewById(R.id.itemTracking_tv_date);
             raw_mat_nm = convertView.findViewById(R.id.itemTracking_tv_detail);
 //            spec = convertView.findViewById(R.id.itemTracking_tv_spec);
-            unit_nm = convertView.findViewById(R.id.itemTracking_ttv_unit_nm);
+            unit_nm = convertView.findViewById(R.id.itemTracking_tv_unit_nm);
             total_amt = convertView.findViewById(R.id.itemTracking_tv_amt);
             poor = convertView.findViewById(R.id.itemTracking_tv_fault);
 
