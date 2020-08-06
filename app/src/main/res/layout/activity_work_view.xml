@@ -489,7 +489,7 @@
                             android:layout_height="30dp"
                             android:layout_marginTop="18dp"
                             app:layout_constraintEnd_toEndOf="@+id/workInstRaw_gv_detail"
-                            app:layout_constraintStart_toStartOf="@+id/_dynamic"
+
                             app:layout_constraintTop_toBottomOf="@+id/textView36">
 
                             <TextView
@@ -638,6 +638,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <GridView
+                            android:id="@+id/workInstTaw_gv_half"
                             android:layout_width="649dp"
                             android:layout_height="211dp"
                             android:layout_marginStart="1dp"
