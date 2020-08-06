@@ -70,7 +70,6 @@ public class ItemTraceAdapter extends BaseAdapter {
             intime = convertView.findViewById(R.id.itemTracking_tv_date);
             raw_mat_nm = convertView.findViewById(R.id.itemTracking_tv_detail);
             spec = convertView.findViewById(R.id.itemTracking_tv_spec);
-//            unit_nm = convertView.findViewById(R.id.itemTracking_tv_unit_nm);
             total_amt = convertView.findViewById(R.id.itemTracking_tv_amt);
             poor = convertView.findViewById(R.id.itemTracking_tv_fault);
 
@@ -81,7 +80,6 @@ public class ItemTraceAdapter extends BaseAdapter {
 //            holder.cust_nm = cust_nm;
             holder.raw_mat_nm = raw_mat_nm;
             holder.spec = spec;
-//            holder.unit_nm = unit_nm;
             holder.total_amt = total_amt;
             holder.poor = poor;
 
@@ -96,7 +94,6 @@ public class ItemTraceAdapter extends BaseAdapter {
 //            cust_nm = holder.cust_nm;
             raw_mat_nm = holder.raw_mat_nm;
             spec = holder.spec;
-            unit_nm = holder.unit_nm;
             total_amt = holder.total_amt;
             poor = holder.poor;
         }
@@ -174,7 +171,6 @@ public class ItemTraceAdapter extends BaseAdapter {
         TextView intime;
         TextView raw_mat_nm;
         TextView spec;
-        TextView unit_nm;
         TextView total_amt;
         TextView poor;
     }

@@ -146,9 +146,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
-                android:layout_width="1269dp"
+                android:layout_width="match_parent"
                 android:layout_height="35dp"
-                app:layout_constraintEnd_toEndOf="@+id/_dynamic"
                 app:layout_constraintStart_toStartOf="@+id/_dynamic"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -178,7 +177,7 @@
 
                 <TextView
                     android:id="@+id/itemTracking_tv_detail"
-                    android:layout_width="180dp"
+                    android:layout_width="240dp"
                     android:layout_height="35sp"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="1dp"
@@ -204,21 +203,23 @@
 
                 <TextView
                     android:id="@+id/itemTracking_tv_amt"
-                    android:layout_width="150dp"
+                    android:layout_width="250dp"
                     android:layout_height="35sp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="1dp"
                     android:gravity="center"
                     android:text="소요수량"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="24sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="935dp" />
+                    app:layout_constraintStart_toEndOf="@+id/itemTracking_tv_spec"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/itemTracking_tv_fault"
                     android:layout_width="150dp"
                     android:layout_height="35sp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginLeft="28dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="1dp"
                     android:gravity="center"
                     android:text="불량수"
                     android:textColor="@color/cardview_light_background"
@@ -230,17 +231,19 @@
             <GridView
                 android:id="@+id/itemTracking_gv_grid"
                 android:layout_width="1277dp"
-                android:layout_height="500dp"
+                android:layout_height="420dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="110dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
