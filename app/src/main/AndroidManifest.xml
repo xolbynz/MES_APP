@@ -2,39 +2,40 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mes_app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/sf_logo_"
-        android:roundIcon="@drawable/sf_logo_"
         android:label="스마트팩토리"
-
+        android:roundIcon="@drawable/sf_logo_"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name="com.mes_app.loginActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="landscape">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/btn_login_click" />
 
-
+        <activity
+            android:name="com.mes_app.loginActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.mes_app.MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            />
-        <activity android:name="com.mes_app.pop_raw_input" android:theme="@android:style/Theme.Dialog" />
-        <activity android:name="com.Dialog.Dailog_Raw_View" android:theme="@android:style/Theme.Dialog" />
-
-<!--        <activity android:name="com.mes_app.raw_viewActivity" />-->
-<!--        <activity android:name="com.mes_app.raw_inputActivity" />-->
-
+        <activity
+            android:name="com.mes_app.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.mes_app.pop_raw_input"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.Dialog.Dailog_Raw_View"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!-- 블루투스-->
 
 </manifest>

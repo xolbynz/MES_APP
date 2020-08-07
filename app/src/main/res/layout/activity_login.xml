@@ -10,15 +10,15 @@
 
     <ImageView
         android:id="@+id/image_saup"
-        android:layout_width="1000dp"
-        android:layout_height="177dp"
+        android:layout_width="894dp"
+        android:layout_height="107dp"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_logo"
@@ -26,28 +26,28 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_login"
-        android:layout_width="731dp"
-        android:layout_height="408dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="592dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_saup"
-        app:layout_constraintVertical_bias="0.277">
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/edit_PW"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="36dp"
+            android:background="@xml/login_edt"
             android:editable="false"
             android:ems="10"
             android:enabled="true"
+            android:gravity="center"
             android:inputType="textPassword"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textColorHighlight="@android:color/holo_blue_light"
-            android:textColorLink="@android:color/holo_blue_light"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/edit_ID"
             app:layout_constraintHorizontal_bias="0.0"
@@ -58,13 +58,13 @@
             android:id="@+id/edit_ID"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="36dp"
+            android:background="@xml/login_edt"
             android:ems="10"
             android:enabled="true"
+            android:gravity="center"
             android:inputType="textPersonName"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textColorHighlight="@android:color/holo_blue_light"
-            android:textColorLink="@android:color/holo_blue_light"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/edit_사업자번호"
             app:layout_constraintHorizontal_bias="1.0"
@@ -80,46 +80,51 @@
             android:layout_marginTop="34dp"
             android:layout_marginEnd="69dp"
             android:layout_marginRight="69dp"
+            android:background="@xml/login_edt"
             android:ems="10"
             android:enabled="true"
+            android:gravity="center"
             android:inputType="textPersonName"
             android:maxLength="10"
             android:textColor="@color/design_default_color_on_secondary"
-            android:textColorHighlight="@android:color/holo_blue_light"
-            android:textColorLink="@android:color/holo_blue_light"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.218"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent"
 
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="167dp"
-            android:layout_height="296dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="165dp"
+            android:layout_height="233dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
             android:background="@color/cardview_light_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/login_fix" />
 
-        <ImageButton
-            android:id="@+id/btn_login"
-            android:layout_width="281dp"
-            android:layout_height="79dp"
-            android:layout_marginStart="225dp"
-            android:layout_marginLeft="225dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/cardview_light_background"
-            android:scaleType="fitCenter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:srcCompat="@drawable/btn_login" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btn_login"
+        android:layout_width="218dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="569dp"
+        android:layout_marginLeft="569dp"
+
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="500dp"
+        android:layout_marginRight="500dp"
+        android:layout_marginBottom="107dp"
+        android:background="@color/cardview_light_background"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_login"
+        app:srcCompat="@xml/btn_login_click" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

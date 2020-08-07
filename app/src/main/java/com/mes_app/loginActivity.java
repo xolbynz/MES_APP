@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -73,9 +74,9 @@ public class loginActivity extends AppCompatActivity {
         layour_login.setOnClickListener(myClickListener);
         image_saup.setOnClickListener(myClickListener);
 
-        Saup_No.setOnFocusChangeListener(onFocusChangeListener);
-        Id.setOnFocusChangeListener(onFocusChangeListener);
-        Pw.setOnFocusChangeListener(onFocusChangeListener);
+//        Saup_No.setOnFocusChangeListener(onFocusChangeListener);
+//        Id.setOnFocusChangeListener(onFocusChangeListener);
+//        Pw.setOnFocusChangeListener(onFocusChangeListener);
 
 
         image_saup.setFocusableInTouchMode(true);
@@ -159,15 +160,24 @@ public class loginActivity extends AppCompatActivity {
         }
     };
 
-    EditText.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+//    EditText.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+//        @Override
+//        public void onFocusChange(View v, boolean hasFocus) {
+//            EditText tmp = (EditText) v;
+//            if(tmp.hasFocus()){
+//                tmp.setBackgroundColor(0XFF444444);
+//            }else{
+//                tmp.setBackgroundColor(Color.WHITE);
+//            }
+//        }
+//    };
+
+    ImageButton.OnHoverListener onHoverListener = new View.OnHoverListener() {
         @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            EditText tmp = (EditText) v;
-            if(tmp.hasFocus()){
-                tmp.setBackgroundColor(0XFF444444);
-            }else{
-                tmp.setBackgroundColor(Color.WHITE);
-            }
+        public boolean onHover(View v, MotionEvent event) {
+
+//            switch (event.getAction())
+            return false;
         }
     };
 
