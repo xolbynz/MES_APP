@@ -148,13 +148,11 @@
                 android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                app:layout_constraintStart_toStartOf="@+id/_dynamic"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/itemTracking_tv_list"
                     android:layout_width="150dp"
-                    android:layout_height="35sp"
                     android:gravity="center"
                     android:text="작업항목"
                     android:textColor="@color/cardview_light_background"
